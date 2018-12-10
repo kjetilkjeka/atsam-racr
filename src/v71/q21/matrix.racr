@@ -1,0 +1,156 @@
+#[doc = "AHB Bus Matrix"]
+peripheral Matrix {
+    matrix_mcfg: [MatrixMcfg; 13] @ 0x0,
+    matrix_scfg: [MatrixScfg; 9] @ 0x40,
+    matrix_mrcr: MatrixMrcr @ 0x100,
+    ccfg_can0: CcfgCan0 @ 0x110,
+    ccfg_sysio: CcfgSysio @ 0x114,
+    ccfg_pccr: CcfgPccr @ 0x118,
+    ccfg_dynckg: CcfgDynckg @ 0x11c,
+    ccfg_smcnfcs: CcfgSmcnfcs @ 0x124,
+    matrix_wpmr: MatrixWpmr @ 0x1e4,
+    matrix_wpsr: MatrixWpsr @ 0x1e8,
+    matrix_version: MatrixVersion @ 0x1fc,
+}
+#[doc = "Master Configuration Register 0"]
+ReadWrite register[32] MatrixMcfg {
+    #[doc = "Undefined Length Burst Type"]
+    ulbt[0..3] {
+        #[doc = "Unlimited Length Burst-No predicted end of burst is generated, therefore INCR bursts coming from this master can only be broken if the Slave Slot Cycle Limit is reached. If the Slot Cycle Limit is not reached, the burst is normally completed by the master, at the latest, on the next AHB 1-Kbyte address boundary, allowing up to 256-beat word bursts or 128-beat double-word bursts.This value should not be used in the very particular case of a master capable of performing back-to-back undefined length bursts on a single slave, since this could indefinitely freeze the slave arbitration and thus prevent another master from accessing this slave."]
+        UnltdLength = 0x0,
+        #[doc = "Single Access-The undefined length burst is treated as a succession of single accesses, allowing re-arbitration at each beat of the INCR burst or bursts sequence."]
+        SingleAccess = 0x1,
+        #[doc = "4-beat Burst-The undefined length burst or bursts sequence is split into 4-beat bursts or less, allowing re-arbitration every 4 beats."]
+        _4beatBurst = 0x2,
+        #[doc = "8-beat Burst-The undefined length burst or bursts sequence is split into 8-beat bursts or less, allowing re-arbitration every 8 beats."]
+        _8beatBurst = 0x3,
+        #[doc = "16-beat Burst-The undefined length burst or bursts sequence is split into 16-beat bursts or less, allowing re-arbitration every 16 beats."]
+        _16beatBurst = 0x4,
+        #[doc = "32-beat Burst -The undefined length burst or bursts sequence is split into 32-beat bursts or less, allowing re-arbitration every 32 beats."]
+        _32beatBurst = 0x5,
+        #[doc = "64-beat Burst-The undefined length burst or bursts sequence is split into 64-beat bursts or less, allowing re-arbitration every 64 beats."]
+        _64beatBurst = 0x6,
+        #[doc = "128-beat Burst-The undefined length burst or bursts sequence is split into 128-beat bursts or less, allowing re-arbitration every 128 beats."]
+        _128beatBurst = 0x7,
+    },
+}
+#[doc = "Slave Configuration Register 0"]
+ReadWrite register[32] MatrixScfg {
+    #[doc = "Maximum Bus Grant Duration for Masters"]
+    slot_cycle[0..9],
+    #[doc = "Default Master Type"]
+    defmstr_type[16..18] {
+        #[doc = "No Default Master-At the end of the current slave access, if no other master request is pending, the slave is disconnected from all masters.This results in a one clock cycle latency for the first access of a burst transfer or for a single access."]
+        None = 0x0,
+        #[doc = "Last Default Master-At the end of the current slave access, if no other master request is pending, the slave stays connected to the last master having accessed it.This results in not having one clock cycle latency when the last master tries to access the slave again."]
+        Last = 0x1,
+        #[doc = "Fixed Default Master-At the end of the current slave access, if no other master request is pending, the slave connects to the fixed master the number that has been written in the FIXED_DEFMSTR field.This results in not having one clock cycle latency when the fixed master tries to access the slave again."]
+        Fixed = 0x2,
+    },
+    #[doc = "Fixed Default Master"]
+    fixed_defmstr[18..22],
+}
+#[doc = "Master Remap Control Register"]
+ReadWrite register[32] MatrixMrcr {
+    #[doc = "Remap Command Bit for Master 0"]
+    rcb0[0],
+    #[doc = "Remap Command Bit for Master 1"]
+    rcb1[1],
+    #[doc = "Remap Command Bit for Master 2"]
+    rcb2[2],
+    #[doc = "Remap Command Bit for Master 3"]
+    rcb3[3],
+    #[doc = "Remap Command Bit for Master 4"]
+    rcb4[4],
+    #[doc = "Remap Command Bit for Master 5"]
+    rcb5[5],
+    #[doc = "Remap Command Bit for Master 6"]
+    rcb6[6],
+    #[doc = "Remap Command Bit for Master 7"]
+    rcb7[7],
+    #[doc = "Remap Command Bit for Master 8"]
+    rcb8[8],
+    #[doc = "Remap Command Bit for Master 9"]
+    rcb9[9],
+    #[doc = "Remap Command Bit for Master 10"]
+    rcb10[10],
+    #[doc = "Remap Command Bit for Master 11"]
+    rcb11[11],
+    #[doc = "Remap Command Bit for Master 12"]
+    rcb12[12],
+}
+#[doc = "CAN0 Configuration Register"]
+ReadWrite register[32] CcfgCan0 {
+    #[doc = "CAN0 DMA Base Address"]
+    can0dmaba[16..32],
+}
+#[doc = "System I/O and CAN1 Configuration Register"]
+ReadWrite register[32] CcfgSysio {
+    #[doc = "PB4 or TDI Assignment"]
+    sysio4[4],
+    #[doc = "PB5 or TDO/TRACESWO Assignment"]
+    sysio5[5],
+    #[doc = "PB6 or TMS/SWDIO Assignment"]
+    sysio6[6],
+    #[doc = "PB7 or TCK/SWCLK Assignment"]
+    sysio7[7],
+    #[doc = "PB12 or ERASE Assignment"]
+    sysio12[12],
+    #[doc = "CAN1 DMA Base Address"]
+    can1dmaba[16..32],
+}
+#[doc = "Peripheral Clock Configuration Register"]
+ReadWrite register[32] CcfgPccr {
+    #[doc = "TC0 Clock Configuration"]
+    tc0cc[20],
+    #[doc = "I2SC0 Clock Configuration"]
+    i2sc0cc[21],
+    #[doc = "I2SC1 Clock Configuration"]
+    i2sc1cc[22],
+}
+#[doc = "Dynamic Clock Gating Register"]
+ReadWrite register[32] CcfgDynckg {
+    #[doc = "MATRIX Dynamic Clock Gating"]
+    matckg[0],
+    #[doc = "Bridge Dynamic Clock Gating Enable"]
+    bridckg[1],
+    #[doc = "EFC Dynamic Clock Gating Enable"]
+    efcckg[2],
+}
+#[doc = "SMC NAND Flash Chip Select Configuration Register"]
+ReadWrite register[32] CcfgSmcnfcs {
+    #[doc = "SMC NAND Flash Chip Select 0 Assignment"]
+    smc_nfcs0[0],
+    #[doc = "SMC NAND Flash Chip Select 1 Assignment"]
+    smc_nfcs1[1],
+    #[doc = "SMC NAND Flash Chip Select 2 Assignment"]
+    smc_nfcs2[2],
+    #[doc = "SMC NAND Flash Chip Select 3 Assignment"]
+    smc_nfcs3[3],
+    #[doc = "SDRAM Enable"]
+    sdramen[4],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] MatrixWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x4d4154,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] MatrixWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] MatrixVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

@@ -1,0 +1,830 @@
+#[doc = "Pulse Width Modulation Controller"]
+peripheral Pwm {
+    pwm_clk: PwmClk @ 0x0,
+    pwm_ena: PwmEna @ 0x4,
+    pwm_dis: PwmDis @ 0x8,
+    pwm_sr: PwmSr @ 0xc,
+    pwm_ier1: PwmIer1 @ 0x10,
+    pwm_idr1: PwmIdr1 @ 0x14,
+    pwm_imr1: PwmImr1 @ 0x18,
+    pwm_isr1: PwmIsr1 @ 0x1c,
+    pwm_scm: PwmScm @ 0x20,
+    pwm_dmar: PwmDmar @ 0x24,
+    pwm_scuc: PwmScuc @ 0x28,
+    pwm_scup: PwmScup @ 0x2c,
+    pwm_scupupd: PwmScupupd @ 0x30,
+    pwm_ier2: PwmIer2 @ 0x34,
+    pwm_idr2: PwmIdr2 @ 0x38,
+    pwm_imr2: PwmImr2 @ 0x3c,
+    pwm_isr2: PwmIsr2 @ 0x40,
+    pwm_oov: PwmOov @ 0x44,
+    pwm_os: PwmOs @ 0x48,
+    pwm_oss: PwmOss @ 0x4c,
+    pwm_osc: PwmOsc @ 0x50,
+    pwm_ossupd: PwmOssupd @ 0x54,
+    pwm_oscupd: PwmOscupd @ 0x58,
+    pwm_fmr: PwmFmr @ 0x5c,
+    pwm_fsr: PwmFsr @ 0x60,
+    pwm_fcr: PwmFcr @ 0x64,
+    pwm_fpv1: PwmFpv1 @ 0x68,
+    pwm_fpe: PwmFpe @ 0x6c,
+    pwm_elmr: [PwmElmr; 2] @ 0x7c,
+    pwm_sspr: PwmSspr @ 0xa0,
+    pwm_sspup: PwmSspup @ 0xa4,
+    pwm_smmr: PwmSmmr @ 0xb0,
+    pwm_fpv2: PwmFpv2 @ 0xc0,
+    pwm_wpcr: PwmWpcr @ 0xe4,
+    pwm_wpsr: PwmWpsr @ 0xe8,
+    pwm_version: PwmVersion @ 0xfc,
+    pwm_cmupd0: PwmCmupd0 @ 0x400,
+    pwm_cmupd1: PwmCmupd1 @ 0x420,
+    pwm_etrg1: PwmEtrg1 @ 0x42c,
+    pwm_lebr1: PwmLebr1 @ 0x430,
+    pwm_cmupd2: PwmCmupd2 @ 0x440,
+    pwm_etrg2: PwmEtrg2 @ 0x44c,
+    pwm_lebr2: PwmLebr2 @ 0x450,
+    pwm_cmupd3: PwmCmupd3 @ 0x460,
+}
+#[doc = "PWM Clock Register"]
+ReadWrite register[32] PwmClk {
+    #[doc = "CLKA Divide Factor"]
+    diva[0..8] {
+        #[doc = "CLKA clock is turned off"]
+        ClkaPoff = 0x0,
+        #[doc = "CLKA clock is clock selected by PREA"]
+        Prea = 0x1,
+    },
+    #[doc = "CLKA Source Clock Selection"]
+    prea[8..12] {
+        #[doc = "Peripheral clock"]
+        Clk = 0x0,
+        #[doc = "Peripheral clock/2"]
+        ClkDiv2 = 0x1,
+        #[doc = "Peripheral clock/4"]
+        ClkDiv4 = 0x2,
+        #[doc = "Peripheral clock/8"]
+        ClkDiv8 = 0x3,
+        #[doc = "Peripheral clock/16"]
+        ClkDiv16 = 0x4,
+        #[doc = "Peripheral clock/32"]
+        ClkDiv32 = 0x5,
+        #[doc = "Peripheral clock/64"]
+        ClkDiv64 = 0x6,
+        #[doc = "Peripheral clock/128"]
+        ClkDiv128 = 0x7,
+        #[doc = "Peripheral clock/256"]
+        ClkDiv256 = 0x8,
+        #[doc = "Peripheral clock/512"]
+        ClkDiv512 = 0x9,
+        #[doc = "Peripheral clock/1024"]
+        ClkDiv1024 = 0xa,
+    },
+    #[doc = "CLKB Divide Factor"]
+    divb[16..24] {
+        #[doc = "CLKB clock is turned off"]
+        ClkbPoff = 0x0,
+        #[doc = "CLKB clock is clock selected by PREB"]
+        Preb = 0x1,
+    },
+    #[doc = "CLKB Source Clock Selection"]
+    preb[24..28] {
+        #[doc = "Peripheral clock"]
+        Clk = 0x0,
+        #[doc = "Peripheral clock/2"]
+        ClkDiv2 = 0x1,
+        #[doc = "Peripheral clock/4"]
+        ClkDiv4 = 0x2,
+        #[doc = "Peripheral clock/8"]
+        ClkDiv8 = 0x3,
+        #[doc = "Peripheral clock/16"]
+        ClkDiv16 = 0x4,
+        #[doc = "Peripheral clock/32"]
+        ClkDiv32 = 0x5,
+        #[doc = "Peripheral clock/64"]
+        ClkDiv64 = 0x6,
+        #[doc = "Peripheral clock/128"]
+        ClkDiv128 = 0x7,
+        #[doc = "Peripheral clock/256"]
+        ClkDiv256 = 0x8,
+        #[doc = "Peripheral clock/512"]
+        ClkDiv512 = 0x9,
+        #[doc = "Peripheral clock/1024"]
+        ClkDiv1024 = 0xa,
+    },
+}
+#[doc = "PWM Enable Register"]
+WriteOnly register[32] PwmEna {
+    #[doc = "Channel ID"]
+    chid0[0],
+    #[doc = "Channel ID"]
+    chid1[1],
+    #[doc = "Channel ID"]
+    chid2[2],
+    #[doc = "Channel ID"]
+    chid3[3],
+}
+#[doc = "PWM Disable Register"]
+WriteOnly register[32] PwmDis {
+    #[doc = "Channel ID"]
+    chid0[0],
+    #[doc = "Channel ID"]
+    chid1[1],
+    #[doc = "Channel ID"]
+    chid2[2],
+    #[doc = "Channel ID"]
+    chid3[3],
+}
+#[doc = "PWM Status Register"]
+ReadOnly register[32] PwmSr {
+    #[doc = "Channel ID"]
+    chid0[0],
+    #[doc = "Channel ID"]
+    chid1[1],
+    #[doc = "Channel ID"]
+    chid2[2],
+    #[doc = "Channel ID"]
+    chid3[3],
+}
+#[doc = "PWM Interrupt Enable Register 1"]
+WriteOnly register[32] PwmIer1 {
+    #[doc = "Counter Event on Channel 0 Interrupt Enable"]
+    chid0[0],
+    #[doc = "Counter Event on Channel 1 Interrupt Enable"]
+    chid1[1],
+    #[doc = "Counter Event on Channel 2 Interrupt Enable"]
+    chid2[2],
+    #[doc = "Counter Event on Channel 3 Interrupt Enable"]
+    chid3[3],
+    #[doc = "Fault Protection Trigger on Channel 0 Interrupt Enable"]
+    fchid0[16],
+    #[doc = "Fault Protection Trigger on Channel 1 Interrupt Enable"]
+    fchid1[17],
+    #[doc = "Fault Protection Trigger on Channel 2 Interrupt Enable"]
+    fchid2[18],
+    #[doc = "Fault Protection Trigger on Channel 3 Interrupt Enable"]
+    fchid3[19],
+}
+#[doc = "PWM Interrupt Disable Register 1"]
+WriteOnly register[32] PwmIdr1 {
+    #[doc = "Counter Event on Channel 0 Interrupt Disable"]
+    chid0[0],
+    #[doc = "Counter Event on Channel 1 Interrupt Disable"]
+    chid1[1],
+    #[doc = "Counter Event on Channel 2 Interrupt Disable"]
+    chid2[2],
+    #[doc = "Counter Event on Channel 3 Interrupt Disable"]
+    chid3[3],
+    #[doc = "Fault Protection Trigger on Channel 0 Interrupt Disable"]
+    fchid0[16],
+    #[doc = "Fault Protection Trigger on Channel 1 Interrupt Disable"]
+    fchid1[17],
+    #[doc = "Fault Protection Trigger on Channel 2 Interrupt Disable"]
+    fchid2[18],
+    #[doc = "Fault Protection Trigger on Channel 3 Interrupt Disable"]
+    fchid3[19],
+}
+#[doc = "PWM Interrupt Mask Register 1"]
+ReadOnly register[32] PwmImr1 {
+    #[doc = "Counter Event on Channel 0 Interrupt Mask"]
+    chid0[0],
+    #[doc = "Counter Event on Channel 1 Interrupt Mask"]
+    chid1[1],
+    #[doc = "Counter Event on Channel 2 Interrupt Mask"]
+    chid2[2],
+    #[doc = "Counter Event on Channel 3 Interrupt Mask"]
+    chid3[3],
+    #[doc = "Fault Protection Trigger on Channel 0 Interrupt Mask"]
+    fchid0[16],
+    #[doc = "Fault Protection Trigger on Channel 1 Interrupt Mask"]
+    fchid1[17],
+    #[doc = "Fault Protection Trigger on Channel 2 Interrupt Mask"]
+    fchid2[18],
+    #[doc = "Fault Protection Trigger on Channel 3 Interrupt Mask"]
+    fchid3[19],
+}
+#[doc = "PWM Interrupt Status Register 1"]
+ReadOnly register[32] PwmIsr1 {
+    #[doc = "Counter Event on Channel 0"]
+    chid0[0],
+    #[doc = "Counter Event on Channel 1"]
+    chid1[1],
+    #[doc = "Counter Event on Channel 2"]
+    chid2[2],
+    #[doc = "Counter Event on Channel 3"]
+    chid3[3],
+    #[doc = "Fault Protection Trigger on Channel 0"]
+    fchid0[16],
+    #[doc = "Fault Protection Trigger on Channel 1"]
+    fchid1[17],
+    #[doc = "Fault Protection Trigger on Channel 2"]
+    fchid2[18],
+    #[doc = "Fault Protection Trigger on Channel 3"]
+    fchid3[19],
+}
+#[doc = "PWM Sync Channels Mode Register"]
+ReadWrite register[32] PwmScm {
+    #[doc = "Synchronous Channel 0"]
+    sync0[0],
+    #[doc = "Synchronous Channel 1"]
+    sync1[1],
+    #[doc = "Synchronous Channel 2"]
+    sync2[2],
+    #[doc = "Synchronous Channel 3"]
+    sync3[3],
+    #[doc = "Synchronous Channels Update Mode"]
+    updm[16..18] {
+        #[doc = "Manual write of double buffer registers and manual update of synchronous channels"]
+        Mode0 = 0x0,
+        #[doc = "Manual write of double buffer registers and automatic update of synchronous channels"]
+        Mode1 = 0x1,
+        #[doc = "Automatic write of duty-cycle update registers by the DMA Controller and automatic update of synchronous channels"]
+        Mode2 = 0x2,
+    },
+    #[doc = "DMA Controller Transfer Request Mode"]
+    ptrm[20],
+    #[doc = "DMA Controller Transfer Request Comparison Selection"]
+    ptrcs[21..24],
+}
+#[doc = "PWM DMA Register"]
+WriteOnly register[32] PwmDmar {
+    #[doc = "Duty-Cycle Holding Register for DMA Access"]
+    dmaduty[0..24],
+}
+#[doc = "PWM Sync Channels Update Control Register"]
+ReadWrite register[32] PwmScuc {
+    #[doc = "Synchronous Channels Update Unlock"]
+    updulock[0],
+}
+#[doc = "PWM Sync Channels Update Period Register"]
+ReadWrite register[32] PwmScup {
+    #[doc = "Update Period"]
+    upr[0..4],
+    #[doc = "Update Period Counter"]
+    uprcnt[4..8],
+}
+#[doc = "PWM Sync Channels Update Period Update Register"]
+WriteOnly register[32] PwmScupupd {
+    #[doc = "Update Period Update"]
+    uprupd[0..4],
+}
+#[doc = "PWM Interrupt Enable Register 2"]
+WriteOnly register[32] PwmIer2 {
+    #[doc = "Write Ready for Synchronous Channels Update Interrupt Enable"]
+    wrdy[0],
+    #[doc = "Synchronous Channels Update Underrun Error Interrupt Enable"]
+    unre[3],
+    #[doc = "Comparison 0 Match Interrupt Enable"]
+    cmpm0[8],
+    #[doc = "Comparison 1 Match Interrupt Enable"]
+    cmpm1[9],
+    #[doc = "Comparison 2 Match Interrupt Enable"]
+    cmpm2[10],
+    #[doc = "Comparison 3 Match Interrupt Enable"]
+    cmpm3[11],
+    #[doc = "Comparison 4 Match Interrupt Enable"]
+    cmpm4[12],
+    #[doc = "Comparison 5 Match Interrupt Enable"]
+    cmpm5[13],
+    #[doc = "Comparison 6 Match Interrupt Enable"]
+    cmpm6[14],
+    #[doc = "Comparison 7 Match Interrupt Enable"]
+    cmpm7[15],
+    #[doc = "Comparison 0 Update Interrupt Enable"]
+    cmpu0[16],
+    #[doc = "Comparison 1 Update Interrupt Enable"]
+    cmpu1[17],
+    #[doc = "Comparison 2 Update Interrupt Enable"]
+    cmpu2[18],
+    #[doc = "Comparison 3 Update Interrupt Enable"]
+    cmpu3[19],
+    #[doc = "Comparison 4 Update Interrupt Enable"]
+    cmpu4[20],
+    #[doc = "Comparison 5 Update Interrupt Enable"]
+    cmpu5[21],
+    #[doc = "Comparison 6 Update Interrupt Enable"]
+    cmpu6[22],
+    #[doc = "Comparison 7 Update Interrupt Enable"]
+    cmpu7[23],
+}
+#[doc = "PWM Interrupt Disable Register 2"]
+WriteOnly register[32] PwmIdr2 {
+    #[doc = "Write Ready for Synchronous Channels Update Interrupt Disable"]
+    wrdy[0],
+    #[doc = "Synchronous Channels Update Underrun Error Interrupt Disable"]
+    unre[3],
+    #[doc = "Comparison 0 Match Interrupt Disable"]
+    cmpm0[8],
+    #[doc = "Comparison 1 Match Interrupt Disable"]
+    cmpm1[9],
+    #[doc = "Comparison 2 Match Interrupt Disable"]
+    cmpm2[10],
+    #[doc = "Comparison 3 Match Interrupt Disable"]
+    cmpm3[11],
+    #[doc = "Comparison 4 Match Interrupt Disable"]
+    cmpm4[12],
+    #[doc = "Comparison 5 Match Interrupt Disable"]
+    cmpm5[13],
+    #[doc = "Comparison 6 Match Interrupt Disable"]
+    cmpm6[14],
+    #[doc = "Comparison 7 Match Interrupt Disable"]
+    cmpm7[15],
+    #[doc = "Comparison 0 Update Interrupt Disable"]
+    cmpu0[16],
+    #[doc = "Comparison 1 Update Interrupt Disable"]
+    cmpu1[17],
+    #[doc = "Comparison 2 Update Interrupt Disable"]
+    cmpu2[18],
+    #[doc = "Comparison 3 Update Interrupt Disable"]
+    cmpu3[19],
+    #[doc = "Comparison 4 Update Interrupt Disable"]
+    cmpu4[20],
+    #[doc = "Comparison 5 Update Interrupt Disable"]
+    cmpu5[21],
+    #[doc = "Comparison 6 Update Interrupt Disable"]
+    cmpu6[22],
+    #[doc = "Comparison 7 Update Interrupt Disable"]
+    cmpu7[23],
+}
+#[doc = "PWM Interrupt Mask Register 2"]
+ReadOnly register[32] PwmImr2 {
+    #[doc = "Write Ready for Synchronous Channels Update Interrupt Mask"]
+    wrdy[0],
+    #[doc = "Synchronous Channels Update Underrun Error Interrupt Mask"]
+    unre[3],
+    #[doc = "Comparison 0 Match Interrupt Mask"]
+    cmpm0[8],
+    #[doc = "Comparison 1 Match Interrupt Mask"]
+    cmpm1[9],
+    #[doc = "Comparison 2 Match Interrupt Mask"]
+    cmpm2[10],
+    #[doc = "Comparison 3 Match Interrupt Mask"]
+    cmpm3[11],
+    #[doc = "Comparison 4 Match Interrupt Mask"]
+    cmpm4[12],
+    #[doc = "Comparison 5 Match Interrupt Mask"]
+    cmpm5[13],
+    #[doc = "Comparison 6 Match Interrupt Mask"]
+    cmpm6[14],
+    #[doc = "Comparison 7 Match Interrupt Mask"]
+    cmpm7[15],
+    #[doc = "Comparison 0 Update Interrupt Mask"]
+    cmpu0[16],
+    #[doc = "Comparison 1 Update Interrupt Mask"]
+    cmpu1[17],
+    #[doc = "Comparison 2 Update Interrupt Mask"]
+    cmpu2[18],
+    #[doc = "Comparison 3 Update Interrupt Mask"]
+    cmpu3[19],
+    #[doc = "Comparison 4 Update Interrupt Mask"]
+    cmpu4[20],
+    #[doc = "Comparison 5 Update Interrupt Mask"]
+    cmpu5[21],
+    #[doc = "Comparison 6 Update Interrupt Mask"]
+    cmpu6[22],
+    #[doc = "Comparison 7 Update Interrupt Mask"]
+    cmpu7[23],
+}
+#[doc = "PWM Interrupt Status Register 2"]
+ReadOnly register[32] PwmIsr2 {
+    #[doc = "Write Ready for Synchronous Channels Update"]
+    wrdy[0],
+    #[doc = "Synchronous Channels Update Underrun Error"]
+    unre[3],
+    #[doc = "Comparison 0 Match"]
+    cmpm0[8],
+    #[doc = "Comparison 1 Match"]
+    cmpm1[9],
+    #[doc = "Comparison 2 Match"]
+    cmpm2[10],
+    #[doc = "Comparison 3 Match"]
+    cmpm3[11],
+    #[doc = "Comparison 4 Match"]
+    cmpm4[12],
+    #[doc = "Comparison 5 Match"]
+    cmpm5[13],
+    #[doc = "Comparison 6 Match"]
+    cmpm6[14],
+    #[doc = "Comparison 7 Match"]
+    cmpm7[15],
+    #[doc = "Comparison 0 Update"]
+    cmpu0[16],
+    #[doc = "Comparison 1 Update"]
+    cmpu1[17],
+    #[doc = "Comparison 2 Update"]
+    cmpu2[18],
+    #[doc = "Comparison 3 Update"]
+    cmpu3[19],
+    #[doc = "Comparison 4 Update"]
+    cmpu4[20],
+    #[doc = "Comparison 5 Update"]
+    cmpu5[21],
+    #[doc = "Comparison 6 Update"]
+    cmpu6[22],
+    #[doc = "Comparison 7 Update"]
+    cmpu7[23],
+}
+#[doc = "PWM Output Override Value Register"]
+ReadWrite register[32] PwmOov {
+    #[doc = "Output Override Value for PWMH output of the channel 0"]
+    oovh0[0],
+    #[doc = "Output Override Value for PWMH output of the channel 1"]
+    oovh1[1],
+    #[doc = "Output Override Value for PWMH output of the channel 2"]
+    oovh2[2],
+    #[doc = "Output Override Value for PWMH output of the channel 3"]
+    oovh3[3],
+    #[doc = "Output Override Value for PWML output of the channel 0"]
+    oovl0[16],
+    #[doc = "Output Override Value for PWML output of the channel 1"]
+    oovl1[17],
+    #[doc = "Output Override Value for PWML output of the channel 2"]
+    oovl2[18],
+    #[doc = "Output Override Value for PWML output of the channel 3"]
+    oovl3[19],
+}
+#[doc = "PWM Output Selection Register"]
+ReadWrite register[32] PwmOs {
+    #[doc = "Output Selection for PWMH output of the channel 0"]
+    osh0[0],
+    #[doc = "Output Selection for PWMH output of the channel 1"]
+    osh1[1],
+    #[doc = "Output Selection for PWMH output of the channel 2"]
+    osh2[2],
+    #[doc = "Output Selection for PWMH output of the channel 3"]
+    osh3[3],
+    #[doc = "Output Selection for PWML output of the channel 0"]
+    osl0[16],
+    #[doc = "Output Selection for PWML output of the channel 1"]
+    osl1[17],
+    #[doc = "Output Selection for PWML output of the channel 2"]
+    osl2[18],
+    #[doc = "Output Selection for PWML output of the channel 3"]
+    osl3[19],
+}
+#[doc = "PWM Output Selection Set Register"]
+WriteOnly register[32] PwmOss {
+    #[doc = "Output Selection Set for PWMH output of the channel 0"]
+    ossh0[0],
+    #[doc = "Output Selection Set for PWMH output of the channel 1"]
+    ossh1[1],
+    #[doc = "Output Selection Set for PWMH output of the channel 2"]
+    ossh2[2],
+    #[doc = "Output Selection Set for PWMH output of the channel 3"]
+    ossh3[3],
+    #[doc = "Output Selection Set for PWML output of the channel 0"]
+    ossl0[16],
+    #[doc = "Output Selection Set for PWML output of the channel 1"]
+    ossl1[17],
+    #[doc = "Output Selection Set for PWML output of the channel 2"]
+    ossl2[18],
+    #[doc = "Output Selection Set for PWML output of the channel 3"]
+    ossl3[19],
+}
+#[doc = "PWM Output Selection Clear Register"]
+WriteOnly register[32] PwmOsc {
+    #[doc = "Output Selection Clear for PWMH output of the channel 0"]
+    osch0[0],
+    #[doc = "Output Selection Clear for PWMH output of the channel 1"]
+    osch1[1],
+    #[doc = "Output Selection Clear for PWMH output of the channel 2"]
+    osch2[2],
+    #[doc = "Output Selection Clear for PWMH output of the channel 3"]
+    osch3[3],
+    #[doc = "Output Selection Clear for PWML output of the channel 0"]
+    oscl0[16],
+    #[doc = "Output Selection Clear for PWML output of the channel 1"]
+    oscl1[17],
+    #[doc = "Output Selection Clear for PWML output of the channel 2"]
+    oscl2[18],
+    #[doc = "Output Selection Clear for PWML output of the channel 3"]
+    oscl3[19],
+}
+#[doc = "PWM Output Selection Set Update Register"]
+WriteOnly register[32] PwmOssupd {
+    #[doc = "Output Selection Set for PWMH output of the channel 0"]
+    ossuph0[0],
+    #[doc = "Output Selection Set for PWMH output of the channel 1"]
+    ossuph1[1],
+    #[doc = "Output Selection Set for PWMH output of the channel 2"]
+    ossuph2[2],
+    #[doc = "Output Selection Set for PWMH output of the channel 3"]
+    ossuph3[3],
+    #[doc = "Output Selection Set for PWML output of the channel 0"]
+    ossupl0[16],
+    #[doc = "Output Selection Set for PWML output of the channel 1"]
+    ossupl1[17],
+    #[doc = "Output Selection Set for PWML output of the channel 2"]
+    ossupl2[18],
+    #[doc = "Output Selection Set for PWML output of the channel 3"]
+    ossupl3[19],
+}
+#[doc = "PWM Output Selection Clear Update Register"]
+WriteOnly register[32] PwmOscupd {
+    #[doc = "Output Selection Clear for PWMH output of the channel 0"]
+    oscuph0[0],
+    #[doc = "Output Selection Clear for PWMH output of the channel 1"]
+    oscuph1[1],
+    #[doc = "Output Selection Clear for PWMH output of the channel 2"]
+    oscuph2[2],
+    #[doc = "Output Selection Clear for PWMH output of the channel 3"]
+    oscuph3[3],
+    #[doc = "Output Selection Clear for PWML output of the channel 0"]
+    oscupl0[16],
+    #[doc = "Output Selection Clear for PWML output of the channel 1"]
+    oscupl1[17],
+    #[doc = "Output Selection Clear for PWML output of the channel 2"]
+    oscupl2[18],
+    #[doc = "Output Selection Clear for PWML output of the channel 3"]
+    oscupl3[19],
+}
+#[doc = "PWM Fault Mode Register"]
+ReadWrite register[32] PwmFmr {
+    #[doc = "Fault Polarity"]
+    fpol[0..8],
+    #[doc = "Fault Activation Mode"]
+    fmod[8..16],
+    #[doc = "Fault Filtering"]
+    ffil[16..24],
+}
+#[doc = "PWM Fault Status Register"]
+ReadOnly register[32] PwmFsr {
+    #[doc = "Fault Input Value"]
+    fiv[0..8],
+    #[doc = "Fault Status"]
+    fs[8..16],
+}
+#[doc = "PWM Fault Clear Register"]
+WriteOnly register[32] PwmFcr {
+    #[doc = "Fault Clear"]
+    fclr[0..8],
+}
+#[doc = "PWM Fault Protection Value Register 1"]
+ReadWrite register[32] PwmFpv1 {
+    #[doc = "Fault Protection Value for PWMH output on channel 0"]
+    fpvh0[0],
+    #[doc = "Fault Protection Value for PWMH output on channel 1"]
+    fpvh1[1],
+    #[doc = "Fault Protection Value for PWMH output on channel 2"]
+    fpvh2[2],
+    #[doc = "Fault Protection Value for PWMH output on channel 3"]
+    fpvh3[3],
+    #[doc = "Fault Protection Value for PWML output on channel 0"]
+    fpvl0[16],
+    #[doc = "Fault Protection Value for PWML output on channel 1"]
+    fpvl1[17],
+    #[doc = "Fault Protection Value for PWML output on channel 2"]
+    fpvl2[18],
+    #[doc = "Fault Protection Value for PWML output on channel 3"]
+    fpvl3[19],
+}
+#[doc = "PWM Fault Protection Enable Register"]
+ReadWrite register[32] PwmFpe {
+    #[doc = "Fault Protection Enable for channel 0"]
+    fpe0[0..8],
+    #[doc = "Fault Protection Enable for channel 1"]
+    fpe1[8..16],
+    #[doc = "Fault Protection Enable for channel 2"]
+    fpe2[16..24],
+    #[doc = "Fault Protection Enable for channel 3"]
+    fpe3[24..32],
+}
+#[doc = "PWM Event Line 0 Mode Register 0"]
+ReadWrite register[32] PwmElmr {
+    #[doc = "Comparison 0 Selection"]
+    csel0[0],
+    #[doc = "Comparison 1 Selection"]
+    csel1[1],
+    #[doc = "Comparison 2 Selection"]
+    csel2[2],
+    #[doc = "Comparison 3 Selection"]
+    csel3[3],
+    #[doc = "Comparison 4 Selection"]
+    csel4[4],
+    #[doc = "Comparison 5 Selection"]
+    csel5[5],
+    #[doc = "Comparison 6 Selection"]
+    csel6[6],
+    #[doc = "Comparison 7 Selection"]
+    csel7[7],
+}
+#[doc = "PWM Spread Spectrum Register"]
+ReadWrite register[32] PwmSspr {
+    #[doc = "Spread Spectrum Limit Value"]
+    sprd[0..24],
+    #[doc = "Spread Spectrum Counter Mode"]
+    sprdm[24],
+}
+#[doc = "PWM Spread Spectrum Update Register"]
+WriteOnly register[32] PwmSspup {
+    #[doc = "Spread Spectrum Limit Value Update"]
+    sprdup[0..24],
+}
+#[doc = "PWM Stepper Motor Mode Register"]
+ReadWrite register[32] PwmSmmr {
+    #[doc = "Gray Count ENable"]
+    gcen0[0],
+    #[doc = "Gray Count ENable"]
+    gcen1[1],
+    #[doc = "DOWN Count"]
+    down0[16],
+    #[doc = "DOWN Count"]
+    down1[17],
+}
+#[doc = "PWM Fault Protection Value 2 Register"]
+ReadWrite register[32] PwmFpv2 {
+    #[doc = "Fault Protection to Hi-Z for PWMH output on channel 0"]
+    fpzh0[0],
+    #[doc = "Fault Protection to Hi-Z for PWMH output on channel 1"]
+    fpzh1[1],
+    #[doc = "Fault Protection to Hi-Z for PWMH output on channel 2"]
+    fpzh2[2],
+    #[doc = "Fault Protection to Hi-Z for PWMH output on channel 3"]
+    fpzh3[3],
+    #[doc = "Fault Protection to Hi-Z for PWML output on channel 0"]
+    fpzl0[16],
+    #[doc = "Fault Protection to Hi-Z for PWML output on channel 1"]
+    fpzl1[17],
+    #[doc = "Fault Protection to Hi-Z for PWML output on channel 2"]
+    fpzl2[18],
+    #[doc = "Fault Protection to Hi-Z for PWML output on channel 3"]
+    fpzl3[19],
+}
+#[doc = "PWM Write Protection Control Register"]
+WriteOnly register[32] PwmWpcr {
+    #[doc = "Write Protection Command"]
+    wpcmd[0..2] {
+        #[doc = "Disables the software write protection of the register groups of which the bit WPRGx is at '1'."]
+        DisableSwProt = 0x0,
+        #[doc = "Enables the software write protection of the register groups of which the bit WPRGx is at '1'."]
+        EnableSwProt = 0x1,
+        #[doc = "Enables the hardware write protection of the register groups of which the bit WPRGx is at '1'. Only a hardware reset of the PWM controller can disable the hardware write protection. Moreover, to meet security requirements, the PIO lines associated with the PWM can not be configured through the PIO interface."]
+        EnableHwProt = 0x2,
+    },
+    #[doc = "Write Protection Register Group 0"]
+    wprg0[2],
+    #[doc = "Write Protection Register Group 1"]
+    wprg1[3],
+    #[doc = "Write Protection Register Group 2"]
+    wprg2[4],
+    #[doc = "Write Protection Register Group 3"]
+    wprg3[5],
+    #[doc = "Write Protection Register Group 4"]
+    wprg4[6],
+    #[doc = "Write Protection Register Group 5"]
+    wprg5[7],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPCMD field.Always reads as 0"]
+        Passwd = 0x50574d,
+    },
+}
+#[doc = "PWM Write Protection Status Register"]
+ReadOnly register[32] PwmWpsr {
+    #[doc = "Write Protect SW Status"]
+    wpsws0[0],
+    #[doc = "Write Protect SW Status"]
+    wpsws1[1],
+    #[doc = "Write Protect SW Status"]
+    wpsws2[2],
+    #[doc = "Write Protect SW Status"]
+    wpsws3[3],
+    #[doc = "Write Protect SW Status"]
+    wpsws4[4],
+    #[doc = "Write Protect SW Status"]
+    wpsws5[5],
+    #[doc = "Write Protect Violation Status"]
+    wpvs[7],
+    #[doc = "Write Protect HW Status"]
+    wphws0[8],
+    #[doc = "Write Protect HW Status"]
+    wphws1[9],
+    #[doc = "Write Protect HW Status"]
+    wphws2[10],
+    #[doc = "Write Protect HW Status"]
+    wphws3[11],
+    #[doc = "Write Protect HW Status"]
+    wphws4[12],
+    #[doc = "Write Protect HW Status"]
+    wphws5[13],
+    #[doc = "Write Protect Violation Source"]
+    wpvsrc[16..32],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] PwmVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}
+#[doc = "PWM Channel Mode Update Register (ch_num = 0)"]
+WriteOnly register[32] PwmCmupd0 {
+    #[doc = "Channel Polarity Update"]
+    cpolup[9],
+    #[doc = "Channel Polarity Inversion Update"]
+    cpolinvup[13],
+}
+#[doc = "PWM Channel Mode Update Register (ch_num = 1)"]
+WriteOnly register[32] PwmCmupd1 {
+    #[doc = "Channel Polarity Update"]
+    cpolup[9],
+    #[doc = "Channel Polarity Inversion Update"]
+    cpolinvup[13],
+}
+#[doc = "PWM External Trigger Register (trg_num = 1)"]
+ReadWrite register[32] PwmEtrg1 {
+    #[doc = "Maximum Counter value"]
+    maxcnt[0..24],
+    #[doc = "External Trigger Mode"]
+    trgmode[24..26] {
+        #[doc = "External trigger is not enabled."]
+        Off = 0x0,
+        #[doc = "External PWM Reset Mode"]
+        Mode1 = 0x1,
+        #[doc = "External PWM Start Mode"]
+        Mode2 = 0x2,
+        #[doc = "Cycle-by-cycle Duty Mode"]
+        Mode3 = 0x3,
+    },
+    #[doc = "Edge Selection"]
+    trgedge[28] {
+        #[doc = "TRGMODE = 1: TRGINx event detection on falling edge.TRGMODE = 2, 3: TRGINx active level is 0"]
+        FallingZero = 0x0,
+        #[doc = "TRGMODE = 1: TRGINx event detection on rising edge.TRGMODE = 2, 3: TRGINx active level is 1"]
+        RisingOne = 0x1,
+    },
+    #[doc = "Filtered input"]
+    trgfilt[29],
+    #[doc = "Trigger Source"]
+    trgsrc[30],
+    #[doc = "Recoverable Fault Enable"]
+    rfen[31],
+}
+#[doc = "PWM Leading-Edge Blanking Register (trg_num = 1)"]
+ReadWrite register[32] PwmLebr1 {
+    #[doc = "Leading-Edge Blanking Delay for TRGINx"]
+    lebdelay[0..7],
+    #[doc = "PWML Falling Edge Enable"]
+    pwmlfen[16],
+    #[doc = "PWML Rising Edge Enable"]
+    pwmlren[17],
+    #[doc = "PWMH Falling Edge Enable"]
+    pwmhfen[18],
+    #[doc = "PWMH Rising Edge Enable"]
+    pwmhren[19],
+}
+#[doc = "PWM Channel Mode Update Register (ch_num = 2)"]
+WriteOnly register[32] PwmCmupd2 {
+    #[doc = "Channel Polarity Update"]
+    cpolup[9],
+    #[doc = "Channel Polarity Inversion Update"]
+    cpolinvup[13],
+}
+#[doc = "PWM External Trigger Register (trg_num = 2)"]
+ReadWrite register[32] PwmEtrg2 {
+    #[doc = "Maximum Counter value"]
+    maxcnt[0..24],
+    #[doc = "External Trigger Mode"]
+    trgmode[24..26] {
+        #[doc = "External trigger is not enabled."]
+        Off = 0x0,
+        #[doc = "External PWM Reset Mode"]
+        Mode1 = 0x1,
+        #[doc = "External PWM Start Mode"]
+        Mode2 = 0x2,
+        #[doc = "Cycle-by-cycle Duty Mode"]
+        Mode3 = 0x3,
+    },
+    #[doc = "Edge Selection"]
+    trgedge[28] {
+        #[doc = "TRGMODE = 1: TRGINx event detection on falling edge.TRGMODE = 2, 3: TRGINx active level is 0"]
+        FallingZero = 0x0,
+        #[doc = "TRGMODE = 1: TRGINx event detection on rising edge.TRGMODE = 2, 3: TRGINx active level is 1"]
+        RisingOne = 0x1,
+    },
+    #[doc = "Filtered input"]
+    trgfilt[29],
+    #[doc = "Trigger Source"]
+    trgsrc[30],
+    #[doc = "Recoverable Fault Enable"]
+    rfen[31],
+}
+#[doc = "PWM Leading-Edge Blanking Register (trg_num = 2)"]
+ReadWrite register[32] PwmLebr2 {
+    #[doc = "Leading-Edge Blanking Delay for TRGINx"]
+    lebdelay[0..7],
+    #[doc = "PWML Falling Edge Enable"]
+    pwmlfen[16],
+    #[doc = "PWML Rising Edge Enable"]
+    pwmlren[17],
+    #[doc = "PWMH Falling Edge Enable"]
+    pwmhfen[18],
+    #[doc = "PWMH Rising Edge Enable"]
+    pwmhren[19],
+}
+#[doc = "PWM Channel Mode Update Register (ch_num = 3)"]
+WriteOnly register[32] PwmCmupd3 {
+    #[doc = "Channel Polarity Update"]
+    cpolup[9],
+    #[doc = "Channel Polarity Inversion Update"]
+    cpolinvup[13],
+}

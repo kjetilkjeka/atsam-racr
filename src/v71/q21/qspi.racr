@@ -1,0 +1,285 @@
+#[doc = "Quad Serial Peripheral Interface"]
+peripheral Qspi {
+    qspi_cr: QspiCr @ 0x0,
+    qspi_mr: QspiMr @ 0x4,
+    qspi_rdr: QspiRdr @ 0x8,
+    qspi_tdr: QspiTdr @ 0xc,
+    qspi_sr: QspiSr @ 0x10,
+    qspi_ier: QspiIer @ 0x14,
+    qspi_idr: QspiIdr @ 0x18,
+    qspi_imr: QspiImr @ 0x1c,
+    qspi_scr: QspiScr @ 0x20,
+    qspi_iar: QspiIar @ 0x30,
+    qspi_icr: QspiIcr @ 0x34,
+    qspi_ifr: QspiIfr @ 0x38,
+    qspi_smr: QspiSmr @ 0x40,
+    qspi_skr: QspiSkr @ 0x44,
+    qspi_wpmr: QspiWpmr @ 0xe4,
+    qspi_wpsr: QspiWpsr @ 0xe8,
+    qspi_version: QspiVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] QspiCr {
+    #[doc = "QSPI Enable"]
+    qspien[0],
+    #[doc = "QSPI Disable"]
+    qspidis[1],
+    #[doc = "QSPI Software Reset"]
+    swrst[7],
+    #[doc = "Last Transfer"]
+    lastxfer[24],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] QspiMr {
+    #[doc = "Serial Memory Mode"]
+    smm[0] {
+        #[doc = "The QSPI is in SPI mode."]
+        Spi = 0x0,
+        #[doc = "The QSPI is in Serial Memory mode."]
+        Memory = 0x1,
+    },
+    #[doc = "Local Loopback Enable"]
+    llb[1] {
+        #[doc = "Local loopback path disabled."]
+        Disabled = 0x0,
+        #[doc = "Local loopback path enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Wait Data Read Before Transfer"]
+    wdrbt[2] {
+        #[doc = "No effect. In SPI mode, a transfer can be initiated whatever the state of the QSPI_RDR is."]
+        Disabled = 0x0,
+        #[doc = "In SPI mode, a transfer can start only if the QSPI_RDR is empty, i.e., does not contain any unread data. This mode prevents overrun error in reception."]
+        Enabled = 0x1,
+    },
+    #[doc = "Chip Select Mode"]
+    csmode[4..6] {
+        #[doc = "The chip select is deasserted if QSPI_TDR.TD has not been reloaded before the end of the current transfer."]
+        NotReloaded = 0x0,
+        #[doc = "The chip select is deasserted when the bit LASTXFER is written at 1 and the character written in QSPI_TDR.TD has been transferred."]
+        Lastxfer = 0x1,
+        #[doc = "The chip select is deasserted systematically after each transfer."]
+        Systematically = 0x2,
+    },
+    #[doc = "Number Of Bits Per Transfer"]
+    nbbits[8..12] {
+        #[doc = "8 bits for transfer"]
+        _8Bit = 0x0,
+        #[doc = "16 bits for transfer"]
+        _16Bit = 0x8,
+    },
+    #[doc = "Delay Between Consecutive Transfers"]
+    dlybct[16..24],
+    #[doc = "Minimum Inactive QCS Delay"]
+    dlycs[24..32],
+}
+#[doc = "Receive Data Register"]
+ReadOnly register[32] QspiRdr {
+    #[doc = "Receive Data"]
+    rd[0..16],
+}
+#[doc = "Transmit Data Register"]
+WriteOnly register[32] QspiTdr {
+    #[doc = "Transmit Data"]
+    td[0..16],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] QspiSr {
+    #[doc = "Receive Data Register Full (cleared by reading SPI_RDR)"]
+    rdrf[0],
+    #[doc = "Transmit Data Register Empty (cleared by writing SPI_TDR)"]
+    tdre[1],
+    #[doc = "Transmission Registers Empty (cleared by writing SPI_TDR)"]
+    txempty[2],
+    #[doc = "Overrun Error Status (cleared on read)"]
+    ovres[3],
+    #[doc = "Chip Select Rise (cleared on read)"]
+    csr[8],
+    #[doc = "Chip Select Status"]
+    css[9],
+    #[doc = "Instruction End Status (cleared on read)"]
+    instre[10],
+    #[doc = "QSPI Enable Status"]
+    qspiens[24],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] QspiIer {
+    #[doc = "Receive Data Register Full Interrupt Enable"]
+    rdrf[0],
+    #[doc = "Transmit Data Register Empty Interrupt Enable"]
+    tdre[1],
+    #[doc = "Transmission Registers Empty Enable"]
+    txempty[2],
+    #[doc = "Overrun Error Interrupt Enable"]
+    ovres[3],
+    #[doc = "Chip Select Rise Interrupt Enable"]
+    csr[8],
+    #[doc = "Chip Select Status Interrupt Enable"]
+    css[9],
+    #[doc = "Instruction End Interrupt Enable"]
+    instre[10],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] QspiIdr {
+    #[doc = "Receive Data Register Full Interrupt Disable"]
+    rdrf[0],
+    #[doc = "Transmit Data Register Empty Interrupt Disable"]
+    tdre[1],
+    #[doc = "Transmission Registers Empty Disable"]
+    txempty[2],
+    #[doc = "Overrun Error Interrupt Disable"]
+    ovres[3],
+    #[doc = "Chip Select Rise Interrupt Disable"]
+    csr[8],
+    #[doc = "Chip Select Status Interrupt Disable"]
+    css[9],
+    #[doc = "Instruction End Interrupt Disable"]
+    instre[10],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] QspiImr {
+    #[doc = "Receive Data Register Full Interrupt Mask"]
+    rdrf[0],
+    #[doc = "Transmit Data Register Empty Interrupt Mask"]
+    tdre[1],
+    #[doc = "Transmission Registers Empty Mask"]
+    txempty[2],
+    #[doc = "Overrun Error Interrupt Mask"]
+    ovres[3],
+    #[doc = "Chip Select Rise Interrupt Mask"]
+    csr[8],
+    #[doc = "Chip Select Status Interrupt Mask"]
+    css[9],
+    #[doc = "Instruction End Interrupt Mask"]
+    instre[10],
+}
+#[doc = "Serial Clock Register"]
+ReadWrite register[32] QspiScr {
+    #[doc = "Clock Polarity"]
+    cpol[0],
+    #[doc = "Clock Phase"]
+    cpha[1],
+    #[doc = "Serial Clock Baud Rate"]
+    scbr[8..16],
+    #[doc = "Delay Before QSCK"]
+    dlybs[16..24],
+}
+#[doc = "Instruction Address Register"]
+ReadWrite register[32] QspiIar {
+    #[doc = "Address"]
+    addr[0..32],
+}
+#[doc = "Instruction Code Register"]
+ReadWrite register[32] QspiIcr {
+    #[doc = "Instruction Code"]
+    inst[0..8],
+    #[doc = "Option Code"]
+    opt[16..24],
+}
+#[doc = "Instruction Frame Register"]
+ReadWrite register[32] QspiIfr {
+    #[doc = "Width of Instruction Code, Address, Option Code and Data"]
+    width[0..3] {
+        #[doc = "Instruction: Single-bit SPI / Address-Option: Single-bit SPI / Data: Single-bit SPI"]
+        SingleBitSpi = 0x0,
+        #[doc = "Instruction: Single-bit SPI / Address-Option: Single-bit SPI / Data: Dual SPI"]
+        DualOutput = 0x1,
+        #[doc = "Instruction: Single-bit SPI / Address-Option: Single-bit SPI / Data: Quad SPI"]
+        QuadOutput = 0x2,
+        #[doc = "Instruction: Single-bit SPI / Address-Option: Dual SPI / Data: Dual SPI"]
+        DualIo = 0x3,
+        #[doc = "Instruction: Single-bit SPI / Address-Option: Quad SPI / Data: Quad SPI"]
+        QuadIo = 0x4,
+        #[doc = "Instruction: Dual SPI / Address-Option: Dual SPI / Data: Dual SPI"]
+        DualCmd = 0x5,
+        #[doc = "Instruction: Quad SPI / Address-Option: Quad SPI / Data: Quad SPI"]
+        QuadCmd = 0x6,
+    },
+    #[doc = "Instruction Enable"]
+    insten[4],
+    #[doc = "Address Enable"]
+    addren[5],
+    #[doc = "Option Enable"]
+    opten[6],
+    #[doc = "Data Enable"]
+    dataen[7],
+    #[doc = "Option Code Length"]
+    optl[8..10] {
+        #[doc = "The option code is 1 bit long."]
+        Option1bit = 0x0,
+        #[doc = "The option code is 2 bits long."]
+        Option2bit = 0x1,
+        #[doc = "The option code is 4 bits long."]
+        Option4bit = 0x2,
+        #[doc = "The option code is 8 bits long."]
+        Option8bit = 0x3,
+    },
+    #[doc = "Address Length"]
+    addrl[10] {
+        #[doc = "The address is 24 bits long."]
+        _24Bit = 0x0,
+        #[doc = "The address is 32 bits long."]
+        _32Bit = 0x1,
+    },
+    #[doc = "Data Transfer Type"]
+    tfrtyp[12..14] {
+        #[doc = "Read transfer from the serial memory.Scrambling is not performed.Read at random location (fetch) in the serial Flash memory is not possible."]
+        TrsfrRead = 0x0,
+        #[doc = "Read data transfer from the serial memory.If enabled, scrambling is performed.Read at random location (fetch) in the serial Flash memory is possible."]
+        TrsfrReadMemory = 0x1,
+        #[doc = "Write transfer into the serial memory.Scrambling is not performed."]
+        TrsfrWrite = 0x2,
+        #[doc = "Write data transfer into the serial memory.If enabled, scrambling is performed."]
+        TrsfrWriteMemory = 0x3,
+    },
+    #[doc = "Continuous Read Mode"]
+    crm[14] {
+        #[doc = "The Continuous Read mode is disabled."]
+        Disabled = 0x0,
+        #[doc = "The Continuous Read mode is enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Number Of Dummy Cycles"]
+    nbdum[16..21],
+}
+#[doc = "Scrambling Mode Register"]
+ReadWrite register[32] QspiSmr {
+    #[doc = "Scrambling/Unscrambling Enable"]
+    scren[0] {
+        #[doc = "The scrambling/unscrambling is disabled."]
+        Disabled = 0x0,
+        #[doc = "The scrambling/unscrambling is enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Scrambling/Unscrambling Random Value Disable"]
+    rvdis[1],
+}
+#[doc = "Scrambling Key Register"]
+WriteOnly register[32] QspiSkr {
+    #[doc = "User Scrambling Key"]
+    usrk[0..32],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] QspiWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit. Always reads as 0."]
+        Passwd = 0x515350,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] QspiWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..16],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] QspiVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

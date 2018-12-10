@@ -1,0 +1,217 @@
+#[doc = "MediaLB"]
+peripheral Mlb {
+    mlb_mlbc0: MlbMlbc0 @ 0x0,
+    mlb_ms0: MlbMs0 @ 0xc,
+    mlb_ms1: MlbMs1 @ 0x14,
+    mlb_mss: MlbMss @ 0x20,
+    mlb_msd: MlbMsd @ 0x24,
+    mlb_mien: MlbMien @ 0x2c,
+    mlb_mlbc1: MlbMlbc1 @ 0x3c,
+    mlb_hctl: MlbHctl @ 0x80,
+    mlb_hcmr: [MlbHcmr; 2] @ 0x88,
+    mlb_hcer: [MlbHcer; 2] @ 0x90,
+    mlb_hcbr: [MlbHcbr; 2] @ 0x98,
+    mlb_mdat: [MlbMdat; 4] @ 0xc0,
+    mlb_mdwe: [MlbMdwe; 4] @ 0xd0,
+    mlb_mctl: MlbMctl @ 0xe0,
+    mlb_madr: MlbMadr @ 0xe4,
+    mlb_actl: MlbActl @ 0x3c0,
+    mlb_acsr: [MlbAcsr; 2] @ 0x3d0,
+    mlb_acmr: [MlbAcmr; 2] @ 0x3d8,
+}
+#[doc = "MediaLB Control 0 Register"]
+ReadWrite register[32] MlbMlbc0 {
+    #[doc = "MediaLB Enable"]
+    mlben[0],
+    #[doc = "MLBCLK (MediaLB clock) Speed Select"]
+    mlbclk[2..5] {
+        #[doc = "256xFs (for MLBPEN = 0)"]
+        _256Fs = 0x0,
+        #[doc = "512xFs (for MLBPEN = 0)"]
+        _512Fs = 0x1,
+        #[doc = "1024xFs (for MLBPEN = 0)"]
+        _1024Fs = 0x2,
+    },
+    #[doc = "Must be Written to 0"]
+    zero[5],
+    #[doc = "MediaLB Lock Status (read-only)"]
+    mlblk[7],
+    #[doc = "Asynchronous Tx Packet Retry"]
+    asyretry[12],
+    #[doc = "Control Tx Packet Retry"]
+    ctlretry[14],
+    #[doc = "The number of frames per sub-buffer for synchronous channels"]
+    fcnt[15..18] {
+        #[doc = "1 frame per sub-buffer (Operation is the same as Standard mode.)"]
+        _1Frame = 0x0,
+        #[doc = "2 frames per sub-buffer"]
+        _2Frames = 0x1,
+        #[doc = "4 frames per sub-buffer"]
+        _4Frames = 0x2,
+        #[doc = "8 frames per sub-buffer"]
+        _8Frames = 0x3,
+        #[doc = "16 frames per sub-buffer"]
+        _16Frames = 0x4,
+        #[doc = "32 frames per sub-buffer"]
+        _32Frames = 0x5,
+        #[doc = "64 frames per sub-buffer"]
+        _64Frames = 0x6,
+    },
+}
+#[doc = "MediaLB Channel Status 0 Register"]
+ReadWrite register[32] MlbMs0 {
+    #[doc = "MediaLB Channel Status [31:0] (cleared by writing a 0)"]
+    mcs[0..32],
+}
+#[doc = "MediaLB Channel Status1 Register"]
+ReadWrite register[32] MlbMs1 {
+    #[doc = "MediaLB Channel Status [63:32] (cleared by writing a 0)"]
+    mcs[0..32],
+}
+#[doc = "MediaLB System Status Register"]
+ReadWrite register[32] MlbMss {
+    #[doc = "Reset System Command Detected in the System Quadlet (cleared by writing a 0)"]
+    rstsyscmd[0],
+    #[doc = "Network Lock System Command Detected in the System Quadlet (cleared by writing a 0)"]
+    lksyscmd[1],
+    #[doc = "Network Unlock System Command Detected in the System Quadlet (cleared by writing a 0)"]
+    ulksyscmd[2],
+    #[doc = "Channel Scan System Command Detected in the System Quadlet (cleared by writing a 0)"]
+    cssyscmd[3],
+    #[doc = "Software System Command Detected in the System Quadlet (cleared by writing a 0)"]
+    swsyscmd[4],
+    #[doc = "Service Request Enabled"]
+    servreq[5],
+}
+#[doc = "MediaLB System Data Register"]
+ReadOnly register[32] MlbMsd {
+    #[doc = "System Data (Byte 0)"]
+    sd0[0..8],
+    #[doc = "System Data (Byte 1)"]
+    sd1[8..16],
+    #[doc = "System Data (Byte 2)"]
+    sd2[16..24],
+    #[doc = "System Data (Byte 3)"]
+    sd3[24..32],
+}
+#[doc = "MediaLB Interrupt Enable Register"]
+ReadWrite register[32] MlbMien {
+    #[doc = "Isochronous Rx Protocol Error Enable"]
+    isoc_pe[0],
+    #[doc = "Isochronous Rx Buffer Overflow Enable"]
+    isoc_bufo[1],
+    #[doc = "Synchronous Protocol Error Enable"]
+    sync_pe[16],
+    #[doc = "Asynchronous Rx Done Enable"]
+    arx_done[17],
+    #[doc = "Asynchronous Rx Protocol Error Enable"]
+    arx_pe[18],
+    #[doc = "Asynchronous Rx Break Enable"]
+    arx_break[19],
+    #[doc = "Asynchronous Tx Packet Done Enable"]
+    atx_done[20],
+    #[doc = "Asynchronous Tx Protocol Error Enable"]
+    atx_pe[21],
+    #[doc = "Asynchronous Tx Break Enable"]
+    atx_break[22],
+    #[doc = "Control Rx Packet Done Enable"]
+    crx_done[24],
+    #[doc = "Control Rx Protocol Error Enable"]
+    crx_pe[25],
+    #[doc = "Control Rx Break Enable"]
+    crx_break[26],
+    #[doc = "Control Tx Packet Done Enable"]
+    ctx_done[27],
+    #[doc = "Control Tx Protocol Error Enable"]
+    ctx_pe[28],
+    #[doc = "Control Tx Break Enable"]
+    ctx_break[29],
+}
+#[doc = "MediaLB Control 1 Register"]
+ReadWrite register[32] MlbMlbc1 {
+    #[doc = "MediaLB Lock Error Status (cleared by writing a 0)"]
+    lock[6],
+    #[doc = "MediaLB Clock Missing Status (cleared by writing a 0)"]
+    clkm[7],
+    #[doc = "Node Device Address"]
+    nda[8..16],
+}
+#[doc = "HBI Control Register"]
+ReadWrite register[32] MlbHctl {
+    #[doc = "Address Generation Unit 0 Software Reset"]
+    rst0[0],
+    #[doc = "Address Generation Unit 1 Software Reset"]
+    rst1[1],
+    #[doc = "HBI Enable"]
+    en[15],
+}
+#[doc = "HBI Channel Mask 0 Register 0"]
+ReadWrite register[32] MlbHcmr {
+    #[doc = "Bitwise Channel Mask Bit [31:0]"]
+    chm[0..32],
+}
+#[doc = "HBI Channel Error 0 Register 0"]
+ReadOnly register[32] MlbHcer {
+    #[doc = "Bitwise Channel Error Bit [31:0]"]
+    cerr[0..32],
+}
+#[doc = "HBI Channel Busy 0 Register 0"]
+ReadOnly register[32] MlbHcbr {
+    #[doc = "Bitwise Channel Busy Bit [31:0]"]
+    chb[0..32],
+}
+#[doc = "MIF Data 0 Register 0"]
+ReadWrite register[32] MlbMdat {
+    #[doc = "CRT or DBR Data"]
+    data[0..32],
+}
+#[doc = "MIF Data Write Enable 0 Register 0"]
+ReadWrite register[32] MlbMdwe {
+    #[doc = "Bitwise Write Enable for CTR Data - bits[31:0]"]
+    mask[0..32],
+}
+#[doc = "MIF Control Register"]
+ReadWrite register[32] MlbMctl {
+    #[doc = "Transfer Complete (Write 0 to Clear)"]
+    xcmp[0],
+}
+#[doc = "MIF Address Register"]
+ReadWrite register[32] MlbMadr {
+    #[doc = "CTR or DBR Address"]
+    addr[0..14],
+    #[doc = "Target Location Bit"]
+    tb[30] {
+        #[doc = "Selects CTR"]
+        Ctr = 0x0,
+        #[doc = "Selects DBR"]
+        Dbr = 0x1,
+    },
+    #[doc = "Write-Not-Read Selection"]
+    wnr[31],
+}
+#[doc = "AHB Control Register"]
+ReadWrite register[32] MlbActl {
+    #[doc = "Software Clear Enable"]
+    sce[0],
+    #[doc = "AHB Interrupt Mux Enable"]
+    smx[1],
+    #[doc = "DMA Mode"]
+    dma_mode[2],
+    #[doc = "DMA Packet Buffering Mode"]
+    mpb[4] {
+        #[doc = "Single-packet mode"]
+        SinglePacket = 0x0,
+        #[doc = "Multiple-packet mode"]
+        MultiplePacket = 0x1,
+    },
+}
+#[doc = "AHB Channel Status 0 Register 0"]
+ReadWrite register[32] MlbAcsr {
+    #[doc = "Interrupt Status for Logical Channels [31:0] (cleared by writing a 1)"]
+    chs[0..32],
+}
+#[doc = "AHB Channel Mask 0 Register 0"]
+ReadWrite register[32] MlbAcmr {
+    #[doc = "Bitwise Channel Mask Bits 31 to 0"]
+    chm[0..32],
+}

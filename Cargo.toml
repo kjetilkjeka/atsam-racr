@@ -1,0 +1,7 @@
+[package]
+name = "atsam-racr"
+version = "0.1.0"
+authors = ["Kjetil Kjeka <kjetilkjeka@gmail.com>"]
+edition = "2018"
+
+[dependencies]

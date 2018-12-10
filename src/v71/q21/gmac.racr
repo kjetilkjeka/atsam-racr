@@ -1,0 +1,1756 @@
+#[doc = "Gigabit Ethernet MAC"]
+peripheral Gmac {
+    gmac_ncr: GmacNcr @ 0x0,
+    gmac_ncfgr: GmacNcfgr @ 0x4,
+    gmac_nsr: GmacNsr @ 0x8,
+    gmac_ur: GmacUr @ 0xc,
+    gmac_dcfgr: GmacDcfgr @ 0x10,
+    gmac_tsr: GmacTsr @ 0x14,
+    gmac_rbqb: GmacRbqb @ 0x18,
+    gmac_tbqb: GmacTbqb @ 0x1c,
+    gmac_rsr: GmacRsr @ 0x20,
+    gmac_isr: GmacIsr @ 0x24,
+    gmac_ier: GmacIer @ 0x28,
+    gmac_idr: GmacIdr @ 0x2c,
+    gmac_imr: GmacImr @ 0x30,
+    gmac_man: GmacMan @ 0x34,
+    gmac_rpq: GmacRpq @ 0x38,
+    gmac_tpq: GmacTpq @ 0x3c,
+    gmac_tpsf: GmacTpsf @ 0x40,
+    gmac_rpsf: GmacRpsf @ 0x44,
+    gmac_rjfml: GmacRjfml @ 0x48,
+    gmac_hrb: GmacHrb @ 0x80,
+    gmac_hrt: GmacHrt @ 0x84,
+    gmac_tidm1: GmacTidm1 @ 0xa8,
+    gmac_tidm2: GmacTidm2 @ 0xac,
+    gmac_tidm3: GmacTidm3 @ 0xb0,
+    gmac_tidm4: GmacTidm4 @ 0xb4,
+    gmac_wol: GmacWol @ 0xb8,
+    gmac_ipgs: GmacIpgs @ 0xbc,
+    gmac_svlan: GmacSvlan @ 0xc0,
+    gmac_tpfcp: GmacTpfcp @ 0xc4,
+    gmac_samb1: GmacSamb1 @ 0xc8,
+    gmac_samt1: GmacSamt1 @ 0xcc,
+    gmac_nsc: GmacNsc @ 0xdc,
+    gmac_scl: GmacScl @ 0xe0,
+    gmac_sch: GmacSch @ 0xe4,
+    gmac_eftsh: GmacEftsh @ 0xe8,
+    gmac_efrsh: GmacEfrsh @ 0xec,
+    gmac_peftsh: GmacPeftsh @ 0xf0,
+    gmac_pefrsh: GmacPefrsh @ 0xf4,
+    gmac_mid: GmacMid @ 0xfc,
+    gmac_otlo: GmacOtlo @ 0x100,
+    gmac_othi: GmacOthi @ 0x104,
+    gmac_ft: GmacFt @ 0x108,
+    gmac_bcft: GmacBcft @ 0x10c,
+    gmac_mft: GmacMft @ 0x110,
+    gmac_pft: GmacPft @ 0x114,
+    gmac_bft64: GmacBft64 @ 0x118,
+    gmac_tbft127: GmacTbft127 @ 0x11c,
+    gmac_tbft255: GmacTbft255 @ 0x120,
+    gmac_tbft511: GmacTbft511 @ 0x124,
+    gmac_tbft1023: GmacTbft1023 @ 0x128,
+    gmac_tbft1518: GmacTbft1518 @ 0x12c,
+    gmac_gtbft1518: GmacGtbft1518 @ 0x130,
+    gmac_tur: GmacTur @ 0x134,
+    gmac_scf: GmacScf @ 0x138,
+    gmac_mcf: GmacMcf @ 0x13c,
+    gmac_ec: GmacEc @ 0x140,
+    gmac_lc: GmacLc @ 0x144,
+    gmac_dtf: GmacDtf @ 0x148,
+    gmac_cse: GmacCse @ 0x14c,
+    gmac_orlo: GmacOrlo @ 0x150,
+    gmac_orhi: GmacOrhi @ 0x154,
+    gmac_fr: GmacFr @ 0x158,
+    gmac_bcfr: GmacBcfr @ 0x15c,
+    gmac_mfr: GmacMfr @ 0x160,
+    gmac_pfr: GmacPfr @ 0x164,
+    gmac_bfr64: GmacBfr64 @ 0x168,
+    gmac_tbfr127: GmacTbfr127 @ 0x16c,
+    gmac_tbfr255: GmacTbfr255 @ 0x170,
+    gmac_tbfr511: GmacTbfr511 @ 0x174,
+    gmac_tbfr1023: GmacTbfr1023 @ 0x178,
+    gmac_tbfr1518: GmacTbfr1518 @ 0x17c,
+    gmac_tmxbfr: GmacTmxbfr @ 0x180,
+    gmac_ufr: GmacUfr @ 0x184,
+    gmac_ofr: GmacOfr @ 0x188,
+    gmac_jr: GmacJr @ 0x18c,
+    gmac_fcse: GmacFcse @ 0x190,
+    gmac_lffe: GmacLffe @ 0x194,
+    gmac_rse: GmacRse @ 0x198,
+    gmac_ae: GmacAe @ 0x19c,
+    gmac_rre: GmacRre @ 0x1a0,
+    gmac_roe: GmacRoe @ 0x1a4,
+    gmac_ihce: GmacIhce @ 0x1a8,
+    gmac_tce: GmacTce @ 0x1ac,
+    gmac_uce: GmacUce @ 0x1b0,
+    gmac_tisubn: GmacTisubn @ 0x1bc,
+    gmac_tsh: GmacTsh @ 0x1c0,
+    gmac_tsl: GmacTsl @ 0x1d0,
+    gmac_tn: GmacTn @ 0x1d4,
+    gmac_ta: GmacTa @ 0x1d8,
+    gmac_ti: GmacTi @ 0x1dc,
+    gmac_eftsl: GmacEftsl @ 0x1e0,
+    gmac_eftn: GmacEftn @ 0x1e4,
+    gmac_efrsl: GmacEfrsl @ 0x1e8,
+    gmac_efrn: GmacEfrn @ 0x1ec,
+    gmac_peftsl: GmacPeftsl @ 0x1f0,
+    gmac_peftn: GmacPeftn @ 0x1f4,
+    gmac_pefrsl: GmacPefrsl @ 0x1f8,
+    gmac_pefrn: GmacPefrn @ 0x1fc,
+    gmac_rxlpi: GmacRxlpi @ 0x270,
+    gmac_rxlpitime: GmacRxlpitime @ 0x274,
+    gmac_txlpi: GmacTxlpi @ 0x278,
+    gmac_txlpitime: GmacTxlpitime @ 0x27c,
+    gmac_isrpq: [GmacIsrpq; 5] @ 0x3fc,
+    gmac_tbqbapq: [GmacTbqbapq; 5] @ 0x43c,
+    gmac_rbqbapq: [GmacRbqbapq; 5] @ 0x47c,
+    gmac_rbsrpq: [GmacRbsrpq; 5] @ 0x49c,
+    gmac_cbscr: GmacCbscr @ 0x4bc,
+    gmac_cbsisqa: GmacCbsisqa @ 0x4c0,
+    gmac_cbsisqb: GmacCbsisqb @ 0x4c4,
+    gmac_st1rpq: [GmacSt1rpq; 4] @ 0x500,
+    gmac_st2rpq: [GmacSt2rpq; 8] @ 0x540,
+    gmac_ierpq: [GmacIerpq; 5] @ 0x5fc,
+    gmac_idrpq: [GmacIdrpq; 5] @ 0x61c,
+    gmac_imrpq: [GmacImrpq; 5] @ 0x63c,
+    gmac_st2er: [GmacSt2er; 4] @ 0x6e0,
+    gmac_st2cw00: GmacSt2cw00 @ 0x700,
+    gmac_st2cw10: GmacSt2cw10 @ 0x704,
+    gmac_st2cw01: GmacSt2cw01 @ 0x708,
+    gmac_st2cw11: GmacSt2cw11 @ 0x70c,
+    gmac_st2cw02: GmacSt2cw02 @ 0x710,
+    gmac_st2cw12: GmacSt2cw12 @ 0x714,
+    gmac_st2cw03: GmacSt2cw03 @ 0x718,
+    gmac_st2cw13: GmacSt2cw13 @ 0x71c,
+    gmac_st2cw04: GmacSt2cw04 @ 0x720,
+    gmac_st2cw14: GmacSt2cw14 @ 0x724,
+    gmac_st2cw05: GmacSt2cw05 @ 0x728,
+    gmac_st2cw15: GmacSt2cw15 @ 0x72c,
+    gmac_st2cw06: GmacSt2cw06 @ 0x730,
+    gmac_st2cw16: GmacSt2cw16 @ 0x734,
+    gmac_st2cw07: GmacSt2cw07 @ 0x738,
+    gmac_st2cw17: GmacSt2cw17 @ 0x73c,
+    gmac_st2cw08: GmacSt2cw08 @ 0x740,
+    gmac_st2cw18: GmacSt2cw18 @ 0x744,
+    gmac_st2cw09: GmacSt2cw09 @ 0x748,
+    gmac_st2cw19: GmacSt2cw19 @ 0x74c,
+    gmac_st2cw010: GmacSt2cw010 @ 0x750,
+    gmac_st2cw110: GmacSt2cw110 @ 0x754,
+    gmac_st2cw011: GmacSt2cw011 @ 0x758,
+    gmac_st2cw111: GmacSt2cw111 @ 0x75c,
+    gmac_st2cw012: GmacSt2cw012 @ 0x760,
+    gmac_st2cw112: GmacSt2cw112 @ 0x764,
+    gmac_st2cw013: GmacSt2cw013 @ 0x768,
+    gmac_st2cw113: GmacSt2cw113 @ 0x76c,
+    gmac_st2cw014: GmacSt2cw014 @ 0x770,
+    gmac_st2cw114: GmacSt2cw114 @ 0x774,
+    gmac_st2cw015: GmacSt2cw015 @ 0x778,
+    gmac_st2cw115: GmacSt2cw115 @ 0x77c,
+    gmac_st2cw016: GmacSt2cw016 @ 0x780,
+    gmac_st2cw116: GmacSt2cw116 @ 0x784,
+    gmac_st2cw017: GmacSt2cw017 @ 0x788,
+    gmac_st2cw117: GmacSt2cw117 @ 0x78c,
+    gmac_st2cw018: GmacSt2cw018 @ 0x790,
+    gmac_st2cw118: GmacSt2cw118 @ 0x794,
+    gmac_st2cw019: GmacSt2cw019 @ 0x798,
+    gmac_st2cw119: GmacSt2cw119 @ 0x79c,
+    gmac_st2cw020: GmacSt2cw020 @ 0x7a0,
+    gmac_st2cw120: GmacSt2cw120 @ 0x7a4,
+    gmac_st2cw021: GmacSt2cw021 @ 0x7a8,
+    gmac_st2cw121: GmacSt2cw121 @ 0x7ac,
+    gmac_st2cw022: GmacSt2cw022 @ 0x7b0,
+    gmac_st2cw122: GmacSt2cw122 @ 0x7b4,
+    gmac_st2cw023: GmacSt2cw023 @ 0x7b8,
+    gmac_st2cw123: GmacSt2cw123 @ 0x7bc,
+}
+#[doc = "Network Control Register"]
+ReadWrite register[32] GmacNcr {
+    #[doc = "Loop Back Local"]
+    lbl[1],
+    #[doc = "Receive Enable"]
+    rxen[2],
+    #[doc = "Transmit Enable"]
+    txen[3],
+    #[doc = "Management Port Enable"]
+    mpe[4],
+    #[doc = "Clear Statistics Registers"]
+    clrstat[5],
+    #[doc = "Increment Statistics Registers"]
+    incstat[6],
+    #[doc = "Write Enable for Statistics Registers"]
+    westat[7],
+    #[doc = "Back pressure"]
+    bp[8],
+    #[doc = "Start Transmission"]
+    tstart[9],
+    #[doc = "Transmit Halt"]
+    thalt[10],
+    #[doc = "Transmit Pause Frame"]
+    txpf[11],
+    #[doc = "Transmit Zero Quantum Pause Frame"]
+    txzqpf[12],
+    #[doc = "Store Receive Time Stamp to Memory"]
+    srtsm[15],
+    #[doc = "Enable PFC Priority-based Pause Reception"]
+    enpbpr[16],
+    #[doc = "Transmit PFC Priority-based Pause Frame"]
+    txpbpf[17],
+    #[doc = "Flush Next Packet"]
+    fnp[18],
+    #[doc = "Enable LPI Transmission"]
+    txlpien[19],
+}
+#[doc = "Network Configuration Register"]
+ReadWrite register[32] GmacNcfgr {
+    #[doc = "Speed"]
+    spd[0],
+    #[doc = "Full Duplex"]
+    fd[1],
+    #[doc = "Discard Non-VLAN FRAMES"]
+    dnvlan[2],
+    #[doc = "Jumbo Frame Size"]
+    jframe[3],
+    #[doc = "Copy All Frames"]
+    caf[4],
+    #[doc = "No Broadcast"]
+    nbc[5],
+    #[doc = "Multicast Hash Enable"]
+    mtihen[6],
+    #[doc = "Unicast Hash Enable"]
+    unihen[7],
+    #[doc = "1536 Maximum Frame Size"]
+    maxfs[8],
+    #[doc = "Retry Test"]
+    rty[12],
+    #[doc = "Pause Enable"]
+    pen[13],
+    #[doc = "Receive Buffer Offset"]
+    rxbufo[14..16],
+    #[doc = "Length Field Error Frame Discard"]
+    lferd[16],
+    #[doc = "Remove FCS"]
+    rfcs[17],
+    #[doc = "MDC CLock Division"]
+    clk[18..21] {
+        #[doc = "MCK divided by 8 (MCK up to 20 MHz)"]
+        Mck8 = 0x0,
+        #[doc = "MCK divided by 16 (MCK up to 40 MHz)"]
+        Mck16 = 0x1,
+        #[doc = "MCK divided by 32 (MCK up to 80 MHz)"]
+        Mck32 = 0x2,
+        #[doc = "MCK divided by 48 (MCK up to 120 MHz)"]
+        Mck48 = 0x3,
+        #[doc = "MCK divided by 64 (MCK up to 160 MHz)"]
+        Mck64 = 0x4,
+        #[doc = "MCK divided by 96 (MCK up to 240 MHz)"]
+        Mck96 = 0x5,
+    },
+    #[doc = "Data Bus Width"]
+    dbw[21..23],
+    #[doc = "Disable Copy of Pause Frames"]
+    dcpf[23],
+    #[doc = "Receive Checksum Offload Enable"]
+    rxcoen[24],
+    #[doc = "Enable Frames Received in Half Duplex"]
+    efrhd[25],
+    #[doc = "Ignore RX FCS"]
+    irxfcs[26],
+    #[doc = "IP Stretch Enable"]
+    ipgsen[28],
+    #[doc = "Receive Bad Preamble"]
+    rxbp[29],
+    #[doc = "Ignore IPG GRXER"]
+    irxer[30],
+}
+#[doc = "Network Status Register"]
+ReadOnly register[32] GmacNsr {
+    #[doc = "MDIO Input Status"]
+    mdio[1],
+    #[doc = "PHY Management Logic Idle"]
+    idle[2],
+    #[doc = "LPI Indication"]
+    rxlpis[7],
+}
+#[doc = "User Register"]
+ReadWrite register[32] GmacUr {
+    #[doc = "Reduced MII Mode"]
+    rmii[0],
+}
+#[doc = "DMA Configuration Register"]
+ReadWrite register[32] GmacDcfgr {
+    #[doc = "Fixed Burst Length for DMA Data Operations:"]
+    fbldo[0..5] {
+        #[doc = "00001: Always use SINGLE AHB bursts"]
+        Single = 0x1,
+        #[doc = "001xx: Attempt to use INCR4 AHB bursts (Default)"]
+        Incr4 = 0x4,
+        #[doc = "01xxx: Attempt to use INCR8 AHB bursts"]
+        Incr8 = 0x8,
+        #[doc = "1xxxx: Attempt to use INCR16 AHB bursts"]
+        Incr16 = 0x10,
+    },
+    #[doc = "Endian Swap Mode Enable for Management Descriptor Accesses"]
+    esma[6],
+    #[doc = "Endian Swap Mode Enable for Packet Data Accesses"]
+    espa[7],
+    #[doc = "Receiver Packet Buffer Memory Size Select"]
+    rxbms[8..10] {
+        #[doc = "4/8 Kbyte Memory Size"]
+        Eighth = 0x0,
+        #[doc = "4/4 Kbytes Memory Size"]
+        Quarter = 0x1,
+        #[doc = "4/2 Kbytes Memory Size"]
+        Half = 0x2,
+        #[doc = "4 Kbytes Memory Size"]
+        Full = 0x3,
+    },
+    #[doc = "Transmitter Packet Buffer Memory Size Select"]
+    txpbms[10],
+    #[doc = "Transmitter Checksum Generation Offload Enable"]
+    txcoen[11],
+    #[doc = "DMA Receive Buffer Size"]
+    drbs[16..24],
+    #[doc = "DMA Discard Receive Packets"]
+    ddrp[24],
+}
+#[doc = "Transmit Status Register"]
+ReadWrite register[32] GmacTsr {
+    #[doc = "Used Bit Read"]
+    ubr[0],
+    #[doc = "Collision Occurred"]
+    col[1],
+    #[doc = "Retry Limit Exceeded"]
+    rle[2],
+    #[doc = "Transmit Go"]
+    txgo[3],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[4],
+    #[doc = "Transmit Complete"]
+    txcomp[5],
+    #[doc = "HRESP Not OK"]
+    hresp[8],
+}
+#[doc = "Receive Buffer Queue Base Address Register"]
+ReadWrite register[32] GmacRbqb {
+    #[doc = "Receive Buffer Queue Base Address"]
+    addr[2..32],
+}
+#[doc = "Transmit Buffer Queue Base Address Register"]
+ReadWrite register[32] GmacTbqb {
+    #[doc = "Transmit Buffer Queue Base Address"]
+    addr[2..32],
+}
+#[doc = "Receive Status Register"]
+ReadWrite register[32] GmacRsr {
+    #[doc = "Buffer Not Available"]
+    bna[0],
+    #[doc = "Frame Received"]
+    rec[1],
+    #[doc = "Receive Overrun"]
+    rxovr[2],
+    #[doc = "HRESP Not OK"]
+    hno[3],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] GmacIsr {
+    #[doc = "Management Frame Sent"]
+    mfs[0],
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "TX Used Bit Read"]
+    txubr[3],
+    #[doc = "Transmit Underrun"]
+    tur[4],
+    #[doc = "Retry Limit Exceeded"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+    #[doc = "Pause Frame with Non-zero Pause Quantum Received"]
+    pfnz[12],
+    #[doc = "Pause Time Zero"]
+    ptz[13],
+    #[doc = "Pause Frame Transmitted"]
+    pftr[14],
+    #[doc = "PTP Delay Request Frame Received"]
+    drqfr[18],
+    #[doc = "PTP Sync Frame Received"]
+    sfr[19],
+    #[doc = "PTP Delay Request Frame Transmitted"]
+    drqft[20],
+    #[doc = "PTP Sync Frame Transmitted"]
+    sft[21],
+    #[doc = "PDelay Request Frame Received"]
+    pdrqfr[22],
+    #[doc = "PDelay Response Frame Received"]
+    pdrsfr[23],
+    #[doc = "PDelay Request Frame Transmitted"]
+    pdrqft[24],
+    #[doc = "PDelay Response Frame Transmitted"]
+    pdrsft[25],
+    #[doc = "TSU Seconds Register Increment"]
+    sri[26],
+    #[doc = "Receive LPI indication Status Bit Change"]
+    rxlpisbc[27],
+    #[doc = "Wake On LAN"]
+    wol[28],
+    #[doc = "TSU Timer Comparison"]
+    tsutimcomp[29],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] GmacIer {
+    #[doc = "Management Frame Sent"]
+    mfs[0],
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "TX Used Bit Read"]
+    txubr[3],
+    #[doc = "Transmit Underrun"]
+    tur[4],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+    #[doc = "Pause Frame with Non-zero Pause Quantum Received"]
+    pfnz[12],
+    #[doc = "Pause Time Zero"]
+    ptz[13],
+    #[doc = "Pause Frame Transmitted"]
+    pftr[14],
+    #[doc = "External Interrupt"]
+    exint[15],
+    #[doc = "PTP Delay Request Frame Received"]
+    drqfr[18],
+    #[doc = "PTP Sync Frame Received"]
+    sfr[19],
+    #[doc = "PTP Delay Request Frame Transmitted"]
+    drqft[20],
+    #[doc = "PTP Sync Frame Transmitted"]
+    sft[21],
+    #[doc = "PDelay Request Frame Received"]
+    pdrqfr[22],
+    #[doc = "PDelay Response Frame Received"]
+    pdrsfr[23],
+    #[doc = "PDelay Request Frame Transmitted"]
+    pdrqft[24],
+    #[doc = "PDelay Response Frame Transmitted"]
+    pdrsft[25],
+    #[doc = "TSU Seconds Register Increment"]
+    sri[26],
+    #[doc = "Enable RX LPI Indication"]
+    rxlpisbc[27],
+    #[doc = "Wake On LAN"]
+    wol[28],
+    #[doc = "TSU Timer Comparison"]
+    tsutimcomp[29],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] GmacIdr {
+    #[doc = "Management Frame Sent"]
+    mfs[0],
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "TX Used Bit Read"]
+    txubr[3],
+    #[doc = "Transmit Underrun"]
+    tur[4],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+    #[doc = "Pause Frame with Non-zero Pause Quantum Received"]
+    pfnz[12],
+    #[doc = "Pause Time Zero"]
+    ptz[13],
+    #[doc = "Pause Frame Transmitted"]
+    pftr[14],
+    #[doc = "External Interrupt"]
+    exint[15],
+    #[doc = "PTP Delay Request Frame Received"]
+    drqfr[18],
+    #[doc = "PTP Sync Frame Received"]
+    sfr[19],
+    #[doc = "PTP Delay Request Frame Transmitted"]
+    drqft[20],
+    #[doc = "PTP Sync Frame Transmitted"]
+    sft[21],
+    #[doc = "PDelay Request Frame Received"]
+    pdrqfr[22],
+    #[doc = "PDelay Response Frame Received"]
+    pdrsfr[23],
+    #[doc = "PDelay Request Frame Transmitted"]
+    pdrqft[24],
+    #[doc = "PDelay Response Frame Transmitted"]
+    pdrsft[25],
+    #[doc = "TSU Seconds Register Increment"]
+    sri[26],
+    #[doc = "Enable RX LPI Indication"]
+    rxlpisbc[27],
+    #[doc = "Wake On LAN"]
+    wol[28],
+    #[doc = "TSU Timer Comparison"]
+    tsutimcomp[29],
+}
+#[doc = "Interrupt Mask Register"]
+ReadWrite register[32] GmacImr {
+    #[doc = "Management Frame Sent"]
+    mfs[0],
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "TX Used Bit Read"]
+    txubr[3],
+    #[doc = "Transmit Underrun"]
+    tur[4],
+    #[doc = "Retry Limit Exceeded"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+    #[doc = "Pause Frame with Non-zero Pause Quantum Received"]
+    pfnz[12],
+    #[doc = "Pause Time Zero"]
+    ptz[13],
+    #[doc = "Pause Frame Transmitted"]
+    pftr[14],
+    #[doc = "External Interrupt"]
+    exint[15],
+    #[doc = "PTP Delay Request Frame Received"]
+    drqfr[18],
+    #[doc = "PTP Sync Frame Received"]
+    sfr[19],
+    #[doc = "PTP Delay Request Frame Transmitted"]
+    drqft[20],
+    #[doc = "PTP Sync Frame Transmitted"]
+    sft[21],
+    #[doc = "PDelay Request Frame Received"]
+    pdrqfr[22],
+    #[doc = "PDelay Response Frame Received"]
+    pdrsfr[23],
+    #[doc = "PDelay Request Frame Transmitted"]
+    pdrqft[24],
+    #[doc = "PDelay Response Frame Transmitted"]
+    pdrsft[25],
+    #[doc = "TSU Seconds Register Increment"]
+    sri[26],
+    #[doc = "Enable RX LPI Indication"]
+    rxlpisbc[27],
+    #[doc = "Wake On LAN"]
+    wol[28],
+    #[doc = "TSU Timer Comparison"]
+    tsutimcomp[29],
+}
+#[doc = "PHY Maintenance Register"]
+ReadWrite register[32] GmacMan {
+    #[doc = "PHY Data"]
+    data[0..16],
+    #[doc = "Write Ten"]
+    wtn[16..18],
+    #[doc = "Register Address"]
+    rega[18..23],
+    #[doc = "PHY Address"]
+    phya[23..28],
+    #[doc = "Operation"]
+    op[28..30],
+    #[doc = "Clause 22 Operation"]
+    cltto[30],
+    #[doc = "Write ZERO"]
+    wzo[31],
+}
+#[doc = "Received Pause Quantum Register"]
+ReadOnly register[32] GmacRpq {
+    #[doc = "Received Pause Quantum"]
+    rpq[0..16],
+}
+#[doc = "Transmit Pause Quantum Register"]
+ReadWrite register[32] GmacTpq {
+    #[doc = "Transmit Pause Quantum"]
+    tpq[0..16],
+}
+#[doc = "TX Partial Store and Forward Register"]
+ReadWrite register[32] GmacTpsf {
+    #[doc = "Transmit Partial Store and Forward Address"]
+    tpb1adr[0..12],
+    #[doc = "Enable TX Partial Store and Forward Operation"]
+    entxp[31],
+}
+#[doc = "RX Partial Store and Forward Register"]
+ReadWrite register[32] GmacRpsf {
+    #[doc = "Receive Partial Store and Forward Address"]
+    rpb1adr[0..12],
+    #[doc = "Enable RX Partial Store and Forward Operation"]
+    enrxp[31],
+}
+#[doc = "RX Jumbo Frame Max Length Register"]
+ReadWrite register[32] GmacRjfml {
+    #[doc = "Frame Max Length"]
+    fml[0..14],
+}
+#[doc = "Hash Register Bottom"]
+ReadWrite register[32] GmacHrb {
+    #[doc = "Hash Address"]
+    addr[0..32],
+}
+#[doc = "Hash Register Top"]
+ReadWrite register[32] GmacHrt {
+    #[doc = "Hash Address"]
+    addr[0..32],
+}
+#[doc = "Type ID Match 1 Register"]
+ReadWrite register[32] GmacTidm1 {
+    #[doc = "Type ID Match 1"]
+    tid[0..16],
+    #[doc = "Enable Copying of TID Matched Frames"]
+    enid1[31],
+}
+#[doc = "Type ID Match 2 Register"]
+ReadWrite register[32] GmacTidm2 {
+    #[doc = "Type ID Match 2"]
+    tid[0..16],
+    #[doc = "Enable Copying of TID Matched Frames"]
+    enid2[31],
+}
+#[doc = "Type ID Match 3 Register"]
+ReadWrite register[32] GmacTidm3 {
+    #[doc = "Type ID Match 3"]
+    tid[0..16],
+    #[doc = "Enable Copying of TID Matched Frames"]
+    enid3[31],
+}
+#[doc = "Type ID Match 4 Register"]
+ReadWrite register[32] GmacTidm4 {
+    #[doc = "Type ID Match 4"]
+    tid[0..16],
+    #[doc = "Enable Copying of TID Matched Frames"]
+    enid4[31],
+}
+#[doc = "Wake on LAN Register"]
+ReadWrite register[32] GmacWol {
+    #[doc = "ARP Request IP Address"]
+    ip[0..16],
+    #[doc = "Magic Packet Event Enable"]
+    mag[16],
+    #[doc = "ARP Request IP Address"]
+    arp[17],
+    #[doc = "Specific Address Register 1 Event Enable"]
+    sa1[18],
+    #[doc = "Multicast Hash Event Enable"]
+    mti[19],
+}
+#[doc = "IPG Stretch Register"]
+ReadWrite register[32] GmacIpgs {
+    #[doc = "Frame Length"]
+    fl[0..16],
+}
+#[doc = "Stacked VLAN Register"]
+ReadWrite register[32] GmacSvlan {
+    #[doc = "User Defined VLAN_TYPE Field"]
+    vlan_type[0..16],
+    #[doc = "Enable Stacked VLAN Processing Mode"]
+    esvlan[31],
+}
+#[doc = "Transmit PFC Pause Register"]
+ReadWrite register[32] GmacTpfcp {
+    #[doc = "Priority Enable Vector"]
+    pev[0..8],
+    #[doc = "Pause Quantum"]
+    pq[8..16],
+}
+#[doc = "Specific Address 1 Mask Bottom Register"]
+ReadWrite register[32] GmacSamb1 {
+    #[doc = "Specific Address 1 Mask"]
+    addr[0..32],
+}
+#[doc = "Specific Address 1 Mask Top Register"]
+ReadWrite register[32] GmacSamt1 {
+    #[doc = "Specific Address 1 Mask"]
+    addr[0..16],
+}
+#[doc = "1588 Timer Nanosecond Comparison Register"]
+ReadWrite register[32] GmacNsc {
+    #[doc = "1588 Timer Nanosecond Comparison Value"]
+    nanosec[0..22],
+}
+#[doc = "1588 Timer Second Comparison Low Register"]
+ReadWrite register[32] GmacScl {
+    #[doc = "1588 Timer Second Comparison Value"]
+    sec[0..32],
+}
+#[doc = "1588 Timer Second Comparison High Register"]
+ReadWrite register[32] GmacSch {
+    #[doc = "1588 Timer Second Comparison Value"]
+    sec[0..16],
+}
+#[doc = "PTP Event Frame Transmitted Seconds High Register"]
+ReadOnly register[32] GmacEftsh {
+    #[doc = "Register Update"]
+    rud[0..16],
+}
+#[doc = "PTP Event Frame Received Seconds High Register"]
+ReadOnly register[32] GmacEfrsh {
+    #[doc = "Register Update"]
+    rud[0..16],
+}
+#[doc = "PTP Peer Event Frame Transmitted Seconds High Register"]
+ReadOnly register[32] GmacPeftsh {
+    #[doc = "Register Update"]
+    rud[0..16],
+}
+#[doc = "PTP Peer Event Frame Received Seconds High Register"]
+ReadOnly register[32] GmacPefrsh {
+    #[doc = "Register Update"]
+    rud[0..16],
+}
+#[doc = "Module ID Register"]
+ReadOnly register[32] GmacMid {
+    #[doc = "Module Revision"]
+    mrev[0..16],
+    #[doc = "Module Identification Number"]
+    mid[16..32],
+}
+#[doc = "Octets Transmitted Low Register"]
+ReadOnly register[32] GmacOtlo {
+    #[doc = "Transmitted Octets"]
+    txo[0..32],
+}
+#[doc = "Octets Transmitted High Register"]
+ReadOnly register[32] GmacOthi {
+    #[doc = "Transmitted Octets"]
+    txo[0..16],
+}
+#[doc = "Frames Transmitted Register"]
+ReadOnly register[32] GmacFt {
+    #[doc = "Frames Transmitted without Error"]
+    ftx[0..32],
+}
+#[doc = "Broadcast Frames Transmitted Register"]
+ReadOnly register[32] GmacBcft {
+    #[doc = "Broadcast Frames Transmitted without Error"]
+    bftx[0..32],
+}
+#[doc = "Multicast Frames Transmitted Register"]
+ReadOnly register[32] GmacMft {
+    #[doc = "Multicast Frames Transmitted without Error"]
+    mftx[0..32],
+}
+#[doc = "Pause Frames Transmitted Register"]
+ReadOnly register[32] GmacPft {
+    #[doc = "Pause Frames Transmitted Register"]
+    pftx[0..16],
+}
+#[doc = "64 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacBft64 {
+    #[doc = "64 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "65 to 127 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacTbft127 {
+    #[doc = "65 to 127 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "128 to 255 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacTbft255 {
+    #[doc = "128 to 255 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "256 to 511 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacTbft511 {
+    #[doc = "256 to 511 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "512 to 1023 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacTbft1023 {
+    #[doc = "512 to 1023 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "1024 to 1518 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacTbft1518 {
+    #[doc = "1024 to 1518 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "Greater Than 1518 Byte Frames Transmitted Register"]
+ReadOnly register[32] GmacGtbft1518 {
+    #[doc = "Greater than 1518 Byte Frames Transmitted without Error"]
+    nftx[0..32],
+}
+#[doc = "Transmit Underruns Register"]
+ReadOnly register[32] GmacTur {
+    #[doc = "Transmit Underruns"]
+    txunr[0..10],
+}
+#[doc = "Single Collision Frames Register"]
+ReadOnly register[32] GmacScf {
+    #[doc = "Single Collision"]
+    scol[0..18],
+}
+#[doc = "Multiple Collision Frames Register"]
+ReadOnly register[32] GmacMcf {
+    #[doc = "Multiple Collision"]
+    mcol[0..18],
+}
+#[doc = "Excessive Collisions Register"]
+ReadOnly register[32] GmacEc {
+    #[doc = "Excessive Collisions"]
+    xcol[0..10],
+}
+#[doc = "Late Collisions Register"]
+ReadOnly register[32] GmacLc {
+    #[doc = "Late Collisions"]
+    lcol[0..10],
+}
+#[doc = "Deferred Transmission Frames Register"]
+ReadOnly register[32] GmacDtf {
+    #[doc = "Deferred Transmission"]
+    deft[0..18],
+}
+#[doc = "Carrier Sense Errors Register"]
+ReadOnly register[32] GmacCse {
+    #[doc = "Carrier Sense Error"]
+    csr[0..10],
+}
+#[doc = "Octets Received Low Received Register"]
+ReadOnly register[32] GmacOrlo {
+    #[doc = "Received Octets"]
+    rxo[0..32],
+}
+#[doc = "Octets Received High Received Register"]
+ReadOnly register[32] GmacOrhi {
+    #[doc = "Received Octets"]
+    rxo[0..16],
+}
+#[doc = "Frames Received Register"]
+ReadOnly register[32] GmacFr {
+    #[doc = "Frames Received without Error"]
+    frx[0..32],
+}
+#[doc = "Broadcast Frames Received Register"]
+ReadOnly register[32] GmacBcfr {
+    #[doc = "Broadcast Frames Received without Error"]
+    bfrx[0..32],
+}
+#[doc = "Multicast Frames Received Register"]
+ReadOnly register[32] GmacMfr {
+    #[doc = "Multicast Frames Received without Error"]
+    mfrx[0..32],
+}
+#[doc = "Pause Frames Received Register"]
+ReadOnly register[32] GmacPfr {
+    #[doc = "Pause Frames Received Register"]
+    pfrx[0..16],
+}
+#[doc = "64 Byte Frames Received Register"]
+ReadOnly register[32] GmacBfr64 {
+    #[doc = "64 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "65 to 127 Byte Frames Received Register"]
+ReadOnly register[32] GmacTbfr127 {
+    #[doc = "65 to 127 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "128 to 255 Byte Frames Received Register"]
+ReadOnly register[32] GmacTbfr255 {
+    #[doc = "128 to 255 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "256 to 511 Byte Frames Received Register"]
+ReadOnly register[32] GmacTbfr511 {
+    #[doc = "256 to 511 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "512 to 1023 Byte Frames Received Register"]
+ReadOnly register[32] GmacTbfr1023 {
+    #[doc = "512 to 1023 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "1024 to 1518 Byte Frames Received Register"]
+ReadOnly register[32] GmacTbfr1518 {
+    #[doc = "1024 to 1518 Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "1519 to Maximum Byte Frames Received Register"]
+ReadOnly register[32] GmacTmxbfr {
+    #[doc = "1519 to Maximum Byte Frames Received without Error"]
+    nfrx[0..32],
+}
+#[doc = "Undersize Frames Received Register"]
+ReadOnly register[32] GmacUfr {
+    #[doc = "Undersize Frames Received"]
+    ufrx[0..10],
+}
+#[doc = "Oversize Frames Received Register"]
+ReadOnly register[32] GmacOfr {
+    #[doc = "Oversized Frames Received"]
+    ofrx[0..10],
+}
+#[doc = "Jabbers Received Register"]
+ReadOnly register[32] GmacJr {
+    #[doc = "Jabbers Received"]
+    jrx[0..10],
+}
+#[doc = "Frame Check Sequence Errors Register"]
+ReadOnly register[32] GmacFcse {
+    #[doc = "Frame Check Sequence Errors"]
+    fckr[0..10],
+}
+#[doc = "Length Field Frame Errors Register"]
+ReadOnly register[32] GmacLffe {
+    #[doc = "Length Field Frame Errors"]
+    lfer[0..10],
+}
+#[doc = "Receive Symbol Errors Register"]
+ReadOnly register[32] GmacRse {
+    #[doc = "Receive Symbol Errors"]
+    rxse[0..10],
+}
+#[doc = "Alignment Errors Register"]
+ReadOnly register[32] GmacAe {
+    #[doc = "Alignment Errors"]
+    aer[0..10],
+}
+#[doc = "Receive Resource Errors Register"]
+ReadOnly register[32] GmacRre {
+    #[doc = "Receive Resource Errors"]
+    rxrer[0..18],
+}
+#[doc = "Receive Overrun Register"]
+ReadOnly register[32] GmacRoe {
+    #[doc = "Receive Overruns"]
+    rxovr[0..10],
+}
+#[doc = "IP Header Checksum Errors Register"]
+ReadOnly register[32] GmacIhce {
+    #[doc = "IP Header Checksum Errors"]
+    hcker[0..8],
+}
+#[doc = "TCP Checksum Errors Register"]
+ReadOnly register[32] GmacTce {
+    #[doc = "TCP Checksum Errors"]
+    tcker[0..8],
+}
+#[doc = "UDP Checksum Errors Register"]
+ReadOnly register[32] GmacUce {
+    #[doc = "UDP Checksum Errors"]
+    ucker[0..8],
+}
+#[doc = "1588 Timer Increment Sub-nanoseconds Register"]
+ReadWrite register[32] GmacTisubn {
+    #[doc = "Lower Significant Bits of Timer Increment Register"]
+    lsbtir[0..16],
+}
+#[doc = "1588 Timer Seconds High Register"]
+ReadWrite register[32] GmacTsh {
+    #[doc = "Timer Count in Seconds"]
+    tcs[0..16],
+}
+#[doc = "1588 Timer Seconds Low Register"]
+ReadWrite register[32] GmacTsl {
+    #[doc = "Timer Count in Seconds"]
+    tcs[0..32],
+}
+#[doc = "1588 Timer Nanoseconds Register"]
+ReadWrite register[32] GmacTn {
+    #[doc = "Timer Count in Nanoseconds"]
+    tns[0..30],
+}
+#[doc = "1588 Timer Adjust Register"]
+WriteOnly register[32] GmacTa {
+    #[doc = "Increment/Decrement"]
+    itdt[0..30],
+    #[doc = "Adjust 1588 Timer"]
+    adj[31],
+}
+#[doc = "1588 Timer Increment Register"]
+ReadWrite register[32] GmacTi {
+    #[doc = "Count Nanoseconds"]
+    cns[0..8],
+    #[doc = "Alternative Count Nanoseconds"]
+    acns[8..16],
+    #[doc = "Number of Increments"]
+    nit[16..24],
+}
+#[doc = "PTP Event Frame Transmitted Seconds Low Register"]
+ReadOnly register[32] GmacEftsl {
+    #[doc = "Register Update"]
+    rud[0..32],
+}
+#[doc = "PTP Event Frame Transmitted Nanoseconds Register"]
+ReadOnly register[32] GmacEftn {
+    #[doc = "Register Update"]
+    rud[0..30],
+}
+#[doc = "PTP Event Frame Received Seconds Low Register"]
+ReadOnly register[32] GmacEfrsl {
+    #[doc = "Register Update"]
+    rud[0..32],
+}
+#[doc = "PTP Event Frame Received Nanoseconds Register"]
+ReadOnly register[32] GmacEfrn {
+    #[doc = "Register Update"]
+    rud[0..30],
+}
+#[doc = "PTP Peer Event Frame Transmitted Seconds Low Register"]
+ReadOnly register[32] GmacPeftsl {
+    #[doc = "Register Update"]
+    rud[0..32],
+}
+#[doc = "PTP Peer Event Frame Transmitted Nanoseconds Register"]
+ReadOnly register[32] GmacPeftn {
+    #[doc = "Register Update"]
+    rud[0..30],
+}
+#[doc = "PTP Peer Event Frame Received Seconds Low Register"]
+ReadOnly register[32] GmacPefrsl {
+    #[doc = "Register Update"]
+    rud[0..32],
+}
+#[doc = "PTP Peer Event Frame Received Nanoseconds Register"]
+ReadOnly register[32] GmacPefrn {
+    #[doc = "Register Update"]
+    rud[0..30],
+}
+#[doc = "Received LPI Transitions"]
+ReadOnly register[32] GmacRxlpi {
+    #[doc = "Count of RX LPI transitions (cleared on read)"]
+    count[0..16],
+}
+#[doc = "Received LPI Time"]
+ReadOnly register[32] GmacRxlpitime {
+    #[doc = "Time in LPI (cleared on read)"]
+    lpitime[0..24],
+}
+#[doc = "Transmit LPI Transitions"]
+ReadOnly register[32] GmacTxlpi {
+    #[doc = "Count of LPI transitions (cleared on read)"]
+    count[0..16],
+}
+#[doc = "Transmit LPI Time"]
+ReadOnly register[32] GmacTxlpitime {
+    #[doc = "Time in LPI (cleared on read)"]
+    lpitime[0..24],
+}
+#[doc = "Interrupt Status Register Priority Queue (index = 1) 0"]
+ReadOnly register[32] GmacIsrpq {
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+}
+#[doc = "Transmit Buffer Queue Base Address Register Priority Queue (index = 1) 0"]
+ReadWrite register[32] GmacTbqbapq {
+    #[doc = "Transmit Buffer Queue Base Address"]
+    txbqba[2..32],
+}
+#[doc = "Receive Buffer Queue Base Address Register Priority Queue (index = 1) 0"]
+ReadWrite register[32] GmacRbqbapq {
+    #[doc = "Receive Buffer Queue Base Address"]
+    rxbqba[2..32],
+}
+#[doc = "Receive Buffer Size Register Priority Queue (index = 1) 0"]
+ReadWrite register[32] GmacRbsrpq {
+    #[doc = "Receive Buffer Size"]
+    rbs[0..16],
+}
+#[doc = "Credit-Based Shaping Control Register"]
+ReadWrite register[32] GmacCbscr {
+    #[doc = "Queue B CBS Enable"]
+    qbe[0],
+    #[doc = "Queue A CBS Enable"]
+    qae[1],
+}
+#[doc = "Credit-Based Shaping IdleSlope Register for Queue A"]
+ReadWrite register[32] GmacCbsisqa {
+    #[doc = "IdleSlope"]
+    is[0..32],
+}
+#[doc = "Credit-Based Shaping IdleSlope Register for Queue B"]
+ReadWrite register[32] GmacCbsisqb {
+    #[doc = "IdleSlope"]
+    is[0..32],
+}
+#[doc = "Screening Type 1 Register Priority Queue (index = 0) 0"]
+ReadWrite register[32] GmacSt1rpq {
+    #[doc = "Queue Number (0-5)"]
+    qnb[0..3],
+    #[doc = "Differentiated Services or Traffic Class Match"]
+    dstcm[4..12],
+    #[doc = "UDP Port Match"]
+    udpm[12..28],
+    #[doc = "Differentiated Services or Traffic Class Match Enable"]
+    dstce[28],
+    #[doc = "UDP Port Match Enable"]
+    udpe[29],
+}
+#[doc = "Screening Type 2 Register Priority Queue (index = 0) 0"]
+ReadWrite register[32] GmacSt2rpq {
+    #[doc = "Queue Number (0-5)"]
+    qnb[0..3],
+    #[doc = "VLAN Priority"]
+    vlanp[4..7],
+    #[doc = "VLAN Enable"]
+    vlane[8],
+    #[doc = "Index of Screening Type 2 EtherType register x"]
+    i2eth[9..12],
+    #[doc = "EtherType Enable"]
+    ethe[12],
+    #[doc = "Index of Screening Type 2 Compare Word 0/Word 1 register x"]
+    compa[13..18],
+    #[doc = "Compare A Enable"]
+    compae[18],
+    #[doc = "Index of Screening Type 2 Compare Word 0/Word 1 register x"]
+    compb[19..24],
+    #[doc = "Compare B Enable"]
+    compbe[24],
+    #[doc = "Index of Screening Type 2 Compare Word 0/Word 1 register x"]
+    compc[25..30],
+    #[doc = "Compare C Enable"]
+    compce[30],
+}
+#[doc = "Interrupt Enable Register Priority Queue (index = 1) 0"]
+WriteOnly register[32] GmacIerpq {
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+}
+#[doc = "Interrupt Disable Register Priority Queue (index = 1) 0"]
+WriteOnly register[32] GmacIdrpq {
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "Transmit Frame Corruption Due to AHB Error"]
+    tfc[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+}
+#[doc = "Interrupt Mask Register Priority Queue (index = 1) 0"]
+ReadWrite register[32] GmacImrpq {
+    #[doc = "Receive Complete"]
+    rcomp[1],
+    #[doc = "RX Used Bit Read"]
+    rxubr[2],
+    #[doc = "Retry Limit Exceeded or Late Collision"]
+    rlex[5],
+    #[doc = "AHB Error"]
+    ahb[6],
+    #[doc = "Transmit Complete"]
+    tcomp[7],
+    #[doc = "Receive Overrun"]
+    rovr[10],
+    #[doc = "HRESP Not OK"]
+    hresp[11],
+}
+#[doc = "Screening Type 2 Ethertype Register (index = 0) 0"]
+ReadWrite register[32] GmacSt2er {
+    #[doc = "Ethertype Compare Value"]
+    compval[0..16],
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 0)"]
+ReadWrite register[32] GmacSt2cw00 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 0)"]
+ReadWrite register[32] GmacSt2cw10 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 1)"]
+ReadWrite register[32] GmacSt2cw01 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 1)"]
+ReadWrite register[32] GmacSt2cw11 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 2)"]
+ReadWrite register[32] GmacSt2cw02 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 2)"]
+ReadWrite register[32] GmacSt2cw12 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 3)"]
+ReadWrite register[32] GmacSt2cw03 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 3)"]
+ReadWrite register[32] GmacSt2cw13 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 4)"]
+ReadWrite register[32] GmacSt2cw04 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 4)"]
+ReadWrite register[32] GmacSt2cw14 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 5)"]
+ReadWrite register[32] GmacSt2cw05 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 5)"]
+ReadWrite register[32] GmacSt2cw15 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 6)"]
+ReadWrite register[32] GmacSt2cw06 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 6)"]
+ReadWrite register[32] GmacSt2cw16 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 7)"]
+ReadWrite register[32] GmacSt2cw07 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 7)"]
+ReadWrite register[32] GmacSt2cw17 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 8)"]
+ReadWrite register[32] GmacSt2cw08 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 8)"]
+ReadWrite register[32] GmacSt2cw18 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 9)"]
+ReadWrite register[32] GmacSt2cw09 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 9)"]
+ReadWrite register[32] GmacSt2cw19 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 10)"]
+ReadWrite register[32] GmacSt2cw010 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 10)"]
+ReadWrite register[32] GmacSt2cw110 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 11)"]
+ReadWrite register[32] GmacSt2cw011 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 11)"]
+ReadWrite register[32] GmacSt2cw111 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 12)"]
+ReadWrite register[32] GmacSt2cw012 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 12)"]
+ReadWrite register[32] GmacSt2cw112 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 13)"]
+ReadWrite register[32] GmacSt2cw013 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 13)"]
+ReadWrite register[32] GmacSt2cw113 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 14)"]
+ReadWrite register[32] GmacSt2cw014 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 14)"]
+ReadWrite register[32] GmacSt2cw114 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 15)"]
+ReadWrite register[32] GmacSt2cw015 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 15)"]
+ReadWrite register[32] GmacSt2cw115 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 16)"]
+ReadWrite register[32] GmacSt2cw016 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 16)"]
+ReadWrite register[32] GmacSt2cw116 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 17)"]
+ReadWrite register[32] GmacSt2cw017 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 17)"]
+ReadWrite register[32] GmacSt2cw117 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 18)"]
+ReadWrite register[32] GmacSt2cw018 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 18)"]
+ReadWrite register[32] GmacSt2cw118 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 19)"]
+ReadWrite register[32] GmacSt2cw019 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 19)"]
+ReadWrite register[32] GmacSt2cw119 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 20)"]
+ReadWrite register[32] GmacSt2cw020 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 20)"]
+ReadWrite register[32] GmacSt2cw120 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 21)"]
+ReadWrite register[32] GmacSt2cw021 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 21)"]
+ReadWrite register[32] GmacSt2cw121 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 22)"]
+ReadWrite register[32] GmacSt2cw022 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 22)"]
+ReadWrite register[32] GmacSt2cw122 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}
+#[doc = "Screening Type 2 Compare Word 0 Register (index = 23)"]
+ReadWrite register[32] GmacSt2cw023 {
+    #[doc = "Mask Value"]
+    maskval[0..16],
+    #[doc = "Compare Value"]
+    compval[16..32],
+}
+#[doc = "Screening Type 2 Compare Word 1 Register (index = 23)"]
+ReadWrite register[32] GmacSt2cw123 {
+    #[doc = "Offset Value in Bytes"]
+    offsval[0..7],
+    #[doc = "Ethernet Frame Offset Start"]
+    offsstrt[7..9] {
+        #[doc = "Offset from the start of the frame"]
+        Framestart = 0x0,
+        #[doc = "Offset from the byte after the EtherType field"]
+        Ethertype = 0x1,
+        #[doc = "Offset from the byte after the IP header field"]
+        Ip = 0x2,
+        #[doc = "Offset from the byte after the TCP/UDP header field"]
+        TcpUdp = 0x3,
+    },
+}

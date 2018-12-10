@@ -1,0 +1,56 @@
+#[doc = "Static Memory Controller"]
+peripheral Smc {
+    smc_ocms: SmcOcms @ 0x80,
+    smc_key1: SmcKey1 @ 0x84,
+    smc_key2: SmcKey2 @ 0x88,
+    smc_wpmr: SmcWpmr @ 0xe4,
+    smc_wpsr: SmcWpsr @ 0xe8,
+    smc_version: SmcVersion @ 0xfc,
+}
+#[doc = "SMC Off-Chip Memory Scrambling Register"]
+ReadWrite register[32] SmcOcms {
+    #[doc = "Static Memory Controller Scrambling Enable"]
+    smse[0],
+    #[doc = "Chip Select (x = 0 to 3) Scrambling Enable"]
+    cs0se[8],
+    #[doc = "Chip Select (x = 0 to 3) Scrambling Enable"]
+    cs1se[9],
+    #[doc = "Chip Select (x = 0 to 3) Scrambling Enable"]
+    cs2se[10],
+    #[doc = "Chip Select (x = 0 to 3) Scrambling Enable"]
+    cs3se[11],
+}
+#[doc = "SMC Off-Chip Memory Scrambling KEY1 Register"]
+WriteOnly register[32] SmcKey1 {
+    #[doc = "Off-Chip Memory Scrambling (OCMS) Key Part 1"]
+    key1[0..32],
+}
+#[doc = "SMC Off-Chip Memory Scrambling KEY2 Register"]
+WriteOnly register[32] SmcKey2 {
+    #[doc = "Off-Chip Memory Scrambling (OCMS) Key Part 2"]
+    key2[0..32],
+}
+#[doc = "SMC Write Protection Mode Register"]
+ReadWrite register[32] SmcWpmr {
+    #[doc = "Write Protect Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit. Always reads as 0."]
+        Passwd = 0x534d43,
+    },
+}
+#[doc = "SMC Write Protection Status Register"]
+ReadOnly register[32] SmcWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "SMC Version Register"]
+ReadOnly register[32] SmcVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

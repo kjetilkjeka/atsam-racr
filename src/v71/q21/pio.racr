@@ -1,0 +1,3327 @@
+#[doc = "Parallel Input/Output Controller"]
+peripheral Pio {
+    pio_per: PioPer @ 0x0,
+    pio_pdr: PioPdr @ 0x4,
+    pio_psr: PioPsr @ 0x8,
+    pio_oer: PioOer @ 0x10,
+    pio_odr: PioOdr @ 0x14,
+    pio_osr: PioOsr @ 0x18,
+    pio_ifer: PioIfer @ 0x20,
+    pio_ifdr: PioIfdr @ 0x24,
+    pio_ifsr: PioIfsr @ 0x28,
+    pio_sodr: PioSodr @ 0x30,
+    pio_codr: PioCodr @ 0x34,
+    pio_odsr: PioOdsr @ 0x38,
+    pio_pdsr: PioPdsr @ 0x3c,
+    pio_ier: PioIer @ 0x40,
+    pio_idr: PioIdr @ 0x44,
+    pio_imr: PioImr @ 0x48,
+    pio_isr: PioIsr @ 0x4c,
+    pio_mder: PioMder @ 0x50,
+    pio_mddr: PioMddr @ 0x54,
+    pio_mdsr: PioMdsr @ 0x58,
+    pio_pudr: PioPudr @ 0x60,
+    pio_puer: PioPuer @ 0x64,
+    pio_pusr: PioPusr @ 0x68,
+    pio_abcdsr: [PioAbcdsr; 2] @ 0x70,
+    pio_ifscdr: PioIfscdr @ 0x80,
+    pio_ifscer: PioIfscer @ 0x84,
+    pio_ifscsr: PioIfscsr @ 0x88,
+    pio_scdr: PioScdr @ 0x8c,
+    pio_ppddr: PioPpddr @ 0x90,
+    pio_ppder: PioPpder @ 0x94,
+    pio_ppdsr: PioPpdsr @ 0x98,
+    pio_ower: PioOwer @ 0xa0,
+    pio_owdr: PioOwdr @ 0xa4,
+    pio_owsr: PioOwsr @ 0xa8,
+    pio_aimer: PioAimer @ 0xb0,
+    pio_aimdr: PioAimdr @ 0xb4,
+    pio_aimmr: PioAimmr @ 0xb8,
+    pio_esr: PioEsr @ 0xc0,
+    pio_lsr: PioLsr @ 0xc4,
+    pio_elsr: PioElsr @ 0xc8,
+    pio_fellsr: PioFellsr @ 0xd0,
+    pio_rehlsr: PioRehlsr @ 0xd4,
+    pio_frlhsr: PioFrlhsr @ 0xd8,
+    pio_locksr: PioLocksr @ 0xe0,
+    pio_wpmr: PioWpmr @ 0xe4,
+    pio_wpsr: PioWpsr @ 0xe8,
+    pio_version: PioVersion @ 0xfc,
+    pio_schmitt: PioSchmitt @ 0x100,
+    pio_driver: PioDriver @ 0x118,
+    pio_pcmr: PioPcmr @ 0x150,
+    pio_pcier: PioPcier @ 0x154,
+    pio_pcidr: PioPcidr @ 0x158,
+    pio_pcimr: PioPcimr @ 0x15c,
+    pio_pcisr: PioPcisr @ 0x160,
+    pio_pcrhr: PioPcrhr @ 0x164,
+}
+#[doc = "PIO Enable Register"]
+WriteOnly register[32] PioPer {
+    #[doc = "PIO Enable"]
+    p0[0],
+    #[doc = "PIO Enable"]
+    p1[1],
+    #[doc = "PIO Enable"]
+    p2[2],
+    #[doc = "PIO Enable"]
+    p3[3],
+    #[doc = "PIO Enable"]
+    p4[4],
+    #[doc = "PIO Enable"]
+    p5[5],
+    #[doc = "PIO Enable"]
+    p6[6],
+    #[doc = "PIO Enable"]
+    p7[7],
+    #[doc = "PIO Enable"]
+    p8[8],
+    #[doc = "PIO Enable"]
+    p9[9],
+    #[doc = "PIO Enable"]
+    p10[10],
+    #[doc = "PIO Enable"]
+    p11[11],
+    #[doc = "PIO Enable"]
+    p12[12],
+    #[doc = "PIO Enable"]
+    p13[13],
+    #[doc = "PIO Enable"]
+    p14[14],
+    #[doc = "PIO Enable"]
+    p15[15],
+    #[doc = "PIO Enable"]
+    p16[16],
+    #[doc = "PIO Enable"]
+    p17[17],
+    #[doc = "PIO Enable"]
+    p18[18],
+    #[doc = "PIO Enable"]
+    p19[19],
+    #[doc = "PIO Enable"]
+    p20[20],
+    #[doc = "PIO Enable"]
+    p21[21],
+    #[doc = "PIO Enable"]
+    p22[22],
+    #[doc = "PIO Enable"]
+    p23[23],
+    #[doc = "PIO Enable"]
+    p24[24],
+    #[doc = "PIO Enable"]
+    p25[25],
+    #[doc = "PIO Enable"]
+    p26[26],
+    #[doc = "PIO Enable"]
+    p27[27],
+    #[doc = "PIO Enable"]
+    p28[28],
+    #[doc = "PIO Enable"]
+    p29[29],
+    #[doc = "PIO Enable"]
+    p30[30],
+    #[doc = "PIO Enable"]
+    p31[31],
+}
+#[doc = "PIO Disable Register"]
+WriteOnly register[32] PioPdr {
+    #[doc = "PIO Disable"]
+    p0[0],
+    #[doc = "PIO Disable"]
+    p1[1],
+    #[doc = "PIO Disable"]
+    p2[2],
+    #[doc = "PIO Disable"]
+    p3[3],
+    #[doc = "PIO Disable"]
+    p4[4],
+    #[doc = "PIO Disable"]
+    p5[5],
+    #[doc = "PIO Disable"]
+    p6[6],
+    #[doc = "PIO Disable"]
+    p7[7],
+    #[doc = "PIO Disable"]
+    p8[8],
+    #[doc = "PIO Disable"]
+    p9[9],
+    #[doc = "PIO Disable"]
+    p10[10],
+    #[doc = "PIO Disable"]
+    p11[11],
+    #[doc = "PIO Disable"]
+    p12[12],
+    #[doc = "PIO Disable"]
+    p13[13],
+    #[doc = "PIO Disable"]
+    p14[14],
+    #[doc = "PIO Disable"]
+    p15[15],
+    #[doc = "PIO Disable"]
+    p16[16],
+    #[doc = "PIO Disable"]
+    p17[17],
+    #[doc = "PIO Disable"]
+    p18[18],
+    #[doc = "PIO Disable"]
+    p19[19],
+    #[doc = "PIO Disable"]
+    p20[20],
+    #[doc = "PIO Disable"]
+    p21[21],
+    #[doc = "PIO Disable"]
+    p22[22],
+    #[doc = "PIO Disable"]
+    p23[23],
+    #[doc = "PIO Disable"]
+    p24[24],
+    #[doc = "PIO Disable"]
+    p25[25],
+    #[doc = "PIO Disable"]
+    p26[26],
+    #[doc = "PIO Disable"]
+    p27[27],
+    #[doc = "PIO Disable"]
+    p28[28],
+    #[doc = "PIO Disable"]
+    p29[29],
+    #[doc = "PIO Disable"]
+    p30[30],
+    #[doc = "PIO Disable"]
+    p31[31],
+}
+#[doc = "PIO Status Register"]
+ReadOnly register[32] PioPsr {
+    #[doc = "PIO Status"]
+    p0[0],
+    #[doc = "PIO Status"]
+    p1[1],
+    #[doc = "PIO Status"]
+    p2[2],
+    #[doc = "PIO Status"]
+    p3[3],
+    #[doc = "PIO Status"]
+    p4[4],
+    #[doc = "PIO Status"]
+    p5[5],
+    #[doc = "PIO Status"]
+    p6[6],
+    #[doc = "PIO Status"]
+    p7[7],
+    #[doc = "PIO Status"]
+    p8[8],
+    #[doc = "PIO Status"]
+    p9[9],
+    #[doc = "PIO Status"]
+    p10[10],
+    #[doc = "PIO Status"]
+    p11[11],
+    #[doc = "PIO Status"]
+    p12[12],
+    #[doc = "PIO Status"]
+    p13[13],
+    #[doc = "PIO Status"]
+    p14[14],
+    #[doc = "PIO Status"]
+    p15[15],
+    #[doc = "PIO Status"]
+    p16[16],
+    #[doc = "PIO Status"]
+    p17[17],
+    #[doc = "PIO Status"]
+    p18[18],
+    #[doc = "PIO Status"]
+    p19[19],
+    #[doc = "PIO Status"]
+    p20[20],
+    #[doc = "PIO Status"]
+    p21[21],
+    #[doc = "PIO Status"]
+    p22[22],
+    #[doc = "PIO Status"]
+    p23[23],
+    #[doc = "PIO Status"]
+    p24[24],
+    #[doc = "PIO Status"]
+    p25[25],
+    #[doc = "PIO Status"]
+    p26[26],
+    #[doc = "PIO Status"]
+    p27[27],
+    #[doc = "PIO Status"]
+    p28[28],
+    #[doc = "PIO Status"]
+    p29[29],
+    #[doc = "PIO Status"]
+    p30[30],
+    #[doc = "PIO Status"]
+    p31[31],
+}
+#[doc = "Output Enable Register"]
+WriteOnly register[32] PioOer {
+    #[doc = "Output Enable"]
+    p0[0],
+    #[doc = "Output Enable"]
+    p1[1],
+    #[doc = "Output Enable"]
+    p2[2],
+    #[doc = "Output Enable"]
+    p3[3],
+    #[doc = "Output Enable"]
+    p4[4],
+    #[doc = "Output Enable"]
+    p5[5],
+    #[doc = "Output Enable"]
+    p6[6],
+    #[doc = "Output Enable"]
+    p7[7],
+    #[doc = "Output Enable"]
+    p8[8],
+    #[doc = "Output Enable"]
+    p9[9],
+    #[doc = "Output Enable"]
+    p10[10],
+    #[doc = "Output Enable"]
+    p11[11],
+    #[doc = "Output Enable"]
+    p12[12],
+    #[doc = "Output Enable"]
+    p13[13],
+    #[doc = "Output Enable"]
+    p14[14],
+    #[doc = "Output Enable"]
+    p15[15],
+    #[doc = "Output Enable"]
+    p16[16],
+    #[doc = "Output Enable"]
+    p17[17],
+    #[doc = "Output Enable"]
+    p18[18],
+    #[doc = "Output Enable"]
+    p19[19],
+    #[doc = "Output Enable"]
+    p20[20],
+    #[doc = "Output Enable"]
+    p21[21],
+    #[doc = "Output Enable"]
+    p22[22],
+    #[doc = "Output Enable"]
+    p23[23],
+    #[doc = "Output Enable"]
+    p24[24],
+    #[doc = "Output Enable"]
+    p25[25],
+    #[doc = "Output Enable"]
+    p26[26],
+    #[doc = "Output Enable"]
+    p27[27],
+    #[doc = "Output Enable"]
+    p28[28],
+    #[doc = "Output Enable"]
+    p29[29],
+    #[doc = "Output Enable"]
+    p30[30],
+    #[doc = "Output Enable"]
+    p31[31],
+}
+#[doc = "Output Disable Register"]
+WriteOnly register[32] PioOdr {
+    #[doc = "Output Disable"]
+    p0[0],
+    #[doc = "Output Disable"]
+    p1[1],
+    #[doc = "Output Disable"]
+    p2[2],
+    #[doc = "Output Disable"]
+    p3[3],
+    #[doc = "Output Disable"]
+    p4[4],
+    #[doc = "Output Disable"]
+    p5[5],
+    #[doc = "Output Disable"]
+    p6[6],
+    #[doc = "Output Disable"]
+    p7[7],
+    #[doc = "Output Disable"]
+    p8[8],
+    #[doc = "Output Disable"]
+    p9[9],
+    #[doc = "Output Disable"]
+    p10[10],
+    #[doc = "Output Disable"]
+    p11[11],
+    #[doc = "Output Disable"]
+    p12[12],
+    #[doc = "Output Disable"]
+    p13[13],
+    #[doc = "Output Disable"]
+    p14[14],
+    #[doc = "Output Disable"]
+    p15[15],
+    #[doc = "Output Disable"]
+    p16[16],
+    #[doc = "Output Disable"]
+    p17[17],
+    #[doc = "Output Disable"]
+    p18[18],
+    #[doc = "Output Disable"]
+    p19[19],
+    #[doc = "Output Disable"]
+    p20[20],
+    #[doc = "Output Disable"]
+    p21[21],
+    #[doc = "Output Disable"]
+    p22[22],
+    #[doc = "Output Disable"]
+    p23[23],
+    #[doc = "Output Disable"]
+    p24[24],
+    #[doc = "Output Disable"]
+    p25[25],
+    #[doc = "Output Disable"]
+    p26[26],
+    #[doc = "Output Disable"]
+    p27[27],
+    #[doc = "Output Disable"]
+    p28[28],
+    #[doc = "Output Disable"]
+    p29[29],
+    #[doc = "Output Disable"]
+    p30[30],
+    #[doc = "Output Disable"]
+    p31[31],
+}
+#[doc = "Output Status Register"]
+ReadOnly register[32] PioOsr {
+    #[doc = "Output Status"]
+    p0[0],
+    #[doc = "Output Status"]
+    p1[1],
+    #[doc = "Output Status"]
+    p2[2],
+    #[doc = "Output Status"]
+    p3[3],
+    #[doc = "Output Status"]
+    p4[4],
+    #[doc = "Output Status"]
+    p5[5],
+    #[doc = "Output Status"]
+    p6[6],
+    #[doc = "Output Status"]
+    p7[7],
+    #[doc = "Output Status"]
+    p8[8],
+    #[doc = "Output Status"]
+    p9[9],
+    #[doc = "Output Status"]
+    p10[10],
+    #[doc = "Output Status"]
+    p11[11],
+    #[doc = "Output Status"]
+    p12[12],
+    #[doc = "Output Status"]
+    p13[13],
+    #[doc = "Output Status"]
+    p14[14],
+    #[doc = "Output Status"]
+    p15[15],
+    #[doc = "Output Status"]
+    p16[16],
+    #[doc = "Output Status"]
+    p17[17],
+    #[doc = "Output Status"]
+    p18[18],
+    #[doc = "Output Status"]
+    p19[19],
+    #[doc = "Output Status"]
+    p20[20],
+    #[doc = "Output Status"]
+    p21[21],
+    #[doc = "Output Status"]
+    p22[22],
+    #[doc = "Output Status"]
+    p23[23],
+    #[doc = "Output Status"]
+    p24[24],
+    #[doc = "Output Status"]
+    p25[25],
+    #[doc = "Output Status"]
+    p26[26],
+    #[doc = "Output Status"]
+    p27[27],
+    #[doc = "Output Status"]
+    p28[28],
+    #[doc = "Output Status"]
+    p29[29],
+    #[doc = "Output Status"]
+    p30[30],
+    #[doc = "Output Status"]
+    p31[31],
+}
+#[doc = "Glitch Input Filter Enable Register"]
+WriteOnly register[32] PioIfer {
+    #[doc = "Input Filter Enable"]
+    p0[0],
+    #[doc = "Input Filter Enable"]
+    p1[1],
+    #[doc = "Input Filter Enable"]
+    p2[2],
+    #[doc = "Input Filter Enable"]
+    p3[3],
+    #[doc = "Input Filter Enable"]
+    p4[4],
+    #[doc = "Input Filter Enable"]
+    p5[5],
+    #[doc = "Input Filter Enable"]
+    p6[6],
+    #[doc = "Input Filter Enable"]
+    p7[7],
+    #[doc = "Input Filter Enable"]
+    p8[8],
+    #[doc = "Input Filter Enable"]
+    p9[9],
+    #[doc = "Input Filter Enable"]
+    p10[10],
+    #[doc = "Input Filter Enable"]
+    p11[11],
+    #[doc = "Input Filter Enable"]
+    p12[12],
+    #[doc = "Input Filter Enable"]
+    p13[13],
+    #[doc = "Input Filter Enable"]
+    p14[14],
+    #[doc = "Input Filter Enable"]
+    p15[15],
+    #[doc = "Input Filter Enable"]
+    p16[16],
+    #[doc = "Input Filter Enable"]
+    p17[17],
+    #[doc = "Input Filter Enable"]
+    p18[18],
+    #[doc = "Input Filter Enable"]
+    p19[19],
+    #[doc = "Input Filter Enable"]
+    p20[20],
+    #[doc = "Input Filter Enable"]
+    p21[21],
+    #[doc = "Input Filter Enable"]
+    p22[22],
+    #[doc = "Input Filter Enable"]
+    p23[23],
+    #[doc = "Input Filter Enable"]
+    p24[24],
+    #[doc = "Input Filter Enable"]
+    p25[25],
+    #[doc = "Input Filter Enable"]
+    p26[26],
+    #[doc = "Input Filter Enable"]
+    p27[27],
+    #[doc = "Input Filter Enable"]
+    p28[28],
+    #[doc = "Input Filter Enable"]
+    p29[29],
+    #[doc = "Input Filter Enable"]
+    p30[30],
+    #[doc = "Input Filter Enable"]
+    p31[31],
+}
+#[doc = "Glitch Input Filter Disable Register"]
+WriteOnly register[32] PioIfdr {
+    #[doc = "Input Filter Disable"]
+    p0[0],
+    #[doc = "Input Filter Disable"]
+    p1[1],
+    #[doc = "Input Filter Disable"]
+    p2[2],
+    #[doc = "Input Filter Disable"]
+    p3[3],
+    #[doc = "Input Filter Disable"]
+    p4[4],
+    #[doc = "Input Filter Disable"]
+    p5[5],
+    #[doc = "Input Filter Disable"]
+    p6[6],
+    #[doc = "Input Filter Disable"]
+    p7[7],
+    #[doc = "Input Filter Disable"]
+    p8[8],
+    #[doc = "Input Filter Disable"]
+    p9[9],
+    #[doc = "Input Filter Disable"]
+    p10[10],
+    #[doc = "Input Filter Disable"]
+    p11[11],
+    #[doc = "Input Filter Disable"]
+    p12[12],
+    #[doc = "Input Filter Disable"]
+    p13[13],
+    #[doc = "Input Filter Disable"]
+    p14[14],
+    #[doc = "Input Filter Disable"]
+    p15[15],
+    #[doc = "Input Filter Disable"]
+    p16[16],
+    #[doc = "Input Filter Disable"]
+    p17[17],
+    #[doc = "Input Filter Disable"]
+    p18[18],
+    #[doc = "Input Filter Disable"]
+    p19[19],
+    #[doc = "Input Filter Disable"]
+    p20[20],
+    #[doc = "Input Filter Disable"]
+    p21[21],
+    #[doc = "Input Filter Disable"]
+    p22[22],
+    #[doc = "Input Filter Disable"]
+    p23[23],
+    #[doc = "Input Filter Disable"]
+    p24[24],
+    #[doc = "Input Filter Disable"]
+    p25[25],
+    #[doc = "Input Filter Disable"]
+    p26[26],
+    #[doc = "Input Filter Disable"]
+    p27[27],
+    #[doc = "Input Filter Disable"]
+    p28[28],
+    #[doc = "Input Filter Disable"]
+    p29[29],
+    #[doc = "Input Filter Disable"]
+    p30[30],
+    #[doc = "Input Filter Disable"]
+    p31[31],
+}
+#[doc = "Glitch Input Filter Status Register"]
+ReadOnly register[32] PioIfsr {
+    #[doc = "Input Filter Status"]
+    p0[0],
+    #[doc = "Input Filter Status"]
+    p1[1],
+    #[doc = "Input Filter Status"]
+    p2[2],
+    #[doc = "Input Filter Status"]
+    p3[3],
+    #[doc = "Input Filter Status"]
+    p4[4],
+    #[doc = "Input Filter Status"]
+    p5[5],
+    #[doc = "Input Filter Status"]
+    p6[6],
+    #[doc = "Input Filter Status"]
+    p7[7],
+    #[doc = "Input Filter Status"]
+    p8[8],
+    #[doc = "Input Filter Status"]
+    p9[9],
+    #[doc = "Input Filter Status"]
+    p10[10],
+    #[doc = "Input Filter Status"]
+    p11[11],
+    #[doc = "Input Filter Status"]
+    p12[12],
+    #[doc = "Input Filter Status"]
+    p13[13],
+    #[doc = "Input Filter Status"]
+    p14[14],
+    #[doc = "Input Filter Status"]
+    p15[15],
+    #[doc = "Input Filter Status"]
+    p16[16],
+    #[doc = "Input Filter Status"]
+    p17[17],
+    #[doc = "Input Filter Status"]
+    p18[18],
+    #[doc = "Input Filter Status"]
+    p19[19],
+    #[doc = "Input Filter Status"]
+    p20[20],
+    #[doc = "Input Filter Status"]
+    p21[21],
+    #[doc = "Input Filter Status"]
+    p22[22],
+    #[doc = "Input Filter Status"]
+    p23[23],
+    #[doc = "Input Filter Status"]
+    p24[24],
+    #[doc = "Input Filter Status"]
+    p25[25],
+    #[doc = "Input Filter Status"]
+    p26[26],
+    #[doc = "Input Filter Status"]
+    p27[27],
+    #[doc = "Input Filter Status"]
+    p28[28],
+    #[doc = "Input Filter Status"]
+    p29[29],
+    #[doc = "Input Filter Status"]
+    p30[30],
+    #[doc = "Input Filter Status"]
+    p31[31],
+}
+#[doc = "Set Output Data Register"]
+WriteOnly register[32] PioSodr {
+    #[doc = "Set Output Data"]
+    p0[0],
+    #[doc = "Set Output Data"]
+    p1[1],
+    #[doc = "Set Output Data"]
+    p2[2],
+    #[doc = "Set Output Data"]
+    p3[3],
+    #[doc = "Set Output Data"]
+    p4[4],
+    #[doc = "Set Output Data"]
+    p5[5],
+    #[doc = "Set Output Data"]
+    p6[6],
+    #[doc = "Set Output Data"]
+    p7[7],
+    #[doc = "Set Output Data"]
+    p8[8],
+    #[doc = "Set Output Data"]
+    p9[9],
+    #[doc = "Set Output Data"]
+    p10[10],
+    #[doc = "Set Output Data"]
+    p11[11],
+    #[doc = "Set Output Data"]
+    p12[12],
+    #[doc = "Set Output Data"]
+    p13[13],
+    #[doc = "Set Output Data"]
+    p14[14],
+    #[doc = "Set Output Data"]
+    p15[15],
+    #[doc = "Set Output Data"]
+    p16[16],
+    #[doc = "Set Output Data"]
+    p17[17],
+    #[doc = "Set Output Data"]
+    p18[18],
+    #[doc = "Set Output Data"]
+    p19[19],
+    #[doc = "Set Output Data"]
+    p20[20],
+    #[doc = "Set Output Data"]
+    p21[21],
+    #[doc = "Set Output Data"]
+    p22[22],
+    #[doc = "Set Output Data"]
+    p23[23],
+    #[doc = "Set Output Data"]
+    p24[24],
+    #[doc = "Set Output Data"]
+    p25[25],
+    #[doc = "Set Output Data"]
+    p26[26],
+    #[doc = "Set Output Data"]
+    p27[27],
+    #[doc = "Set Output Data"]
+    p28[28],
+    #[doc = "Set Output Data"]
+    p29[29],
+    #[doc = "Set Output Data"]
+    p30[30],
+    #[doc = "Set Output Data"]
+    p31[31],
+}
+#[doc = "Clear Output Data Register"]
+WriteOnly register[32] PioCodr {
+    #[doc = "Clear Output Data"]
+    p0[0],
+    #[doc = "Clear Output Data"]
+    p1[1],
+    #[doc = "Clear Output Data"]
+    p2[2],
+    #[doc = "Clear Output Data"]
+    p3[3],
+    #[doc = "Clear Output Data"]
+    p4[4],
+    #[doc = "Clear Output Data"]
+    p5[5],
+    #[doc = "Clear Output Data"]
+    p6[6],
+    #[doc = "Clear Output Data"]
+    p7[7],
+    #[doc = "Clear Output Data"]
+    p8[8],
+    #[doc = "Clear Output Data"]
+    p9[9],
+    #[doc = "Clear Output Data"]
+    p10[10],
+    #[doc = "Clear Output Data"]
+    p11[11],
+    #[doc = "Clear Output Data"]
+    p12[12],
+    #[doc = "Clear Output Data"]
+    p13[13],
+    #[doc = "Clear Output Data"]
+    p14[14],
+    #[doc = "Clear Output Data"]
+    p15[15],
+    #[doc = "Clear Output Data"]
+    p16[16],
+    #[doc = "Clear Output Data"]
+    p17[17],
+    #[doc = "Clear Output Data"]
+    p18[18],
+    #[doc = "Clear Output Data"]
+    p19[19],
+    #[doc = "Clear Output Data"]
+    p20[20],
+    #[doc = "Clear Output Data"]
+    p21[21],
+    #[doc = "Clear Output Data"]
+    p22[22],
+    #[doc = "Clear Output Data"]
+    p23[23],
+    #[doc = "Clear Output Data"]
+    p24[24],
+    #[doc = "Clear Output Data"]
+    p25[25],
+    #[doc = "Clear Output Data"]
+    p26[26],
+    #[doc = "Clear Output Data"]
+    p27[27],
+    #[doc = "Clear Output Data"]
+    p28[28],
+    #[doc = "Clear Output Data"]
+    p29[29],
+    #[doc = "Clear Output Data"]
+    p30[30],
+    #[doc = "Clear Output Data"]
+    p31[31],
+}
+#[doc = "Output Data Status Register"]
+ReadWrite register[32] PioOdsr {
+    #[doc = "Output Data Status"]
+    p0[0],
+    #[doc = "Output Data Status"]
+    p1[1],
+    #[doc = "Output Data Status"]
+    p2[2],
+    #[doc = "Output Data Status"]
+    p3[3],
+    #[doc = "Output Data Status"]
+    p4[4],
+    #[doc = "Output Data Status"]
+    p5[5],
+    #[doc = "Output Data Status"]
+    p6[6],
+    #[doc = "Output Data Status"]
+    p7[7],
+    #[doc = "Output Data Status"]
+    p8[8],
+    #[doc = "Output Data Status"]
+    p9[9],
+    #[doc = "Output Data Status"]
+    p10[10],
+    #[doc = "Output Data Status"]
+    p11[11],
+    #[doc = "Output Data Status"]
+    p12[12],
+    #[doc = "Output Data Status"]
+    p13[13],
+    #[doc = "Output Data Status"]
+    p14[14],
+    #[doc = "Output Data Status"]
+    p15[15],
+    #[doc = "Output Data Status"]
+    p16[16],
+    #[doc = "Output Data Status"]
+    p17[17],
+    #[doc = "Output Data Status"]
+    p18[18],
+    #[doc = "Output Data Status"]
+    p19[19],
+    #[doc = "Output Data Status"]
+    p20[20],
+    #[doc = "Output Data Status"]
+    p21[21],
+    #[doc = "Output Data Status"]
+    p22[22],
+    #[doc = "Output Data Status"]
+    p23[23],
+    #[doc = "Output Data Status"]
+    p24[24],
+    #[doc = "Output Data Status"]
+    p25[25],
+    #[doc = "Output Data Status"]
+    p26[26],
+    #[doc = "Output Data Status"]
+    p27[27],
+    #[doc = "Output Data Status"]
+    p28[28],
+    #[doc = "Output Data Status"]
+    p29[29],
+    #[doc = "Output Data Status"]
+    p30[30],
+    #[doc = "Output Data Status"]
+    p31[31],
+}
+#[doc = "Pin Data Status Register"]
+ReadOnly register[32] PioPdsr {
+    #[doc = "Output Data Status"]
+    p0[0],
+    #[doc = "Output Data Status"]
+    p1[1],
+    #[doc = "Output Data Status"]
+    p2[2],
+    #[doc = "Output Data Status"]
+    p3[3],
+    #[doc = "Output Data Status"]
+    p4[4],
+    #[doc = "Output Data Status"]
+    p5[5],
+    #[doc = "Output Data Status"]
+    p6[6],
+    #[doc = "Output Data Status"]
+    p7[7],
+    #[doc = "Output Data Status"]
+    p8[8],
+    #[doc = "Output Data Status"]
+    p9[9],
+    #[doc = "Output Data Status"]
+    p10[10],
+    #[doc = "Output Data Status"]
+    p11[11],
+    #[doc = "Output Data Status"]
+    p12[12],
+    #[doc = "Output Data Status"]
+    p13[13],
+    #[doc = "Output Data Status"]
+    p14[14],
+    #[doc = "Output Data Status"]
+    p15[15],
+    #[doc = "Output Data Status"]
+    p16[16],
+    #[doc = "Output Data Status"]
+    p17[17],
+    #[doc = "Output Data Status"]
+    p18[18],
+    #[doc = "Output Data Status"]
+    p19[19],
+    #[doc = "Output Data Status"]
+    p20[20],
+    #[doc = "Output Data Status"]
+    p21[21],
+    #[doc = "Output Data Status"]
+    p22[22],
+    #[doc = "Output Data Status"]
+    p23[23],
+    #[doc = "Output Data Status"]
+    p24[24],
+    #[doc = "Output Data Status"]
+    p25[25],
+    #[doc = "Output Data Status"]
+    p26[26],
+    #[doc = "Output Data Status"]
+    p27[27],
+    #[doc = "Output Data Status"]
+    p28[28],
+    #[doc = "Output Data Status"]
+    p29[29],
+    #[doc = "Output Data Status"]
+    p30[30],
+    #[doc = "Output Data Status"]
+    p31[31],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] PioIer {
+    #[doc = "Input Change Interrupt Enable"]
+    p0[0],
+    #[doc = "Input Change Interrupt Enable"]
+    p1[1],
+    #[doc = "Input Change Interrupt Enable"]
+    p2[2],
+    #[doc = "Input Change Interrupt Enable"]
+    p3[3],
+    #[doc = "Input Change Interrupt Enable"]
+    p4[4],
+    #[doc = "Input Change Interrupt Enable"]
+    p5[5],
+    #[doc = "Input Change Interrupt Enable"]
+    p6[6],
+    #[doc = "Input Change Interrupt Enable"]
+    p7[7],
+    #[doc = "Input Change Interrupt Enable"]
+    p8[8],
+    #[doc = "Input Change Interrupt Enable"]
+    p9[9],
+    #[doc = "Input Change Interrupt Enable"]
+    p10[10],
+    #[doc = "Input Change Interrupt Enable"]
+    p11[11],
+    #[doc = "Input Change Interrupt Enable"]
+    p12[12],
+    #[doc = "Input Change Interrupt Enable"]
+    p13[13],
+    #[doc = "Input Change Interrupt Enable"]
+    p14[14],
+    #[doc = "Input Change Interrupt Enable"]
+    p15[15],
+    #[doc = "Input Change Interrupt Enable"]
+    p16[16],
+    #[doc = "Input Change Interrupt Enable"]
+    p17[17],
+    #[doc = "Input Change Interrupt Enable"]
+    p18[18],
+    #[doc = "Input Change Interrupt Enable"]
+    p19[19],
+    #[doc = "Input Change Interrupt Enable"]
+    p20[20],
+    #[doc = "Input Change Interrupt Enable"]
+    p21[21],
+    #[doc = "Input Change Interrupt Enable"]
+    p22[22],
+    #[doc = "Input Change Interrupt Enable"]
+    p23[23],
+    #[doc = "Input Change Interrupt Enable"]
+    p24[24],
+    #[doc = "Input Change Interrupt Enable"]
+    p25[25],
+    #[doc = "Input Change Interrupt Enable"]
+    p26[26],
+    #[doc = "Input Change Interrupt Enable"]
+    p27[27],
+    #[doc = "Input Change Interrupt Enable"]
+    p28[28],
+    #[doc = "Input Change Interrupt Enable"]
+    p29[29],
+    #[doc = "Input Change Interrupt Enable"]
+    p30[30],
+    #[doc = "Input Change Interrupt Enable"]
+    p31[31],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] PioIdr {
+    #[doc = "Input Change Interrupt Disable"]
+    p0[0],
+    #[doc = "Input Change Interrupt Disable"]
+    p1[1],
+    #[doc = "Input Change Interrupt Disable"]
+    p2[2],
+    #[doc = "Input Change Interrupt Disable"]
+    p3[3],
+    #[doc = "Input Change Interrupt Disable"]
+    p4[4],
+    #[doc = "Input Change Interrupt Disable"]
+    p5[5],
+    #[doc = "Input Change Interrupt Disable"]
+    p6[6],
+    #[doc = "Input Change Interrupt Disable"]
+    p7[7],
+    #[doc = "Input Change Interrupt Disable"]
+    p8[8],
+    #[doc = "Input Change Interrupt Disable"]
+    p9[9],
+    #[doc = "Input Change Interrupt Disable"]
+    p10[10],
+    #[doc = "Input Change Interrupt Disable"]
+    p11[11],
+    #[doc = "Input Change Interrupt Disable"]
+    p12[12],
+    #[doc = "Input Change Interrupt Disable"]
+    p13[13],
+    #[doc = "Input Change Interrupt Disable"]
+    p14[14],
+    #[doc = "Input Change Interrupt Disable"]
+    p15[15],
+    #[doc = "Input Change Interrupt Disable"]
+    p16[16],
+    #[doc = "Input Change Interrupt Disable"]
+    p17[17],
+    #[doc = "Input Change Interrupt Disable"]
+    p18[18],
+    #[doc = "Input Change Interrupt Disable"]
+    p19[19],
+    #[doc = "Input Change Interrupt Disable"]
+    p20[20],
+    #[doc = "Input Change Interrupt Disable"]
+    p21[21],
+    #[doc = "Input Change Interrupt Disable"]
+    p22[22],
+    #[doc = "Input Change Interrupt Disable"]
+    p23[23],
+    #[doc = "Input Change Interrupt Disable"]
+    p24[24],
+    #[doc = "Input Change Interrupt Disable"]
+    p25[25],
+    #[doc = "Input Change Interrupt Disable"]
+    p26[26],
+    #[doc = "Input Change Interrupt Disable"]
+    p27[27],
+    #[doc = "Input Change Interrupt Disable"]
+    p28[28],
+    #[doc = "Input Change Interrupt Disable"]
+    p29[29],
+    #[doc = "Input Change Interrupt Disable"]
+    p30[30],
+    #[doc = "Input Change Interrupt Disable"]
+    p31[31],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] PioImr {
+    #[doc = "Input Change Interrupt Mask"]
+    p0[0],
+    #[doc = "Input Change Interrupt Mask"]
+    p1[1],
+    #[doc = "Input Change Interrupt Mask"]
+    p2[2],
+    #[doc = "Input Change Interrupt Mask"]
+    p3[3],
+    #[doc = "Input Change Interrupt Mask"]
+    p4[4],
+    #[doc = "Input Change Interrupt Mask"]
+    p5[5],
+    #[doc = "Input Change Interrupt Mask"]
+    p6[6],
+    #[doc = "Input Change Interrupt Mask"]
+    p7[7],
+    #[doc = "Input Change Interrupt Mask"]
+    p8[8],
+    #[doc = "Input Change Interrupt Mask"]
+    p9[9],
+    #[doc = "Input Change Interrupt Mask"]
+    p10[10],
+    #[doc = "Input Change Interrupt Mask"]
+    p11[11],
+    #[doc = "Input Change Interrupt Mask"]
+    p12[12],
+    #[doc = "Input Change Interrupt Mask"]
+    p13[13],
+    #[doc = "Input Change Interrupt Mask"]
+    p14[14],
+    #[doc = "Input Change Interrupt Mask"]
+    p15[15],
+    #[doc = "Input Change Interrupt Mask"]
+    p16[16],
+    #[doc = "Input Change Interrupt Mask"]
+    p17[17],
+    #[doc = "Input Change Interrupt Mask"]
+    p18[18],
+    #[doc = "Input Change Interrupt Mask"]
+    p19[19],
+    #[doc = "Input Change Interrupt Mask"]
+    p20[20],
+    #[doc = "Input Change Interrupt Mask"]
+    p21[21],
+    #[doc = "Input Change Interrupt Mask"]
+    p22[22],
+    #[doc = "Input Change Interrupt Mask"]
+    p23[23],
+    #[doc = "Input Change Interrupt Mask"]
+    p24[24],
+    #[doc = "Input Change Interrupt Mask"]
+    p25[25],
+    #[doc = "Input Change Interrupt Mask"]
+    p26[26],
+    #[doc = "Input Change Interrupt Mask"]
+    p27[27],
+    #[doc = "Input Change Interrupt Mask"]
+    p28[28],
+    #[doc = "Input Change Interrupt Mask"]
+    p29[29],
+    #[doc = "Input Change Interrupt Mask"]
+    p30[30],
+    #[doc = "Input Change Interrupt Mask"]
+    p31[31],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] PioIsr {
+    #[doc = "Input Change Interrupt Status"]
+    p0[0],
+    #[doc = "Input Change Interrupt Status"]
+    p1[1],
+    #[doc = "Input Change Interrupt Status"]
+    p2[2],
+    #[doc = "Input Change Interrupt Status"]
+    p3[3],
+    #[doc = "Input Change Interrupt Status"]
+    p4[4],
+    #[doc = "Input Change Interrupt Status"]
+    p5[5],
+    #[doc = "Input Change Interrupt Status"]
+    p6[6],
+    #[doc = "Input Change Interrupt Status"]
+    p7[7],
+    #[doc = "Input Change Interrupt Status"]
+    p8[8],
+    #[doc = "Input Change Interrupt Status"]
+    p9[9],
+    #[doc = "Input Change Interrupt Status"]
+    p10[10],
+    #[doc = "Input Change Interrupt Status"]
+    p11[11],
+    #[doc = "Input Change Interrupt Status"]
+    p12[12],
+    #[doc = "Input Change Interrupt Status"]
+    p13[13],
+    #[doc = "Input Change Interrupt Status"]
+    p14[14],
+    #[doc = "Input Change Interrupt Status"]
+    p15[15],
+    #[doc = "Input Change Interrupt Status"]
+    p16[16],
+    #[doc = "Input Change Interrupt Status"]
+    p17[17],
+    #[doc = "Input Change Interrupt Status"]
+    p18[18],
+    #[doc = "Input Change Interrupt Status"]
+    p19[19],
+    #[doc = "Input Change Interrupt Status"]
+    p20[20],
+    #[doc = "Input Change Interrupt Status"]
+    p21[21],
+    #[doc = "Input Change Interrupt Status"]
+    p22[22],
+    #[doc = "Input Change Interrupt Status"]
+    p23[23],
+    #[doc = "Input Change Interrupt Status"]
+    p24[24],
+    #[doc = "Input Change Interrupt Status"]
+    p25[25],
+    #[doc = "Input Change Interrupt Status"]
+    p26[26],
+    #[doc = "Input Change Interrupt Status"]
+    p27[27],
+    #[doc = "Input Change Interrupt Status"]
+    p28[28],
+    #[doc = "Input Change Interrupt Status"]
+    p29[29],
+    #[doc = "Input Change Interrupt Status"]
+    p30[30],
+    #[doc = "Input Change Interrupt Status"]
+    p31[31],
+}
+#[doc = "Multi-driver Enable Register"]
+WriteOnly register[32] PioMder {
+    #[doc = "Multi-drive Enable"]
+    p0[0],
+    #[doc = "Multi-drive Enable"]
+    p1[1],
+    #[doc = "Multi-drive Enable"]
+    p2[2],
+    #[doc = "Multi-drive Enable"]
+    p3[3],
+    #[doc = "Multi-drive Enable"]
+    p4[4],
+    #[doc = "Multi-drive Enable"]
+    p5[5],
+    #[doc = "Multi-drive Enable"]
+    p6[6],
+    #[doc = "Multi-drive Enable"]
+    p7[7],
+    #[doc = "Multi-drive Enable"]
+    p8[8],
+    #[doc = "Multi-drive Enable"]
+    p9[9],
+    #[doc = "Multi-drive Enable"]
+    p10[10],
+    #[doc = "Multi-drive Enable"]
+    p11[11],
+    #[doc = "Multi-drive Enable"]
+    p12[12],
+    #[doc = "Multi-drive Enable"]
+    p13[13],
+    #[doc = "Multi-drive Enable"]
+    p14[14],
+    #[doc = "Multi-drive Enable"]
+    p15[15],
+    #[doc = "Multi-drive Enable"]
+    p16[16],
+    #[doc = "Multi-drive Enable"]
+    p17[17],
+    #[doc = "Multi-drive Enable"]
+    p18[18],
+    #[doc = "Multi-drive Enable"]
+    p19[19],
+    #[doc = "Multi-drive Enable"]
+    p20[20],
+    #[doc = "Multi-drive Enable"]
+    p21[21],
+    #[doc = "Multi-drive Enable"]
+    p22[22],
+    #[doc = "Multi-drive Enable"]
+    p23[23],
+    #[doc = "Multi-drive Enable"]
+    p24[24],
+    #[doc = "Multi-drive Enable"]
+    p25[25],
+    #[doc = "Multi-drive Enable"]
+    p26[26],
+    #[doc = "Multi-drive Enable"]
+    p27[27],
+    #[doc = "Multi-drive Enable"]
+    p28[28],
+    #[doc = "Multi-drive Enable"]
+    p29[29],
+    #[doc = "Multi-drive Enable"]
+    p30[30],
+    #[doc = "Multi-drive Enable"]
+    p31[31],
+}
+#[doc = "Multi-driver Disable Register"]
+WriteOnly register[32] PioMddr {
+    #[doc = "Multi-drive Disable"]
+    p0[0],
+    #[doc = "Multi-drive Disable"]
+    p1[1],
+    #[doc = "Multi-drive Disable"]
+    p2[2],
+    #[doc = "Multi-drive Disable"]
+    p3[3],
+    #[doc = "Multi-drive Disable"]
+    p4[4],
+    #[doc = "Multi-drive Disable"]
+    p5[5],
+    #[doc = "Multi-drive Disable"]
+    p6[6],
+    #[doc = "Multi-drive Disable"]
+    p7[7],
+    #[doc = "Multi-drive Disable"]
+    p8[8],
+    #[doc = "Multi-drive Disable"]
+    p9[9],
+    #[doc = "Multi-drive Disable"]
+    p10[10],
+    #[doc = "Multi-drive Disable"]
+    p11[11],
+    #[doc = "Multi-drive Disable"]
+    p12[12],
+    #[doc = "Multi-drive Disable"]
+    p13[13],
+    #[doc = "Multi-drive Disable"]
+    p14[14],
+    #[doc = "Multi-drive Disable"]
+    p15[15],
+    #[doc = "Multi-drive Disable"]
+    p16[16],
+    #[doc = "Multi-drive Disable"]
+    p17[17],
+    #[doc = "Multi-drive Disable"]
+    p18[18],
+    #[doc = "Multi-drive Disable"]
+    p19[19],
+    #[doc = "Multi-drive Disable"]
+    p20[20],
+    #[doc = "Multi-drive Disable"]
+    p21[21],
+    #[doc = "Multi-drive Disable"]
+    p22[22],
+    #[doc = "Multi-drive Disable"]
+    p23[23],
+    #[doc = "Multi-drive Disable"]
+    p24[24],
+    #[doc = "Multi-drive Disable"]
+    p25[25],
+    #[doc = "Multi-drive Disable"]
+    p26[26],
+    #[doc = "Multi-drive Disable"]
+    p27[27],
+    #[doc = "Multi-drive Disable"]
+    p28[28],
+    #[doc = "Multi-drive Disable"]
+    p29[29],
+    #[doc = "Multi-drive Disable"]
+    p30[30],
+    #[doc = "Multi-drive Disable"]
+    p31[31],
+}
+#[doc = "Multi-driver Status Register"]
+ReadOnly register[32] PioMdsr {
+    #[doc = "Multi-drive Status"]
+    p0[0],
+    #[doc = "Multi-drive Status"]
+    p1[1],
+    #[doc = "Multi-drive Status"]
+    p2[2],
+    #[doc = "Multi-drive Status"]
+    p3[3],
+    #[doc = "Multi-drive Status"]
+    p4[4],
+    #[doc = "Multi-drive Status"]
+    p5[5],
+    #[doc = "Multi-drive Status"]
+    p6[6],
+    #[doc = "Multi-drive Status"]
+    p7[7],
+    #[doc = "Multi-drive Status"]
+    p8[8],
+    #[doc = "Multi-drive Status"]
+    p9[9],
+    #[doc = "Multi-drive Status"]
+    p10[10],
+    #[doc = "Multi-drive Status"]
+    p11[11],
+    #[doc = "Multi-drive Status"]
+    p12[12],
+    #[doc = "Multi-drive Status"]
+    p13[13],
+    #[doc = "Multi-drive Status"]
+    p14[14],
+    #[doc = "Multi-drive Status"]
+    p15[15],
+    #[doc = "Multi-drive Status"]
+    p16[16],
+    #[doc = "Multi-drive Status"]
+    p17[17],
+    #[doc = "Multi-drive Status"]
+    p18[18],
+    #[doc = "Multi-drive Status"]
+    p19[19],
+    #[doc = "Multi-drive Status"]
+    p20[20],
+    #[doc = "Multi-drive Status"]
+    p21[21],
+    #[doc = "Multi-drive Status"]
+    p22[22],
+    #[doc = "Multi-drive Status"]
+    p23[23],
+    #[doc = "Multi-drive Status"]
+    p24[24],
+    #[doc = "Multi-drive Status"]
+    p25[25],
+    #[doc = "Multi-drive Status"]
+    p26[26],
+    #[doc = "Multi-drive Status"]
+    p27[27],
+    #[doc = "Multi-drive Status"]
+    p28[28],
+    #[doc = "Multi-drive Status"]
+    p29[29],
+    #[doc = "Multi-drive Status"]
+    p30[30],
+    #[doc = "Multi-drive Status"]
+    p31[31],
+}
+#[doc = "Pull-up Disable Register"]
+WriteOnly register[32] PioPudr {
+    #[doc = "Pull-Up Disable"]
+    p0[0],
+    #[doc = "Pull-Up Disable"]
+    p1[1],
+    #[doc = "Pull-Up Disable"]
+    p2[2],
+    #[doc = "Pull-Up Disable"]
+    p3[3],
+    #[doc = "Pull-Up Disable"]
+    p4[4],
+    #[doc = "Pull-Up Disable"]
+    p5[5],
+    #[doc = "Pull-Up Disable"]
+    p6[6],
+    #[doc = "Pull-Up Disable"]
+    p7[7],
+    #[doc = "Pull-Up Disable"]
+    p8[8],
+    #[doc = "Pull-Up Disable"]
+    p9[9],
+    #[doc = "Pull-Up Disable"]
+    p10[10],
+    #[doc = "Pull-Up Disable"]
+    p11[11],
+    #[doc = "Pull-Up Disable"]
+    p12[12],
+    #[doc = "Pull-Up Disable"]
+    p13[13],
+    #[doc = "Pull-Up Disable"]
+    p14[14],
+    #[doc = "Pull-Up Disable"]
+    p15[15],
+    #[doc = "Pull-Up Disable"]
+    p16[16],
+    #[doc = "Pull-Up Disable"]
+    p17[17],
+    #[doc = "Pull-Up Disable"]
+    p18[18],
+    #[doc = "Pull-Up Disable"]
+    p19[19],
+    #[doc = "Pull-Up Disable"]
+    p20[20],
+    #[doc = "Pull-Up Disable"]
+    p21[21],
+    #[doc = "Pull-Up Disable"]
+    p22[22],
+    #[doc = "Pull-Up Disable"]
+    p23[23],
+    #[doc = "Pull-Up Disable"]
+    p24[24],
+    #[doc = "Pull-Up Disable"]
+    p25[25],
+    #[doc = "Pull-Up Disable"]
+    p26[26],
+    #[doc = "Pull-Up Disable"]
+    p27[27],
+    #[doc = "Pull-Up Disable"]
+    p28[28],
+    #[doc = "Pull-Up Disable"]
+    p29[29],
+    #[doc = "Pull-Up Disable"]
+    p30[30],
+    #[doc = "Pull-Up Disable"]
+    p31[31],
+}
+#[doc = "Pull-up Enable Register"]
+WriteOnly register[32] PioPuer {
+    #[doc = "Pull-Up Enable"]
+    p0[0],
+    #[doc = "Pull-Up Enable"]
+    p1[1],
+    #[doc = "Pull-Up Enable"]
+    p2[2],
+    #[doc = "Pull-Up Enable"]
+    p3[3],
+    #[doc = "Pull-Up Enable"]
+    p4[4],
+    #[doc = "Pull-Up Enable"]
+    p5[5],
+    #[doc = "Pull-Up Enable"]
+    p6[6],
+    #[doc = "Pull-Up Enable"]
+    p7[7],
+    #[doc = "Pull-Up Enable"]
+    p8[8],
+    #[doc = "Pull-Up Enable"]
+    p9[9],
+    #[doc = "Pull-Up Enable"]
+    p10[10],
+    #[doc = "Pull-Up Enable"]
+    p11[11],
+    #[doc = "Pull-Up Enable"]
+    p12[12],
+    #[doc = "Pull-Up Enable"]
+    p13[13],
+    #[doc = "Pull-Up Enable"]
+    p14[14],
+    #[doc = "Pull-Up Enable"]
+    p15[15],
+    #[doc = "Pull-Up Enable"]
+    p16[16],
+    #[doc = "Pull-Up Enable"]
+    p17[17],
+    #[doc = "Pull-Up Enable"]
+    p18[18],
+    #[doc = "Pull-Up Enable"]
+    p19[19],
+    #[doc = "Pull-Up Enable"]
+    p20[20],
+    #[doc = "Pull-Up Enable"]
+    p21[21],
+    #[doc = "Pull-Up Enable"]
+    p22[22],
+    #[doc = "Pull-Up Enable"]
+    p23[23],
+    #[doc = "Pull-Up Enable"]
+    p24[24],
+    #[doc = "Pull-Up Enable"]
+    p25[25],
+    #[doc = "Pull-Up Enable"]
+    p26[26],
+    #[doc = "Pull-Up Enable"]
+    p27[27],
+    #[doc = "Pull-Up Enable"]
+    p28[28],
+    #[doc = "Pull-Up Enable"]
+    p29[29],
+    #[doc = "Pull-Up Enable"]
+    p30[30],
+    #[doc = "Pull-Up Enable"]
+    p31[31],
+}
+#[doc = "Pad Pull-up Status Register"]
+ReadOnly register[32] PioPusr {
+    #[doc = "Pull-Up Status"]
+    p0[0],
+    #[doc = "Pull-Up Status"]
+    p1[1],
+    #[doc = "Pull-Up Status"]
+    p2[2],
+    #[doc = "Pull-Up Status"]
+    p3[3],
+    #[doc = "Pull-Up Status"]
+    p4[4],
+    #[doc = "Pull-Up Status"]
+    p5[5],
+    #[doc = "Pull-Up Status"]
+    p6[6],
+    #[doc = "Pull-Up Status"]
+    p7[7],
+    #[doc = "Pull-Up Status"]
+    p8[8],
+    #[doc = "Pull-Up Status"]
+    p9[9],
+    #[doc = "Pull-Up Status"]
+    p10[10],
+    #[doc = "Pull-Up Status"]
+    p11[11],
+    #[doc = "Pull-Up Status"]
+    p12[12],
+    #[doc = "Pull-Up Status"]
+    p13[13],
+    #[doc = "Pull-Up Status"]
+    p14[14],
+    #[doc = "Pull-Up Status"]
+    p15[15],
+    #[doc = "Pull-Up Status"]
+    p16[16],
+    #[doc = "Pull-Up Status"]
+    p17[17],
+    #[doc = "Pull-Up Status"]
+    p18[18],
+    #[doc = "Pull-Up Status"]
+    p19[19],
+    #[doc = "Pull-Up Status"]
+    p20[20],
+    #[doc = "Pull-Up Status"]
+    p21[21],
+    #[doc = "Pull-Up Status"]
+    p22[22],
+    #[doc = "Pull-Up Status"]
+    p23[23],
+    #[doc = "Pull-Up Status"]
+    p24[24],
+    #[doc = "Pull-Up Status"]
+    p25[25],
+    #[doc = "Pull-Up Status"]
+    p26[26],
+    #[doc = "Pull-Up Status"]
+    p27[27],
+    #[doc = "Pull-Up Status"]
+    p28[28],
+    #[doc = "Pull-Up Status"]
+    p29[29],
+    #[doc = "Pull-Up Status"]
+    p30[30],
+    #[doc = "Pull-Up Status"]
+    p31[31],
+}
+#[doc = "Peripheral ABCD Select Register 0"]
+ReadWrite register[32] PioAbcdsr {
+    #[doc = "Peripheral Select"]
+    p0[0],
+    #[doc = "Peripheral Select"]
+    p1[1],
+    #[doc = "Peripheral Select"]
+    p2[2],
+    #[doc = "Peripheral Select"]
+    p3[3],
+    #[doc = "Peripheral Select"]
+    p4[4],
+    #[doc = "Peripheral Select"]
+    p5[5],
+    #[doc = "Peripheral Select"]
+    p6[6],
+    #[doc = "Peripheral Select"]
+    p7[7],
+    #[doc = "Peripheral Select"]
+    p8[8],
+    #[doc = "Peripheral Select"]
+    p9[9],
+    #[doc = "Peripheral Select"]
+    p10[10],
+    #[doc = "Peripheral Select"]
+    p11[11],
+    #[doc = "Peripheral Select"]
+    p12[12],
+    #[doc = "Peripheral Select"]
+    p13[13],
+    #[doc = "Peripheral Select"]
+    p14[14],
+    #[doc = "Peripheral Select"]
+    p15[15],
+    #[doc = "Peripheral Select"]
+    p16[16],
+    #[doc = "Peripheral Select"]
+    p17[17],
+    #[doc = "Peripheral Select"]
+    p18[18],
+    #[doc = "Peripheral Select"]
+    p19[19],
+    #[doc = "Peripheral Select"]
+    p20[20],
+    #[doc = "Peripheral Select"]
+    p21[21],
+    #[doc = "Peripheral Select"]
+    p22[22],
+    #[doc = "Peripheral Select"]
+    p23[23],
+    #[doc = "Peripheral Select"]
+    p24[24],
+    #[doc = "Peripheral Select"]
+    p25[25],
+    #[doc = "Peripheral Select"]
+    p26[26],
+    #[doc = "Peripheral Select"]
+    p27[27],
+    #[doc = "Peripheral Select"]
+    p28[28],
+    #[doc = "Peripheral Select"]
+    p29[29],
+    #[doc = "Peripheral Select"]
+    p30[30],
+    #[doc = "Peripheral Select"]
+    p31[31],
+}
+#[doc = "Input Filter Slow Clock Disable Register"]
+WriteOnly register[32] PioIfscdr {
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p0[0],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p1[1],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p2[2],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p3[3],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p4[4],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p5[5],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p6[6],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p7[7],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p8[8],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p9[9],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p10[10],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p11[11],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p12[12],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p13[13],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p14[14],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p15[15],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p16[16],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p17[17],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p18[18],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p19[19],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p20[20],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p21[21],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p22[22],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p23[23],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p24[24],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p25[25],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p26[26],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p27[27],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p28[28],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p29[29],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p30[30],
+    #[doc = "Peripheral Clock Glitch Filtering Select"]
+    p31[31],
+}
+#[doc = "Input Filter Slow Clock Enable Register"]
+WriteOnly register[32] PioIfscer {
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p0[0],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p1[1],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p2[2],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p3[3],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p4[4],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p5[5],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p6[6],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p7[7],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p8[8],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p9[9],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p10[10],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p11[11],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p12[12],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p13[13],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p14[14],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p15[15],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p16[16],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p17[17],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p18[18],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p19[19],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p20[20],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p21[21],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p22[22],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p23[23],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p24[24],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p25[25],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p26[26],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p27[27],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p28[28],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p29[29],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p30[30],
+    #[doc = "Slow Clock Debouncing Filtering Select"]
+    p31[31],
+}
+#[doc = "Input Filter Slow Clock Status Register"]
+ReadOnly register[32] PioIfscsr {
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p0[0],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p1[1],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p2[2],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p3[3],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p4[4],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p5[5],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p6[6],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p7[7],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p8[8],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p9[9],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p10[10],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p11[11],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p12[12],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p13[13],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p14[14],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p15[15],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p16[16],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p17[17],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p18[18],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p19[19],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p20[20],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p21[21],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p22[22],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p23[23],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p24[24],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p25[25],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p26[26],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p27[27],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p28[28],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p29[29],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p30[30],
+    #[doc = "Glitch or Debouncing Filter Selection Status"]
+    p31[31],
+}
+#[doc = "Slow Clock Divider Debouncing Register"]
+ReadWrite register[32] PioScdr {
+    #[doc = "Slow Clock Divider Selection for Debouncing"]
+    div[0..14],
+}
+#[doc = "Pad Pull-down Disable Register"]
+WriteOnly register[32] PioPpddr {
+    #[doc = "Pull-Down Disable"]
+    p0[0],
+    #[doc = "Pull-Down Disable"]
+    p1[1],
+    #[doc = "Pull-Down Disable"]
+    p2[2],
+    #[doc = "Pull-Down Disable"]
+    p3[3],
+    #[doc = "Pull-Down Disable"]
+    p4[4],
+    #[doc = "Pull-Down Disable"]
+    p5[5],
+    #[doc = "Pull-Down Disable"]
+    p6[6],
+    #[doc = "Pull-Down Disable"]
+    p7[7],
+    #[doc = "Pull-Down Disable"]
+    p8[8],
+    #[doc = "Pull-Down Disable"]
+    p9[9],
+    #[doc = "Pull-Down Disable"]
+    p10[10],
+    #[doc = "Pull-Down Disable"]
+    p11[11],
+    #[doc = "Pull-Down Disable"]
+    p12[12],
+    #[doc = "Pull-Down Disable"]
+    p13[13],
+    #[doc = "Pull-Down Disable"]
+    p14[14],
+    #[doc = "Pull-Down Disable"]
+    p15[15],
+    #[doc = "Pull-Down Disable"]
+    p16[16],
+    #[doc = "Pull-Down Disable"]
+    p17[17],
+    #[doc = "Pull-Down Disable"]
+    p18[18],
+    #[doc = "Pull-Down Disable"]
+    p19[19],
+    #[doc = "Pull-Down Disable"]
+    p20[20],
+    #[doc = "Pull-Down Disable"]
+    p21[21],
+    #[doc = "Pull-Down Disable"]
+    p22[22],
+    #[doc = "Pull-Down Disable"]
+    p23[23],
+    #[doc = "Pull-Down Disable"]
+    p24[24],
+    #[doc = "Pull-Down Disable"]
+    p25[25],
+    #[doc = "Pull-Down Disable"]
+    p26[26],
+    #[doc = "Pull-Down Disable"]
+    p27[27],
+    #[doc = "Pull-Down Disable"]
+    p28[28],
+    #[doc = "Pull-Down Disable"]
+    p29[29],
+    #[doc = "Pull-Down Disable"]
+    p30[30],
+    #[doc = "Pull-Down Disable"]
+    p31[31],
+}
+#[doc = "Pad Pull-down Enable Register"]
+WriteOnly register[32] PioPpder {
+    #[doc = "Pull-Down Enable"]
+    p0[0],
+    #[doc = "Pull-Down Enable"]
+    p1[1],
+    #[doc = "Pull-Down Enable"]
+    p2[2],
+    #[doc = "Pull-Down Enable"]
+    p3[3],
+    #[doc = "Pull-Down Enable"]
+    p4[4],
+    #[doc = "Pull-Down Enable"]
+    p5[5],
+    #[doc = "Pull-Down Enable"]
+    p6[6],
+    #[doc = "Pull-Down Enable"]
+    p7[7],
+    #[doc = "Pull-Down Enable"]
+    p8[8],
+    #[doc = "Pull-Down Enable"]
+    p9[9],
+    #[doc = "Pull-Down Enable"]
+    p10[10],
+    #[doc = "Pull-Down Enable"]
+    p11[11],
+    #[doc = "Pull-Down Enable"]
+    p12[12],
+    #[doc = "Pull-Down Enable"]
+    p13[13],
+    #[doc = "Pull-Down Enable"]
+    p14[14],
+    #[doc = "Pull-Down Enable"]
+    p15[15],
+    #[doc = "Pull-Down Enable"]
+    p16[16],
+    #[doc = "Pull-Down Enable"]
+    p17[17],
+    #[doc = "Pull-Down Enable"]
+    p18[18],
+    #[doc = "Pull-Down Enable"]
+    p19[19],
+    #[doc = "Pull-Down Enable"]
+    p20[20],
+    #[doc = "Pull-Down Enable"]
+    p21[21],
+    #[doc = "Pull-Down Enable"]
+    p22[22],
+    #[doc = "Pull-Down Enable"]
+    p23[23],
+    #[doc = "Pull-Down Enable"]
+    p24[24],
+    #[doc = "Pull-Down Enable"]
+    p25[25],
+    #[doc = "Pull-Down Enable"]
+    p26[26],
+    #[doc = "Pull-Down Enable"]
+    p27[27],
+    #[doc = "Pull-Down Enable"]
+    p28[28],
+    #[doc = "Pull-Down Enable"]
+    p29[29],
+    #[doc = "Pull-Down Enable"]
+    p30[30],
+    #[doc = "Pull-Down Enable"]
+    p31[31],
+}
+#[doc = "Pad Pull-down Status Register"]
+ReadOnly register[32] PioPpdsr {
+    #[doc = "Pull-Down Status"]
+    p0[0],
+    #[doc = "Pull-Down Status"]
+    p1[1],
+    #[doc = "Pull-Down Status"]
+    p2[2],
+    #[doc = "Pull-Down Status"]
+    p3[3],
+    #[doc = "Pull-Down Status"]
+    p4[4],
+    #[doc = "Pull-Down Status"]
+    p5[5],
+    #[doc = "Pull-Down Status"]
+    p6[6],
+    #[doc = "Pull-Down Status"]
+    p7[7],
+    #[doc = "Pull-Down Status"]
+    p8[8],
+    #[doc = "Pull-Down Status"]
+    p9[9],
+    #[doc = "Pull-Down Status"]
+    p10[10],
+    #[doc = "Pull-Down Status"]
+    p11[11],
+    #[doc = "Pull-Down Status"]
+    p12[12],
+    #[doc = "Pull-Down Status"]
+    p13[13],
+    #[doc = "Pull-Down Status"]
+    p14[14],
+    #[doc = "Pull-Down Status"]
+    p15[15],
+    #[doc = "Pull-Down Status"]
+    p16[16],
+    #[doc = "Pull-Down Status"]
+    p17[17],
+    #[doc = "Pull-Down Status"]
+    p18[18],
+    #[doc = "Pull-Down Status"]
+    p19[19],
+    #[doc = "Pull-Down Status"]
+    p20[20],
+    #[doc = "Pull-Down Status"]
+    p21[21],
+    #[doc = "Pull-Down Status"]
+    p22[22],
+    #[doc = "Pull-Down Status"]
+    p23[23],
+    #[doc = "Pull-Down Status"]
+    p24[24],
+    #[doc = "Pull-Down Status"]
+    p25[25],
+    #[doc = "Pull-Down Status"]
+    p26[26],
+    #[doc = "Pull-Down Status"]
+    p27[27],
+    #[doc = "Pull-Down Status"]
+    p28[28],
+    #[doc = "Pull-Down Status"]
+    p29[29],
+    #[doc = "Pull-Down Status"]
+    p30[30],
+    #[doc = "Pull-Down Status"]
+    p31[31],
+}
+#[doc = "Output Write Enable"]
+WriteOnly register[32] PioOwer {
+    #[doc = "Output Write Enable"]
+    p0[0],
+    #[doc = "Output Write Enable"]
+    p1[1],
+    #[doc = "Output Write Enable"]
+    p2[2],
+    #[doc = "Output Write Enable"]
+    p3[3],
+    #[doc = "Output Write Enable"]
+    p4[4],
+    #[doc = "Output Write Enable"]
+    p5[5],
+    #[doc = "Output Write Enable"]
+    p6[6],
+    #[doc = "Output Write Enable"]
+    p7[7],
+    #[doc = "Output Write Enable"]
+    p8[8],
+    #[doc = "Output Write Enable"]
+    p9[9],
+    #[doc = "Output Write Enable"]
+    p10[10],
+    #[doc = "Output Write Enable"]
+    p11[11],
+    #[doc = "Output Write Enable"]
+    p12[12],
+    #[doc = "Output Write Enable"]
+    p13[13],
+    #[doc = "Output Write Enable"]
+    p14[14],
+    #[doc = "Output Write Enable"]
+    p15[15],
+    #[doc = "Output Write Enable"]
+    p16[16],
+    #[doc = "Output Write Enable"]
+    p17[17],
+    #[doc = "Output Write Enable"]
+    p18[18],
+    #[doc = "Output Write Enable"]
+    p19[19],
+    #[doc = "Output Write Enable"]
+    p20[20],
+    #[doc = "Output Write Enable"]
+    p21[21],
+    #[doc = "Output Write Enable"]
+    p22[22],
+    #[doc = "Output Write Enable"]
+    p23[23],
+    #[doc = "Output Write Enable"]
+    p24[24],
+    #[doc = "Output Write Enable"]
+    p25[25],
+    #[doc = "Output Write Enable"]
+    p26[26],
+    #[doc = "Output Write Enable"]
+    p27[27],
+    #[doc = "Output Write Enable"]
+    p28[28],
+    #[doc = "Output Write Enable"]
+    p29[29],
+    #[doc = "Output Write Enable"]
+    p30[30],
+    #[doc = "Output Write Enable"]
+    p31[31],
+}
+#[doc = "Output Write Disable"]
+WriteOnly register[32] PioOwdr {
+    #[doc = "Output Write Disable"]
+    p0[0],
+    #[doc = "Output Write Disable"]
+    p1[1],
+    #[doc = "Output Write Disable"]
+    p2[2],
+    #[doc = "Output Write Disable"]
+    p3[3],
+    #[doc = "Output Write Disable"]
+    p4[4],
+    #[doc = "Output Write Disable"]
+    p5[5],
+    #[doc = "Output Write Disable"]
+    p6[6],
+    #[doc = "Output Write Disable"]
+    p7[7],
+    #[doc = "Output Write Disable"]
+    p8[8],
+    #[doc = "Output Write Disable"]
+    p9[9],
+    #[doc = "Output Write Disable"]
+    p10[10],
+    #[doc = "Output Write Disable"]
+    p11[11],
+    #[doc = "Output Write Disable"]
+    p12[12],
+    #[doc = "Output Write Disable"]
+    p13[13],
+    #[doc = "Output Write Disable"]
+    p14[14],
+    #[doc = "Output Write Disable"]
+    p15[15],
+    #[doc = "Output Write Disable"]
+    p16[16],
+    #[doc = "Output Write Disable"]
+    p17[17],
+    #[doc = "Output Write Disable"]
+    p18[18],
+    #[doc = "Output Write Disable"]
+    p19[19],
+    #[doc = "Output Write Disable"]
+    p20[20],
+    #[doc = "Output Write Disable"]
+    p21[21],
+    #[doc = "Output Write Disable"]
+    p22[22],
+    #[doc = "Output Write Disable"]
+    p23[23],
+    #[doc = "Output Write Disable"]
+    p24[24],
+    #[doc = "Output Write Disable"]
+    p25[25],
+    #[doc = "Output Write Disable"]
+    p26[26],
+    #[doc = "Output Write Disable"]
+    p27[27],
+    #[doc = "Output Write Disable"]
+    p28[28],
+    #[doc = "Output Write Disable"]
+    p29[29],
+    #[doc = "Output Write Disable"]
+    p30[30],
+    #[doc = "Output Write Disable"]
+    p31[31],
+}
+#[doc = "Output Write Status Register"]
+ReadOnly register[32] PioOwsr {
+    #[doc = "Output Write Status"]
+    p0[0],
+    #[doc = "Output Write Status"]
+    p1[1],
+    #[doc = "Output Write Status"]
+    p2[2],
+    #[doc = "Output Write Status"]
+    p3[3],
+    #[doc = "Output Write Status"]
+    p4[4],
+    #[doc = "Output Write Status"]
+    p5[5],
+    #[doc = "Output Write Status"]
+    p6[6],
+    #[doc = "Output Write Status"]
+    p7[7],
+    #[doc = "Output Write Status"]
+    p8[8],
+    #[doc = "Output Write Status"]
+    p9[9],
+    #[doc = "Output Write Status"]
+    p10[10],
+    #[doc = "Output Write Status"]
+    p11[11],
+    #[doc = "Output Write Status"]
+    p12[12],
+    #[doc = "Output Write Status"]
+    p13[13],
+    #[doc = "Output Write Status"]
+    p14[14],
+    #[doc = "Output Write Status"]
+    p15[15],
+    #[doc = "Output Write Status"]
+    p16[16],
+    #[doc = "Output Write Status"]
+    p17[17],
+    #[doc = "Output Write Status"]
+    p18[18],
+    #[doc = "Output Write Status"]
+    p19[19],
+    #[doc = "Output Write Status"]
+    p20[20],
+    #[doc = "Output Write Status"]
+    p21[21],
+    #[doc = "Output Write Status"]
+    p22[22],
+    #[doc = "Output Write Status"]
+    p23[23],
+    #[doc = "Output Write Status"]
+    p24[24],
+    #[doc = "Output Write Status"]
+    p25[25],
+    #[doc = "Output Write Status"]
+    p26[26],
+    #[doc = "Output Write Status"]
+    p27[27],
+    #[doc = "Output Write Status"]
+    p28[28],
+    #[doc = "Output Write Status"]
+    p29[29],
+    #[doc = "Output Write Status"]
+    p30[30],
+    #[doc = "Output Write Status"]
+    p31[31],
+}
+#[doc = "Additional Interrupt Modes Enable Register"]
+WriteOnly register[32] PioAimer {
+    #[doc = "Additional Interrupt Modes Enable"]
+    p0[0],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p1[1],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p2[2],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p3[3],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p4[4],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p5[5],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p6[6],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p7[7],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p8[8],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p9[9],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p10[10],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p11[11],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p12[12],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p13[13],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p14[14],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p15[15],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p16[16],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p17[17],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p18[18],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p19[19],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p20[20],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p21[21],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p22[22],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p23[23],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p24[24],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p25[25],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p26[26],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p27[27],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p28[28],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p29[29],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p30[30],
+    #[doc = "Additional Interrupt Modes Enable"]
+    p31[31],
+}
+#[doc = "Additional Interrupt Modes Disable Register"]
+WriteOnly register[32] PioAimdr {
+    #[doc = "Additional Interrupt Modes Disable"]
+    p0[0],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p1[1],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p2[2],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p3[3],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p4[4],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p5[5],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p6[6],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p7[7],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p8[8],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p9[9],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p10[10],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p11[11],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p12[12],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p13[13],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p14[14],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p15[15],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p16[16],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p17[17],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p18[18],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p19[19],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p20[20],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p21[21],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p22[22],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p23[23],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p24[24],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p25[25],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p26[26],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p27[27],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p28[28],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p29[29],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p30[30],
+    #[doc = "Additional Interrupt Modes Disable"]
+    p31[31],
+}
+#[doc = "Additional Interrupt Modes Mask Register"]
+ReadOnly register[32] PioAimmr {
+    #[doc = "IO Line Index"]
+    p0[0],
+    #[doc = "IO Line Index"]
+    p1[1],
+    #[doc = "IO Line Index"]
+    p2[2],
+    #[doc = "IO Line Index"]
+    p3[3],
+    #[doc = "IO Line Index"]
+    p4[4],
+    #[doc = "IO Line Index"]
+    p5[5],
+    #[doc = "IO Line Index"]
+    p6[6],
+    #[doc = "IO Line Index"]
+    p7[7],
+    #[doc = "IO Line Index"]
+    p8[8],
+    #[doc = "IO Line Index"]
+    p9[9],
+    #[doc = "IO Line Index"]
+    p10[10],
+    #[doc = "IO Line Index"]
+    p11[11],
+    #[doc = "IO Line Index"]
+    p12[12],
+    #[doc = "IO Line Index"]
+    p13[13],
+    #[doc = "IO Line Index"]
+    p14[14],
+    #[doc = "IO Line Index"]
+    p15[15],
+    #[doc = "IO Line Index"]
+    p16[16],
+    #[doc = "IO Line Index"]
+    p17[17],
+    #[doc = "IO Line Index"]
+    p18[18],
+    #[doc = "IO Line Index"]
+    p19[19],
+    #[doc = "IO Line Index"]
+    p20[20],
+    #[doc = "IO Line Index"]
+    p21[21],
+    #[doc = "IO Line Index"]
+    p22[22],
+    #[doc = "IO Line Index"]
+    p23[23],
+    #[doc = "IO Line Index"]
+    p24[24],
+    #[doc = "IO Line Index"]
+    p25[25],
+    #[doc = "IO Line Index"]
+    p26[26],
+    #[doc = "IO Line Index"]
+    p27[27],
+    #[doc = "IO Line Index"]
+    p28[28],
+    #[doc = "IO Line Index"]
+    p29[29],
+    #[doc = "IO Line Index"]
+    p30[30],
+    #[doc = "IO Line Index"]
+    p31[31],
+}
+#[doc = "Edge Select Register"]
+WriteOnly register[32] PioEsr {
+    #[doc = "Edge Interrupt Selection"]
+    p0[0],
+    #[doc = "Edge Interrupt Selection"]
+    p1[1],
+    #[doc = "Edge Interrupt Selection"]
+    p2[2],
+    #[doc = "Edge Interrupt Selection"]
+    p3[3],
+    #[doc = "Edge Interrupt Selection"]
+    p4[4],
+    #[doc = "Edge Interrupt Selection"]
+    p5[5],
+    #[doc = "Edge Interrupt Selection"]
+    p6[6],
+    #[doc = "Edge Interrupt Selection"]
+    p7[7],
+    #[doc = "Edge Interrupt Selection"]
+    p8[8],
+    #[doc = "Edge Interrupt Selection"]
+    p9[9],
+    #[doc = "Edge Interrupt Selection"]
+    p10[10],
+    #[doc = "Edge Interrupt Selection"]
+    p11[11],
+    #[doc = "Edge Interrupt Selection"]
+    p12[12],
+    #[doc = "Edge Interrupt Selection"]
+    p13[13],
+    #[doc = "Edge Interrupt Selection"]
+    p14[14],
+    #[doc = "Edge Interrupt Selection"]
+    p15[15],
+    #[doc = "Edge Interrupt Selection"]
+    p16[16],
+    #[doc = "Edge Interrupt Selection"]
+    p17[17],
+    #[doc = "Edge Interrupt Selection"]
+    p18[18],
+    #[doc = "Edge Interrupt Selection"]
+    p19[19],
+    #[doc = "Edge Interrupt Selection"]
+    p20[20],
+    #[doc = "Edge Interrupt Selection"]
+    p21[21],
+    #[doc = "Edge Interrupt Selection"]
+    p22[22],
+    #[doc = "Edge Interrupt Selection"]
+    p23[23],
+    #[doc = "Edge Interrupt Selection"]
+    p24[24],
+    #[doc = "Edge Interrupt Selection"]
+    p25[25],
+    #[doc = "Edge Interrupt Selection"]
+    p26[26],
+    #[doc = "Edge Interrupt Selection"]
+    p27[27],
+    #[doc = "Edge Interrupt Selection"]
+    p28[28],
+    #[doc = "Edge Interrupt Selection"]
+    p29[29],
+    #[doc = "Edge Interrupt Selection"]
+    p30[30],
+    #[doc = "Edge Interrupt Selection"]
+    p31[31],
+}
+#[doc = "Level Select Register"]
+WriteOnly register[32] PioLsr {
+    #[doc = "Level Interrupt Selection"]
+    p0[0],
+    #[doc = "Level Interrupt Selection"]
+    p1[1],
+    #[doc = "Level Interrupt Selection"]
+    p2[2],
+    #[doc = "Level Interrupt Selection"]
+    p3[3],
+    #[doc = "Level Interrupt Selection"]
+    p4[4],
+    #[doc = "Level Interrupt Selection"]
+    p5[5],
+    #[doc = "Level Interrupt Selection"]
+    p6[6],
+    #[doc = "Level Interrupt Selection"]
+    p7[7],
+    #[doc = "Level Interrupt Selection"]
+    p8[8],
+    #[doc = "Level Interrupt Selection"]
+    p9[9],
+    #[doc = "Level Interrupt Selection"]
+    p10[10],
+    #[doc = "Level Interrupt Selection"]
+    p11[11],
+    #[doc = "Level Interrupt Selection"]
+    p12[12],
+    #[doc = "Level Interrupt Selection"]
+    p13[13],
+    #[doc = "Level Interrupt Selection"]
+    p14[14],
+    #[doc = "Level Interrupt Selection"]
+    p15[15],
+    #[doc = "Level Interrupt Selection"]
+    p16[16],
+    #[doc = "Level Interrupt Selection"]
+    p17[17],
+    #[doc = "Level Interrupt Selection"]
+    p18[18],
+    #[doc = "Level Interrupt Selection"]
+    p19[19],
+    #[doc = "Level Interrupt Selection"]
+    p20[20],
+    #[doc = "Level Interrupt Selection"]
+    p21[21],
+    #[doc = "Level Interrupt Selection"]
+    p22[22],
+    #[doc = "Level Interrupt Selection"]
+    p23[23],
+    #[doc = "Level Interrupt Selection"]
+    p24[24],
+    #[doc = "Level Interrupt Selection"]
+    p25[25],
+    #[doc = "Level Interrupt Selection"]
+    p26[26],
+    #[doc = "Level Interrupt Selection"]
+    p27[27],
+    #[doc = "Level Interrupt Selection"]
+    p28[28],
+    #[doc = "Level Interrupt Selection"]
+    p29[29],
+    #[doc = "Level Interrupt Selection"]
+    p30[30],
+    #[doc = "Level Interrupt Selection"]
+    p31[31],
+}
+#[doc = "Edge/Level Status Register"]
+ReadOnly register[32] PioElsr {
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p0[0],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p1[1],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p2[2],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p3[3],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p4[4],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p5[5],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p6[6],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p7[7],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p8[8],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p9[9],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p10[10],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p11[11],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p12[12],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p13[13],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p14[14],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p15[15],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p16[16],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p17[17],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p18[18],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p19[19],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p20[20],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p21[21],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p22[22],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p23[23],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p24[24],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p25[25],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p26[26],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p27[27],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p28[28],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p29[29],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p30[30],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p31[31],
+}
+#[doc = "Falling Edge/Low-Level Select Register"]
+WriteOnly register[32] PioFellsr {
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p0[0],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p1[1],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p2[2],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p3[3],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p4[4],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p5[5],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p6[6],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p7[7],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p8[8],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p9[9],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p10[10],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p11[11],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p12[12],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p13[13],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p14[14],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p15[15],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p16[16],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p17[17],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p18[18],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p19[19],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p20[20],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p21[21],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p22[22],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p23[23],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p24[24],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p25[25],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p26[26],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p27[27],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p28[28],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p29[29],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p30[30],
+    #[doc = "Falling Edge/Low-Level Interrupt Selection"]
+    p31[31],
+}
+#[doc = "Rising Edge/High-Level Select Register"]
+WriteOnly register[32] PioRehlsr {
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p0[0],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p1[1],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p2[2],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p3[3],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p4[4],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p5[5],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p6[6],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p7[7],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p8[8],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p9[9],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p10[10],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p11[11],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p12[12],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p13[13],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p14[14],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p15[15],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p16[16],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p17[17],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p18[18],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p19[19],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p20[20],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p21[21],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p22[22],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p23[23],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p24[24],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p25[25],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p26[26],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p27[27],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p28[28],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p29[29],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p30[30],
+    #[doc = "Rising Edge/High-Level Interrupt Selection"]
+    p31[31],
+}
+#[doc = "Fall/Rise - Low/High Status Register"]
+ReadOnly register[32] PioFrlhsr {
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p0[0],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p1[1],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p2[2],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p3[3],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p4[4],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p5[5],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p6[6],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p7[7],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p8[8],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p9[9],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p10[10],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p11[11],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p12[12],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p13[13],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p14[14],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p15[15],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p16[16],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p17[17],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p18[18],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p19[19],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p20[20],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p21[21],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p22[22],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p23[23],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p24[24],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p25[25],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p26[26],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p27[27],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p28[28],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p29[29],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p30[30],
+    #[doc = "Edge/Level Interrupt Source Selection"]
+    p31[31],
+}
+#[doc = "Lock Status"]
+ReadOnly register[32] PioLocksr {
+    #[doc = "Lock Status"]
+    p0[0],
+    #[doc = "Lock Status"]
+    p1[1],
+    #[doc = "Lock Status"]
+    p2[2],
+    #[doc = "Lock Status"]
+    p3[3],
+    #[doc = "Lock Status"]
+    p4[4],
+    #[doc = "Lock Status"]
+    p5[5],
+    #[doc = "Lock Status"]
+    p6[6],
+    #[doc = "Lock Status"]
+    p7[7],
+    #[doc = "Lock Status"]
+    p8[8],
+    #[doc = "Lock Status"]
+    p9[9],
+    #[doc = "Lock Status"]
+    p10[10],
+    #[doc = "Lock Status"]
+    p11[11],
+    #[doc = "Lock Status"]
+    p12[12],
+    #[doc = "Lock Status"]
+    p13[13],
+    #[doc = "Lock Status"]
+    p14[14],
+    #[doc = "Lock Status"]
+    p15[15],
+    #[doc = "Lock Status"]
+    p16[16],
+    #[doc = "Lock Status"]
+    p17[17],
+    #[doc = "Lock Status"]
+    p18[18],
+    #[doc = "Lock Status"]
+    p19[19],
+    #[doc = "Lock Status"]
+    p20[20],
+    #[doc = "Lock Status"]
+    p21[21],
+    #[doc = "Lock Status"]
+    p22[22],
+    #[doc = "Lock Status"]
+    p23[23],
+    #[doc = "Lock Status"]
+    p24[24],
+    #[doc = "Lock Status"]
+    p25[25],
+    #[doc = "Lock Status"]
+    p26[26],
+    #[doc = "Lock Status"]
+    p27[27],
+    #[doc = "Lock Status"]
+    p28[28],
+    #[doc = "Lock Status"]
+    p29[29],
+    #[doc = "Lock Status"]
+    p30[30],
+    #[doc = "Lock Status"]
+    p31[31],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] PioWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x50494f,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] PioWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] PioVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}
+#[doc = "Schmitt Trigger Register"]
+ReadWrite register[32] PioSchmitt {
+    #[doc = "Schmitt Trigger Control"]
+    schmitt0[0],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt1[1],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt2[2],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt3[3],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt4[4],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt5[5],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt6[6],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt7[7],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt8[8],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt9[9],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt10[10],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt11[11],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt12[12],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt13[13],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt14[14],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt15[15],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt16[16],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt17[17],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt18[18],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt19[19],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt20[20],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt21[21],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt22[22],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt23[23],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt24[24],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt25[25],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt26[26],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt27[27],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt28[28],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt29[29],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt30[30],
+    #[doc = "Schmitt Trigger Control"]
+    schmitt31[31],
+}
+#[doc = "I/O Drive Register"]
+ReadWrite register[32] PioDriver {
+    #[doc = "Drive of PIO Line 0"]
+    line0[0] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 1"]
+    line1[1] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 2"]
+    line2[2] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 3"]
+    line3[3] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 4"]
+    line4[4] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 5"]
+    line5[5] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 6"]
+    line6[6] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 7"]
+    line7[7] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 8"]
+    line8[8] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 9"]
+    line9[9] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 10"]
+    line10[10] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 11"]
+    line11[11] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 12"]
+    line12[12] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 13"]
+    line13[13] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 14"]
+    line14[14] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 15"]
+    line15[15] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 16"]
+    line16[16] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 17"]
+    line17[17] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 18"]
+    line18[18] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 19"]
+    line19[19] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 20"]
+    line20[20] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 21"]
+    line21[21] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 22"]
+    line22[22] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 23"]
+    line23[23] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 24"]
+    line24[24] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 25"]
+    line25[25] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 26"]
+    line26[26] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 27"]
+    line27[27] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 28"]
+    line28[28] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 29"]
+    line29[29] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 30"]
+    line30[30] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+    #[doc = "Drive of PIO Line 31"]
+    line31[31] {
+        #[doc = "Lowest drive"]
+        LowDrive = 0x0,
+        #[doc = "Highest drive"]
+        HighDrive = 0x1,
+    },
+}
+#[doc = "Parallel Capture Mode Register"]
+ReadWrite register[32] PioPcmr {
+    #[doc = "Parallel Capture Mode Enable"]
+    pcen[0],
+    #[doc = "Parallel Capture Mode Data Size"]
+    dsize[4..6] {
+        #[doc = "The reception data in the PIO_PCRHR is a byte (8-bit)"]
+        Byte = 0x0,
+        #[doc = "The reception data in the PIO_PCRHR is a half-word (16-bit)"]
+        Halfword = 0x1,
+        #[doc = "The reception data in the PIO_PCRHR is a word (32-bit)"]
+        Word = 0x2,
+    },
+    #[doc = "Parallel Capture Mode Always Sampling"]
+    alwys[9],
+    #[doc = "Parallel Capture Mode Half Sampling"]
+    halfs[10],
+    #[doc = "Parallel Capture Mode First Sample"]
+    frsts[11],
+}
+#[doc = "Parallel Capture Interrupt Enable Register"]
+WriteOnly register[32] PioPcier {
+    #[doc = "Parallel Capture Mode Data Ready Interrupt Enable"]
+    drdy[0],
+    #[doc = "Parallel Capture Mode Overrun Error Interrupt Enable"]
+    ovre[1],
+    #[doc = "End of Reception Transfer Interrupt Enable"]
+    endrx[2],
+    #[doc = "Reception Buffer Full Interrupt Enable"]
+    rxbuff[3],
+}
+#[doc = "Parallel Capture Interrupt Disable Register"]
+WriteOnly register[32] PioPcidr {
+    #[doc = "Parallel Capture Mode Data Ready Interrupt Disable"]
+    drdy[0],
+    #[doc = "Parallel Capture Mode Overrun Error Interrupt Disable"]
+    ovre[1],
+    #[doc = "End of Reception Transfer Interrupt Disable"]
+    endrx[2],
+    #[doc = "Reception Buffer Full Interrupt Disable"]
+    rxbuff[3],
+}
+#[doc = "Parallel Capture Interrupt Mask Register"]
+ReadOnly register[32] PioPcimr {
+    #[doc = "Parallel Capture Mode Data Ready Interrupt Mask"]
+    drdy[0],
+    #[doc = "Parallel Capture Mode Overrun Error Interrupt Mask"]
+    ovre[1],
+    #[doc = "End of Reception Transfer Interrupt Mask"]
+    endrx[2],
+    #[doc = "Reception Buffer Full Interrupt Mask"]
+    rxbuff[3],
+}
+#[doc = "Parallel Capture Interrupt Status Register"]
+ReadOnly register[32] PioPcisr {
+    #[doc = "Parallel Capture Mode Data Ready"]
+    drdy[0],
+    #[doc = "Parallel Capture Mode Overrun Error"]
+    ovre[1],
+}
+#[doc = "Parallel Capture Reception Holding Register"]
+ReadOnly register[32] PioPcrhr {
+    #[doc = "Parallel Capture Mode Reception Data"]
+    rdata[0..32],
+}

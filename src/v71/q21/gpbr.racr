@@ -1,0 +1,9 @@
+#[doc = "General Purpose Backup Registers"]
+peripheral Gpbr {
+    sys_gpbr: [SysGpbr; 8] @ 0x0,
+}
+#[doc = "General Purpose Backup Register 0"]
+ReadWrite register[32] SysGpbr {
+    #[doc = "Value of GPBR x"]
+    gpbr_value[0..32],
+}

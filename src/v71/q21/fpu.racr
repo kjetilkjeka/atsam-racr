@@ -1,0 +1,43 @@
+#[doc = "Floating Point Unit Registers"]
+peripheral Fpu {
+    fpccr: Fpccr @ 0x0,
+    fpcar: Fpcar @ 0x4,
+    fpdscr: Fpdscr @ 0x8,
+}
+#[doc = "Floating-point Context Control Register"]
+ReadWrite register[32] Fpccr {
+    #[doc = "Lazy state preservation is active. Floating-point stack frame has been allocated but saving state to it has been deferred."]
+    lspact[0],
+    #[doc = "Privilege level was user when the floating-point stack frame was allocated."]
+    user[1],
+    #[doc = "Mode was Thread Mode when the floating-point stack frame was allocated."]
+    thread[3],
+    #[doc = "Priority permitted setting the HardFault handler to the pending state when the floating-point stack frame was allocated."]
+    hfrdy[4],
+    #[doc = "MemManage is enabled and priority permitted setting the MemManage handler to the pending state when the floating-point stack frame was allocated."]
+    mmrdy[5],
+    #[doc = "BusFault is enabled and priority permitted setting the BusFault handler to the pending state when the floating-point stack frame was allocated."]
+    bfrdy[6],
+    #[doc = "DebugMonitor is enabled and priority permits setting MON_PEND when the floating-point stack frame was allocated."]
+    monrdy[8],
+    #[doc = "Enable automatic lazy state preservation for floating-point context."]
+    lspen[30],
+    #[doc = "Enables CONTROL.FPCA setting on execution of a floating-point instruction. This results in automatic hardware state preservation and restoration, for floating-point context, on exception entry and exit."]
+    aspen[31],
+}
+#[doc = "Floating-point Context Address Register"]
+ReadWrite register[32] Fpcar {
+    #[doc = "The location of the unpopulated floating-point register space allocated on an exception stack frame."]
+    address[3..32],
+}
+#[doc = "Floating-point Default Status Control Register"]
+ReadWrite register[32] Fpdscr {
+    #[doc = "Default value for FPSCR.RMode."]
+    rmode[22..24],
+    #[doc = "Default value for FPSCR.FZ."]
+    fz[24],
+    #[doc = "Default value for FPSCR.DN."]
+    dn[25],
+    #[doc = "Default value for FPSCR.AHP."]
+    ahp[26],
+}

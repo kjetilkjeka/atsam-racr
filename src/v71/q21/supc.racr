@@ -1,0 +1,551 @@
+#[doc = "Supply Controller"]
+peripheral Supc {
+    supc_cr: SupcCr @ 0x0,
+    supc_smmr: SupcSmmr @ 0x4,
+    supc_mr: SupcMr @ 0x8,
+    supc_wumr: SupcWumr @ 0xc,
+    supc_wuir: SupcWuir @ 0x10,
+    supc_sr: SupcSr @ 0x14,
+    sysc_version: SyscVersion @ 0xfc,
+}
+#[doc = "Supply Controller Control Register"]
+WriteOnly register[32] SupcCr {
+    #[doc = "Voltage Regulator Off"]
+    vroff[2] {
+        #[doc = "No effect."]
+        NoEffect = 0x0,
+        #[doc = "If KEY is correct, VROFF asserts the vddcore_nreset and stops the voltage regulator."]
+        StopVreg = 0x1,
+    },
+    #[doc = "Crystal Oscillator Select"]
+    xtalsel[3] {
+        #[doc = "No effect."]
+        NoEffect = 0x0,
+        #[doc = "If KEY is correct, XTALSEL switches the slow clock on the crystal oscillator output."]
+        CrystalSel = 0x1,
+    },
+    #[doc = "Password"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0xa5,
+    },
+}
+#[doc = "Supply Controller Supply Monitor Mode Register"]
+ReadWrite register[32] SupcSmmr {
+    #[doc = "Supply Monitor Threshold"]
+    smth[0..4],
+    #[doc = "Supply Monitor Sampling Period"]
+    smsmpl[8..11] {
+        #[doc = "Supply Monitor disabled"]
+        Smd = 0x0,
+        #[doc = "Continuous Supply Monitor"]
+        Csm = 0x1,
+        #[doc = "Supply Monitor enabled one SLCK period every 32 SLCK periods"]
+        _32slck = 0x2,
+        #[doc = "Supply Monitor enabled one SLCK period every 256 SLCK periods"]
+        _256slck = 0x3,
+        #[doc = "Supply Monitor enabled one SLCK period every 2,048 SLCK periods"]
+        _2048slck = 0x4,
+    },
+    #[doc = "Supply Monitor Reset Enable"]
+    smrsten[12] {
+        #[doc = "The core reset signal vddcore_nreset is not affected when a supply monitor detection occurs."]
+        NotEnable = 0x0,
+        #[doc = "The core reset signal, vddcore_nreset is asserted when a supply monitor detection occurs."]
+        Enable = 0x1,
+    },
+    #[doc = "Supply Monitor Interrupt Enable"]
+    smien[13] {
+        #[doc = "The SUPC interrupt signal is not affected when a supply monitor detection occurs."]
+        NotEnable = 0x0,
+        #[doc = "The SUPC interrupt signal is asserted when a supply monitor detection occurs."]
+        Enable = 0x1,
+    },
+}
+#[doc = "Supply Controller Mode Register"]
+ReadWrite register[32] SupcMr {
+    #[doc = "Brownout Detector Reset Enable"]
+    bodrsten[12] {
+        #[doc = "The core reset signal vddcore_nreset is not affected when a brownout detection occurs."]
+        NotEnable = 0x0,
+        #[doc = "The core reset signal, vddcore_nreset is asserted when a brownout detection occurs."]
+        Enable = 0x1,
+    },
+    #[doc = "Brownout Detector Disable"]
+    boddis[13] {
+        #[doc = "The core brownout detector is enabled."]
+        Enable = 0x0,
+        #[doc = "The core brownout detector is disabled."]
+        Disable = 0x1,
+    },
+    #[doc = "Voltage Regulator Enable"]
+    onreg[14] {
+        #[doc = "Internal voltage regulator is not used (external power supply is used)."]
+        OnregUnused = 0x0,
+        #[doc = "Internal voltage regulator is used."]
+        OnregUsed = 0x1,
+    },
+    #[doc = "SRAM On In Backup Mode"]
+    bkupreton[17],
+    #[doc = "Oscillator Bypass"]
+    oscbypass[20] {
+        #[doc = "No effect. Clock selection depends on the value of XTALSEL (SUPC_CR)."]
+        NoEffect = 0x0,
+        #[doc = "The 32 kHz crystal oscillator is bypassed if XTALSEL (SUPC_CR) is set. OSCBYPASS must be set prior to setting XTALSEL."]
+        Bypass = 0x1,
+    },
+    #[doc = "Password Key"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0xa5,
+    },
+}
+#[doc = "Supply Controller Wakeup Mode Register"]
+ReadWrite register[32] SupcWumr {
+    #[doc = "Supply Monitor Wakeup Enable"]
+    smen[1] {
+        #[doc = "The supply monitor detection has no wakeup effect."]
+        NotEnable = 0x0,
+        #[doc = "The supply monitor detection forces the wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Real-time Timer Wakeup Enable"]
+    rtten[2] {
+        #[doc = "The RTT alarm signal has no wakeup effect."]
+        NotEnable = 0x0,
+        #[doc = "The RTT alarm signal forces the wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Real-time Clock Wakeup Enable"]
+    rtcen[3] {
+        #[doc = "The RTC alarm signal has no wakeup effect."]
+        NotEnable = 0x0,
+        #[doc = "The RTC alarm signal forces the wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Low-power Debouncer Enable WKUP0"]
+    lpdbcen0[5] {
+        #[doc = "The WKUP0 input pin is not connected to the low-power debouncer."]
+        NotEnable = 0x0,
+        #[doc = "The WKUP0 input pin is connected to the low-power debouncer and forces a system wakeup."]
+        Enable = 0x1,
+    },
+    #[doc = "Low-power Debouncer Enable WKUP1"]
+    lpdbcen1[6] {
+        #[doc = "The WKUP1 input pin is not connected to the low-power debouncer."]
+        NotEnable = 0x0,
+        #[doc = "The WKUP1 input pin is connected to the low-power debouncer and forces a system wakeup."]
+        Enable = 0x1,
+    },
+    #[doc = "Low-power Debouncer Clear"]
+    lpdbcclr[7] {
+        #[doc = "A low-power debounce event does not create an immediate clear on the first half of GPBR registers."]
+        NotEnable = 0x0,
+        #[doc = "A low-power debounce event on WKUP0 or WKUP1 generates an immediate clear on the first half of GPBR registers."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Inputs Debouncer Period"]
+    wkupdbc[12..15] {
+        #[doc = "Immediate, no debouncing, detected active at least on one Slow Clock edge."]
+        Immediate = 0x0,
+        #[doc = "WKUPx shall be in its active state for at least 3 SLCK periods"]
+        _3Slck = 0x1,
+        #[doc = "WKUPx shall be in its active state for at least 32 SLCK periods"]
+        _32Slck = 0x2,
+        #[doc = "WKUPx shall be in its active state for at least 512 SLCK periods"]
+        _512Slck = 0x3,
+        #[doc = "WKUPx shall be in its active state for at least 4,096 SLCK periods"]
+        _4096Slck = 0x4,
+        #[doc = "WKUPx shall be in its active state for at least 32,768 SLCK periods"]
+        _32768Slck = 0x5,
+    },
+    #[doc = "Low-power Debouncer Period"]
+    lpdbc[16..19] {
+        #[doc = "Disables the low-power debouncers."]
+        Disable = 0x0,
+        #[doc = "WKUP0/1 in active state for at least 2 RTCOUTx clock periods"]
+        _2Rtcout = 0x1,
+        #[doc = "WKUP0/1 in active state for at least 3 RTCOUTx clock periods"]
+        _3Rtcout = 0x2,
+        #[doc = "WKUP0/1 in active state for at least 4 RTCOUTx clock periods"]
+        _4Rtcout = 0x3,
+        #[doc = "WKUP0/1 in active state for at least 5 RTCOUTx clock periods"]
+        _5Rtcout = 0x4,
+        #[doc = "WKUP0/1 in active state for at least 6 RTCOUTx clock periods"]
+        _6Rtcout = 0x5,
+        #[doc = "WKUP0/1 in active state for at least 7 RTCOUTx clock periods"]
+        _7Rtcout = 0x6,
+        #[doc = "WKUP0/1 in active state for at least 8 RTCOUTx clock periods"]
+        _8Rtcout = 0x7,
+    },
+}
+#[doc = "Supply Controller Wakeup Inputs Register"]
+ReadWrite register[32] SupcWuir {
+    #[doc = "Wakeup Input Enable 0 to 0"]
+    wkupen0[0] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 1"]
+    wkupen1[1] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 2"]
+    wkupen2[2] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 3"]
+    wkupen3[3] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 4"]
+    wkupen4[4] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 5"]
+    wkupen5[5] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 6"]
+    wkupen6[6] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 7"]
+    wkupen7[7] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 8"]
+    wkupen8[8] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 9"]
+    wkupen9[9] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 10"]
+    wkupen10[10] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 11"]
+    wkupen11[11] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 12"]
+    wkupen12[12] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Enable 0 to 13"]
+    wkupen13[13] {
+        #[doc = "The corresponding wakeup input has no wakeup effect."]
+        Disable = 0x0,
+        #[doc = "The corresponding wakeup input is enabled for a wakeup of the core power supply."]
+        Enable = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 0"]
+    wkupt0[16] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 1"]
+    wkupt1[17] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 2"]
+    wkupt2[18] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 3"]
+    wkupt3[19] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 4"]
+    wkupt4[20] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 5"]
+    wkupt5[21] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 6"]
+    wkupt6[22] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 7"]
+    wkupt7[23] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 8"]
+    wkupt8[24] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 9"]
+    wkupt9[25] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 10"]
+    wkupt10[26] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 11"]
+    wkupt11[27] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 12"]
+    wkupt12[28] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+    #[doc = "Wakeup Input Type 0 to 13"]
+    wkupt13[29] {
+        #[doc = "A falling edge followed by a low level for a period defined by WKUPDBC on the corre-sponding wakeup input forces the wakeup of the core power supply."]
+        Low = 0x0,
+        #[doc = "A rising edge followed by a high level for a period defined by WKUPDBC on the cor-responding wakeup input forces the wakeup of the core power supply."]
+        High = 0x1,
+    },
+}
+#[doc = "Supply Controller Status Register"]
+ReadOnly register[32] SupcSr {
+    #[doc = "WKUP Wakeup Status (cleared on read)"]
+    wkups[1] {
+        #[doc = "No wakeup due to the assertion of the WKUP pins has occurred since the last read of SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one wakeup due to the assertion of the WKUP pins has occurred since the last read of SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Supply Monitor Detection Wakeup Status (cleared on read)"]
+    smws[2] {
+        #[doc = "No wakeup due to a supply monitor detection has occurred since the last read of SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one wakeup due to a supply monitor detection has occurred since the last read of SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Brownout Detector Reset Status (cleared on read)"]
+    bodrsts[3] {
+        #[doc = "No core brownout rising edge event has been detected since the last read of the SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one brownout output rising edge event has been detected since the last read of the SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Supply Monitor Reset Status (cleared on read)"]
+    smrsts[4] {
+        #[doc = "No supply monitor detection has generated a core reset since the last read of the SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one supply monitor detection has generated a core reset since the last read of the SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Supply Monitor Status (cleared on read)"]
+    sms[5] {
+        #[doc = "No supply monitor detection since the last read of SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one supply monitor detection since the last read of SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Supply Monitor Output Status"]
+    smos[6] {
+        #[doc = "The supply monitor detected VDDIO higher than its threshold at its last measurement."]
+        High = 0x0,
+        #[doc = "The supply monitor detected VDDIO lower than its threshold at its last measurement."]
+        Low = 0x1,
+    },
+    #[doc = "32-kHz Oscillator Selection Status"]
+    oscsel[7] {
+        #[doc = "The slow clock, SLCK, is generated by the embedded 32 kHz RC oscillator."]
+        Rc = 0x0,
+        #[doc = "The slow clock, SLCK, is generated by the 32 kHz crystal oscillator."]
+        Cryst = 0x1,
+    },
+    #[doc = "Low-power Debouncer Wakeup Status on WKUP0 (cleared on read)"]
+    lpdbcs0[13] {
+        #[doc = "No wakeup due to the assertion of the WKUP0 pin has occurred since the last read of SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one wakeup due to the assertion of the WKUP0 pin has occurred since the last read of SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "Low-power Debouncer Wakeup Status on WKUP1 (cleared on read)"]
+    lpdbcs1[14] {
+        #[doc = "No wakeup due to the assertion of the WKUP1 pin has occurred since the last read of SUPC_SR."]
+        No = 0x0,
+        #[doc = "At least one wakeup due to the assertion of the WKUP1 pin has occurred since the last read of SUPC_SR."]
+        Present = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis0[16] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis1[17] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis2[18] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis3[19] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis4[20] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis5[21] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis6[22] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis7[23] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis8[24] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis9[25] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis10[26] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis11[27] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis12[28] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+    #[doc = "WKUPx Input Status (cleared on read)"]
+    wkupis13[29] {
+        #[doc = "The corresponding wakeup input is disabled, or was inactive at the time the debouncer triggered a wakeup event."]
+        Dis = 0x0,
+        #[doc = "The corresponding wakeup input was active at the time the debouncer triggered a wakeup event since the last read of SUPC_SR."]
+        En = 0x1,
+    },
+}
+#[doc = "Version Register"]
+ReadOnly register[32] SyscVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

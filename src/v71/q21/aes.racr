@@ -1,0 +1,248 @@
+#[doc = "Advanced Encryption Standard"]
+peripheral Aes {
+    aes_cr: AesCr @ 0x0,
+    aes_mr: AesMr @ 0x4,
+    aes_ier: AesIer @ 0x10,
+    aes_idr: AesIdr @ 0x14,
+    aes_imr: AesImr @ 0x18,
+    aes_isr: AesIsr @ 0x1c,
+    aes_keywr: [AesKeywr; 8] @ 0x20,
+    aes_idatar: [AesIdatar; 4] @ 0x40,
+    aes_odatar: [AesOdatar; 4] @ 0x50,
+    aes_ivr: [AesIvr; 4] @ 0x60,
+    aes_aadlenr: AesAadlenr @ 0x70,
+    aes_clenr: AesClenr @ 0x74,
+    aes_ghashr: [AesGhashr; 4] @ 0x78,
+    aes_tagr: [AesTagr; 4] @ 0x88,
+    aes_ctrr: AesCtrr @ 0x98,
+    aes_gcmhr: [AesGcmhr; 4] @ 0x9c,
+    aes_version: AesVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] AesCr {
+    #[doc = "Start Processing"]
+    start[0],
+    #[doc = "Software Reset"]
+    swrst[8],
+    #[doc = "Random Number Generator Seed Loading"]
+    loadseed[16],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] AesMr {
+    #[doc = "Processing Mode"]
+    cipher[0],
+    #[doc = "GCM Automatic Tag Generation Enable"]
+    gtagen[1],
+    #[doc = "Dual Input Buffer"]
+    dualbuff[3] {
+        #[doc = "AES_IDATARx cannot be written during processing of previous block."]
+        Inactive = 0x0,
+        #[doc = "AES_IDATARx can be written during processing of previous block when SMOD = 2. It speeds up the overall runtime of large files."]
+        Active = 0x1,
+    },
+    #[doc = "Processing Delay"]
+    procdly[4..8],
+    #[doc = "Start Mode"]
+    smod[8..10] {
+        #[doc = "Manual Mode"]
+        ManualStart = 0x0,
+        #[doc = "Auto Mode"]
+        AutoStart = 0x1,
+        #[doc = "AES_IDATAR0 access only Auto Mode (DMA)"]
+        Idatar0Start = 0x2,
+    },
+    #[doc = "Key Size"]
+    keysize[10..12] {
+        #[doc = "AES Key Size is 128 bits"]
+        Aes128 = 0x0,
+        #[doc = "AES Key Size is 192 bits"]
+        Aes192 = 0x1,
+        #[doc = "AES Key Size is 256 bits"]
+        Aes256 = 0x2,
+    },
+    #[doc = "Operating Mode"]
+    opmod[12..15] {
+        #[doc = "ECB: Electronic Code Book mode"]
+        Ecb = 0x0,
+        #[doc = "CBC: Cipher Block Chaining mode"]
+        Cbc = 0x1,
+        #[doc = "OFB: Output Feedback mode"]
+        Ofb = 0x2,
+        #[doc = "CFB: Cipher Feedback mode"]
+        Cfb = 0x3,
+        #[doc = "CTR: Counter mode (16-bit internal counter)"]
+        Ctr = 0x4,
+        #[doc = "GCM: Galois/Counter mode"]
+        Gcm = 0x5,
+    },
+    #[doc = "Last Output Data Mode"]
+    lod[15],
+    #[doc = "Cipher Feedback Data Size"]
+    cfbs[16..19] {
+        #[doc = "128-bit"]
+        Size128bit = 0x0,
+        #[doc = "64-bit"]
+        Size64bit = 0x1,
+        #[doc = "32-bit"]
+        Size32bit = 0x2,
+        #[doc = "16-bit"]
+        Size16bit = 0x3,
+        #[doc = "8-bit"]
+        Size8bit = 0x4,
+    },
+    #[doc = "Countermeasure Key"]
+    ckey[20..24] {
+        #[doc = "This field must be written with 0xE to allow CMTYPx bit configuration changes. Any other values will abort the write operation in CMTYPx bits.Always reads as 0."]
+        Passwd = 0xe,
+    },
+    #[doc = "Countermeasure Type 1"]
+    cmtyp1[24] {
+        #[doc = "Countermeasure type 1 is disabled."]
+        NoprotExtkey = 0x0,
+        #[doc = "Countermeasure type 1 is enabled."]
+        ProtExtkey = 0x1,
+    },
+    #[doc = "Countermeasure Type 2"]
+    cmtyp2[25] {
+        #[doc = "Countermeasure type 2 is disabled."]
+        NoPause = 0x0,
+        #[doc = "Countermeasure type 2 is enabled."]
+        Pause = 0x1,
+    },
+    #[doc = "Countermeasure Type 3"]
+    cmtyp3[26] {
+        #[doc = "Countermeasure type 3 is disabled."]
+        NoDummy = 0x0,
+        #[doc = "Countermeasure type 3 is enabled."]
+        Dummy = 0x1,
+    },
+    #[doc = "Countermeasure Type 4"]
+    cmtyp4[27] {
+        #[doc = "Countermeasure type 4 is disabled."]
+        NoRestart = 0x0,
+        #[doc = "Countermeasure type 4 is enabled."]
+        Restart = 0x1,
+    },
+    #[doc = "Countermeasure Type 5"]
+    cmtyp5[28] {
+        #[doc = "Countermeasure type 5 is disabled."]
+        NoAddaccess = 0x0,
+        #[doc = "Countermeasure type 5 is enabled."]
+        Addaccess = 0x1,
+    },
+    #[doc = "Countermeasure Type 6"]
+    cmtyp6[29] {
+        #[doc = "Countermeasure type 6 is disabled."]
+        NoIdlecurrent = 0x0,
+        #[doc = "Countermeasure type 6 is enabled."]
+        Idlecurrent = 0x1,
+    },
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] AesIer {
+    #[doc = "Data Ready Interrupt Enable"]
+    datrdy[0],
+    #[doc = "Unspecified Register Access Detection Interrupt Enable"]
+    urad[8],
+    #[doc = "GCM Tag Ready Interrupt Enable"]
+    tagrdy[16],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] AesIdr {
+    #[doc = "Data Ready Interrupt Disable"]
+    datrdy[0],
+    #[doc = "Unspecified Register Access Detection Interrupt Disable"]
+    urad[8],
+    #[doc = "GCM Tag Ready Interrupt Disable"]
+    tagrdy[16],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] AesImr {
+    #[doc = "Data Ready Interrupt Mask"]
+    datrdy[0],
+    #[doc = "Unspecified Register Access Detection Interrupt Mask"]
+    urad[8],
+    #[doc = "GCM Tag Ready Interrupt Mask"]
+    tagrdy[16],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] AesIsr {
+    #[doc = "Data Ready (cleared by setting bit START or bit SWRST in AES_CR or by reading AES_ODATARx)"]
+    datrdy[0],
+    #[doc = "Unspecified Register Access Detection Status (cleared by writing SWRST in AES_CR)"]
+    urad[8],
+    #[doc = "Unspecified Register Access (cleared by writing SWRST in AES_CR)"]
+    urat[12..16] {
+        #[doc = "Input Data register written during the data processing when SMOD = 0x2 mode."]
+        IdrWrProcessing = 0x0,
+        #[doc = "Output Data register read during the data processing."]
+        OdrRdProcessing = 0x1,
+        #[doc = "Mode register written during the data processing."]
+        MrWrProcessing = 0x2,
+        #[doc = "Output Data register read during the sub-keys generation."]
+        OdrRdSubkgen = 0x3,
+        #[doc = "Mode register written during the sub-keys generation."]
+        MrWrSubkgen = 0x4,
+        #[doc = "Write-only register read access."]
+        WorRdAccess = 0x5,
+    },
+    #[doc = "GCM Tag Ready"]
+    tagrdy[16],
+}
+#[doc = "Key Word Register 0"]
+WriteOnly register[32] AesKeywr {
+    #[doc = "Key Word"]
+    keyw[0..32],
+}
+#[doc = "Input Data Register 0"]
+WriteOnly register[32] AesIdatar {
+    #[doc = "Input Data Word"]
+    idata[0..32],
+}
+#[doc = "Output Data Register 0"]
+ReadOnly register[32] AesOdatar {
+    #[doc = "Output Data"]
+    odata[0..32],
+}
+#[doc = "Initialization Vector Register 0"]
+WriteOnly register[32] AesIvr {
+    #[doc = "Initialization Vector"]
+    iv[0..32],
+}
+#[doc = "Additional Authenticated Data Length Register"]
+ReadWrite register[32] AesAadlenr {
+    #[doc = "Additional Authenticated Data Length"]
+    aadlen[0..32],
+}
+#[doc = "Plaintext/Ciphertext Length Register"]
+ReadWrite register[32] AesClenr {
+    #[doc = "Plaintext/Ciphertext Length"]
+    clen[0..32],
+}
+#[doc = "GCM Intermediate Hash Word Register 0"]
+ReadWrite register[32] AesGhashr {
+    #[doc = "Intermediate GCM Hash Word x"]
+    ghash[0..32],
+}
+#[doc = "GCM Authentication Tag Word Register 0"]
+ReadOnly register[32] AesTagr {
+    #[doc = "GCM Authentication Tag x"]
+    tag[0..32],
+}
+#[doc = "GCM Encryption Counter Value Register"]
+ReadOnly register[32] AesCtrr {
+    #[doc = "GCM Encryption Counter"]
+    ctr[0..32],
+}
+#[doc = "GCM H Word Register 0"]
+ReadWrite register[32] AesGcmhr {
+    #[doc = "GCM H Word x"]
+    h[0..32],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] AesVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

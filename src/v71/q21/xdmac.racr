@@ -1,0 +1,775 @@
+#[doc = "Extensible DMA Controller"]
+peripheral Xdmac {
+    xdmac_gtype: XdmacGtype @ 0x0,
+    xdmac_gcfg: XdmacGcfg @ 0x4,
+    xdmac_gwac: XdmacGwac @ 0x8,
+    xdmac_gie: XdmacGie @ 0xc,
+    xdmac_gid: XdmacGid @ 0x10,
+    xdmac_gim: XdmacGim @ 0x14,
+    xdmac_gis: XdmacGis @ 0x18,
+    xdmac_ge: XdmacGe @ 0x1c,
+    xdmac_gd: XdmacGd @ 0x20,
+    xdmac_gs: XdmacGs @ 0x24,
+    xdmac_grs: XdmacGrs @ 0x28,
+    xdmac_gws: XdmacGws @ 0x2c,
+    xdmac_grws: XdmacGrws @ 0x30,
+    xdmac_grwr: XdmacGrwr @ 0x34,
+    xdmac_gswr: XdmacGswr @ 0x38,
+    xdmac_gsws: XdmacGsws @ 0x3c,
+    xdmac_gswf: XdmacGswf @ 0x40,
+    xdmac_version: XdmacVersion @ 0xffc,
+}
+#[doc = "Global Type Register"]
+ReadOnly register[32] XdmacGtype {
+    #[doc = "Number of Channels Minus One"]
+    nb_ch[0..5],
+    #[doc = "Number of Bytes"]
+    fifo_sz[5..16],
+    #[doc = "Number of Peripheral Requests Minus One"]
+    nb_req[16..23],
+}
+#[doc = "Global Configuration Register"]
+ReadWrite register[32] XdmacGcfg {
+    #[doc = "Configuration Registers Clock Gating Disable"]
+    cgdisreg[0],
+    #[doc = "Pipeline Clock Gating Disable"]
+    cgdispipe[1],
+    #[doc = "FIFO Clock Gating Disable"]
+    cgdisfifo[2],
+    #[doc = "Bus Interface Clock Gating Disable"]
+    cgdisif[3],
+    #[doc = "Boundary X Kilobyte Enable"]
+    bxkben[8],
+}
+#[doc = "Global Weighted Arbiter Configuration Register"]
+ReadWrite register[32] XdmacGwac {
+    #[doc = "Pool Weight 0"]
+    pw0[0..4],
+    #[doc = "Pool Weight 1"]
+    pw1[4..8],
+    #[doc = "Pool Weight 2"]
+    pw2[8..12],
+    #[doc = "Pool Weight 3"]
+    pw3[12..16],
+}
+#[doc = "Global Interrupt Enable Register"]
+WriteOnly register[32] XdmacGie {
+    #[doc = "XDMAC Channel 0 Interrupt Enable Bit"]
+    ie0[0],
+    #[doc = "XDMAC Channel 1 Interrupt Enable Bit"]
+    ie1[1],
+    #[doc = "XDMAC Channel 2 Interrupt Enable Bit"]
+    ie2[2],
+    #[doc = "XDMAC Channel 3 Interrupt Enable Bit"]
+    ie3[3],
+    #[doc = "XDMAC Channel 4 Interrupt Enable Bit"]
+    ie4[4],
+    #[doc = "XDMAC Channel 5 Interrupt Enable Bit"]
+    ie5[5],
+    #[doc = "XDMAC Channel 6 Interrupt Enable Bit"]
+    ie6[6],
+    #[doc = "XDMAC Channel 7 Interrupt Enable Bit"]
+    ie7[7],
+    #[doc = "XDMAC Channel 8 Interrupt Enable Bit"]
+    ie8[8],
+    #[doc = "XDMAC Channel 9 Interrupt Enable Bit"]
+    ie9[9],
+    #[doc = "XDMAC Channel 10 Interrupt Enable Bit"]
+    ie10[10],
+    #[doc = "XDMAC Channel 11 Interrupt Enable Bit"]
+    ie11[11],
+    #[doc = "XDMAC Channel 12 Interrupt Enable Bit"]
+    ie12[12],
+    #[doc = "XDMAC Channel 13 Interrupt Enable Bit"]
+    ie13[13],
+    #[doc = "XDMAC Channel 14 Interrupt Enable Bit"]
+    ie14[14],
+    #[doc = "XDMAC Channel 15 Interrupt Enable Bit"]
+    ie15[15],
+    #[doc = "XDMAC Channel 16 Interrupt Enable Bit"]
+    ie16[16],
+    #[doc = "XDMAC Channel 17 Interrupt Enable Bit"]
+    ie17[17],
+    #[doc = "XDMAC Channel 18 Interrupt Enable Bit"]
+    ie18[18],
+    #[doc = "XDMAC Channel 19 Interrupt Enable Bit"]
+    ie19[19],
+    #[doc = "XDMAC Channel 20 Interrupt Enable Bit"]
+    ie20[20],
+    #[doc = "XDMAC Channel 21 Interrupt Enable Bit"]
+    ie21[21],
+    #[doc = "XDMAC Channel 22 Interrupt Enable Bit"]
+    ie22[22],
+    #[doc = "XDMAC Channel 23 Interrupt Enable Bit"]
+    ie23[23],
+}
+#[doc = "Global Interrupt Disable Register"]
+WriteOnly register[32] XdmacGid {
+    #[doc = "XDMAC Channel 0 Interrupt Disable Bit"]
+    id0[0],
+    #[doc = "XDMAC Channel 1 Interrupt Disable Bit"]
+    id1[1],
+    #[doc = "XDMAC Channel 2 Interrupt Disable Bit"]
+    id2[2],
+    #[doc = "XDMAC Channel 3 Interrupt Disable Bit"]
+    id3[3],
+    #[doc = "XDMAC Channel 4 Interrupt Disable Bit"]
+    id4[4],
+    #[doc = "XDMAC Channel 5 Interrupt Disable Bit"]
+    id5[5],
+    #[doc = "XDMAC Channel 6 Interrupt Disable Bit"]
+    id6[6],
+    #[doc = "XDMAC Channel 7 Interrupt Disable Bit"]
+    id7[7],
+    #[doc = "XDMAC Channel 8 Interrupt Disable Bit"]
+    id8[8],
+    #[doc = "XDMAC Channel 9 Interrupt Disable Bit"]
+    id9[9],
+    #[doc = "XDMAC Channel 10 Interrupt Disable Bit"]
+    id10[10],
+    #[doc = "XDMAC Channel 11 Interrupt Disable Bit"]
+    id11[11],
+    #[doc = "XDMAC Channel 12 Interrupt Disable Bit"]
+    id12[12],
+    #[doc = "XDMAC Channel 13 Interrupt Disable Bit"]
+    id13[13],
+    #[doc = "XDMAC Channel 14 Interrupt Disable Bit"]
+    id14[14],
+    #[doc = "XDMAC Channel 15 Interrupt Disable Bit"]
+    id15[15],
+    #[doc = "XDMAC Channel 16 Interrupt Disable Bit"]
+    id16[16],
+    #[doc = "XDMAC Channel 17 Interrupt Disable Bit"]
+    id17[17],
+    #[doc = "XDMAC Channel 18 Interrupt Disable Bit"]
+    id18[18],
+    #[doc = "XDMAC Channel 19 Interrupt Disable Bit"]
+    id19[19],
+    #[doc = "XDMAC Channel 20 Interrupt Disable Bit"]
+    id20[20],
+    #[doc = "XDMAC Channel 21 Interrupt Disable Bit"]
+    id21[21],
+    #[doc = "XDMAC Channel 22 Interrupt Disable Bit"]
+    id22[22],
+    #[doc = "XDMAC Channel 23 Interrupt Disable Bit"]
+    id23[23],
+}
+#[doc = "Global Interrupt Mask Register"]
+ReadOnly register[32] XdmacGim {
+    #[doc = "XDMAC Channel 0 Interrupt Mask Bit"]
+    im0[0],
+    #[doc = "XDMAC Channel 1 Interrupt Mask Bit"]
+    im1[1],
+    #[doc = "XDMAC Channel 2 Interrupt Mask Bit"]
+    im2[2],
+    #[doc = "XDMAC Channel 3 Interrupt Mask Bit"]
+    im3[3],
+    #[doc = "XDMAC Channel 4 Interrupt Mask Bit"]
+    im4[4],
+    #[doc = "XDMAC Channel 5 Interrupt Mask Bit"]
+    im5[5],
+    #[doc = "XDMAC Channel 6 Interrupt Mask Bit"]
+    im6[6],
+    #[doc = "XDMAC Channel 7 Interrupt Mask Bit"]
+    im7[7],
+    #[doc = "XDMAC Channel 8 Interrupt Mask Bit"]
+    im8[8],
+    #[doc = "XDMAC Channel 9 Interrupt Mask Bit"]
+    im9[9],
+    #[doc = "XDMAC Channel 10 Interrupt Mask Bit"]
+    im10[10],
+    #[doc = "XDMAC Channel 11 Interrupt Mask Bit"]
+    im11[11],
+    #[doc = "XDMAC Channel 12 Interrupt Mask Bit"]
+    im12[12],
+    #[doc = "XDMAC Channel 13 Interrupt Mask Bit"]
+    im13[13],
+    #[doc = "XDMAC Channel 14 Interrupt Mask Bit"]
+    im14[14],
+    #[doc = "XDMAC Channel 15 Interrupt Mask Bit"]
+    im15[15],
+    #[doc = "XDMAC Channel 16 Interrupt Mask Bit"]
+    im16[16],
+    #[doc = "XDMAC Channel 17 Interrupt Mask Bit"]
+    im17[17],
+    #[doc = "XDMAC Channel 18 Interrupt Mask Bit"]
+    im18[18],
+    #[doc = "XDMAC Channel 19 Interrupt Mask Bit"]
+    im19[19],
+    #[doc = "XDMAC Channel 20 Interrupt Mask Bit"]
+    im20[20],
+    #[doc = "XDMAC Channel 21 Interrupt Mask Bit"]
+    im21[21],
+    #[doc = "XDMAC Channel 22 Interrupt Mask Bit"]
+    im22[22],
+    #[doc = "XDMAC Channel 23 Interrupt Mask Bit"]
+    im23[23],
+}
+#[doc = "Global Interrupt Status Register"]
+ReadOnly register[32] XdmacGis {
+    #[doc = "XDMAC Channel 0 Interrupt Status Bit"]
+    is0[0],
+    #[doc = "XDMAC Channel 1 Interrupt Status Bit"]
+    is1[1],
+    #[doc = "XDMAC Channel 2 Interrupt Status Bit"]
+    is2[2],
+    #[doc = "XDMAC Channel 3 Interrupt Status Bit"]
+    is3[3],
+    #[doc = "XDMAC Channel 4 Interrupt Status Bit"]
+    is4[4],
+    #[doc = "XDMAC Channel 5 Interrupt Status Bit"]
+    is5[5],
+    #[doc = "XDMAC Channel 6 Interrupt Status Bit"]
+    is6[6],
+    #[doc = "XDMAC Channel 7 Interrupt Status Bit"]
+    is7[7],
+    #[doc = "XDMAC Channel 8 Interrupt Status Bit"]
+    is8[8],
+    #[doc = "XDMAC Channel 9 Interrupt Status Bit"]
+    is9[9],
+    #[doc = "XDMAC Channel 10 Interrupt Status Bit"]
+    is10[10],
+    #[doc = "XDMAC Channel 11 Interrupt Status Bit"]
+    is11[11],
+    #[doc = "XDMAC Channel 12 Interrupt Status Bit"]
+    is12[12],
+    #[doc = "XDMAC Channel 13 Interrupt Status Bit"]
+    is13[13],
+    #[doc = "XDMAC Channel 14 Interrupt Status Bit"]
+    is14[14],
+    #[doc = "XDMAC Channel 15 Interrupt Status Bit"]
+    is15[15],
+    #[doc = "XDMAC Channel 16 Interrupt Status Bit"]
+    is16[16],
+    #[doc = "XDMAC Channel 17 Interrupt Status Bit"]
+    is17[17],
+    #[doc = "XDMAC Channel 18 Interrupt Status Bit"]
+    is18[18],
+    #[doc = "XDMAC Channel 19 Interrupt Status Bit"]
+    is19[19],
+    #[doc = "XDMAC Channel 20 Interrupt Status Bit"]
+    is20[20],
+    #[doc = "XDMAC Channel 21 Interrupt Status Bit"]
+    is21[21],
+    #[doc = "XDMAC Channel 22 Interrupt Status Bit"]
+    is22[22],
+    #[doc = "XDMAC Channel 23 Interrupt Status Bit"]
+    is23[23],
+}
+#[doc = "Global Channel Enable Register"]
+WriteOnly register[32] XdmacGe {
+    #[doc = "XDMAC Channel 0 Enable Bit"]
+    en0[0],
+    #[doc = "XDMAC Channel 1 Enable Bit"]
+    en1[1],
+    #[doc = "XDMAC Channel 2 Enable Bit"]
+    en2[2],
+    #[doc = "XDMAC Channel 3 Enable Bit"]
+    en3[3],
+    #[doc = "XDMAC Channel 4 Enable Bit"]
+    en4[4],
+    #[doc = "XDMAC Channel 5 Enable Bit"]
+    en5[5],
+    #[doc = "XDMAC Channel 6 Enable Bit"]
+    en6[6],
+    #[doc = "XDMAC Channel 7 Enable Bit"]
+    en7[7],
+    #[doc = "XDMAC Channel 8 Enable Bit"]
+    en8[8],
+    #[doc = "XDMAC Channel 9 Enable Bit"]
+    en9[9],
+    #[doc = "XDMAC Channel 10 Enable Bit"]
+    en10[10],
+    #[doc = "XDMAC Channel 11 Enable Bit"]
+    en11[11],
+    #[doc = "XDMAC Channel 12 Enable Bit"]
+    en12[12],
+    #[doc = "XDMAC Channel 13 Enable Bit"]
+    en13[13],
+    #[doc = "XDMAC Channel 14 Enable Bit"]
+    en14[14],
+    #[doc = "XDMAC Channel 15 Enable Bit"]
+    en15[15],
+    #[doc = "XDMAC Channel 16 Enable Bit"]
+    en16[16],
+    #[doc = "XDMAC Channel 17 Enable Bit"]
+    en17[17],
+    #[doc = "XDMAC Channel 18 Enable Bit"]
+    en18[18],
+    #[doc = "XDMAC Channel 19 Enable Bit"]
+    en19[19],
+    #[doc = "XDMAC Channel 20 Enable Bit"]
+    en20[20],
+    #[doc = "XDMAC Channel 21 Enable Bit"]
+    en21[21],
+    #[doc = "XDMAC Channel 22 Enable Bit"]
+    en22[22],
+    #[doc = "XDMAC Channel 23 Enable Bit"]
+    en23[23],
+}
+#[doc = "Global Channel Disable Register"]
+WriteOnly register[32] XdmacGd {
+    #[doc = "XDMAC Channel 0 Disable Bit"]
+    di0[0],
+    #[doc = "XDMAC Channel 1 Disable Bit"]
+    di1[1],
+    #[doc = "XDMAC Channel 2 Disable Bit"]
+    di2[2],
+    #[doc = "XDMAC Channel 3 Disable Bit"]
+    di3[3],
+    #[doc = "XDMAC Channel 4 Disable Bit"]
+    di4[4],
+    #[doc = "XDMAC Channel 5 Disable Bit"]
+    di5[5],
+    #[doc = "XDMAC Channel 6 Disable Bit"]
+    di6[6],
+    #[doc = "XDMAC Channel 7 Disable Bit"]
+    di7[7],
+    #[doc = "XDMAC Channel 8 Disable Bit"]
+    di8[8],
+    #[doc = "XDMAC Channel 9 Disable Bit"]
+    di9[9],
+    #[doc = "XDMAC Channel 10 Disable Bit"]
+    di10[10],
+    #[doc = "XDMAC Channel 11 Disable Bit"]
+    di11[11],
+    #[doc = "XDMAC Channel 12 Disable Bit"]
+    di12[12],
+    #[doc = "XDMAC Channel 13 Disable Bit"]
+    di13[13],
+    #[doc = "XDMAC Channel 14 Disable Bit"]
+    di14[14],
+    #[doc = "XDMAC Channel 15 Disable Bit"]
+    di15[15],
+    #[doc = "XDMAC Channel 16 Disable Bit"]
+    di16[16],
+    #[doc = "XDMAC Channel 17 Disable Bit"]
+    di17[17],
+    #[doc = "XDMAC Channel 18 Disable Bit"]
+    di18[18],
+    #[doc = "XDMAC Channel 19 Disable Bit"]
+    di19[19],
+    #[doc = "XDMAC Channel 20 Disable Bit"]
+    di20[20],
+    #[doc = "XDMAC Channel 21 Disable Bit"]
+    di21[21],
+    #[doc = "XDMAC Channel 22 Disable Bit"]
+    di22[22],
+    #[doc = "XDMAC Channel 23 Disable Bit"]
+    di23[23],
+}
+#[doc = "Global Channel Status Register"]
+ReadOnly register[32] XdmacGs {
+    #[doc = "XDMAC Channel 0 Status Bit"]
+    st0[0],
+    #[doc = "XDMAC Channel 1 Status Bit"]
+    st1[1],
+    #[doc = "XDMAC Channel 2 Status Bit"]
+    st2[2],
+    #[doc = "XDMAC Channel 3 Status Bit"]
+    st3[3],
+    #[doc = "XDMAC Channel 4 Status Bit"]
+    st4[4],
+    #[doc = "XDMAC Channel 5 Status Bit"]
+    st5[5],
+    #[doc = "XDMAC Channel 6 Status Bit"]
+    st6[6],
+    #[doc = "XDMAC Channel 7 Status Bit"]
+    st7[7],
+    #[doc = "XDMAC Channel 8 Status Bit"]
+    st8[8],
+    #[doc = "XDMAC Channel 9 Status Bit"]
+    st9[9],
+    #[doc = "XDMAC Channel 10 Status Bit"]
+    st10[10],
+    #[doc = "XDMAC Channel 11 Status Bit"]
+    st11[11],
+    #[doc = "XDMAC Channel 12 Status Bit"]
+    st12[12],
+    #[doc = "XDMAC Channel 13 Status Bit"]
+    st13[13],
+    #[doc = "XDMAC Channel 14 Status Bit"]
+    st14[14],
+    #[doc = "XDMAC Channel 15 Status Bit"]
+    st15[15],
+    #[doc = "XDMAC Channel 16 Status Bit"]
+    st16[16],
+    #[doc = "XDMAC Channel 17 Status Bit"]
+    st17[17],
+    #[doc = "XDMAC Channel 18 Status Bit"]
+    st18[18],
+    #[doc = "XDMAC Channel 19 Status Bit"]
+    st19[19],
+    #[doc = "XDMAC Channel 20 Status Bit"]
+    st20[20],
+    #[doc = "XDMAC Channel 21 Status Bit"]
+    st21[21],
+    #[doc = "XDMAC Channel 22 Status Bit"]
+    st22[22],
+    #[doc = "XDMAC Channel 23 Status Bit"]
+    st23[23],
+}
+#[doc = "Global Channel Read Suspend Register"]
+ReadWrite register[32] XdmacGrs {
+    #[doc = "XDMAC Channel 0 Read Suspend Bit"]
+    rs0[0],
+    #[doc = "XDMAC Channel 1 Read Suspend Bit"]
+    rs1[1],
+    #[doc = "XDMAC Channel 2 Read Suspend Bit"]
+    rs2[2],
+    #[doc = "XDMAC Channel 3 Read Suspend Bit"]
+    rs3[3],
+    #[doc = "XDMAC Channel 4 Read Suspend Bit"]
+    rs4[4],
+    #[doc = "XDMAC Channel 5 Read Suspend Bit"]
+    rs5[5],
+    #[doc = "XDMAC Channel 6 Read Suspend Bit"]
+    rs6[6],
+    #[doc = "XDMAC Channel 7 Read Suspend Bit"]
+    rs7[7],
+    #[doc = "XDMAC Channel 8 Read Suspend Bit"]
+    rs8[8],
+    #[doc = "XDMAC Channel 9 Read Suspend Bit"]
+    rs9[9],
+    #[doc = "XDMAC Channel 10 Read Suspend Bit"]
+    rs10[10],
+    #[doc = "XDMAC Channel 11 Read Suspend Bit"]
+    rs11[11],
+    #[doc = "XDMAC Channel 12 Read Suspend Bit"]
+    rs12[12],
+    #[doc = "XDMAC Channel 13 Read Suspend Bit"]
+    rs13[13],
+    #[doc = "XDMAC Channel 14 Read Suspend Bit"]
+    rs14[14],
+    #[doc = "XDMAC Channel 15 Read Suspend Bit"]
+    rs15[15],
+    #[doc = "XDMAC Channel 16 Read Suspend Bit"]
+    rs16[16],
+    #[doc = "XDMAC Channel 17 Read Suspend Bit"]
+    rs17[17],
+    #[doc = "XDMAC Channel 18 Read Suspend Bit"]
+    rs18[18],
+    #[doc = "XDMAC Channel 19 Read Suspend Bit"]
+    rs19[19],
+    #[doc = "XDMAC Channel 20 Read Suspend Bit"]
+    rs20[20],
+    #[doc = "XDMAC Channel 21 Read Suspend Bit"]
+    rs21[21],
+    #[doc = "XDMAC Channel 22 Read Suspend Bit"]
+    rs22[22],
+    #[doc = "XDMAC Channel 23 Read Suspend Bit"]
+    rs23[23],
+}
+#[doc = "Global Channel Write Suspend Register"]
+ReadWrite register[32] XdmacGws {
+    #[doc = "XDMAC Channel 0 Write Suspend Bit"]
+    ws0[0],
+    #[doc = "XDMAC Channel 1 Write Suspend Bit"]
+    ws1[1],
+    #[doc = "XDMAC Channel 2 Write Suspend Bit"]
+    ws2[2],
+    #[doc = "XDMAC Channel 3 Write Suspend Bit"]
+    ws3[3],
+    #[doc = "XDMAC Channel 4 Write Suspend Bit"]
+    ws4[4],
+    #[doc = "XDMAC Channel 5 Write Suspend Bit"]
+    ws5[5],
+    #[doc = "XDMAC Channel 6 Write Suspend Bit"]
+    ws6[6],
+    #[doc = "XDMAC Channel 7 Write Suspend Bit"]
+    ws7[7],
+    #[doc = "XDMAC Channel 8 Write Suspend Bit"]
+    ws8[8],
+    #[doc = "XDMAC Channel 9 Write Suspend Bit"]
+    ws9[9],
+    #[doc = "XDMAC Channel 10 Write Suspend Bit"]
+    ws10[10],
+    #[doc = "XDMAC Channel 11 Write Suspend Bit"]
+    ws11[11],
+    #[doc = "XDMAC Channel 12 Write Suspend Bit"]
+    ws12[12],
+    #[doc = "XDMAC Channel 13 Write Suspend Bit"]
+    ws13[13],
+    #[doc = "XDMAC Channel 14 Write Suspend Bit"]
+    ws14[14],
+    #[doc = "XDMAC Channel 15 Write Suspend Bit"]
+    ws15[15],
+    #[doc = "XDMAC Channel 16 Write Suspend Bit"]
+    ws16[16],
+    #[doc = "XDMAC Channel 17 Write Suspend Bit"]
+    ws17[17],
+    #[doc = "XDMAC Channel 18 Write Suspend Bit"]
+    ws18[18],
+    #[doc = "XDMAC Channel 19 Write Suspend Bit"]
+    ws19[19],
+    #[doc = "XDMAC Channel 20 Write Suspend Bit"]
+    ws20[20],
+    #[doc = "XDMAC Channel 21 Write Suspend Bit"]
+    ws21[21],
+    #[doc = "XDMAC Channel 22 Write Suspend Bit"]
+    ws22[22],
+    #[doc = "XDMAC Channel 23 Write Suspend Bit"]
+    ws23[23],
+}
+#[doc = "Global Channel Read Write Suspend Register"]
+WriteOnly register[32] XdmacGrws {
+    #[doc = "XDMAC Channel 0 Read Write Suspend Bit"]
+    rws0[0],
+    #[doc = "XDMAC Channel 1 Read Write Suspend Bit"]
+    rws1[1],
+    #[doc = "XDMAC Channel 2 Read Write Suspend Bit"]
+    rws2[2],
+    #[doc = "XDMAC Channel 3 Read Write Suspend Bit"]
+    rws3[3],
+    #[doc = "XDMAC Channel 4 Read Write Suspend Bit"]
+    rws4[4],
+    #[doc = "XDMAC Channel 5 Read Write Suspend Bit"]
+    rws5[5],
+    #[doc = "XDMAC Channel 6 Read Write Suspend Bit"]
+    rws6[6],
+    #[doc = "XDMAC Channel 7 Read Write Suspend Bit"]
+    rws7[7],
+    #[doc = "XDMAC Channel 8 Read Write Suspend Bit"]
+    rws8[8],
+    #[doc = "XDMAC Channel 9 Read Write Suspend Bit"]
+    rws9[9],
+    #[doc = "XDMAC Channel 10 Read Write Suspend Bit"]
+    rws10[10],
+    #[doc = "XDMAC Channel 11 Read Write Suspend Bit"]
+    rws11[11],
+    #[doc = "XDMAC Channel 12 Read Write Suspend Bit"]
+    rws12[12],
+    #[doc = "XDMAC Channel 13 Read Write Suspend Bit"]
+    rws13[13],
+    #[doc = "XDMAC Channel 14 Read Write Suspend Bit"]
+    rws14[14],
+    #[doc = "XDMAC Channel 15 Read Write Suspend Bit"]
+    rws15[15],
+    #[doc = "XDMAC Channel 16 Read Write Suspend Bit"]
+    rws16[16],
+    #[doc = "XDMAC Channel 17 Read Write Suspend Bit"]
+    rws17[17],
+    #[doc = "XDMAC Channel 18 Read Write Suspend Bit"]
+    rws18[18],
+    #[doc = "XDMAC Channel 19 Read Write Suspend Bit"]
+    rws19[19],
+    #[doc = "XDMAC Channel 20 Read Write Suspend Bit"]
+    rws20[20],
+    #[doc = "XDMAC Channel 21 Read Write Suspend Bit"]
+    rws21[21],
+    #[doc = "XDMAC Channel 22 Read Write Suspend Bit"]
+    rws22[22],
+    #[doc = "XDMAC Channel 23 Read Write Suspend Bit"]
+    rws23[23],
+}
+#[doc = "Global Channel Read Write Resume Register"]
+WriteOnly register[32] XdmacGrwr {
+    #[doc = "XDMAC Channel 0 Read Write Resume Bit"]
+    rwr0[0],
+    #[doc = "XDMAC Channel 1 Read Write Resume Bit"]
+    rwr1[1],
+    #[doc = "XDMAC Channel 2 Read Write Resume Bit"]
+    rwr2[2],
+    #[doc = "XDMAC Channel 3 Read Write Resume Bit"]
+    rwr3[3],
+    #[doc = "XDMAC Channel 4 Read Write Resume Bit"]
+    rwr4[4],
+    #[doc = "XDMAC Channel 5 Read Write Resume Bit"]
+    rwr5[5],
+    #[doc = "XDMAC Channel 6 Read Write Resume Bit"]
+    rwr6[6],
+    #[doc = "XDMAC Channel 7 Read Write Resume Bit"]
+    rwr7[7],
+    #[doc = "XDMAC Channel 8 Read Write Resume Bit"]
+    rwr8[8],
+    #[doc = "XDMAC Channel 9 Read Write Resume Bit"]
+    rwr9[9],
+    #[doc = "XDMAC Channel 10 Read Write Resume Bit"]
+    rwr10[10],
+    #[doc = "XDMAC Channel 11 Read Write Resume Bit"]
+    rwr11[11],
+    #[doc = "XDMAC Channel 12 Read Write Resume Bit"]
+    rwr12[12],
+    #[doc = "XDMAC Channel 13 Read Write Resume Bit"]
+    rwr13[13],
+    #[doc = "XDMAC Channel 14 Read Write Resume Bit"]
+    rwr14[14],
+    #[doc = "XDMAC Channel 15 Read Write Resume Bit"]
+    rwr15[15],
+    #[doc = "XDMAC Channel 16 Read Write Resume Bit"]
+    rwr16[16],
+    #[doc = "XDMAC Channel 17 Read Write Resume Bit"]
+    rwr17[17],
+    #[doc = "XDMAC Channel 18 Read Write Resume Bit"]
+    rwr18[18],
+    #[doc = "XDMAC Channel 19 Read Write Resume Bit"]
+    rwr19[19],
+    #[doc = "XDMAC Channel 20 Read Write Resume Bit"]
+    rwr20[20],
+    #[doc = "XDMAC Channel 21 Read Write Resume Bit"]
+    rwr21[21],
+    #[doc = "XDMAC Channel 22 Read Write Resume Bit"]
+    rwr22[22],
+    #[doc = "XDMAC Channel 23 Read Write Resume Bit"]
+    rwr23[23],
+}
+#[doc = "Global Channel Software Request Register"]
+WriteOnly register[32] XdmacGswr {
+    #[doc = "XDMAC Channel 0 Software Request Bit"]
+    swreq0[0],
+    #[doc = "XDMAC Channel 1 Software Request Bit"]
+    swreq1[1],
+    #[doc = "XDMAC Channel 2 Software Request Bit"]
+    swreq2[2],
+    #[doc = "XDMAC Channel 3 Software Request Bit"]
+    swreq3[3],
+    #[doc = "XDMAC Channel 4 Software Request Bit"]
+    swreq4[4],
+    #[doc = "XDMAC Channel 5 Software Request Bit"]
+    swreq5[5],
+    #[doc = "XDMAC Channel 6 Software Request Bit"]
+    swreq6[6],
+    #[doc = "XDMAC Channel 7 Software Request Bit"]
+    swreq7[7],
+    #[doc = "XDMAC Channel 8 Software Request Bit"]
+    swreq8[8],
+    #[doc = "XDMAC Channel 9 Software Request Bit"]
+    swreq9[9],
+    #[doc = "XDMAC Channel 10 Software Request Bit"]
+    swreq10[10],
+    #[doc = "XDMAC Channel 11 Software Request Bit"]
+    swreq11[11],
+    #[doc = "XDMAC Channel 12 Software Request Bit"]
+    swreq12[12],
+    #[doc = "XDMAC Channel 13 Software Request Bit"]
+    swreq13[13],
+    #[doc = "XDMAC Channel 14 Software Request Bit"]
+    swreq14[14],
+    #[doc = "XDMAC Channel 15 Software Request Bit"]
+    swreq15[15],
+    #[doc = "XDMAC Channel 16 Software Request Bit"]
+    swreq16[16],
+    #[doc = "XDMAC Channel 17 Software Request Bit"]
+    swreq17[17],
+    #[doc = "XDMAC Channel 18 Software Request Bit"]
+    swreq18[18],
+    #[doc = "XDMAC Channel 19 Software Request Bit"]
+    swreq19[19],
+    #[doc = "XDMAC Channel 20 Software Request Bit"]
+    swreq20[20],
+    #[doc = "XDMAC Channel 21 Software Request Bit"]
+    swreq21[21],
+    #[doc = "XDMAC Channel 22 Software Request Bit"]
+    swreq22[22],
+    #[doc = "XDMAC Channel 23 Software Request Bit"]
+    swreq23[23],
+}
+#[doc = "Global Channel Software Request Status Register"]
+ReadOnly register[32] XdmacGsws {
+    #[doc = "XDMAC Channel 0 Software Request Status Bit"]
+    swrs0[0],
+    #[doc = "XDMAC Channel 1 Software Request Status Bit"]
+    swrs1[1],
+    #[doc = "XDMAC Channel 2 Software Request Status Bit"]
+    swrs2[2],
+    #[doc = "XDMAC Channel 3 Software Request Status Bit"]
+    swrs3[3],
+    #[doc = "XDMAC Channel 4 Software Request Status Bit"]
+    swrs4[4],
+    #[doc = "XDMAC Channel 5 Software Request Status Bit"]
+    swrs5[5],
+    #[doc = "XDMAC Channel 6 Software Request Status Bit"]
+    swrs6[6],
+    #[doc = "XDMAC Channel 7 Software Request Status Bit"]
+    swrs7[7],
+    #[doc = "XDMAC Channel 8 Software Request Status Bit"]
+    swrs8[8],
+    #[doc = "XDMAC Channel 9 Software Request Status Bit"]
+    swrs9[9],
+    #[doc = "XDMAC Channel 10 Software Request Status Bit"]
+    swrs10[10],
+    #[doc = "XDMAC Channel 11 Software Request Status Bit"]
+    swrs11[11],
+    #[doc = "XDMAC Channel 12 Software Request Status Bit"]
+    swrs12[12],
+    #[doc = "XDMAC Channel 13 Software Request Status Bit"]
+    swrs13[13],
+    #[doc = "XDMAC Channel 14 Software Request Status Bit"]
+    swrs14[14],
+    #[doc = "XDMAC Channel 15 Software Request Status Bit"]
+    swrs15[15],
+    #[doc = "XDMAC Channel 16 Software Request Status Bit"]
+    swrs16[16],
+    #[doc = "XDMAC Channel 17 Software Request Status Bit"]
+    swrs17[17],
+    #[doc = "XDMAC Channel 18 Software Request Status Bit"]
+    swrs18[18],
+    #[doc = "XDMAC Channel 19 Software Request Status Bit"]
+    swrs19[19],
+    #[doc = "XDMAC Channel 20 Software Request Status Bit"]
+    swrs20[20],
+    #[doc = "XDMAC Channel 21 Software Request Status Bit"]
+    swrs21[21],
+    #[doc = "XDMAC Channel 22 Software Request Status Bit"]
+    swrs22[22],
+    #[doc = "XDMAC Channel 23 Software Request Status Bit"]
+    swrs23[23],
+}
+#[doc = "Global Channel Software Flush Request Register"]
+WriteOnly register[32] XdmacGswf {
+    #[doc = "XDMAC Channel 0 Software Flush Request Bit"]
+    swf0[0],
+    #[doc = "XDMAC Channel 1 Software Flush Request Bit"]
+    swf1[1],
+    #[doc = "XDMAC Channel 2 Software Flush Request Bit"]
+    swf2[2],
+    #[doc = "XDMAC Channel 3 Software Flush Request Bit"]
+    swf3[3],
+    #[doc = "XDMAC Channel 4 Software Flush Request Bit"]
+    swf4[4],
+    #[doc = "XDMAC Channel 5 Software Flush Request Bit"]
+    swf5[5],
+    #[doc = "XDMAC Channel 6 Software Flush Request Bit"]
+    swf6[6],
+    #[doc = "XDMAC Channel 7 Software Flush Request Bit"]
+    swf7[7],
+    #[doc = "XDMAC Channel 8 Software Flush Request Bit"]
+    swf8[8],
+    #[doc = "XDMAC Channel 9 Software Flush Request Bit"]
+    swf9[9],
+    #[doc = "XDMAC Channel 10 Software Flush Request Bit"]
+    swf10[10],
+    #[doc = "XDMAC Channel 11 Software Flush Request Bit"]
+    swf11[11],
+    #[doc = "XDMAC Channel 12 Software Flush Request Bit"]
+    swf12[12],
+    #[doc = "XDMAC Channel 13 Software Flush Request Bit"]
+    swf13[13],
+    #[doc = "XDMAC Channel 14 Software Flush Request Bit"]
+    swf14[14],
+    #[doc = "XDMAC Channel 15 Software Flush Request Bit"]
+    swf15[15],
+    #[doc = "XDMAC Channel 16 Software Flush Request Bit"]
+    swf16[16],
+    #[doc = "XDMAC Channel 17 Software Flush Request Bit"]
+    swf17[17],
+    #[doc = "XDMAC Channel 18 Software Flush Request Bit"]
+    swf18[18],
+    #[doc = "XDMAC Channel 19 Software Flush Request Bit"]
+    swf19[19],
+    #[doc = "XDMAC Channel 20 Software Flush Request Bit"]
+    swf20[20],
+    #[doc = "XDMAC Channel 21 Software Flush Request Bit"]
+    swf21[21],
+    #[doc = "XDMAC Channel 22 Software Flush Request Bit"]
+    swf22[22],
+    #[doc = "XDMAC Channel 23 Software Flush Request Bit"]
+    swf23[23],
+}
+#[doc = "XDMAC Version Register"]
+ReadWrite register[32] XdmacVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

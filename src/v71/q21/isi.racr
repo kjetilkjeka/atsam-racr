@@ -1,0 +1,357 @@
+#[doc = "Image Sensor Interface"]
+peripheral Isi {
+    isi_cfg1: IsiCfg1 @ 0x0,
+    isi_cfg2: IsiCfg2 @ 0x4,
+    isi_psize: IsiPsize @ 0x8,
+    isi_pdecf: IsiPdecf @ 0xc,
+    isi_y2r_set0: IsiY2rSet0 @ 0x10,
+    isi_y2r_set1: IsiY2rSet1 @ 0x14,
+    isi_r2y_set0: IsiR2ySet0 @ 0x18,
+    isi_r2y_set1: IsiR2ySet1 @ 0x1c,
+    isi_r2y_set2: IsiR2ySet2 @ 0x20,
+    isi_cr: IsiCr @ 0x24,
+    isi_sr: IsiSr @ 0x28,
+    isi_ier: IsiIer @ 0x2c,
+    isi_idr: IsiIdr @ 0x30,
+    isi_imr: IsiImr @ 0x34,
+    isi_dma_cher: IsiDmaCher @ 0x38,
+    isi_dma_chdr: IsiDmaChdr @ 0x3c,
+    isi_dma_chsr: IsiDmaChsr @ 0x40,
+    isi_dma_p_addr: IsiDmaPAddr @ 0x44,
+    isi_dma_p_ctrl: IsiDmaPCtrl @ 0x48,
+    isi_dma_p_dscr: IsiDmaPDscr @ 0x4c,
+    isi_dma_c_addr: IsiDmaCAddr @ 0x50,
+    isi_dma_c_ctrl: IsiDmaCCtrl @ 0x54,
+    isi_dma_c_dscr: IsiDmaCDscr @ 0x58,
+    isi_wpmr: IsiWpmr @ 0xe4,
+    isi_wpsr: IsiWpsr @ 0xe8,
+    isi_version: IsiVersion @ 0xfc,
+}
+#[doc = "ISI Configuration 1 Register"]
+ReadWrite register[32] IsiCfg1 {
+    #[doc = "Horizontal Synchronization Polarity"]
+    hsync_pol[2],
+    #[doc = "Vertical Synchronization Polarity"]
+    vsync_pol[3],
+    #[doc = "Pixel Clock Polarity"]
+    pixclk_pol[4],
+    #[doc = "Grayscale Little Endian"]
+    grayle[5],
+    #[doc = "Embedded Synchronization"]
+    emb_sync[6],
+    #[doc = "Embedded Synchronization Correction"]
+    crc_sync[7],
+    #[doc = "Frame Rate [0..7]"]
+    frate[8..11],
+    #[doc = "Disable Codec Request"]
+    discr[11],
+    #[doc = "Full Mode is Allowed"]
+    full[12],
+    #[doc = "Threshold Mask"]
+    thmask[13..15] {
+        #[doc = "Only 4 beats AHB burst allowed"]
+        Beats4 = 0x0,
+        #[doc = "Only 4 and 8 beats AHB burst allowed"]
+        Beats8 = 0x1,
+        #[doc = "4, 8 and 16 beats AHB burst allowed"]
+        Beats16 = 0x2,
+    },
+    #[doc = "Start of Line Delay"]
+    sld[16..24],
+    #[doc = "Start of Frame Delay"]
+    sfd[24..32],
+}
+#[doc = "ISI Configuration 2 Register"]
+ReadWrite register[32] IsiCfg2 {
+    #[doc = "Vertical Size of the Image Sensor [0..2047]"]
+    im_vsize[0..11],
+    #[doc = "Grayscale Pixel Format Mode"]
+    gs_mode[11],
+    #[doc = "RGB Input Mode"]
+    rgb_mode[12],
+    #[doc = "Grayscale Mode Format Enable"]
+    grayscale[13],
+    #[doc = "RGB Format Swap Mode"]
+    rgb_swap[14],
+    #[doc = "Color Space for the Image Data"]
+    col_space[15],
+    #[doc = "Horizontal Size of the Image Sensor [0..2047]"]
+    im_hsize[16..27],
+    #[doc = "YCrCb Format Swap Mode"]
+    ycc_swap[28..30] {
+        #[doc = "Byte 0 Cb(i)Byte 1 Y(i)Byte 2 Cr(i)Byte 3 Y(i+1)"]
+        Default = 0x0,
+        #[doc = "Byte 0 Cr(i)Byte 1 Y(i)Byte 2 Cb(i)Byte 3 Y(i+1)"]
+        Mode1 = 0x1,
+        #[doc = "Byte 0 Y(i)Byte 1 Cb(i)Byte 2 Y(i+1)Byte 3 Cr(i)"]
+        Mode2 = 0x2,
+        #[doc = "Byte 0 Y(i)Byte 1 Cr(i)Byte 2 Y(i+1)Byte 3 Cb(i)"]
+        Mode3 = 0x3,
+    },
+    #[doc = "RGB Pixel Mapping Configuration"]
+    rgb_cfg[30..32] {
+        #[doc = "Byte 0 R/G(MSB)Byte 1 G(LSB)/BByte 2 R/G(MSB)Byte 3 G(LSB)/B"]
+        Default = 0x0,
+        #[doc = "Byte 0 B/G(MSB)Byte 1 G(LSB)/RByte 2 B/G(MSB)Byte 3 G(LSB)/R"]
+        Mode1 = 0x1,
+        #[doc = "Byte 0 G(LSB)/RByte 1 B/G(MSB)Byte 2 G(LSB)/RByte 3 B/G(MSB)"]
+        Mode2 = 0x2,
+        #[doc = "Byte 0 G(LSB)/BByte 1 R/G(MSB)Byte 2 G(LSB)/BByte 3 R/G(MSB)"]
+        Mode3 = 0x3,
+    },
+}
+#[doc = "ISI Preview Size Register"]
+ReadWrite register[32] IsiPsize {
+    #[doc = "Vertical Size for the Preview Path"]
+    prev_vsize[0..10],
+    #[doc = "Horizontal Size for the Preview Path"]
+    prev_hsize[16..26],
+}
+#[doc = "ISI Preview Decimation Factor Register"]
+ReadWrite register[32] IsiPdecf {
+    #[doc = "Decimation Factor"]
+    dec_factor[0..8],
+}
+#[doc = "ISI Color Space Conversion YCrCb To RGB Set 0 Register"]
+ReadWrite register[32] IsiY2rSet0 {
+    #[doc = "Color Space Conversion Matrix Coefficient C0"]
+    c0[0..8],
+    #[doc = "Color Space Conversion Matrix Coefficient C1"]
+    c1[8..16],
+    #[doc = "Color Space Conversion Matrix Coefficient C2"]
+    c2[16..24],
+    #[doc = "Color Space Conversion Matrix Coefficient C3"]
+    c3[24..32],
+}
+#[doc = "ISI Color Space Conversion YCrCb To RGB Set 1 Register"]
+ReadWrite register[32] IsiY2rSet1 {
+    #[doc = "Color Space Conversion Matrix Coefficient C4"]
+    c4[0..9],
+    #[doc = "Color Space Conversion Luminance Default Offset"]
+    yoff[12],
+    #[doc = "Color Space Conversion Red Chrominance Default Offset"]
+    croff[13],
+    #[doc = "Color Space Conversion Blue Chrominance Default Offset"]
+    cboff[14],
+}
+#[doc = "ISI Color Space Conversion RGB To YCrCb Set 0 Register"]
+ReadWrite register[32] IsiR2ySet0 {
+    #[doc = "Color Space Conversion Matrix Coefficient C0"]
+    c0[0..7],
+    #[doc = "Color Space Conversion Matrix Coefficient C1"]
+    c1[8..15],
+    #[doc = "Color Space Conversion Matrix Coefficient C2"]
+    c2[16..23],
+    #[doc = "Color Space Conversion Red Component Offset"]
+    roff[24],
+}
+#[doc = "ISI Color Space Conversion RGB To YCrCb Set 1 Register"]
+ReadWrite register[32] IsiR2ySet1 {
+    #[doc = "Color Space Conversion Matrix Coefficient C3"]
+    c3[0..7],
+    #[doc = "Color Space Conversion Matrix Coefficient C4"]
+    c4[8..15],
+    #[doc = "Color Space Conversion Matrix Coefficient C5"]
+    c5[16..23],
+    #[doc = "Color Space Conversion Green Component Offset"]
+    goff[24],
+}
+#[doc = "ISI Color Space Conversion RGB To YCrCb Set 2 Register"]
+ReadWrite register[32] IsiR2ySet2 {
+    #[doc = "Color Space Conversion Matrix Coefficient C6"]
+    c6[0..7],
+    #[doc = "Color Space Conversion Matrix Coefficient C7"]
+    c7[8..15],
+    #[doc = "Color Space Conversion Matrix Coefficient C8"]
+    c8[16..23],
+    #[doc = "Color Space Conversion Blue Component Offset"]
+    boff[24],
+}
+#[doc = "ISI Control Register"]
+WriteOnly register[32] IsiCr {
+    #[doc = "ISI Module Enable Request"]
+    isi_en[0],
+    #[doc = "ISI Module Disable Request"]
+    isi_dis[1],
+    #[doc = "ISI Software Reset Request"]
+    isi_srst[2],
+    #[doc = "ISI Codec Request"]
+    isi_cdc[8],
+}
+#[doc = "ISI Status Register"]
+ReadOnly register[32] IsiSr {
+    #[doc = "Module Enable"]
+    enable[0],
+    #[doc = "Module Disable Request has Terminated (cleared on read)"]
+    dis_done[1],
+    #[doc = "Module Software Reset Request has Terminated (cleared on read)"]
+    srst[2],
+    #[doc = "Pending Codec Request"]
+    cdc_pnd[8],
+    #[doc = "Vertical Synchronization (cleared on read)"]
+    vsync[10],
+    #[doc = "Preview DMA Transfer has Terminated (cleared on read)"]
+    pxfr_done[16],
+    #[doc = "Codec DMA Transfer has Terminated (cleared on read)"]
+    cxfr_done[17],
+    #[doc = "Synchronization in Progress"]
+    sip[19],
+    #[doc = "Preview Datapath Overflow (cleared on read)"]
+    p_ovr[24],
+    #[doc = "Codec Datapath Overflow (cleared on read)"]
+    c_ovr[25],
+    #[doc = "CRC Synchronization Error (cleared on read)"]
+    crc_err[26],
+    #[doc = "Frame Rate Overrun (cleared on read)"]
+    fr_ovr[27],
+}
+#[doc = "ISI Interrupt Enable Register"]
+WriteOnly register[32] IsiIer {
+    #[doc = "Disable Done Interrupt Enable"]
+    dis_done[1],
+    #[doc = "Software Reset Interrupt Enable"]
+    srst[2],
+    #[doc = "Vertical Synchronization Interrupt Enable"]
+    vsync[10],
+    #[doc = "Preview DMA Transfer Done Interrupt Enable"]
+    pxfr_done[16],
+    #[doc = "Codec DMA Transfer Done Interrupt Enable"]
+    cxfr_done[17],
+    #[doc = "Preview Datapath Overflow Interrupt Enable"]
+    p_ovr[24],
+    #[doc = "Codec Datapath Overflow Interrupt Enable"]
+    c_ovr[25],
+    #[doc = "Embedded Synchronization CRC Error Interrupt Enable"]
+    crc_err[26],
+    #[doc = "Frame Rate Overflow Interrupt Enable"]
+    fr_ovr[27],
+}
+#[doc = "ISI Interrupt Disable Register"]
+WriteOnly register[32] IsiIdr {
+    #[doc = "Disable Done Interrupt Disable"]
+    dis_done[1],
+    #[doc = "Software Reset Interrupt Disable"]
+    srst[2],
+    #[doc = "Vertical Synchronization Interrupt Disable"]
+    vsync[10],
+    #[doc = "Preview DMA Transfer Done Interrupt Disable"]
+    pxfr_done[16],
+    #[doc = "Codec DMA Transfer Done Interrupt Disable"]
+    cxfr_done[17],
+    #[doc = "Preview Datapath Overflow Interrupt Disable"]
+    p_ovr[24],
+    #[doc = "Codec Datapath Overflow Interrupt Disable"]
+    c_ovr[25],
+    #[doc = "Embedded Synchronization CRC Error Interrupt Disable"]
+    crc_err[26],
+    #[doc = "Frame Rate Overflow Interrupt Disable"]
+    fr_ovr[27],
+}
+#[doc = "ISI Interrupt Mask Register"]
+ReadOnly register[32] IsiImr {
+    #[doc = "Module Disable Operation Completed"]
+    dis_done[1],
+    #[doc = "Software Reset Completed"]
+    srst[2],
+    #[doc = "Vertical Synchronization"]
+    vsync[10],
+    #[doc = "Preview DMA Transfer Completed"]
+    pxfr_done[16],
+    #[doc = "Codec DMA Transfer Completed"]
+    cxfr_done[17],
+    #[doc = "Preview FIFO Overflow"]
+    p_ovr[24],
+    #[doc = "Codec FIFO Overflow"]
+    c_ovr[25],
+    #[doc = "CRC Synchronization Error"]
+    crc_err[26],
+    #[doc = "Frame Rate Overrun"]
+    fr_ovr[27],
+}
+#[doc = "DMA Channel Enable Register"]
+WriteOnly register[32] IsiDmaCher {
+    #[doc = "Preview Channel Enable"]
+    p_ch_en[0],
+    #[doc = "Codec Channel Enable"]
+    c_ch_en[1],
+}
+#[doc = "DMA Channel Disable Register"]
+WriteOnly register[32] IsiDmaChdr {
+    #[doc = "Preview Channel Disable Request"]
+    p_ch_dis[0],
+    #[doc = "Codec Channel Disable Request"]
+    c_ch_dis[1],
+}
+#[doc = "DMA Channel Status Register"]
+ReadOnly register[32] IsiDmaChsr {
+    #[doc = "Preview DMA Channel Status"]
+    p_ch_s[0],
+    #[doc = "Code DMA Channel Status"]
+    c_ch_s[1],
+}
+#[doc = "DMA Preview Base Address Register"]
+ReadWrite register[32] IsiDmaPAddr {
+    #[doc = "Preview Image Base Address"]
+    p_addr[2..32],
+}
+#[doc = "DMA Preview Control Register"]
+ReadWrite register[32] IsiDmaPCtrl {
+    #[doc = "Descriptor Fetch Control Bit"]
+    p_fetch[0],
+    #[doc = "Descriptor Writeback Control Bit"]
+    p_wb[1],
+    #[doc = "Transfer Done Flag Control"]
+    p_ien[2],
+    #[doc = "Preview Transfer Done"]
+    p_done[3],
+}
+#[doc = "DMA Preview Descriptor Address Register"]
+ReadWrite register[32] IsiDmaPDscr {
+    #[doc = "Preview Descriptor Base Address"]
+    p_dscr[2..32],
+}
+#[doc = "DMA Codec Base Address Register"]
+ReadWrite register[32] IsiDmaCAddr {
+    #[doc = "Codec Image Base Address"]
+    c_addr[2..32],
+}
+#[doc = "DMA Codec Control Register"]
+ReadWrite register[32] IsiDmaCCtrl {
+    #[doc = "Descriptor Fetch Control Bit"]
+    c_fetch[0],
+    #[doc = "Descriptor Writeback Control Bit"]
+    c_wb[1],
+    #[doc = "Transfer Done Flag Control"]
+    c_ien[2],
+    #[doc = "Codec Transfer Done"]
+    c_done[3],
+}
+#[doc = "DMA Codec Descriptor Address Register"]
+ReadWrite register[32] IsiDmaCDscr {
+    #[doc = "Codec Descriptor Base Address"]
+    c_dscr[2..32],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] IsiWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key Password"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x495349,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] IsiWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] IsiVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

@@ -1,0 +1,40 @@
+#[doc = "Watchdog Timer"]
+peripheral Wdt {
+    wdt_cr: WdtCr @ 0x0,
+    wdt_mr: WdtMr @ 0x4,
+    wdt_sr: WdtSr @ 0x8,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] WdtCr {
+    #[doc = "Watchdog Restart"]
+    wdrstt[0],
+    #[doc = "Password"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0xa5,
+    },
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] WdtMr {
+    #[doc = "Watchdog Counter Value"]
+    wdv[0..12],
+    #[doc = "Watchdog Fault Interrupt Enable"]
+    wdfien[12],
+    #[doc = "Watchdog Reset Enable"]
+    wdrsten[13],
+    #[doc = "Watchdog Disable"]
+    wddis[15],
+    #[doc = "Watchdog Delta Value"]
+    wdd[16..28],
+    #[doc = "Watchdog Debug Halt"]
+    wddbghlt[28],
+    #[doc = "Watchdog Idle Halt"]
+    wdidlehlt[29],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] WdtSr {
+    #[doc = "Watchdog Underflow (cleared on read)"]
+    wdunf[0],
+    #[doc = "Watchdog Error (cleared on read)"]
+    wderr[1],
+}

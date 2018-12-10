@@ -1,0 +1,274 @@
+peripheral Lockbit {
+    lockbit_word0: LockbitWord0 @ 0x0,
+    lockbit_word1: LockbitWord1 @ 0x4,
+    lockbit_word2: LockbitWord2 @ 0x8,
+    lockbit_word3: LockbitWord3 @ 0xc,
+}
+#[doc = "Lock Bits Word 0"]
+ReadWrite register[32] LockbitWord0 {
+    #[doc = "Lock Region 0"]
+    lock_region_0[0],
+    #[doc = "Lock Region 1"]
+    lock_region_1[1],
+    #[doc = "Lock Region 2"]
+    lock_region_2[2],
+    #[doc = "Lock Region 3"]
+    lock_region_3[3],
+    #[doc = "Lock Region 4"]
+    lock_region_4[4],
+    #[doc = "Lock Region 5"]
+    lock_region_5[5],
+    #[doc = "Lock Region 6"]
+    lock_region_6[6],
+    #[doc = "Lock Region 7"]
+    lock_region_7[7],
+    #[doc = "Lock Region 8"]
+    lock_region_8[8],
+    #[doc = "Lock Region 9"]
+    lock_region_9[9],
+    #[doc = "Lock Region 10"]
+    lock_region_10[10],
+    #[doc = "Lock Region 11"]
+    lock_region_11[11],
+    #[doc = "Lock Region 12"]
+    lock_region_12[12],
+    #[doc = "Lock Region 13"]
+    lock_region_13[13],
+    #[doc = "Lock Region 14"]
+    lock_region_14[14],
+    #[doc = "Lock Region 15"]
+    lock_region_15[15],
+    #[doc = "Lock Region 16"]
+    lock_region_16[16],
+    #[doc = "Lock Region 17"]
+    lock_region_17[17],
+    #[doc = "Lock Region 18"]
+    lock_region_18[18],
+    #[doc = "Lock Region 19"]
+    lock_region_19[19],
+    #[doc = "Lock Region 20"]
+    lock_region_20[20],
+    #[doc = "Lock Region 21"]
+    lock_region_21[21],
+    #[doc = "Lock Region 22"]
+    lock_region_22[22],
+    #[doc = "Lock Region 23"]
+    lock_region_23[23],
+    #[doc = "Lock Region 24"]
+    lock_region_24[24],
+    #[doc = "Lock Region 25"]
+    lock_region_25[25],
+    #[doc = "Lock Region 26"]
+    lock_region_26[26],
+    #[doc = "Lock Region 27"]
+    lock_region_27[27],
+    #[doc = "Lock Region 28"]
+    lock_region_28[28],
+    #[doc = "Lock Region 29"]
+    lock_region_29[29],
+    #[doc = "Lock Region 30"]
+    lock_region_30[30],
+    #[doc = "Lock Region 31"]
+    lock_region_31[31],
+}
+#[doc = "Lock Bits Word 1"]
+ReadWrite register[32] LockbitWord1 {
+    #[doc = "Lock Region 32"]
+    lock_region_32[0],
+    #[doc = "Lock Region 33"]
+    lock_region_33[1],
+    #[doc = "Lock Region 34"]
+    lock_region_34[2],
+    #[doc = "Lock Region 35"]
+    lock_region_35[3],
+    #[doc = "Lock Region 36"]
+    lock_region_36[4],
+    #[doc = "Lock Region 37"]
+    lock_region_37[5],
+    #[doc = "Lock Region 38"]
+    lock_region_38[6],
+    #[doc = "Lock Region 39"]
+    lock_region_39[7],
+    #[doc = "Lock Region 40"]
+    lock_region_40[8],
+    #[doc = "Lock Region 41"]
+    lock_region_41[9],
+    #[doc = "Lock Region 42"]
+    lock_region_42[10],
+    #[doc = "Lock Region 43"]
+    lock_region_43[11],
+    #[doc = "Lock Region 44"]
+    lock_region_44[12],
+    #[doc = "Lock Region 45"]
+    lock_region_45[13],
+    #[doc = "Lock Region 46"]
+    lock_region_46[14],
+    #[doc = "Lock Region 47"]
+    lock_region_47[15],
+    #[doc = "Lock Region 48"]
+    lock_region_48[16],
+    #[doc = "Lock Region 49"]
+    lock_region_49[17],
+    #[doc = "Lock Region 50"]
+    lock_region_50[18],
+    #[doc = "Lock Region 51"]
+    lock_region_51[19],
+    #[doc = "Lock Region 52"]
+    lock_region_52[20],
+    #[doc = "Lock Region 53"]
+    lock_region_53[21],
+    #[doc = "Lock Region 54"]
+    lock_region_54[22],
+    #[doc = "Lock Region 55"]
+    lock_region_55[23],
+    #[doc = "Lock Region 56"]
+    lock_region_56[24],
+    #[doc = "Lock Region 57"]
+    lock_region_57[25],
+    #[doc = "Lock Region 58"]
+    lock_region_58[26],
+    #[doc = "Lock Region 59"]
+    lock_region_59[27],
+    #[doc = "Lock Region 60"]
+    lock_region_60[28],
+    #[doc = "Lock Region 61"]
+    lock_region_61[29],
+    #[doc = "Lock Region 62"]
+    lock_region_62[30],
+    #[doc = "Lock Region 63"]
+    lock_region_63[31],
+}
+#[doc = "Lock Bits Word 2"]
+ReadWrite register[32] LockbitWord2 {
+    #[doc = "Lock Region 64"]
+    lock_region_64[0],
+    #[doc = "Lock Region 65"]
+    lock_region_65[1],
+    #[doc = "Lock Region 66"]
+    lock_region_66[2],
+    #[doc = "Lock Region 67"]
+    lock_region_67[3],
+    #[doc = "Lock Region 68"]
+    lock_region_68[4],
+    #[doc = "Lock Region 69"]
+    lock_region_69[5],
+    #[doc = "Lock Region 70"]
+    lock_region_70[6],
+    #[doc = "Lock Region 71"]
+    lock_region_71[7],
+    #[doc = "Lock Region 72"]
+    lock_region_72[8],
+    #[doc = "Lock Region 73"]
+    lock_region_73[9],
+    #[doc = "Lock Region 74"]
+    lock_region_74[10],
+    #[doc = "Lock Region 75"]
+    lock_region_75[11],
+    #[doc = "Lock Region 76"]
+    lock_region_76[12],
+    #[doc = "Lock Region 77"]
+    lock_region_77[13],
+    #[doc = "Lock Region 78"]
+    lock_region_78[14],
+    #[doc = "Lock Region 79"]
+    lock_region_79[15],
+    #[doc = "Lock Region 80"]
+    lock_region_80[16],
+    #[doc = "Lock Region 81"]
+    lock_region_81[17],
+    #[doc = "Lock Region 82"]
+    lock_region_82[18],
+    #[doc = "Lock Region 83"]
+    lock_region_83[19],
+    #[doc = "Lock Region 84"]
+    lock_region_84[20],
+    #[doc = "Lock Region 85"]
+    lock_region_85[21],
+    #[doc = "Lock Region 86"]
+    lock_region_86[22],
+    #[doc = "Lock Region 87"]
+    lock_region_87[23],
+    #[doc = "Lock Region 88"]
+    lock_region_88[24],
+    #[doc = "Lock Region 89"]
+    lock_region_89[25],
+    #[doc = "Lock Region 90"]
+    lock_region_90[26],
+    #[doc = "Lock Region 91"]
+    lock_region_91[27],
+    #[doc = "Lock Region 92"]
+    lock_region_92[28],
+    #[doc = "Lock Region 93"]
+    lock_region_93[29],
+    #[doc = "Lock Region 94"]
+    lock_region_94[30],
+    #[doc = "Lock Region 95"]
+    lock_region_95[31],
+}
+#[doc = "Lock Bits Word 3"]
+ReadWrite register[32] LockbitWord3 {
+    #[doc = "Lock Region 96"]
+    lock_region_96[0],
+    #[doc = "Lock Region 97"]
+    lock_region_97[1],
+    #[doc = "Lock Region 98"]
+    lock_region_98[2],
+    #[doc = "Lock Region 99"]
+    lock_region_99[3],
+    #[doc = "Lock Region 100"]
+    lock_region_100[4],
+    #[doc = "Lock Region 101"]
+    lock_region_101[5],
+    #[doc = "Lock Region 102"]
+    lock_region_102[6],
+    #[doc = "Lock Region 103"]
+    lock_region_103[7],
+    #[doc = "Lock Region 104"]
+    lock_region_104[8],
+    #[doc = "Lock Region 105"]
+    lock_region_105[9],
+    #[doc = "Lock Region 106"]
+    lock_region_106[10],
+    #[doc = "Lock Region 107"]
+    lock_region_107[11],
+    #[doc = "Lock Region 108"]
+    lock_region_108[12],
+    #[doc = "Lock Region 109"]
+    lock_region_109[13],
+    #[doc = "Lock Region 110"]
+    lock_region_110[14],
+    #[doc = "Lock Region 111"]
+    lock_region_111[15],
+    #[doc = "Lock Region 112"]
+    lock_region_112[16],
+    #[doc = "Lock Region 113"]
+    lock_region_113[17],
+    #[doc = "Lock Region 114"]
+    lock_region_114[18],
+    #[doc = "Lock Region 115"]
+    lock_region_115[19],
+    #[doc = "Lock Region 116"]
+    lock_region_116[20],
+    #[doc = "Lock Region 117"]
+    lock_region_117[21],
+    #[doc = "Lock Region 118"]
+    lock_region_118[22],
+    #[doc = "Lock Region 119"]
+    lock_region_119[23],
+    #[doc = "Lock Region 120"]
+    lock_region_120[24],
+    #[doc = "Lock Region 121"]
+    lock_region_121[25],
+    #[doc = "Lock Region 122"]
+    lock_region_122[26],
+    #[doc = "Lock Region 123"]
+    lock_region_123[27],
+    #[doc = "Lock Region 124"]
+    lock_region_124[28],
+    #[doc = "Lock Region 125"]
+    lock_region_125[29],
+    #[doc = "Lock Region 126"]
+    lock_region_126[30],
+    #[doc = "Lock Region 127"]
+    lock_region_127[31],
+}

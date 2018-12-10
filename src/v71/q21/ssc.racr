@@ -1,0 +1,364 @@
+#[doc = "Synchronous Serial Controller"]
+peripheral Ssc {
+    ssc_cr: SscCr @ 0x0,
+    ssc_cmr: SscCmr @ 0x4,
+    ssc_rcmr: SscRcmr @ 0x10,
+    ssc_rfmr: SscRfmr @ 0x14,
+    ssc_tcmr: SscTcmr @ 0x18,
+    ssc_tfmr: SscTfmr @ 0x1c,
+    ssc_rhr: SscRhr @ 0x20,
+    ssc_thr: SscThr @ 0x24,
+    ssc_rshr: SscRshr @ 0x30,
+    ssc_tshr: SscTshr @ 0x34,
+    ssc_rc0r: SscRc0r @ 0x38,
+    ssc_rc1r: SscRc1r @ 0x3c,
+    ssc_sr: SscSr @ 0x40,
+    ssc_ier: SscIer @ 0x44,
+    ssc_idr: SscIdr @ 0x48,
+    ssc_imr: SscImr @ 0x4c,
+    ssc_wpmr: SscWpmr @ 0xe4,
+    ssc_wpsr: SscWpsr @ 0xe8,
+    ssc_version: SscVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] SscCr {
+    #[doc = "Receive Enable"]
+    rxen[0],
+    #[doc = "Receive Disable"]
+    rxdis[1],
+    #[doc = "Transmit Enable"]
+    txen[8],
+    #[doc = "Transmit Disable"]
+    txdis[9],
+    #[doc = "Software Reset"]
+    swrst[15],
+}
+#[doc = "Clock Mode Register"]
+ReadWrite register[32] SscCmr {
+    #[doc = "Clock Divider"]
+    div[0..12],
+}
+#[doc = "Receive Clock Mode Register"]
+ReadWrite register[32] SscRcmr {
+    #[doc = "Receive Clock Selection"]
+    cks[0..2] {
+        #[doc = "Divided Clock"]
+        Mck = 0x0,
+        #[doc = "TK Clock signal"]
+        Tk = 0x1,
+        #[doc = "RK pin"]
+        Rk = 0x2,
+    },
+    #[doc = "Receive Clock Output Mode Selection"]
+    cko[2..5] {
+        #[doc = "None, RK pin is an input"]
+        None = 0x0,
+        #[doc = "Continuous Receive Clock, RK pin is an output"]
+        Continuous = 0x1,
+        #[doc = "Receive Clock only during data transfers, RK pin is an output"]
+        Transfer = 0x2,
+    },
+    #[doc = "Receive Clock Inversion"]
+    cki[5],
+    #[doc = "Receive Clock Gating Selection"]
+    ckg[6..8] {
+        #[doc = "None"]
+        Continuous = 0x0,
+        #[doc = "Receive Clock enabled only if RF Low"]
+        EnRfLow = 0x1,
+        #[doc = "Receive Clock enabled only if RF High"]
+        EnRfHigh = 0x2,
+    },
+    #[doc = "Receive Start Selection"]
+    start[8..12] {
+        #[doc = "Continuous, as soon as the receiver is enabled, and immediately after the end of transfer of the previous data."]
+        Continuous = 0x0,
+        #[doc = "Transmit start"]
+        Transmit = 0x1,
+        #[doc = "Detection of a low level on RF signal"]
+        RfLow = 0x2,
+        #[doc = "Detection of a high level on RF signal"]
+        RfHigh = 0x3,
+        #[doc = "Detection of a falling edge on RF signal"]
+        RfFalling = 0x4,
+        #[doc = "Detection of a rising edge on RF signal"]
+        RfRising = 0x5,
+        #[doc = "Detection of any level change on RF signal"]
+        RfLevel = 0x6,
+        #[doc = "Detection of any edge on RF signal"]
+        RfEdge = 0x7,
+        #[doc = "Compare 0"]
+        Cmp0 = 0x8,
+    },
+    #[doc = "Receive Stop Selection"]
+    stop[12],
+    #[doc = "Receive Start Delay"]
+    sttdly[16..24],
+    #[doc = "Receive Period Divider Selection"]
+    period[24..32],
+}
+#[doc = "Receive Frame Mode Register"]
+ReadWrite register[32] SscRfmr {
+    #[doc = "Data Length"]
+    datlen[0..5],
+    #[doc = "Loop Mode"]
+    loop[5],
+    #[doc = "Most Significant Bit First"]
+    msbf[7],
+    #[doc = "Data Number per Frame"]
+    datnb[8..12],
+    #[doc = "Receive Frame Sync Length"]
+    fslen[16..20],
+    #[doc = "Receive Frame Sync Output Selection"]
+    fsos[20..23] {
+        #[doc = "None, RF pin is an input"]
+        None = 0x0,
+        #[doc = "Negative Pulse, RF pin is an output"]
+        Negative = 0x1,
+        #[doc = "Positive Pulse, RF pin is an output"]
+        Positive = 0x2,
+        #[doc = "Driven Low during data transfer, RF pin is an output"]
+        Low = 0x3,
+        #[doc = "Driven High during data transfer, RF pin is an output"]
+        High = 0x4,
+        #[doc = "Toggling at each start of data transfer, RF pin is an output"]
+        Toggling = 0x5,
+    },
+    #[doc = "Frame Sync Edge Detection"]
+    fsedge[24] {
+        #[doc = "Positive Edge Detection"]
+        Positive = 0x0,
+        #[doc = "Negative Edge Detection"]
+        Negative = 0x1,
+    },
+    #[doc = "FSLEN Field Extension"]
+    fslen_ext[28..32],
+}
+#[doc = "Transmit Clock Mode Register"]
+ReadWrite register[32] SscTcmr {
+    #[doc = "Transmit Clock Selection"]
+    cks[0..2] {
+        #[doc = "Divided Clock"]
+        Mck = 0x0,
+        #[doc = "RK Clock signal"]
+        Rk = 0x1,
+        #[doc = "TK pin"]
+        Tk = 0x2,
+    },
+    #[doc = "Transmit Clock Output Mode Selection"]
+    cko[2..5] {
+        #[doc = "None, TK pin is an input"]
+        None = 0x0,
+        #[doc = "Continuous Transmit Clock, TK pin is an output"]
+        Continuous = 0x1,
+        #[doc = "Transmit Clock only during data transfers, TK pin is an output"]
+        Transfer = 0x2,
+    },
+    #[doc = "Transmit Clock Inversion"]
+    cki[5],
+    #[doc = "Transmit Clock Gating Selection"]
+    ckg[6..8] {
+        #[doc = "None"]
+        Continuous = 0x0,
+        #[doc = "Transmit Clock enabled only if TF Low"]
+        EnTfLow = 0x1,
+        #[doc = "Transmit Clock enabled only if TF High"]
+        EnTfHigh = 0x2,
+    },
+    #[doc = "Transmit Start Selection"]
+    start[8..12] {
+        #[doc = "Continuous, as soon as a word is written in the SSC_THR (if Transmit is enabled), and immediately after the end of transfer of the previous data"]
+        Continuous = 0x0,
+        #[doc = "Receive start"]
+        Receive = 0x1,
+        #[doc = "Detection of a low level on TF signal"]
+        TfLow = 0x2,
+        #[doc = "Detection of a high level on TF signal"]
+        TfHigh = 0x3,
+        #[doc = "Detection of a falling edge on TF signal"]
+        TfFalling = 0x4,
+        #[doc = "Detection of a rising edge on TF signal"]
+        TfRising = 0x5,
+        #[doc = "Detection of any level change on TF signal"]
+        TfLevel = 0x6,
+        #[doc = "Detection of any edge on TF signal"]
+        TfEdge = 0x7,
+    },
+    #[doc = "Transmit Start Delay"]
+    sttdly[16..24],
+    #[doc = "Transmit Period Divider Selection"]
+    period[24..32],
+}
+#[doc = "Transmit Frame Mode Register"]
+ReadWrite register[32] SscTfmr {
+    #[doc = "Data Length"]
+    datlen[0..5],
+    #[doc = "Data Default Value"]
+    datdef[5],
+    #[doc = "Most Significant Bit First"]
+    msbf[7],
+    #[doc = "Data Number per Frame"]
+    datnb[8..12],
+    #[doc = "Transmit Frame Sync Length"]
+    fslen[16..20],
+    #[doc = "Transmit Frame Sync Output Selection"]
+    fsos[20..23] {
+        #[doc = "None, TF pin is an input"]
+        None = 0x0,
+        #[doc = "Negative Pulse, TF pin is an output"]
+        Negative = 0x1,
+        #[doc = "Positive Pulse, TF pin is an output"]
+        Positive = 0x2,
+        #[doc = "Driven Low during data transfer"]
+        Low = 0x3,
+        #[doc = "Driven High during data transfer"]
+        High = 0x4,
+        #[doc = "Toggling at each start of data transfer"]
+        Toggling = 0x5,
+    },
+    #[doc = "Frame Sync Data Enable"]
+    fsden[23],
+    #[doc = "Frame Sync Edge Detection"]
+    fsedge[24] {
+        #[doc = "Positive Edge Detection"]
+        Positive = 0x0,
+        #[doc = "Negative Edge Detection"]
+        Negative = 0x1,
+    },
+    #[doc = "FSLEN Field Extension"]
+    fslen_ext[28..32],
+}
+#[doc = "Receive Holding Register"]
+ReadOnly register[32] SscRhr {
+    #[doc = "Receive Data"]
+    rdat[0..32],
+}
+#[doc = "Transmit Holding Register"]
+WriteOnly register[32] SscThr {
+    #[doc = "Transmit Data"]
+    tdat[0..32],
+}
+#[doc = "Receive Sync. Holding Register"]
+ReadOnly register[32] SscRshr {
+    #[doc = "Receive Synchronization Data"]
+    rsdat[0..16],
+}
+#[doc = "Transmit Sync. Holding Register"]
+ReadWrite register[32] SscTshr {
+    #[doc = "Transmit Synchronization Data"]
+    tsdat[0..16],
+}
+#[doc = "Receive Compare 0 Register"]
+ReadWrite register[32] SscRc0r {
+    #[doc = "Receive Compare Data 0"]
+    cp0[0..16],
+}
+#[doc = "Receive Compare 1 Register"]
+ReadWrite register[32] SscRc1r {
+    #[doc = "Receive Compare Data 1"]
+    cp1[0..16],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] SscSr {
+    #[doc = "Transmit Ready"]
+    txrdy[0],
+    #[doc = "Transmit Empty"]
+    txempty[1],
+    #[doc = "Receive Ready"]
+    rxrdy[4],
+    #[doc = "Receive Overrun"]
+    ovrun[5],
+    #[doc = "Compare 0"]
+    cp0[8],
+    #[doc = "Compare 1"]
+    cp1[9],
+    #[doc = "Transmit Sync"]
+    txsyn[10],
+    #[doc = "Receive Sync"]
+    rxsyn[11],
+    #[doc = "Transmit Enable"]
+    txen[16],
+    #[doc = "Receive Enable"]
+    rxen[17],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] SscIer {
+    #[doc = "Transmit Ready Interrupt Enable"]
+    txrdy[0],
+    #[doc = "Transmit Empty Interrupt Enable"]
+    txempty[1],
+    #[doc = "Receive Ready Interrupt Enable"]
+    rxrdy[4],
+    #[doc = "Receive Overrun Interrupt Enable"]
+    ovrun[5],
+    #[doc = "Compare 0 Interrupt Enable"]
+    cp0[8],
+    #[doc = "Compare 1 Interrupt Enable"]
+    cp1[9],
+    #[doc = "Tx Sync Interrupt Enable"]
+    txsyn[10],
+    #[doc = "Rx Sync Interrupt Enable"]
+    rxsyn[11],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] SscIdr {
+    #[doc = "Transmit Ready Interrupt Disable"]
+    txrdy[0],
+    #[doc = "Transmit Empty Interrupt Disable"]
+    txempty[1],
+    #[doc = "Receive Ready Interrupt Disable"]
+    rxrdy[4],
+    #[doc = "Receive Overrun Interrupt Disable"]
+    ovrun[5],
+    #[doc = "Compare 0 Interrupt Disable"]
+    cp0[8],
+    #[doc = "Compare 1 Interrupt Disable"]
+    cp1[9],
+    #[doc = "Tx Sync Interrupt Enable"]
+    txsyn[10],
+    #[doc = "Rx Sync Interrupt Enable"]
+    rxsyn[11],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] SscImr {
+    #[doc = "Transmit Ready Interrupt Mask"]
+    txrdy[0],
+    #[doc = "Transmit Empty Interrupt Mask"]
+    txempty[1],
+    #[doc = "Receive Ready Interrupt Mask"]
+    rxrdy[4],
+    #[doc = "Receive Overrun Interrupt Mask"]
+    ovrun[5],
+    #[doc = "Compare 0 Interrupt Mask"]
+    cp0[8],
+    #[doc = "Compare 1 Interrupt Mask"]
+    cp1[9],
+    #[doc = "Tx Sync Interrupt Mask"]
+    txsyn[10],
+    #[doc = "Rx Sync Interrupt Mask"]
+    rxsyn[11],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] SscWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x535343,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] SscWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protect Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] SscVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..16],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

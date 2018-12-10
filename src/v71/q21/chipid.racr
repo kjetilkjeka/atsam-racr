@@ -1,0 +1,137 @@
+#[doc = "Chip Identifier"]
+peripheral Chipid {
+    chipid_cidr: ChipidCidr @ 0x0,
+    chipid_exid: ChipidExid @ 0x4,
+}
+#[doc = "Chip ID Register"]
+ReadOnly register[32] ChipidCidr {
+    #[doc = "Version of the Device"]
+    version[0..5],
+    #[doc = "Embedded Processor"]
+    eproc[5..8] {
+        #[doc = "Cortex-M7"]
+        Samx7 = 0x0,
+        #[doc = "ARM946ES"]
+        Arm946es = 0x1,
+        #[doc = "ARM7TDMI"]
+        Arm7tdmi = 0x2,
+        #[doc = "Cortex-M3"]
+        Cm3 = 0x3,
+        #[doc = "ARM920T"]
+        Arm920t = 0x4,
+        #[doc = "ARM926EJS"]
+        Arm926ejs = 0x5,
+        #[doc = "Cortex-A5"]
+        Ca5 = 0x6,
+        #[doc = "Cortex-M4"]
+        Cm4 = 0x7,
+    },
+    #[doc = "Nonvolatile Program Memory Size"]
+    nvpsiz[8..12] {
+        #[doc = "None"]
+        None = 0x0,
+        #[doc = "8 Kbytes"]
+        _8k = 0x1,
+        #[doc = "16 Kbytes"]
+        _16k = 0x2,
+        #[doc = "32 Kbytes"]
+        _32k = 0x3,
+        #[doc = "64 Kbytes"]
+        _64k = 0x5,
+        #[doc = "128 Kbytes"]
+        _128k = 0x7,
+        #[doc = "160 Kbytes"]
+        _160k = 0x8,
+        #[doc = "256 Kbytes"]
+        _256k = 0x9,
+        #[doc = "512 Kbytes"]
+        _512k = 0xa,
+        #[doc = "1024 Kbytes"]
+        _1024k = 0xc,
+        #[doc = "2048 Kbytes"]
+        _2048k = 0xe,
+    },
+    #[doc = "Second Nonvolatile Program Memory Size"]
+    nvpsiz2[12..16] {
+        #[doc = "None"]
+        None = 0x0,
+        #[doc = "8 Kbytes"]
+        _8k = 0x1,
+        #[doc = "16 Kbytes"]
+        _16k = 0x2,
+        #[doc = "32 Kbytes"]
+        _32k = 0x3,
+        #[doc = "64 Kbytes"]
+        _64k = 0x5,
+        #[doc = "128 Kbytes"]
+        _128k = 0x7,
+        #[doc = "256 Kbytes"]
+        _256k = 0x9,
+        #[doc = "512 Kbytes"]
+        _512k = 0xa,
+        #[doc = "1024 Kbytes"]
+        _1024k = 0xc,
+        #[doc = "2048 Kbytes"]
+        _2048k = 0xe,
+    },
+    #[doc = "Internal SRAM Size"]
+    sramsiz[16..20] {
+        #[doc = "48 Kbytes"]
+        _48k = 0x0,
+        #[doc = "192 Kbytes"]
+        _192k = 0x1,
+        #[doc = "384 Kbytes"]
+        _384k = 0x2,
+        #[doc = "6 Kbytes"]
+        _6k = 0x3,
+        #[doc = "24 Kbytes"]
+        _24k = 0x4,
+        #[doc = "4 Kbytes"]
+        _4k = 0x5,
+        #[doc = "80 Kbytes"]
+        _80k = 0x6,
+        #[doc = "160 Kbytes"]
+        _160k = 0x7,
+        #[doc = "8 Kbytes"]
+        _8k = 0x8,
+        #[doc = "16 Kbytes"]
+        _16k = 0x9,
+        #[doc = "32 Kbytes"]
+        _32k = 0xa,
+        #[doc = "64 Kbytes"]
+        _64k = 0xb,
+        #[doc = "128 Kbytes"]
+        _128k = 0xc,
+        #[doc = "256 Kbytes"]
+        _256k = 0xd,
+        #[doc = "96 Kbytes"]
+        _96k = 0xe,
+        #[doc = "512 Kbytes"]
+        _512k = 0xf,
+    },
+    #[doc = "Architecture Identifier"]
+    arch[20..28] {
+        #[doc = "SAM V71"]
+        Samv71 = 0x12,
+    },
+    #[doc = "Nonvolatile Program Memory Type"]
+    nvptyp[28..31] {
+        #[doc = "ROM"]
+        Rom = 0x0,
+        #[doc = "ROMless or on-chip Flash"]
+        Romless = 0x1,
+        #[doc = "Embedded Flash Memory"]
+        Flash = 0x2,
+        #[doc = "ROM and Embedded Flash Memory- NVPSIZ is ROM size- NVPSIZ2 is Flash size"]
+        RomFlash = 0x3,
+        #[doc = "SRAM emulating ROM"]
+        Sram = 0x4,
+    },
+    #[doc = "Extension Flag"]
+    ext[31],
+}
+#[doc = "Chip ID Extension Register"]
+ReadOnly register[32] ChipidExid {
+    #[doc = "Chip ID Extension"]
+    exid[0..32],
+}

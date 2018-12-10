@@ -1,0 +1,38 @@
+#[doc = "Reinforced Safety Watchdog Timer"]
+peripheral Rswdt {
+    rswdt_cr: RswdtCr @ 0x0,
+    rswdt_mr: RswdtMr @ 0x4,
+    rswdt_sr: RswdtSr @ 0x8,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] RswdtCr {
+    #[doc = "Watchdog Restart"]
+    wdrstt[0],
+    #[doc = "Password"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0xc4,
+    },
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] RswdtMr {
+    #[doc = "Watchdog Counter Value"]
+    wdv[0..12],
+    #[doc = "Watchdog Fault Interrupt Enable"]
+    wdfien[12],
+    #[doc = "Watchdog Reset Enable"]
+    wdrsten[13],
+    #[doc = "Watchdog Disable"]
+    wddis[15],
+    #[doc = "Must Always Be Written with 0xFFF"]
+    allones[16..28],
+    #[doc = "Watchdog Debug Halt"]
+    wddbghlt[28],
+    #[doc = "Watchdog Idle Halt"]
+    wdidlehlt[29],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] RswdtSr {
+    #[doc = "Watchdog Underflow"]
+    wdunf[0],
+}

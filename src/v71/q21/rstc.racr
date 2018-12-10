@@ -1,0 +1,54 @@
+#[doc = "Reset Controller"]
+peripheral Rstc {
+    rstc_cr: RstcCr @ 0x0,
+    rstc_sr: RstcSr @ 0x4,
+    rstc_mr: RstcMr @ 0x8,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] RstcCr {
+    #[doc = "Processor Reset"]
+    procrst[0],
+    #[doc = "External Reset"]
+    extrst[3],
+    #[doc = "System Reset Key"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0xa5,
+    },
+}
+#[doc = "Status Register"]
+ReadOnly register[32] RstcSr {
+    #[doc = "User Reset Status"]
+    ursts[0],
+    #[doc = "Reset Type"]
+    rsttyp[8..11] {
+        #[doc = "First powerup reset"]
+        GeneralRst = 0x0,
+        #[doc = "Return from Backup mode"]
+        BackupRst = 0x1,
+        #[doc = "Watchdog fault occurred"]
+        WdtRst = 0x2,
+        #[doc = "Processor reset required by the software"]
+        SoftRst = 0x3,
+        #[doc = "NRST pin detected low"]
+        UserRst = 0x4,
+    },
+    #[doc = "NRST Pin Level"]
+    nrstl[16],
+    #[doc = "Software Reset Command in Progress"]
+    srcmp[17],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] RstcMr {
+    #[doc = "User Reset Enable"]
+    ursten[0],
+    #[doc = "User Reset Interrupt Enable"]
+    urstien[4],
+    #[doc = "External Reset Length"]
+    erstl[8..12],
+    #[doc = "Write Access Password"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation.Always reads as 0."]
+        Passwd = 0xa5,
+    },
+}

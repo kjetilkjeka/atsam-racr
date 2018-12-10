@@ -1,0 +1,26 @@
+#[doc = "USB Transmitter Interface Macrocell"]
+peripheral Utmi {
+    utmi_ohciicr: UtmiOhciicr @ 0x10,
+    utmi_cktrim: UtmiCktrim @ 0x30,
+}
+#[doc = "OHCI Interrupt Configuration Register"]
+ReadWrite register[32] UtmiOhciicr {
+    #[doc = "USB PORTx Reset"]
+    res0[0],
+    #[doc = "OHCI Asynchronous Resume Interrupt Enable"]
+    arie[4],
+    #[doc = "Reserved"]
+    appstart[5],
+    #[doc = "USB Device Pull-up Disable"]
+    udppudis[23],
+}
+#[doc = "UTMI Clock Trimming Register"]
+ReadWrite register[32] UtmiCktrim {
+    #[doc = "UTMI Reference Clock Frequency"]
+    freq[0..2] {
+        #[doc = "12 MHz reference clock"]
+        Xtal12 = 0x0,
+        #[doc = "16 MHz reference clock"]
+        Xtal16 = 0x1,
+    },
+}

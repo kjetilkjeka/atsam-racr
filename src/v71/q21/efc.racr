@@ -1,0 +1,116 @@
+#[doc = "Embedded Flash Controller"]
+peripheral Efc {
+    eefc_fmr: EefcFmr @ 0x0,
+    eefc_fcr: EefcFcr @ 0x4,
+    eefc_fsr: EefcFsr @ 0x8,
+    eefc_frr: EefcFrr @ 0xc,
+    eefc_version: EefcVersion @ 0x14,
+    eefc_wpmr: EefcWpmr @ 0xe4,
+}
+#[doc = "EEFC Flash Mode Register"]
+ReadWrite register[32] EefcFmr {
+    #[doc = "Flash Ready Interrupt Enable"]
+    frdy[0],
+    #[doc = "Flash Wait State"]
+    fws[8..12],
+    #[doc = "Sequential Code Optimization Disable"]
+    scod[16],
+    #[doc = "Code Loop Optimization Enable"]
+    cloe[26],
+}
+#[doc = "EEFC Flash Command Register"]
+WriteOnly register[32] EefcFcr {
+    #[doc = "Flash Command"]
+    fcmd[0..8] {
+        #[doc = "Get Flash descriptor"]
+        Getd = 0x0,
+        #[doc = "Write page"]
+        Wp = 0x1,
+        #[doc = "Write page and lock"]
+        Wpl = 0x2,
+        #[doc = "Erase page and write page"]
+        Ewp = 0x3,
+        #[doc = "Erase page and write page then lock"]
+        Ewpl = 0x4,
+        #[doc = "Erase all"]
+        Ea = 0x5,
+        #[doc = "Erase pages"]
+        Epa = 0x7,
+        #[doc = "Set lock bit"]
+        Slb = 0x8,
+        #[doc = "Clear lock bit"]
+        Clb = 0x9,
+        #[doc = "Get lock bit"]
+        Glb = 0xa,
+        #[doc = "Set GPNVM bit"]
+        Sgpb = 0xb,
+        #[doc = "Clear GPNVM bit"]
+        Cgpb = 0xc,
+        #[doc = "Get GPNVM bit"]
+        Ggpb = 0xd,
+        #[doc = "Start read unique identifier"]
+        Stui = 0xe,
+        #[doc = "Stop read unique identifier"]
+        Spui = 0xf,
+        #[doc = "Get CALIB bit"]
+        Gcalb = 0x10,
+        #[doc = "Erase sector"]
+        Es = 0x11,
+        #[doc = "Write user signature"]
+        Wus = 0x12,
+        #[doc = "Erase user signature"]
+        Eus = 0x13,
+        #[doc = "Start read user signature"]
+        Stus = 0x14,
+        #[doc = "Stop read user signature"]
+        Spus = 0x15,
+    },
+    #[doc = "Flash Command Argument"]
+    farg[8..24],
+    #[doc = "Flash Writing Protection Key"]
+    fkey[24..32] {
+        #[doc = "The 0x5A value enables the command defined by the bits of the register. If the field is written with a different value, the write is not performed and no action is started."]
+        Passwd = 0x5a,
+    },
+}
+#[doc = "EEFC Flash Status Register"]
+ReadOnly register[32] EefcFsr {
+    #[doc = "Flash Ready Status (cleared when Flash is busy)"]
+    frdy[0],
+    #[doc = "Flash Command Error Status (cleared on read or by writing EEFC_FCR)"]
+    fcmde[1],
+    #[doc = "Flash Lock Error Status (cleared on read)"]
+    flocke[2],
+    #[doc = "Flash Error Status (cleared when a programming operation starts)"]
+    flerr[3],
+    #[doc = "Unique ECC Error on LSB Part of the Memory Flash Data Bus (cleared on read)"]
+    ueccelsb[16],
+    #[doc = "Multiple ECC Error on LSB Part of the Memory Flash Data Bus (cleared on read)"]
+    meccelsb[17],
+    #[doc = "Unique ECC Error on MSB Part of the Memory Flash Data Bus (cleared on read)"]
+    ueccemsb[18],
+    #[doc = "Multiple ECC Error on MSB Part of the Memory Flash Data Bus (cleared on read)"]
+    meccemsb[19],
+}
+#[doc = "EEFC Flash Result Register"]
+ReadOnly register[32] EefcFrr {
+    #[doc = "Flash Result Value"]
+    fvalue[0..32],
+}
+#[doc = "EEFC Version Register"]
+ReadOnly register[32] EefcVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] EefcWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation.Always reads as 0."]
+        Passwd = 0x454643,
+    },
+}

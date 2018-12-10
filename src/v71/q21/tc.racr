@@ -1,0 +1,131 @@
+#[doc = "Timer Counter"]
+peripheral Tc {
+    tc_bcr: TcBcr @ 0xc0,
+    tc_bmr: TcBmr @ 0xc4,
+    tc_qier: TcQier @ 0xc8,
+    tc_qidr: TcQidr @ 0xcc,
+    tc_qimr: TcQimr @ 0xd0,
+    tc_qisr: TcQisr @ 0xd4,
+    tc_fmr: TcFmr @ 0xd8,
+    tc_wpmr: TcWpmr @ 0xe4,
+    tc_ver: TcVer @ 0xfc,
+}
+#[doc = "Block Control Register"]
+WriteOnly register[32] TcBcr {
+    #[doc = "Synchro Command"]
+    sync[0],
+}
+#[doc = "Block Mode Register"]
+ReadWrite register[32] TcBmr {
+    #[doc = "External Clock Signal 0 Selection"]
+    tc0xc0s[0..2] {
+        #[doc = "Signal connected to XC0: TCLK0"]
+        Tclk0 = 0x0,
+        #[doc = "Signal connected to XC0: TIOA1"]
+        Tioa1 = 0x2,
+        #[doc = "Signal connected to XC0: TIOA2"]
+        Tioa2 = 0x3,
+    },
+    #[doc = "External Clock Signal 1 Selection"]
+    tc1xc1s[2..4] {
+        #[doc = "Signal connected to XC1: TCLK1"]
+        Tclk1 = 0x0,
+        #[doc = "Signal connected to XC1: TIOA0"]
+        Tioa0 = 0x2,
+        #[doc = "Signal connected to XC1: TIOA2"]
+        Tioa2 = 0x3,
+    },
+    #[doc = "External Clock Signal 2 Selection"]
+    tc2xc2s[4..6] {
+        #[doc = "Signal connected to XC2: TCLK2"]
+        Tclk2 = 0x0,
+        #[doc = "Signal connected to XC2: TIOA0"]
+        Tioa0 = 0x2,
+        #[doc = "Signal connected to XC2: TIOA1"]
+        Tioa1 = 0x3,
+    },
+    #[doc = "Quadrature Decoder Enabled"]
+    qden[8],
+    #[doc = "Position Enabled"]
+    posen[9],
+    #[doc = "Speed Enabled"]
+    speeden[10],
+    #[doc = "Quadrature Decoding Transparent"]
+    qdtrans[11],
+    #[doc = "Edge on PHA Count Mode"]
+    edgpha[12],
+    #[doc = "Inverted PHA"]
+    inva[13],
+    #[doc = "Inverted PHB"]
+    invb[14],
+    #[doc = "Inverted Index"]
+    invidx[15],
+    #[doc = "Swap PHA and PHB"]
+    swap[16],
+    #[doc = "Index Pin is PHB Pin"]
+    idxphb[17],
+    #[doc = "Maximum Filter"]
+    maxfilt[20..26],
+}
+#[doc = "QDEC Interrupt Enable Register"]
+WriteOnly register[32] TcQier {
+    #[doc = "Index"]
+    idx[0],
+    #[doc = "Direction Change"]
+    dirchg[1],
+    #[doc = "Quadrature Error"]
+    qerr[2],
+}
+#[doc = "QDEC Interrupt Disable Register"]
+WriteOnly register[32] TcQidr {
+    #[doc = "Index"]
+    idx[0],
+    #[doc = "Direction Change"]
+    dirchg[1],
+    #[doc = "Quadrature Error"]
+    qerr[2],
+}
+#[doc = "QDEC Interrupt Mask Register"]
+ReadOnly register[32] TcQimr {
+    #[doc = "Index"]
+    idx[0],
+    #[doc = "Direction Change"]
+    dirchg[1],
+    #[doc = "Quadrature Error"]
+    qerr[2],
+}
+#[doc = "QDEC Interrupt Status Register"]
+ReadOnly register[32] TcQisr {
+    #[doc = "Index"]
+    idx[0],
+    #[doc = "Direction Change"]
+    dirchg[1],
+    #[doc = "Quadrature Error"]
+    qerr[2],
+    #[doc = "Direction"]
+    dir[8],
+}
+#[doc = "Fault Mode Register"]
+ReadWrite register[32] TcFmr {
+    #[doc = "Enable Compare Fault Channel 0"]
+    encf0[0],
+    #[doc = "Enable Compare Fault Channel 1"]
+    encf1[1],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] TcWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x54494d,
+    },
+}
+#[doc = "Version Register"]
+ReadOnly register[32] TcVer {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

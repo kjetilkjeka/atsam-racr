@@ -1,0 +1,199 @@
+#[doc = "Universal Asynchronous Receiver Transmitter"]
+peripheral Uart {
+    uart_cr: UartCr @ 0x0,
+    uart_mr: UartMr @ 0x4,
+    uart_ier: UartIer @ 0x8,
+    uart_idr: UartIdr @ 0xc,
+    uart_imr: UartImr @ 0x10,
+    uart_sr: UartSr @ 0x14,
+    uart_rhr: UartRhr @ 0x18,
+    uart_thr: UartThr @ 0x1c,
+    uart_brgr: UartBrgr @ 0x20,
+    uart_cmpr: UartCmpr @ 0x24,
+    uart_wpmr: UartWpmr @ 0xe4,
+    uart_version: UartVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] UartCr {
+    #[doc = "Reset Receiver"]
+    rstrx[2],
+    #[doc = "Reset Transmitter"]
+    rsttx[3],
+    #[doc = "Receiver Enable"]
+    rxen[4],
+    #[doc = "Receiver Disable"]
+    rxdis[5],
+    #[doc = "Transmitter Enable"]
+    txen[6],
+    #[doc = "Transmitter Disable"]
+    txdis[7],
+    #[doc = "Reset Status"]
+    rststa[8],
+    #[doc = "Request Clear"]
+    reqclr[12],
+    #[doc = "Debug Enable"]
+    dbge[15],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] UartMr {
+    #[doc = "Receiver Digital Filter"]
+    filter[4] {
+        #[doc = "UART does not filter the receive line."]
+        Disabled = 0x0,
+        #[doc = "UART filters the receive line using a three-sample filter (16x-bit clock) (2 over 3 majority)."]
+        Enabled = 0x1,
+    },
+    #[doc = "Parity Type"]
+    par[9..12] {
+        #[doc = "Even Parity"]
+        Even = 0x0,
+        #[doc = "Odd Parity"]
+        Odd = 0x1,
+        #[doc = "Space: parity forced to 0"]
+        Space = 0x2,
+        #[doc = "Mark: parity forced to 1"]
+        Mark = 0x3,
+        #[doc = "No parity"]
+        No = 0x4,
+    },
+    #[doc = "Baud Rate Source Clock"]
+    brsrcck[12] {
+        #[doc = "The baud rate is driven by the peripheral clock"]
+        PeriphClk = 0x0,
+        #[doc = "The baud rate is driven by a PMC-programmable clock PCK (see section Power Management Controller (PMC))."]
+        PmcPck = 0x1,
+    },
+    #[doc = "Channel Mode"]
+    chmode[14..16] {
+        #[doc = "Normal mode"]
+        Normal = 0x0,
+        #[doc = "Automatic echo"]
+        Automatic = 0x1,
+        #[doc = "Local loopback"]
+        LocalLoopback = 0x2,
+        #[doc = "Remote loopback"]
+        RemoteLoopback = 0x3,
+    },
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] UartIer {
+    #[doc = "Enable RXRDY Interrupt"]
+    rxrdy[0],
+    #[doc = "Enable TXRDY Interrupt"]
+    txrdy[1],
+    #[doc = "Enable Overrun Error Interrupt"]
+    ovre[5],
+    #[doc = "Enable Framing Error Interrupt"]
+    frame[6],
+    #[doc = "Enable Parity Error Interrupt"]
+    pare[7],
+    #[doc = "Enable TXEMPTY Interrupt"]
+    txempty[9],
+    #[doc = "Enable Comparison Interrupt"]
+    cmp[15],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] UartIdr {
+    #[doc = "Disable RXRDY Interrupt"]
+    rxrdy[0],
+    #[doc = "Disable TXRDY Interrupt"]
+    txrdy[1],
+    #[doc = "Disable Overrun Error Interrupt"]
+    ovre[5],
+    #[doc = "Disable Framing Error Interrupt"]
+    frame[6],
+    #[doc = "Disable Parity Error Interrupt"]
+    pare[7],
+    #[doc = "Disable TXEMPTY Interrupt"]
+    txempty[9],
+    #[doc = "Disable Comparison Interrupt"]
+    cmp[15],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] UartImr {
+    #[doc = "Mask RXRDY Interrupt"]
+    rxrdy[0],
+    #[doc = "Disable TXRDY Interrupt"]
+    txrdy[1],
+    #[doc = "Mask Overrun Error Interrupt"]
+    ovre[5],
+    #[doc = "Mask Framing Error Interrupt"]
+    frame[6],
+    #[doc = "Mask Parity Error Interrupt"]
+    pare[7],
+    #[doc = "Mask TXEMPTY Interrupt"]
+    txempty[9],
+    #[doc = "Mask Comparison Interrupt"]
+    cmp[15],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] UartSr {
+    #[doc = "Receiver Ready"]
+    rxrdy[0],
+    #[doc = "Transmitter Ready"]
+    txrdy[1],
+    #[doc = "Overrun Error"]
+    ovre[5],
+    #[doc = "Framing Error"]
+    frame[6],
+    #[doc = "Parity Error"]
+    pare[7],
+    #[doc = "Transmitter Empty"]
+    txempty[9],
+    #[doc = "Comparison Match"]
+    cmp[15],
+    #[doc = "SleepWalking Enable Status"]
+    swes[21],
+    #[doc = "Clock Request"]
+    clkreq[22],
+    #[doc = "Wake-Up Request"]
+    wkupreq[23],
+}
+#[doc = "Receive Holding Register"]
+ReadOnly register[32] UartRhr {
+    #[doc = "Received Character"]
+    rxchr[0..8],
+}
+#[doc = "Transmit Holding Register"]
+WriteOnly register[32] UartThr {
+    #[doc = "Character to be Transmitted"]
+    txchr[0..8],
+}
+#[doc = "Baud Rate Generator Register"]
+ReadWrite register[32] UartBrgr {
+    #[doc = "Clock Divisor"]
+    cd[0..16],
+}
+#[doc = "Comparison Register"]
+ReadWrite register[32] UartCmpr {
+    #[doc = "First Comparison Value for Received Character"]
+    val1[0..8],
+    #[doc = "Comparison Mode"]
+    cmpmode[12] {
+        #[doc = "Any character is received and comparison function drives CMP flag."]
+        FlagOnly = 0x0,
+        #[doc = "Comparison condition must be met to start reception."]
+        StartCondition = 0x1,
+    },
+    #[doc = "Compare Parity"]
+    cmppar[14],
+    #[doc = "Second Comparison Value for Received Character"]
+    val2[16..24],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] UartWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation.Always reads as 0."]
+        Passwd = 0x554152,
+    },
+}
+#[doc = "Version Register"]
+ReadOnly register[32] UartVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

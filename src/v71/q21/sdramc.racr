@@ -1,0 +1,188 @@
+#[doc = "SDRAM Controller"]
+peripheral Sdramc {
+    sdramc_mr: SdramcMr @ 0x0,
+    sdramc_tr: SdramcTr @ 0x4,
+    sdramc_cr: SdramcCr @ 0x8,
+    sdramc_lpr: SdramcLpr @ 0x10,
+    sdramc_ier: SdramcIer @ 0x14,
+    sdramc_idr: SdramcIdr @ 0x18,
+    sdramc_imr: SdramcImr @ 0x1c,
+    sdramc_isr: SdramcIsr @ 0x20,
+    sdramc_mdr: SdramcMdr @ 0x24,
+    sdramc_cfr1: SdramcCfr1 @ 0x28,
+    sdramc_ocms: SdramcOcms @ 0x2c,
+    sdramc_ocms_key1: SdramcOcmsKey1 @ 0x30,
+    sdramc_ocms_key2: SdramcOcmsKey2 @ 0x34,
+    sdramc_version: SdramcVersion @ 0xfc,
+}
+#[doc = "SDRAMC Mode Register"]
+ReadWrite register[32] SdramcMr {
+    #[doc = "SDRAMC Command Mode"]
+    mode[0..3] {
+        #[doc = "Normal mode. Any access to the SDRAM is decoded normally. To activate this mode, the command must be followed by a write to the SDRAM."]
+        Normal = 0x0,
+        #[doc = "The SDRAMC issues a NOP command when the SDRAM device is accessed regardless of the cycle. To activate this mode, the command must be followed by a write to the SDRAM."]
+        Nop = 0x1,
+        #[doc = "The SDRAMC issues an "All Banks Precharge" command when the SDRAM device is accessed regardless of the cycle. To activate this mode, the command must be followed by a write to the SDRAM."]
+        AllbanksPrecharge = 0x2,
+        #[doc = "The SDRAMC issues a "Load Mode Register" command when the SDRAM device is accessed regardless of the cycle. To activate this mode, the command must be followed by a write to the SDRAM."]
+        LoadModereg = 0x3,
+        #[doc = "The SDRAMC issues an "Auto-Refresh" Command when the SDRAM device is accessed regardless of the cycle. Previously, an "All Banks Precharge" command must be issued. To activate this mode, the command must be followed by a write to the SDRAM."]
+        AutoRefresh = 0x4,
+        #[doc = "The SDRAMC issues an "Extended Load Mode Register" command when the SDRAM device is accessed regardless of the cycle. To activate this mode, the "Extended Load Mode Register" command must be followed by a write to the SDRAM. The write in the SDRAM must be done in the appropriate bank; most low-power SDRAM devices use the bank 1."]
+        ExtLoadModereg = 0x5,
+        #[doc = "Deep Power-down mode. Enters Deep Power-down mode."]
+        DeepPowerdown = 0x6,
+    },
+}
+#[doc = "SDRAMC Refresh Timer Register"]
+ReadWrite register[32] SdramcTr {
+    #[doc = "SDRAMC Refresh Timer Count"]
+    count[0..12],
+}
+#[doc = "SDRAMC Configuration Register"]
+ReadWrite register[32] SdramcCr {
+    #[doc = "Number of Column Bits"]
+    nc[0..2] {
+        #[doc = "8 column bits"]
+        Col8 = 0x0,
+        #[doc = "9 column bits"]
+        Col9 = 0x1,
+        #[doc = "10 column bits"]
+        Col10 = 0x2,
+        #[doc = "11 column bits"]
+        Col11 = 0x3,
+    },
+    #[doc = "Number of Row Bits"]
+    nr[2..4] {
+        #[doc = "11 row bits"]
+        Row11 = 0x0,
+        #[doc = "12 row bits"]
+        Row12 = 0x1,
+        #[doc = "13 row bits"]
+        Row13 = 0x2,
+    },
+    #[doc = "Number of Banks"]
+    nb[4] {
+        #[doc = "2 banks"]
+        Bank2 = 0x0,
+        #[doc = "4 banks"]
+        Bank4 = 0x1,
+    },
+    #[doc = "CAS Latency"]
+    cas[5..7] {
+        #[doc = "1 cycle latency"]
+        Latency1 = 0x1,
+        #[doc = "2 cycle latency"]
+        Latency2 = 0x2,
+        #[doc = "3 cycle latency"]
+        Latency3 = 0x3,
+    },
+    #[doc = "Data Bus Width"]
+    dbw[7],
+    #[doc = "Write Recovery Delay"]
+    twr[8..12],
+    #[doc = "Row Cycle Delay and Row Refresh Cycle"]
+    trc_trfc[12..16],
+    #[doc = "Row Precharge Delay"]
+    trp[16..20],
+    #[doc = "Row to Column Delay"]
+    trcd[20..24],
+    #[doc = "Active to Precharge Delay"]
+    tras[24..28],
+    #[doc = "Exit Self-Refresh to Active Delay"]
+    txsr[28..32],
+}
+#[doc = "SDRAMC Low Power Register"]
+ReadWrite register[32] SdramcLpr {
+    #[doc = "Low-power Configuration Bits"]
+    lpcb[0..2] {
+        #[doc = "The low-power feature is inhibited: no Power-down, Self-refresh or Deep Power-down command is issued to the SDRAM device."]
+        Disabled = 0x0,
+        #[doc = "The SDRAMC issues a Self-refresh command to the SDRAM device, the SDCK clock is deactivated and the SDCKE signal is set low. The SDRAM device leaves the Self-refresh mode when accessed and enters it after the access."]
+        SelfRefresh = 0x1,
+        #[doc = "The SDRAMC issues a Power-down Command to the SDRAM device after each access, the SDCKE signal is set to low. The SDRAM device leaves the Power-down mode when accessed and enters it after the access."]
+        PowerDown = 0x2,
+        #[doc = "The SDRAMC issues a Deep Power-down command to the SDRAM device. This mode is unique to low-power SDRAM."]
+        DeepPowerDown = 0x3,
+    },
+    #[doc = "Partial Array Self-refresh (only for low-power SDRAM)"]
+    pasr[4..7],
+    #[doc = "Temperature Compensated Self-Refresh (only for low-power SDRAM)"]
+    tcsr[8..10],
+    #[doc = "Drive Strength (only for low-power SDRAM)"]
+    ds[10..12],
+    #[doc = "Time to Define When Low-power Mode Is Enabled"]
+    timeout[12..14] {
+        #[doc = "The SDRAMC activates the SDRAM Low-power mode immediately after the end of the last transfer."]
+        LpLastXfer = 0x0,
+        #[doc = "The SDRAMC activates the SDRAM Low-power mode 64 clock cycles after the end of the last transfer."]
+        LpLastXfer64 = 0x1,
+        #[doc = "The SDRAMC activates the SDRAM Low-power mode 128 clock cycles after the end of the last transfer."]
+        LpLastXfer128 = 0x2,
+    },
+}
+#[doc = "SDRAMC Interrupt Enable Register"]
+WriteOnly register[32] SdramcIer {
+    #[doc = "Refresh Error Interrupt Enable"]
+    res[0],
+}
+#[doc = "SDRAMC Interrupt Disable Register"]
+WriteOnly register[32] SdramcIdr {
+    #[doc = "Refresh Error Interrupt Disable"]
+    res[0],
+}
+#[doc = "SDRAMC Interrupt Mask Register"]
+ReadOnly register[32] SdramcImr {
+    #[doc = "Refresh Error Interrupt Mask"]
+    res[0],
+}
+#[doc = "SDRAMC Interrupt Status Register"]
+ReadOnly register[32] SdramcIsr {
+    #[doc = "Refresh Error Status (cleared on read)"]
+    res[0],
+}
+#[doc = "SDRAMC Memory Device Register"]
+ReadWrite register[32] SdramcMdr {
+    #[doc = "Memory Device Type"]
+    md[0..2] {
+        #[doc = "SDRAM"]
+        Sdram = 0x0,
+        #[doc = "Low-power SDRAM"]
+        Lpsdram = 0x1,
+    },
+}
+#[doc = "SDRAMC Configuration Register 1"]
+ReadWrite register[32] SdramcCfr1 {
+    #[doc = "Load Mode Register Command to Active or Refresh Command"]
+    tmrd[0..4],
+    #[doc = "Support Unaligned Access"]
+    unal[8] {
+        #[doc = "Unaligned access is not supported."]
+        Unsupported = 0x0,
+        #[doc = "Unaligned access is supported."]
+        Supported = 0x1,
+    },
+}
+#[doc = "SDRAMC OCMS Register"]
+ReadWrite register[32] SdramcOcms {
+    #[doc = "SDRAM Memory Controller Scrambling Enable"]
+    sdr_se[0],
+}
+#[doc = "SDRAMC OCMS KEY1 Register"]
+WriteOnly register[32] SdramcOcmsKey1 {
+    #[doc = "Off-chip Memory Scrambling (OCMS) Key Part 1"]
+    key1[0..32],
+}
+#[doc = "SDRAMC OCMS KEY2 Register"]
+WriteOnly register[32] SdramcOcmsKey2 {
+    #[doc = "Off-chip Memory Scrambling (OCMS) Key Part 2"]
+    key2[0..32],
+}
+#[doc = "SDRAMC Version Register"]
+ReadOnly register[32] SdramcVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

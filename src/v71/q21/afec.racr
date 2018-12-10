@@ -1,0 +1,669 @@
+#[doc = "Analog Front-End Controller"]
+peripheral Afec {
+    afec_cr: AfecCr @ 0x0,
+    afec_mr: AfecMr @ 0x4,
+    afec_emr: AfecEmr @ 0x8,
+    afec_seq1r: AfecSeq1r @ 0xc,
+    afec_seq2r: AfecSeq2r @ 0x10,
+    afec_cher: AfecCher @ 0x14,
+    afec_chdr: AfecChdr @ 0x18,
+    afec_chsr: AfecChsr @ 0x1c,
+    afec_lcdr: AfecLcdr @ 0x20,
+    afec_ier: AfecIer @ 0x24,
+    afec_idr: AfecIdr @ 0x28,
+    afec_imr: AfecImr @ 0x2c,
+    afec_isr: AfecIsr @ 0x30,
+    afec_over: AfecOver @ 0x4c,
+    afec_cwr: AfecCwr @ 0x50,
+    afec_cgr: AfecCgr @ 0x54,
+    afec_diffr: AfecDiffr @ 0x60,
+    afec_cselr: AfecCselr @ 0x64,
+    afec_cdr: AfecCdr @ 0x68,
+    afec_cocr: AfecCocr @ 0x6c,
+    afec_tempmr: AfecTempmr @ 0x70,
+    afec_tempcwr: AfecTempcwr @ 0x74,
+    afec_acr: AfecAcr @ 0x94,
+    afec_shmr: AfecShmr @ 0xa0,
+    afec_cosr: AfecCosr @ 0xd0,
+    afec_cvr: AfecCvr @ 0xd4,
+    afec_cecr: AfecCecr @ 0xd8,
+    afec_wpmr: AfecWpmr @ 0xe4,
+    afec_wpsr: AfecWpsr @ 0xe8,
+    afec_version: AfecVersion @ 0xfc,
+}
+#[doc = "AFEC Control Register"]
+WriteOnly register[32] AfecCr {
+    #[doc = "Software Reset"]
+    swrst[0],
+    #[doc = "Start Conversion"]
+    start[1],
+}
+#[doc = "AFEC Mode Register"]
+ReadWrite register[32] AfecMr {
+    #[doc = "Trigger Enable"]
+    trgen[0] {
+        #[doc = "Hardware triggers are disabled. Starting a conversion is only possible by software."]
+        Dis = 0x0,
+        #[doc = "Hardware trigger selected by TRGSEL field is enabled."]
+        En = 0x1,
+    },
+    #[doc = "Trigger Selection"]
+    trgsel[1..4] {
+        #[doc = "AFE0_ADTRG for AFEC0 / AFE1_ADTRG for AFEC1"]
+        AfecTrig0 = 0x0,
+        #[doc = "TIOA Output of the Timer Counter Channel 0 for AFEC0/TIOA Output of the Timer Counter Channel 3 for AFEC1"]
+        AfecTrig1 = 0x1,
+        #[doc = "TIOA Output of the Timer Counter Channel 1 for AFEC0/TIOA Output of the Timer Counter Channel 4 for AFEC1"]
+        AfecTrig2 = 0x2,
+        #[doc = "TIOA Output of the Timer Counter Channel 2 for AFEC0/TIOA Output of the Timer Counter Channel 5 for AFEC1"]
+        AfecTrig3 = 0x3,
+        #[doc = "PWM0 event line 0 for AFEC0 / PWM1 event line 0 for AFEC1"]
+        AfecTrig4 = 0x4,
+        #[doc = "PWM0 event line 1 for AFEC0 / PWM1 event line 1 for AFEC1"]
+        AfecTrig5 = 0x5,
+        #[doc = "Analog Comparator"]
+        AfecTrig6 = 0x6,
+    },
+    #[doc = "Sleep Mode"]
+    sleep[5] {
+        #[doc = "Normal mode: The AFE and reference voltage circuitry are kept ON between conversions."]
+        Normal = 0x0,
+        #[doc = "Sleep mode: The AFE and reference voltage circuitry are OFF between conversions."]
+        Sleep = 0x1,
+    },
+    #[doc = "Fast Wakeup"]
+    fwup[6] {
+        #[doc = "Normal Sleep mode: The sleep mode is defined by the SLEEP bit."]
+        Off = 0x0,
+        #[doc = "Fast akeup Sleep mode: The voltage reference is ON between conversions and AFE is OFF."]
+        On = 0x1,
+    },
+    #[doc = "Free Run Mode"]
+    freerun[7] {
+        #[doc = "Normal mode"]
+        Off = 0x0,
+        #[doc = "Free Run mode: Never wait for any trigger."]
+        On = 0x1,
+    },
+    #[doc = "Prescaler Rate Selection"]
+    prescal[8..16],
+    #[doc = "Startup Time"]
+    startup[16..20] {
+        #[doc = "0 periods of AFE clock"]
+        Sut0 = 0x0,
+        #[doc = "8 periods of AFE clock"]
+        Sut8 = 0x1,
+        #[doc = "16 periods of AFE clock"]
+        Sut16 = 0x2,
+        #[doc = "24 periods of AFE clock"]
+        Sut24 = 0x3,
+        #[doc = "64 periods of AFE clock"]
+        Sut64 = 0x4,
+        #[doc = "80 periods of AFE clock"]
+        Sut80 = 0x5,
+        #[doc = "96 periods of AFE clock"]
+        Sut96 = 0x6,
+        #[doc = "112 periods of AFE clock"]
+        Sut112 = 0x7,
+        #[doc = "512 periods of AFE clock"]
+        Sut512 = 0x8,
+        #[doc = "576 periods of AFE clock"]
+        Sut576 = 0x9,
+        #[doc = "640 periods of AFE clock"]
+        Sut640 = 0xa,
+        #[doc = "704 periods of AFE clock"]
+        Sut704 = 0xb,
+        #[doc = "768 periods of AFE clock"]
+        Sut768 = 0xc,
+        #[doc = "832 periods of AFE clock"]
+        Sut832 = 0xd,
+        #[doc = "896 periods of AFE clock"]
+        Sut896 = 0xe,
+        #[doc = "960 periods of AFE clock"]
+        Sut960 = 0xf,
+    },
+    #[doc = "One"]
+    one[23],
+    #[doc = "Tracking Time"]
+    tracktim[24..28],
+    #[doc = "Transfer Period"]
+    transfer[28..30],
+    #[doc = "User Sequence Enable"]
+    useq[31] {
+        #[doc = "Normal mode: The controller converts channels in a simple numeric order."]
+        NumOrder = 0x0,
+        #[doc = "User Sequence mode: The sequence respects what is defined in AFEC_SEQ1R and AFEC_SEQ1R."]
+        RegOrder = 0x1,
+    },
+}
+#[doc = "AFEC Extended Mode Register"]
+ReadWrite register[32] AfecEmr {
+    #[doc = "Comparison Mode"]
+    cmpmode[0..2] {
+        #[doc = "Generates an event when the converted data is lower than the low threshold of the window."]
+        Low = 0x0,
+        #[doc = "Generates an event when the converted data is higher than the high threshold of the window."]
+        High = 0x1,
+        #[doc = "Generates an event when the converted data is in the comparison window."]
+        In = 0x2,
+        #[doc = "Generates an event when the converted data is out of the comparison window."]
+        Out = 0x3,
+    },
+    #[doc = "Comparison Selected Channel"]
+    cmpsel[3..8],
+    #[doc = "Compare All Channels"]
+    cmpall[9],
+    #[doc = "Compare Event Filtering"]
+    cmpfilter[12..14],
+    #[doc = "Resolution"]
+    res[16..19] {
+        #[doc = "12-bit resolution, AFE sample rate is maximum (no averaging)."]
+        NoAverage = 0x0,
+        #[doc = "13-bit resolution, AFE sample rate divided by 4 (averaging)."]
+        Osr4 = 0x2,
+        #[doc = "14-bit resolution, AFE sample rate divided by 16 (averaging)."]
+        Osr16 = 0x3,
+        #[doc = "15-bit resolution, AFE sample rate divided by 64 (averaging)."]
+        Osr64 = 0x4,
+        #[doc = "16-bit resolution, AFE sample rate divided by 256 (averaging)."]
+        Osr256 = 0x5,
+    },
+    #[doc = "TAG of the AFEC_LDCR"]
+    tag[24],
+    #[doc = "Single Trigger Mode"]
+    stm[25],
+    #[doc = "Sign Mode"]
+    signmode[28..30] {
+        #[doc = "Single-Ended channels: Unsigned conversions.Differential channels: Signed conversions."]
+        SeUnsgDfSign = 0x0,
+        #[doc = "Single-Ended channels: Signed conversions.Differential channels: Unsigned conversions."]
+        SeSignDfUnsg = 0x1,
+        #[doc = "All channels: Unsigned conversions."]
+        AllUnsigned = 0x2,
+        #[doc = "All channels: Signed conversions."]
+        AllSigned = 0x3,
+    },
+}
+#[doc = "AFEC Channel Sequence 1 Register"]
+ReadWrite register[32] AfecSeq1r {
+    #[doc = "User Sequence Number 0"]
+    usch0[0..4],
+    #[doc = "User Sequence Number 1"]
+    usch1[4..8],
+    #[doc = "User Sequence Number 2"]
+    usch2[8..12],
+    #[doc = "User Sequence Number 3"]
+    usch3[12..16],
+    #[doc = "User Sequence Number 4"]
+    usch4[16..20],
+    #[doc = "User Sequence Number 5"]
+    usch5[20..24],
+    #[doc = "User Sequence Number 6"]
+    usch6[24..28],
+    #[doc = "User Sequence Number 7"]
+    usch7[28..32],
+}
+#[doc = "AFEC Channel Sequence 2 Register"]
+ReadWrite register[32] AfecSeq2r {
+    #[doc = "User Sequence Number 8"]
+    usch8[0..4],
+    #[doc = "User Sequence Number 9"]
+    usch9[4..8],
+    #[doc = "User Sequence Number 10"]
+    usch10[8..12],
+    #[doc = "User Sequence Number 11"]
+    usch11[12..16],
+}
+#[doc = "AFEC Channel Enable Register"]
+WriteOnly register[32] AfecCher {
+    #[doc = "Channel 0 Enable"]
+    ch0[0],
+    #[doc = "Channel 1 Enable"]
+    ch1[1],
+    #[doc = "Channel 2 Enable"]
+    ch2[2],
+    #[doc = "Channel 3 Enable"]
+    ch3[3],
+    #[doc = "Channel 4 Enable"]
+    ch4[4],
+    #[doc = "Channel 5 Enable"]
+    ch5[5],
+    #[doc = "Channel 6 Enable"]
+    ch6[6],
+    #[doc = "Channel 7 Enable"]
+    ch7[7],
+    #[doc = "Channel 8 Enable"]
+    ch8[8],
+    #[doc = "Channel 9 Enable"]
+    ch9[9],
+    #[doc = "Channel 10 Enable"]
+    ch10[10],
+    #[doc = "Channel 11 Enable"]
+    ch11[11],
+}
+#[doc = "AFEC Channel Disable Register"]
+WriteOnly register[32] AfecChdr {
+    #[doc = "Channel 0 Disable"]
+    ch0[0],
+    #[doc = "Channel 1 Disable"]
+    ch1[1],
+    #[doc = "Channel 2 Disable"]
+    ch2[2],
+    #[doc = "Channel 3 Disable"]
+    ch3[3],
+    #[doc = "Channel 4 Disable"]
+    ch4[4],
+    #[doc = "Channel 5 Disable"]
+    ch5[5],
+    #[doc = "Channel 6 Disable"]
+    ch6[6],
+    #[doc = "Channel 7 Disable"]
+    ch7[7],
+    #[doc = "Channel 8 Disable"]
+    ch8[8],
+    #[doc = "Channel 9 Disable"]
+    ch9[9],
+    #[doc = "Channel 10 Disable"]
+    ch10[10],
+    #[doc = "Channel 11 Disable"]
+    ch11[11],
+}
+#[doc = "AFEC Channel Status Register"]
+ReadOnly register[32] AfecChsr {
+    #[doc = "Channel 0 Status"]
+    ch0[0],
+    #[doc = "Channel 1 Status"]
+    ch1[1],
+    #[doc = "Channel 2 Status"]
+    ch2[2],
+    #[doc = "Channel 3 Status"]
+    ch3[3],
+    #[doc = "Channel 4 Status"]
+    ch4[4],
+    #[doc = "Channel 5 Status"]
+    ch5[5],
+    #[doc = "Channel 6 Status"]
+    ch6[6],
+    #[doc = "Channel 7 Status"]
+    ch7[7],
+    #[doc = "Channel 8 Status"]
+    ch8[8],
+    #[doc = "Channel 9 Status"]
+    ch9[9],
+    #[doc = "Channel 10 Status"]
+    ch10[10],
+    #[doc = "Channel 11 Status"]
+    ch11[11],
+}
+#[doc = "AFEC Last Converted Data Register"]
+ReadOnly register[32] AfecLcdr {
+    #[doc = "Last Data Converted"]
+    ldata[0..16],
+    #[doc = "Channel Number"]
+    chnb[24..28],
+}
+#[doc = "AFEC Interrupt Enable Register"]
+WriteOnly register[32] AfecIer {
+    #[doc = "End of Conversion Interrupt Enable 0"]
+    eoc0[0],
+    #[doc = "End of Conversion Interrupt Enable 1"]
+    eoc1[1],
+    #[doc = "End of Conversion Interrupt Enable 2"]
+    eoc2[2],
+    #[doc = "End of Conversion Interrupt Enable 3"]
+    eoc3[3],
+    #[doc = "End of Conversion Interrupt Enable 4"]
+    eoc4[4],
+    #[doc = "End of Conversion Interrupt Enable 5"]
+    eoc5[5],
+    #[doc = "End of Conversion Interrupt Enable 6"]
+    eoc6[6],
+    #[doc = "End of Conversion Interrupt Enable 7"]
+    eoc7[7],
+    #[doc = "End of Conversion Interrupt Enable 8"]
+    eoc8[8],
+    #[doc = "End of Conversion Interrupt Enable 9"]
+    eoc9[9],
+    #[doc = "End of Conversion Interrupt Enable 10"]
+    eoc10[10],
+    #[doc = "End of Conversion Interrupt Enable 11"]
+    eoc11[11],
+    #[doc = "Data Ready Interrupt Enable"]
+    drdy[24],
+    #[doc = "General Overrun Error Interrupt Enable"]
+    govre[25],
+    #[doc = "Comparison Event Interrupt Enable"]
+    compe[26],
+    #[doc = "Temperature Change Interrupt Enable"]
+    tempchg[30],
+}
+#[doc = "AFEC Interrupt Disable Register"]
+WriteOnly register[32] AfecIdr {
+    #[doc = "End of Conversion Interrupt Disable 0"]
+    eoc0[0],
+    #[doc = "End of Conversion Interrupt Disable 1"]
+    eoc1[1],
+    #[doc = "End of Conversion Interrupt Disable 2"]
+    eoc2[2],
+    #[doc = "End of Conversion Interrupt Disable 3"]
+    eoc3[3],
+    #[doc = "End of Conversion Interrupt Disable 4"]
+    eoc4[4],
+    #[doc = "End of Conversion Interrupt Disable 5"]
+    eoc5[5],
+    #[doc = "End of Conversion Interrupt Disable 6"]
+    eoc6[6],
+    #[doc = "End of Conversion Interrupt Disable 7"]
+    eoc7[7],
+    #[doc = "End of Conversion Interrupt Disable 8"]
+    eoc8[8],
+    #[doc = "End of Conversion Interrupt Disable 9"]
+    eoc9[9],
+    #[doc = "End of Conversion Interrupt Disable 10"]
+    eoc10[10],
+    #[doc = "End of Conversion Interrupt Disable 11"]
+    eoc11[11],
+    #[doc = "Data Ready Interrupt Disable"]
+    drdy[24],
+    #[doc = "General Overrun Error Interrupt Disable"]
+    govre[25],
+    #[doc = "Comparison Event Interrupt Disable"]
+    compe[26],
+    #[doc = "Temperature Change Interrupt Disable"]
+    tempchg[30],
+}
+#[doc = "AFEC Interrupt Mask Register"]
+ReadOnly register[32] AfecImr {
+    #[doc = "End of Conversion Interrupt Mask 0"]
+    eoc0[0],
+    #[doc = "End of Conversion Interrupt Mask 1"]
+    eoc1[1],
+    #[doc = "End of Conversion Interrupt Mask 2"]
+    eoc2[2],
+    #[doc = "End of Conversion Interrupt Mask 3"]
+    eoc3[3],
+    #[doc = "End of Conversion Interrupt Mask 4"]
+    eoc4[4],
+    #[doc = "End of Conversion Interrupt Mask 5"]
+    eoc5[5],
+    #[doc = "End of Conversion Interrupt Mask 6"]
+    eoc6[6],
+    #[doc = "End of Conversion Interrupt Mask 7"]
+    eoc7[7],
+    #[doc = "End of Conversion Interrupt Mask 8"]
+    eoc8[8],
+    #[doc = "End of Conversion Interrupt Mask 9"]
+    eoc9[9],
+    #[doc = "End of Conversion Interrupt Mask 10"]
+    eoc10[10],
+    #[doc = "End of Conversion Interrupt Mask 11"]
+    eoc11[11],
+    #[doc = "Data Ready Interrupt Mask"]
+    drdy[24],
+    #[doc = "General Overrun Error Interrupt Mask"]
+    govre[25],
+    #[doc = "Comparison Event Interrupt Mask"]
+    compe[26],
+    #[doc = "Temperature Change Interrupt Mask"]
+    tempchg[30],
+}
+#[doc = "AFEC Interrupt Status Register"]
+ReadOnly register[32] AfecIsr {
+    #[doc = "End of Conversion 0 (cleared by reading AFEC_CDRx)"]
+    eoc0[0],
+    #[doc = "End of Conversion 1 (cleared by reading AFEC_CDRx)"]
+    eoc1[1],
+    #[doc = "End of Conversion 2 (cleared by reading AFEC_CDRx)"]
+    eoc2[2],
+    #[doc = "End of Conversion 3 (cleared by reading AFEC_CDRx)"]
+    eoc3[3],
+    #[doc = "End of Conversion 4 (cleared by reading AFEC_CDRx)"]
+    eoc4[4],
+    #[doc = "End of Conversion 5 (cleared by reading AFEC_CDRx)"]
+    eoc5[5],
+    #[doc = "End of Conversion 6 (cleared by reading AFEC_CDRx)"]
+    eoc6[6],
+    #[doc = "End of Conversion 7 (cleared by reading AFEC_CDRx)"]
+    eoc7[7],
+    #[doc = "End of Conversion 8 (cleared by reading AFEC_CDRx)"]
+    eoc8[8],
+    #[doc = "End of Conversion 9 (cleared by reading AFEC_CDRx)"]
+    eoc9[9],
+    #[doc = "End of Conversion 10 (cleared by reading AFEC_CDRx)"]
+    eoc10[10],
+    #[doc = "End of Conversion 11 (cleared by reading AFEC_CDRx)"]
+    eoc11[11],
+    #[doc = "Data Ready (cleared by reading AFEC_LCDR)"]
+    drdy[24],
+    #[doc = "General Overrun Error (cleared by reading AFEC_ISR)"]
+    govre[25],
+    #[doc = "Comparison Error (cleared by reading AFEC_ISR)"]
+    compe[26],
+    #[doc = "Temperature Change (cleared on read)"]
+    tempchg[30],
+}
+#[doc = "AFEC Overrun Status Register"]
+ReadOnly register[32] AfecOver {
+    #[doc = "Overrun Error 0"]
+    ovre0[0],
+    #[doc = "Overrun Error 1"]
+    ovre1[1],
+    #[doc = "Overrun Error 2"]
+    ovre2[2],
+    #[doc = "Overrun Error 3"]
+    ovre3[3],
+    #[doc = "Overrun Error 4"]
+    ovre4[4],
+    #[doc = "Overrun Error 5"]
+    ovre5[5],
+    #[doc = "Overrun Error 6"]
+    ovre6[6],
+    #[doc = "Overrun Error 7"]
+    ovre7[7],
+    #[doc = "Overrun Error 8"]
+    ovre8[8],
+    #[doc = "Overrun Error 9"]
+    ovre9[9],
+    #[doc = "Overrun Error 10"]
+    ovre10[10],
+    #[doc = "Overrun Error 11"]
+    ovre11[11],
+}
+#[doc = "AFEC Compare Window Register"]
+ReadWrite register[32] AfecCwr {
+    #[doc = "Low Threshold"]
+    lowthres[0..16],
+    #[doc = "High Threshold"]
+    highthres[16..32],
+}
+#[doc = "AFEC Channel Gain Register"]
+ReadWrite register[32] AfecCgr {
+    #[doc = "Gain for Channel 0"]
+    gain0[0..2],
+    #[doc = "Gain for Channel 1"]
+    gain1[2..4],
+    #[doc = "Gain for Channel 2"]
+    gain2[4..6],
+    #[doc = "Gain for Channel 3"]
+    gain3[6..8],
+    #[doc = "Gain for Channel 4"]
+    gain4[8..10],
+    #[doc = "Gain for Channel 5"]
+    gain5[10..12],
+    #[doc = "Gain for Channel 6"]
+    gain6[12..14],
+    #[doc = "Gain for Channel 7"]
+    gain7[14..16],
+    #[doc = "Gain for Channel 8"]
+    gain8[16..18],
+    #[doc = "Gain for Channel 9"]
+    gain9[18..20],
+    #[doc = "Gain for Channel 10"]
+    gain10[20..22],
+    #[doc = "Gain for Channel 11"]
+    gain11[22..24],
+}
+#[doc = "AFEC Channel Differential Register"]
+ReadWrite register[32] AfecDiffr {
+    #[doc = "Differential inputs for channel 0"]
+    diff0[0],
+    #[doc = "Differential inputs for channel 1"]
+    diff1[1],
+    #[doc = "Differential inputs for channel 2"]
+    diff2[2],
+    #[doc = "Differential inputs for channel 3"]
+    diff3[3],
+    #[doc = "Differential inputs for channel 4"]
+    diff4[4],
+    #[doc = "Differential inputs for channel 5"]
+    diff5[5],
+    #[doc = "Differential inputs for channel 6"]
+    diff6[6],
+    #[doc = "Differential inputs for channel 7"]
+    diff7[7],
+    #[doc = "Differential inputs for channel 8"]
+    diff8[8],
+    #[doc = "Differential inputs for channel 9"]
+    diff9[9],
+    #[doc = "Differential inputs for channel 10"]
+    diff10[10],
+    #[doc = "Differential inputs for channel 11"]
+    diff11[11],
+}
+#[doc = "AFEC Channel Selection Register"]
+ReadWrite register[32] AfecCselr {
+    #[doc = "Channel Selection"]
+    csel[0..4],
+}
+#[doc = "AFEC Channel Data Register"]
+ReadOnly register[32] AfecCdr {
+    #[doc = "Converted Data"]
+    data[0..16],
+}
+#[doc = "AFEC Channel Offset Compensation Register"]
+ReadWrite register[32] AfecCocr {
+    #[doc = "Analog Offset"]
+    aoff[0..10],
+}
+#[doc = "AFEC Temperature Sensor Mode Register"]
+ReadWrite register[32] AfecTempmr {
+    #[doc = "Temperature Sensor RTC Trigger Mode"]
+    rtct[0],
+    #[doc = "Temperature Comparison Mode"]
+    tempcmpmod[4..6] {
+        #[doc = "Generates an event when the converted data is lower than the low threshold of the window."]
+        Low = 0x0,
+        #[doc = "Generates an event when the converted data is higher than the high threshold of the window."]
+        High = 0x1,
+        #[doc = "Generates an event when the converted data is in the comparison window."]
+        In = 0x2,
+        #[doc = "Generates an event when the converted data is out of the comparison window."]
+        Out = 0x3,
+    },
+}
+#[doc = "AFEC Temperature Compare Window Register"]
+ReadWrite register[32] AfecTempcwr {
+    #[doc = "Temperature Low Threshold"]
+    tlowthres[0..16],
+    #[doc = "Temperature High Threshold"]
+    thighthres[16..32],
+}
+#[doc = "AFEC Analog Control Register"]
+ReadWrite register[32] AfecAcr {
+    #[doc = "PGA0 Enable"]
+    pga0en[2],
+    #[doc = "PGA1 Enable"]
+    pga1en[3],
+    #[doc = "AFE Bias Current Control"]
+    ibctl[8..10],
+}
+#[doc = "AFEC Sample & Hold Mode Register"]
+ReadWrite register[32] AfecShmr {
+    #[doc = "Dual Sample & Hold for channel 0"]
+    dual0[0],
+    #[doc = "Dual Sample & Hold for channel 1"]
+    dual1[1],
+    #[doc = "Dual Sample & Hold for channel 2"]
+    dual2[2],
+    #[doc = "Dual Sample & Hold for channel 3"]
+    dual3[3],
+    #[doc = "Dual Sample & Hold for channel 4"]
+    dual4[4],
+    #[doc = "Dual Sample & Hold for channel 5"]
+    dual5[5],
+    #[doc = "Dual Sample & Hold for channel 6"]
+    dual6[6],
+    #[doc = "Dual Sample & Hold for channel 7"]
+    dual7[7],
+    #[doc = "Dual Sample & Hold for channel 8"]
+    dual8[8],
+    #[doc = "Dual Sample & Hold for channel 9"]
+    dual9[9],
+    #[doc = "Dual Sample & Hold for channel 10"]
+    dual10[10],
+    #[doc = "Dual Sample & Hold for channel 11"]
+    dual11[11],
+}
+#[doc = "AFEC Correction Select Register"]
+ReadWrite register[32] AfecCosr {
+    #[doc = "Sample & Hold unit Correction Select"]
+    csel[0],
+}
+#[doc = "AFEC Correction Values Register"]
+ReadWrite register[32] AfecCvr {
+    #[doc = "Offset Correction"]
+    offsetcorr[0..16],
+    #[doc = "Gain Correction"]
+    gaincorr[16..32],
+}
+#[doc = "AFEC Channel Error Correction Register"]
+ReadWrite register[32] AfecCecr {
+    #[doc = "Error Correction Enable for channel 0"]
+    ecorr0[0],
+    #[doc = "Error Correction Enable for channel 1"]
+    ecorr1[1],
+    #[doc = "Error Correction Enable for channel 2"]
+    ecorr2[2],
+    #[doc = "Error Correction Enable for channel 3"]
+    ecorr3[3],
+    #[doc = "Error Correction Enable for channel 4"]
+    ecorr4[4],
+    #[doc = "Error Correction Enable for channel 5"]
+    ecorr5[5],
+    #[doc = "Error Correction Enable for channel 6"]
+    ecorr6[6],
+    #[doc = "Error Correction Enable for channel 7"]
+    ecorr7[7],
+    #[doc = "Error Correction Enable for channel 8"]
+    ecorr8[8],
+    #[doc = "Error Correction Enable for channel 9"]
+    ecorr9[9],
+    #[doc = "Error Correction Enable for channel 10"]
+    ecorr10[10],
+    #[doc = "Error Correction Enable for channel 11"]
+    ecorr11[11],
+}
+#[doc = "AFEC Write Protection Mode Register"]
+ReadWrite register[32] AfecWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protect KEY"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit. Always reads as 0."]
+        Passwd = 0x414443,
+    },
+}
+#[doc = "AFEC Write Protection Status Register"]
+ReadOnly register[32] AfecWpsr {
+    #[doc = "Write Protect Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protect Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "AFEC Version Register"]
+ReadOnly register[32] AfecVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

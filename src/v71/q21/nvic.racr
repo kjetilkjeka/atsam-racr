@@ -1,0 +1,765 @@
+#[doc = "Nested Vectored Interrupt Controller"]
+peripheral Nvic {
+    nviciser0: Nviciser0 @ 0x0,
+    nviciser1: Nviciser1 @ 0x4,
+    nviciser2: Nviciser2 @ 0x8,
+    nviciser3: Nviciser3 @ 0xc,
+    nvicicer0: Nvicicer0 @ 0x80,
+    nvicicer1: Nvicicer1 @ 0x84,
+    nvicicer2: Nvicicer2 @ 0x88,
+    nvicicer3: Nvicicer3 @ 0x8c,
+    nvicispr0: Nvicispr0 @ 0x100,
+    nvicispr1: Nvicispr1 @ 0x104,
+    nvicispr2: Nvicispr2 @ 0x108,
+    nvicispr3: Nvicispr3 @ 0x10c,
+    nvicicpr0: Nvicicpr0 @ 0x180,
+    nvicicpr1: Nvicicpr1 @ 0x184,
+    nvicicpr2: Nvicicpr2 @ 0x188,
+    nvicicpr3: Nvicicpr3 @ 0x18c,
+    nviciabr0: Nviciabr0 @ 0x200,
+    nviciabr1: Nviciabr1 @ 0x204,
+    nviciabr2: Nviciabr2 @ 0x208,
+    nviciabr3: Nviciabr3 @ 0x20c,
+    nvicip0: Nvicip0 @ 0x300,
+    nvicip1: Nvicip1 @ 0x301,
+    nvicip2: Nvicip2 @ 0x302,
+    nvicip3: Nvicip3 @ 0x303,
+    nvicip4: Nvicip4 @ 0x304,
+    nvicip5: Nvicip5 @ 0x305,
+    nvicip6: Nvicip6 @ 0x306,
+    nvicip7: Nvicip7 @ 0x307,
+    nvicip8: Nvicip8 @ 0x308,
+    nvicip9: Nvicip9 @ 0x309,
+    nvicip10: Nvicip10 @ 0x30a,
+    nvicip11: Nvicip11 @ 0x30b,
+    nvicip12: Nvicip12 @ 0x30c,
+    nvicip13: Nvicip13 @ 0x30d,
+    nvicip14: Nvicip14 @ 0x30e,
+    nvicip15: Nvicip15 @ 0x30f,
+    nvicip16: Nvicip16 @ 0x310,
+    nvicip17: Nvicip17 @ 0x311,
+    nvicip18: Nvicip18 @ 0x312,
+    nvicip19: Nvicip19 @ 0x313,
+    nvicip20: Nvicip20 @ 0x314,
+    nvicip21: Nvicip21 @ 0x315,
+    nvicip22: Nvicip22 @ 0x316,
+    nvicip23: Nvicip23 @ 0x317,
+    nvicip24: Nvicip24 @ 0x318,
+    nvicip25: Nvicip25 @ 0x319,
+    nvicip26: Nvicip26 @ 0x31a,
+    nvicip27: Nvicip27 @ 0x31b,
+    nvicip28: Nvicip28 @ 0x31c,
+    nvicip29: Nvicip29 @ 0x31d,
+    nvicip30: Nvicip30 @ 0x31e,
+    nvicip31: Nvicip31 @ 0x31f,
+    nvicip32: Nvicip32 @ 0x320,
+    nvicip33: Nvicip33 @ 0x321,
+    nvicip34: Nvicip34 @ 0x322,
+    nvicip35: Nvicip35 @ 0x323,
+    nvicip36: Nvicip36 @ 0x324,
+    nvicip37: Nvicip37 @ 0x325,
+    nvicip38: Nvicip38 @ 0x326,
+    nvicip39: Nvicip39 @ 0x327,
+    nvicip40: Nvicip40 @ 0x328,
+    nvicip41: Nvicip41 @ 0x329,
+    nvicip42: Nvicip42 @ 0x32a,
+    nvicip43: Nvicip43 @ 0x32b,
+    nvicip44: Nvicip44 @ 0x32c,
+    nvicip45: Nvicip45 @ 0x32d,
+    nvicip46: Nvicip46 @ 0x32e,
+    nvicip47: Nvicip47 @ 0x32f,
+    nvicip48: Nvicip48 @ 0x330,
+    nvicip49: Nvicip49 @ 0x331,
+    nvicip50: Nvicip50 @ 0x332,
+    nvicip51: Nvicip51 @ 0x333,
+    nvicip52: Nvicip52 @ 0x334,
+    nvicip53: Nvicip53 @ 0x335,
+    nvicip54: Nvicip54 @ 0x336,
+    nvicip55: Nvicip55 @ 0x337,
+    nvicip56: Nvicip56 @ 0x338,
+    nvicip57: Nvicip57 @ 0x339,
+    nvicip58: Nvicip58 @ 0x33a,
+    nvicip59: Nvicip59 @ 0x33b,
+    nvicip60: Nvicip60 @ 0x33c,
+    nvicip61: Nvicip61 @ 0x33d,
+    nvicip62: Nvicip62 @ 0x33e,
+    nvicip63: Nvicip63 @ 0x33f,
+    nvicip64: Nvicip64 @ 0x340,
+    nvicip65: Nvicip65 @ 0x341,
+    nvicip66: Nvicip66 @ 0x342,
+    nvicip67: Nvicip67 @ 0x343,
+    nvicip68: Nvicip68 @ 0x344,
+    nvicip69: Nvicip69 @ 0x345,
+    nvicip70: Nvicip70 @ 0x346,
+    nvicip71: Nvicip71 @ 0x347,
+    nvicip72: Nvicip72 @ 0x348,
+    nvicip73: Nvicip73 @ 0x349,
+    nvicip74: Nvicip74 @ 0x34a,
+    nvicip75: Nvicip75 @ 0x34b,
+    nvicip76: Nvicip76 @ 0x34c,
+    nvicip77: Nvicip77 @ 0x34d,
+    nvicip78: Nvicip78 @ 0x34e,
+    nvicip79: Nvicip79 @ 0x34f,
+    nvicip80: Nvicip80 @ 0x350,
+    nvicip81: Nvicip81 @ 0x351,
+    nvicip82: Nvicip82 @ 0x352,
+    nvicip83: Nvicip83 @ 0x353,
+    nvicip84: Nvicip84 @ 0x354,
+    nvicip85: Nvicip85 @ 0x355,
+    nvicip86: Nvicip86 @ 0x356,
+    nvicip87: Nvicip87 @ 0x357,
+    nvicip88: Nvicip88 @ 0x358,
+    nvicip89: Nvicip89 @ 0x359,
+    nvicip90: Nvicip90 @ 0x35a,
+    nvicip91: Nvicip91 @ 0x35b,
+    nvicip92: Nvicip92 @ 0x35c,
+    nvicip93: Nvicip93 @ 0x35d,
+    nvicip94: Nvicip94 @ 0x35e,
+    nvicip95: Nvicip95 @ 0x35f,
+    nvicip96: Nvicip96 @ 0x360,
+    nvicip97: Nvicip97 @ 0x361,
+    nvicip98: Nvicip98 @ 0x362,
+    nvicip99: Nvicip99 @ 0x363,
+    nvicip100: Nvicip100 @ 0x364,
+    nvicip101: Nvicip101 @ 0x365,
+    nvicip102: Nvicip102 @ 0x366,
+    nvicip103: Nvicip103 @ 0x367,
+    nvicip104: Nvicip104 @ 0x368,
+    nvicip105: Nvicip105 @ 0x369,
+    nvicstir: Nvicstir @ 0xe00,
+}
+#[doc = "Interrupt Set Enable Register n"]
+ReadWrite register[32] Nviciser0 {
+    #[doc = "Interrupt set enable bits"]
+    setena[0..32],
+}
+#[doc = "Interrupt Set Enable Register n"]
+ReadWrite register[32] Nviciser1 {
+    #[doc = "Interrupt set enable bits"]
+    setena[0..32],
+}
+#[doc = "Interrupt Set Enable Register n"]
+ReadWrite register[32] Nviciser2 {
+    #[doc = "Interrupt set enable bits"]
+    setena[0..32],
+}
+#[doc = "Interrupt Set Enable Register n"]
+ReadWrite register[32] Nviciser3 {
+    #[doc = "Interrupt set enable bits"]
+    setena[0..32],
+}
+#[doc = "Interrupt Clear Enable Register n"]
+ReadWrite register[32] Nvicicer0 {
+    #[doc = "Interrupt clear-enable bits"]
+    clrena[0..32],
+}
+#[doc = "Interrupt Clear Enable Register n"]
+ReadWrite register[32] Nvicicer1 {
+    #[doc = "Interrupt clear-enable bits"]
+    clrena[0..32],
+}
+#[doc = "Interrupt Clear Enable Register n"]
+ReadWrite register[32] Nvicicer2 {
+    #[doc = "Interrupt clear-enable bits"]
+    clrena[0..32],
+}
+#[doc = "Interrupt Clear Enable Register n"]
+ReadWrite register[32] Nvicicer3 {
+    #[doc = "Interrupt clear-enable bits"]
+    clrena[0..32],
+}
+#[doc = "Interrupt Set Pending Register n"]
+ReadWrite register[32] Nvicispr0 {
+    #[doc = "Interrupt set-pending bits"]
+    setpend[0..32],
+}
+#[doc = "Interrupt Set Pending Register n"]
+ReadWrite register[32] Nvicispr1 {
+    #[doc = "Interrupt set-pending bits"]
+    setpend[0..32],
+}
+#[doc = "Interrupt Set Pending Register n"]
+ReadWrite register[32] Nvicispr2 {
+    #[doc = "Interrupt set-pending bits"]
+    setpend[0..32],
+}
+#[doc = "Interrupt Set Pending Register n"]
+ReadWrite register[32] Nvicispr3 {
+    #[doc = "Interrupt set-pending bits"]
+    setpend[0..32],
+}
+#[doc = "Interrupt Clear Pending Register n"]
+ReadWrite register[32] Nvicicpr0 {
+    #[doc = "Interrupt clear-pending bits"]
+    clrpend[0..32],
+}
+#[doc = "Interrupt Clear Pending Register n"]
+ReadWrite register[32] Nvicicpr1 {
+    #[doc = "Interrupt clear-pending bits"]
+    clrpend[0..32],
+}
+#[doc = "Interrupt Clear Pending Register n"]
+ReadWrite register[32] Nvicicpr2 {
+    #[doc = "Interrupt clear-pending bits"]
+    clrpend[0..32],
+}
+#[doc = "Interrupt Clear Pending Register n"]
+ReadWrite register[32] Nvicicpr3 {
+    #[doc = "Interrupt clear-pending bits"]
+    clrpend[0..32],
+}
+#[doc = "Interrupt Active bit Register n"]
+ReadWrite register[32] Nviciabr0 {
+    #[doc = "Interrupt active flags"]
+    active[0..32],
+}
+#[doc = "Interrupt Active bit Register n"]
+ReadWrite register[32] Nviciabr1 {
+    #[doc = "Interrupt active flags"]
+    active[0..32],
+}
+#[doc = "Interrupt Active bit Register n"]
+ReadWrite register[32] Nviciabr2 {
+    #[doc = "Interrupt active flags"]
+    active[0..32],
+}
+#[doc = "Interrupt Active bit Register n"]
+ReadWrite register[32] Nviciabr3 {
+    #[doc = "Interrupt active flags"]
+    active[0..32],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip0 {
+    #[doc = "Priority of interrupt 0"]
+    pri0[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip1 {
+    #[doc = "Priority of interrupt 1"]
+    pri1[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip2 {
+    #[doc = "Priority of interrupt 2"]
+    pri2[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip3 {
+    #[doc = "Priority of interrupt 3"]
+    pri3[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip4 {
+    #[doc = "Priority of interrupt 4"]
+    pri4[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip5 {
+    #[doc = "Priority of interrupt 5"]
+    pri5[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip6 {
+    #[doc = "Priority of interrupt 6"]
+    pri6[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip7 {
+    #[doc = "Priority of interrupt 7"]
+    pri7[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip8 {
+    #[doc = "Priority of interrupt 8"]
+    pri8[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip9 {
+    #[doc = "Priority of interrupt 9"]
+    pri9[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip10 {
+    #[doc = "Priority of interrupt 10"]
+    pri10[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip11 {
+    #[doc = "Priority of interrupt 11"]
+    pri11[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip12 {
+    #[doc = "Priority of interrupt 12"]
+    pri12[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip13 {
+    #[doc = "Priority of interrupt 13"]
+    pri13[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip14 {
+    #[doc = "Priority of interrupt 14"]
+    pri14[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip15 {
+    #[doc = "Priority of interrupt 15"]
+    pri15[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip16 {
+    #[doc = "Priority of interrupt 16"]
+    pri16[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip17 {
+    #[doc = "Priority of interrupt 17"]
+    pri17[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip18 {
+    #[doc = "Priority of interrupt 18"]
+    pri18[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip19 {
+    #[doc = "Priority of interrupt 19"]
+    pri19[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip20 {
+    #[doc = "Priority of interrupt 20"]
+    pri20[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip21 {
+    #[doc = "Priority of interrupt 21"]
+    pri21[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip22 {
+    #[doc = "Priority of interrupt 22"]
+    pri22[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip23 {
+    #[doc = "Priority of interrupt 23"]
+    pri23[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip24 {
+    #[doc = "Priority of interrupt 24"]
+    pri24[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip25 {
+    #[doc = "Priority of interrupt 25"]
+    pri25[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip26 {
+    #[doc = "Priority of interrupt 26"]
+    pri26[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip27 {
+    #[doc = "Priority of interrupt 27"]
+    pri27[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip28 {
+    #[doc = "Priority of interrupt 28"]
+    pri28[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip29 {
+    #[doc = "Priority of interrupt 29"]
+    pri29[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip30 {
+    #[doc = "Priority of interrupt 30"]
+    pri30[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip31 {
+    #[doc = "Priority of interrupt 31"]
+    pri31[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip32 {
+    #[doc = "Priority of interrupt 32"]
+    pri32[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip33 {
+    #[doc = "Priority of interrupt 33"]
+    pri33[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip34 {
+    #[doc = "Priority of interrupt 34"]
+    pri34[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip35 {
+    #[doc = "Priority of interrupt 35"]
+    pri35[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip36 {
+    #[doc = "Priority of interrupt 36"]
+    pri36[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip37 {
+    #[doc = "Priority of interrupt 37"]
+    pri37[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip38 {
+    #[doc = "Priority of interrupt 38"]
+    pri38[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip39 {
+    #[doc = "Priority of interrupt 39"]
+    pri39[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip40 {
+    #[doc = "Priority of interrupt 40"]
+    pri40[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip41 {
+    #[doc = "Priority of interrupt 41"]
+    pri41[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip42 {
+    #[doc = "Priority of interrupt 42"]
+    pri42[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip43 {
+    #[doc = "Priority of interrupt 43"]
+    pri43[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip44 {
+    #[doc = "Priority of interrupt 44"]
+    pri44[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip45 {
+    #[doc = "Priority of interrupt 45"]
+    pri45[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip46 {
+    #[doc = "Priority of interrupt 46"]
+    pri46[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip47 {
+    #[doc = "Priority of interrupt 47"]
+    pri47[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip48 {
+    #[doc = "Priority of interrupt 48"]
+    pri48[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip49 {
+    #[doc = "Priority of interrupt 49"]
+    pri49[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip50 {
+    #[doc = "Priority of interrupt 50"]
+    pri50[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip51 {
+    #[doc = "Priority of interrupt 51"]
+    pri51[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip52 {
+    #[doc = "Priority of interrupt 52"]
+    pri52[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip53 {
+    #[doc = "Priority of interrupt 53"]
+    pri53[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip54 {
+    #[doc = "Priority of interrupt 54"]
+    pri54[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip55 {
+    #[doc = "Priority of interrupt 55"]
+    pri55[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip56 {
+    #[doc = "Priority of interrupt 56"]
+    pri56[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip57 {
+    #[doc = "Priority of interrupt 57"]
+    pri57[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip58 {
+    #[doc = "Priority of interrupt 58"]
+    pri58[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip59 {
+    #[doc = "Priority of interrupt 59"]
+    pri59[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip60 {
+    #[doc = "Priority of interrupt 60"]
+    pri60[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip61 {
+    #[doc = "Priority of interrupt 61"]
+    pri61[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip62 {
+    #[doc = "Priority of interrupt 62"]
+    pri62[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip63 {
+    #[doc = "Priority of interrupt 63"]
+    pri63[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip64 {
+    #[doc = "Priority of interrupt 64"]
+    pri64[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip65 {
+    #[doc = "Priority of interrupt 65"]
+    pri65[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip66 {
+    #[doc = "Priority of interrupt 66"]
+    pri66[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip67 {
+    #[doc = "Priority of interrupt 67"]
+    pri67[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip68 {
+    #[doc = "Priority of interrupt 68"]
+    pri68[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip69 {
+    #[doc = "Priority of interrupt 69"]
+    pri69[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip70 {
+    #[doc = "Priority of interrupt 70"]
+    pri70[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip71 {
+    #[doc = "Priority of interrupt 71"]
+    pri71[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip72 {
+    #[doc = "Priority of interrupt 72"]
+    pri72[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip73 {
+    #[doc = "Priority of interrupt 73"]
+    pri73[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip74 {
+    #[doc = "Priority of interrupt 74"]
+    pri74[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip75 {
+    #[doc = "Priority of interrupt 75"]
+    pri75[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip76 {
+    #[doc = "Priority of interrupt 76"]
+    pri76[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip77 {
+    #[doc = "Priority of interrupt 77"]
+    pri77[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip78 {
+    #[doc = "Priority of interrupt 78"]
+    pri78[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip79 {
+    #[doc = "Priority of interrupt 79"]
+    pri79[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip80 {
+    #[doc = "Priority of interrupt 80"]
+    pri80[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip81 {
+    #[doc = "Priority of interrupt 81"]
+    pri81[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip82 {
+    #[doc = "Priority of interrupt 82"]
+    pri82[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip83 {
+    #[doc = "Priority of interrupt 83"]
+    pri83[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip84 {
+    #[doc = "Priority of interrupt 84"]
+    pri84[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip85 {
+    #[doc = "Priority of interrupt 85"]
+    pri85[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip86 {
+    #[doc = "Priority of interrupt 86"]
+    pri86[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip87 {
+    #[doc = "Priority of interrupt 87"]
+    pri87[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip88 {
+    #[doc = "Priority of interrupt 88"]
+    pri88[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip89 {
+    #[doc = "Priority of interrupt 89"]
+    pri89[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip90 {
+    #[doc = "Priority of interrupt 90"]
+    pri90[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip91 {
+    #[doc = "Priority of interrupt 91"]
+    pri91[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip92 {
+    #[doc = "Priority of interrupt 92"]
+    pri92[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip93 {
+    #[doc = "Priority of interrupt 93"]
+    pri93[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip94 {
+    #[doc = "Priority of interrupt 94"]
+    pri94[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip95 {
+    #[doc = "Priority of interrupt 95"]
+    pri95[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip96 {
+    #[doc = "Priority of interrupt 96"]
+    pri96[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip97 {
+    #[doc = "Priority of interrupt 97"]
+    pri97[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip98 {
+    #[doc = "Priority of interrupt 98"]
+    pri98[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip99 {
+    #[doc = "Priority of interrupt 99"]
+    pri99[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip100 {
+    #[doc = "Priority of interrupt 100"]
+    pri100[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip101 {
+    #[doc = "Priority of interrupt 101"]
+    pri101[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip102 {
+    #[doc = "Priority of interrupt 102"]
+    pri102[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip103 {
+    #[doc = "Priority of interrupt 103"]
+    pri103[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip104 {
+    #[doc = "Priority of interrupt 104"]
+    pri104[0..8],
+}
+#[doc = "Interrupt Priority Register n"]
+ReadWrite register[8] Nvicip105 {
+    #[doc = "Priority of interrupt 105"]
+    pri105[0..8],
+}
+#[doc = "Software Trigger Interrupt Register"]
+ReadWrite register[32] Nvicstir {
+    #[doc = "Interrupt ID of the interrupt to trigger, in the range 0-239. For example, a value of 0x03 specifies interrupt IRQ3."]
+    intid[0..9],
+}

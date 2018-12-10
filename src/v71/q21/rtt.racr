@@ -1,0 +1,39 @@
+#[doc = "Real-time Timer"]
+peripheral Rtt {
+    rtt_mr: RttMr @ 0x0,
+    rtt_ar: RttAr @ 0x4,
+    rtt_vr: RttVr @ 0x8,
+    rtt_sr: RttSr @ 0xc,
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] RttMr {
+    #[doc = "Real-time Timer Prescaler Value"]
+    rtpres[0..16],
+    #[doc = "Alarm Interrupt Enable"]
+    almien[16],
+    #[doc = "Real-time Timer Increment Interrupt Enable"]
+    rttincien[17],
+    #[doc = "Real-time Timer Restart"]
+    rttrst[18],
+    #[doc = "Real-time Timer Disable"]
+    rttdis[20],
+    #[doc = "Real-Time Clock 1Hz Clock Selection"]
+    rtc1hz[24],
+}
+#[doc = "Alarm Register"]
+ReadWrite register[32] RttAr {
+    #[doc = "Alarm Value"]
+    almv[0..32],
+}
+#[doc = "Value Register"]
+ReadOnly register[32] RttVr {
+    #[doc = "Current Real-time Value"]
+    crtv[0..32],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] RttSr {
+    #[doc = "Real-time Alarm Status (cleared on read)"]
+    alms[0],
+    #[doc = "Prescaler Roll-over Status (cleared on read)"]
+    rttinc[1],
+}

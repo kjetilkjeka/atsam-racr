@@ -1,0 +1,113 @@
+mod acc;
+mod aes;
+mod afec;
+mod chipid;
+mod dacc;
+mod efc;
+mod gmac;
+mod gpbr;
+mod hsmci;
+mod i2sc;
+mod icm;
+mod isi;
+mod matrix;
+mod mcan;
+mod mlb;
+mod pioa;
+mod piob;
+mod pioc;
+mod piod;
+mod pioe;
+mod pmc;
+mod pwm;
+mod qspi;
+mod rstc;
+mod rswdt;
+mod rtc;
+mod rtt;
+mod sdramc;
+mod smc;
+mod spi;
+mod ssc;
+mod supc;
+mod tc;
+mod trng;
+mod twihs;
+mod uart;
+mod usart;
+mod usbhs;
+mod utmi;
+mod wdt;
+mod xdmac;
+mod lockbit;
+mod system_control;
+mod sys_tick;
+mod nvic;
+mod mpu;
+mod fpu;
+
+device Atsamv71q21b {
+    acc: acc::Acc @ 0x40044000,
+    aes: aes::Aes @ 0x4006c000,
+    afec0: afec::Afec @ 0x4003c000,
+    afec1: afec::Afec @ 0x40064000,
+    chipid: chipid::Chipid @ 0x400e0940,
+    dacc: dacc::Dacc @ 0x40040000,
+    efc: efc::Efc @ 0x400e0c00,
+    gmac: gmac::Gmac @ 0x40050000,
+    gpbr: gpbr::Gpbr @ 0x400e1890,
+    hsmci: hsmci::Hsmci @ 0x40000000,
+    i2sc0: i2sc::I2sc @ 0x4008c000,
+    i2sc1: i2sc::I2sc @ 0x40090000,
+    icm: icm::Icm @ 0x40048000,
+    isi: isi::Isi @ 0x4004c000,
+    matrix: matrix::Matrix @ 0x40088000,
+    mcan0: mcan::Mcan @ 0x40030000,
+    mcan1: mcan::Mcan @ 0x40034000,
+    mlb: mlb::Mlb @ 0x40068000,
+    pioa: pio::Pio @ 0x400e0e00,
+    piob: pio::Pio @ 0x400e1000,
+    pioc: pio::Pio @ 0x400e1200,
+    piod: pio::Pio @ 0x400e1400,
+    pioe: pio::Pio @ 0x400e1600,
+    pmc: pmc::Pmc @ 0x400e0600,
+    pwm0: pwm::Pwm @ 0x40020000,
+    pwm1: pwm::Pwm @ 0x4005c000,
+    qspi: qspi::Qspi @ 0x4007c000,
+    rstc: rstc::Rstc @ 0x400e1800,
+    rswdt: rswdt::Rswdt @ 0x400e1900,
+    rtc: rtc::Rtc @ 0x400e1860,
+    rtt: rtt::Rtt @ 0x400e1830,
+    sdramc: sdramc::Sdramc @ 0x40084000,
+    smc: smc::Smc @ 0x40080000,
+    spi0: spi::Spi @ 0x40008000,
+    spi1: spi::Spi @ 0x40058000,
+    ssc: ssc::Ssc @ 0x40004000,
+    supc: supc::Supc @ 0x400e1810,
+    tc0: tc::Tc @ 0x4000c000,
+    tc1: tc::Tc @ 0x40010000,
+    tc2: tc::Tc @ 0x40014000,
+    tc3: tc::Tc @ 0x40054000,
+    trng: trng::Trng @ 0x40070000,
+    twihs0: twihs::Twihs @ 0x40018000,
+    twihs1: twihs::Twihs @ 0x4001c000,
+    twihs2: twihs::Twihs @ 0x40060000,
+    uart0: uart::Uart @ 0x400e0800,
+    uart1: uart::Uart @ 0x400e0a00,
+    uart2: uart::Uart @ 0x400e1a00,
+    uart3: uart::Uart @ 0x400e1c00,
+    uart4: uart::Uart @ 0x400e1e00,
+    usart0: usart::Usart @ 0x40024000,
+    usart1: usart::Usart @ 0x40028000,
+    usart2: usart::Usart @ 0x4002c000,
+    usbhs: usbhs::Usbhs @ 0x40038000,
+    utmi: utmi::Utmi @ 0x400e0400,
+    wdt: wdt::Wdt @ 0x400e1850,
+    xdmac: xdmac::Xdmac @ 0x40078000,
+    lockbit: lockbit::Lockbit @ 0x0,
+    system_control: system_control::SystemControl @ 0xe000e000,
+    sys_tick: sys_tick::SysTick @ 0xe000e010,
+    nvic: nvic::Nvic @ 0xe000e100,
+    mpu: mpu::Mpu @ 0xe000ed90,
+    fpu: fpu::Fpu @ 0xe000ef34,
+}

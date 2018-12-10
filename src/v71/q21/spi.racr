@@ -1,0 +1,195 @@
+#[doc = "Serial Peripheral Interface"]
+peripheral Spi {
+    spi_cr: SpiCr @ 0x0,
+    spi_mr: SpiMr @ 0x4,
+    spi_rdr: SpiRdr @ 0x8,
+    spi_tdr: SpiTdr @ 0xc,
+    spi_sr: SpiSr @ 0x10,
+    spi_ier: SpiIer @ 0x14,
+    spi_idr: SpiIdr @ 0x18,
+    spi_imr: SpiImr @ 0x1c,
+    spi_csr: [SpiCsr; 4] @ 0x30,
+    spi_wpmr: SpiWpmr @ 0xe4,
+    spi_wpsr: SpiWpsr @ 0xe8,
+    spi_version: SpiVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] SpiCr {
+    #[doc = "SPI Enable"]
+    spien[0],
+    #[doc = "SPI Disable"]
+    spidis[1],
+    #[doc = "SPI Software Reset"]
+    swrst[7],
+    #[doc = "Request to Clear the Comparison Trigger"]
+    reqclr[12],
+    #[doc = "Last Transfer"]
+    lastxfer[24],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] SpiMr {
+    #[doc = "Master/Slave Mode"]
+    mstr[0],
+    #[doc = "Peripheral Select"]
+    ps[1],
+    #[doc = "Chip Select Decode"]
+    pcsdec[2],
+    #[doc = "Mode Fault Detection"]
+    modfdis[4],
+    #[doc = "Wait Data Read Before Transfer"]
+    wdrbt[5],
+    #[doc = "Local Loopback Enable"]
+    llb[7],
+    #[doc = "Peripheral Chip Select"]
+    pcs[16..20],
+    #[doc = "Delay Between Chip Selects"]
+    dlybcs[24..32],
+}
+#[doc = "Receive Data Register"]
+ReadOnly register[32] SpiRdr {
+    #[doc = "Receive Data"]
+    rd[0..16],
+    #[doc = "Peripheral Chip Select"]
+    pcs[16..20],
+}
+#[doc = "Transmit Data Register"]
+WriteOnly register[32] SpiTdr {
+    #[doc = "Transmit Data"]
+    td[0..16],
+    #[doc = "Peripheral Chip Select"]
+    pcs[16..20],
+    #[doc = "Last Transfer"]
+    lastxfer[24],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] SpiSr {
+    #[doc = "Receive Data Register Full (cleared by reading SPI_RDR)"]
+    rdrf[0],
+    #[doc = "Transmit Data Register Empty (cleared by writing SPI_TDR)"]
+    tdre[1],
+    #[doc = "Mode Fault Error (cleared on read)"]
+    modf[2],
+    #[doc = "Overrun Error Status (cleared on read)"]
+    ovres[3],
+    #[doc = "NSS Rising (cleared on read)"]
+    nssr[8],
+    #[doc = "Transmission Registers Empty (cleared by writing SPI_TDR)"]
+    txempty[9],
+    #[doc = "Underrun Error Status (Slave mode only) (cleared on read)"]
+    undes[10],
+    #[doc = "SPI Enable Status"]
+    spiens[16],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] SpiIer {
+    #[doc = "Receive Data Register Full Interrupt Enable"]
+    rdrf[0],
+    #[doc = "SPI Transmit Data Register Empty Interrupt Enable"]
+    tdre[1],
+    #[doc = "Mode Fault Error Interrupt Enable"]
+    modf[2],
+    #[doc = "Overrun Error Interrupt Enable"]
+    ovres[3],
+    #[doc = "NSS Rising Interrupt Enable"]
+    nssr[8],
+    #[doc = "Transmission Registers Empty Enable"]
+    txempty[9],
+    #[doc = "Underrun Error Interrupt Enable"]
+    undes[10],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] SpiIdr {
+    #[doc = "Receive Data Register Full Interrupt Disable"]
+    rdrf[0],
+    #[doc = "SPI Transmit Data Register Empty Interrupt Disable"]
+    tdre[1],
+    #[doc = "Mode Fault Error Interrupt Disable"]
+    modf[2],
+    #[doc = "Overrun Error Interrupt Disable"]
+    ovres[3],
+    #[doc = "NSS Rising Interrupt Disable"]
+    nssr[8],
+    #[doc = "Transmission Registers Empty Disable"]
+    txempty[9],
+    #[doc = "Underrun Error Interrupt Disable"]
+    undes[10],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] SpiImr {
+    #[doc = "Receive Data Register Full Interrupt Mask"]
+    rdrf[0],
+    #[doc = "SPI Transmit Data Register Empty Interrupt Mask"]
+    tdre[1],
+    #[doc = "Mode Fault Error Interrupt Mask"]
+    modf[2],
+    #[doc = "Overrun Error Interrupt Mask"]
+    ovres[3],
+    #[doc = "NSS Rising Interrupt Mask"]
+    nssr[8],
+    #[doc = "Transmission Registers Empty Mask"]
+    txempty[9],
+    #[doc = "Underrun Error Interrupt Mask"]
+    undes[10],
+}
+#[doc = "Chip Select Register (CS_number = 0) 0"]
+ReadWrite register[32] SpiCsr {
+    #[doc = "Clock Polarity"]
+    cpol[0],
+    #[doc = "Clock Phase"]
+    ncpha[1],
+    #[doc = "Chip Select Not Active After Transfer (Ignored if CSAAT = 1)"]
+    csnaat[2],
+    #[doc = "Chip Select Active After Transfer"]
+    csaat[3],
+    #[doc = "Bits Per Transfer"]
+    bits[4..8] {
+        #[doc = "8 bits for transfer"]
+        _8Bit = 0x0,
+        #[doc = "9 bits for transfer"]
+        _9Bit = 0x1,
+        #[doc = "10 bits for transfer"]
+        _10Bit = 0x2,
+        #[doc = "11 bits for transfer"]
+        _11Bit = 0x3,
+        #[doc = "12 bits for transfer"]
+        _12Bit = 0x4,
+        #[doc = "13 bits for transfer"]
+        _13Bit = 0x5,
+        #[doc = "14 bits for transfer"]
+        _14Bit = 0x6,
+        #[doc = "15 bits for transfer"]
+        _15Bit = 0x7,
+        #[doc = "16 bits for transfer"]
+        _16Bit = 0x8,
+    },
+    #[doc = "Serial Clock Bit Rate"]
+    scbr[8..16],
+    #[doc = "Delay Before SPCK"]
+    dlybs[16..24],
+    #[doc = "Delay Between Consecutive Transfers"]
+    dlybct[24..32],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] SpiWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x535049,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] SpiWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..16],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] SpiVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

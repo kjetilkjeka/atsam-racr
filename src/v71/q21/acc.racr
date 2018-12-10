@@ -1,0 +1,154 @@
+#[doc = "Analog Comparator Controller"]
+peripheral Acc {
+    acc_cr: AccCr @ 0x0,
+    acc_mr: AccMr @ 0x4,
+    acc_ier: AccIer @ 0x24,
+    acc_idr: AccIdr @ 0x28,
+    acc_imr: AccImr @ 0x2c,
+    acc_isr: AccIsr @ 0x30,
+    acc_acr: AccAcr @ 0x94,
+    acc_wpmr: AccWpmr @ 0xe4,
+    acc_wpsr: AccWpsr @ 0xe8,
+    acc_ver: AccVer @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] AccCr {
+    #[doc = "Software Reset"]
+    swrst[0],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] AccMr {
+    #[doc = "Selection for Minus Comparator Input"]
+    selminus[0..3] {
+        #[doc = "Select TS"]
+        Ts = 0x0,
+        #[doc = "Select VREFP"]
+        Vrefp = 0x1,
+        #[doc = "Select DAC0"]
+        Dac0 = 0x2,
+        #[doc = "Select DAC1"]
+        Dac1 = 0x3,
+        #[doc = "Select AFE0_AD0"]
+        Afe0Ad0 = 0x4,
+        #[doc = "Select AFE0_AD1"]
+        Afe0Ad1 = 0x5,
+        #[doc = "Select AFE0_AD2"]
+        Afe0Ad2 = 0x6,
+        #[doc = "Select AFE0_AD3"]
+        Afe0Ad3 = 0x7,
+    },
+    #[doc = "Selection For Plus Comparator Input"]
+    selplus[4..7] {
+        #[doc = "Select AFE0_AD0"]
+        Afe0Ad0 = 0x0,
+        #[doc = "Select AFE0_AD1"]
+        Afe0Ad1 = 0x1,
+        #[doc = "Select AFE0_AD2"]
+        Afe0Ad2 = 0x2,
+        #[doc = "Select AFE0_AD3"]
+        Afe0Ad3 = 0x3,
+        #[doc = "Select AFE0_AD4"]
+        Afe0Ad4 = 0x4,
+        #[doc = "Select AFE0_AD5"]
+        Afe0Ad5 = 0x5,
+        #[doc = "Select AFE1_AD0"]
+        Afe1Ad0 = 0x6,
+        #[doc = "Select AFE1_AD1"]
+        Afe1Ad1 = 0x7,
+    },
+    #[doc = "Analog Comparator Enable"]
+    acen[8] {
+        #[doc = "Analog comparator disabled."]
+        Dis = 0x0,
+        #[doc = "Analog comparator enabled."]
+        En = 0x1,
+    },
+    #[doc = "Edge Type"]
+    edgetyp[9..11] {
+        #[doc = "Only rising edge of comparator output"]
+        Rising = 0x0,
+        #[doc = "Falling edge of comparator output"]
+        Falling = 0x1,
+        #[doc = "Any edge of comparator output"]
+        Any = 0x2,
+    },
+    #[doc = "Invert Comparator Output"]
+    inv[12] {
+        #[doc = "Analog comparator output is directly processed."]
+        Dis = 0x0,
+        #[doc = "Analog comparator output is inverted prior to being processed."]
+        En = 0x1,
+    },
+    #[doc = "Selection Of Fault Source"]
+    selfs[13] {
+        #[doc = "The CE flag is used to drive the FAULT output."]
+        Ce = 0x0,
+        #[doc = "The output of the analog comparator flag is used to drive the FAULT output."]
+        Output = 0x1,
+    },
+    #[doc = "Fault Enable"]
+    fe[14] {
+        #[doc = "The FAULT output is tied to 0."]
+        Dis = 0x0,
+        #[doc = "The FAULT output is driven by the signal defined by SELFS."]
+        En = 0x1,
+    },
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] AccIer {
+    #[doc = "Comparison Edge"]
+    ce[0],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] AccIdr {
+    #[doc = "Comparison Edge"]
+    ce[0],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] AccImr {
+    #[doc = "Comparison Edge"]
+    ce[0],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] AccIsr {
+    #[doc = "Comparison Edge (cleared on read)"]
+    ce[0],
+    #[doc = "Synchronized Comparator Output"]
+    sco[1],
+    #[doc = "Flag Mask"]
+    mask[31],
+}
+#[doc = "Analog Control Register"]
+ReadWrite register[32] AccAcr {
+    #[doc = "Current Selection"]
+    isel[0] {
+        #[doc = "Low-power option."]
+        Lopw = 0x0,
+        #[doc = "High-speed option."]
+        Hisp = 0x1,
+    },
+    #[doc = "Hysteresis Selection"]
+    hyst[1..3],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] AccWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x414343,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] AccWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] AccVer {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

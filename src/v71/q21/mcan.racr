@@ -1,0 +1,1388 @@
+#[doc = "Controller Area Network"]
+peripheral Mcan {
+    mcan_crel: McanCrel @ 0x0,
+    mcan_endn: McanEndn @ 0x4,
+    mcan_cust: McanCust @ 0x8,
+    mcan_dbtp: McanDbtp @ 0xc,
+    mcan_test: McanTest @ 0x10,
+    mcan_rwd: McanRwd @ 0x14,
+    mcan_cccr: McanCccr @ 0x18,
+    mcan_nbtp: McanNbtp @ 0x1c,
+    mcan_tscc: McanTscc @ 0x20,
+    mcan_tscv: McanTscv @ 0x24,
+    mcan_tocc: McanTocc @ 0x28,
+    mcan_tocv: McanTocv @ 0x2c,
+    mcan_ecr: McanEcr @ 0x40,
+    mcan_psr: McanPsr @ 0x44,
+    mcan_tdcr: McanTdcr @ 0x48,
+    mcan_ir: McanIr @ 0x50,
+    mcan_ie: McanIe @ 0x54,
+    mcan_ils: McanIls @ 0x58,
+    mcan_ile: McanIle @ 0x5c,
+    mcan_gfc: McanGfc @ 0x80,
+    mcan_sidfc: McanSidfc @ 0x84,
+    mcan_xidfc: McanXidfc @ 0x88,
+    mcan_xidam: McanXidam @ 0x90,
+    mcan_hpms: McanHpms @ 0x94,
+    mcan_ndat1: McanNdat1 @ 0x98,
+    mcan_ndat2: McanNdat2 @ 0x9c,
+    mcan_rxf0c: McanRxf0c @ 0xa0,
+    mcan_rxf0s: McanRxf0s @ 0xa4,
+    mcan_rxf0a: McanRxf0a @ 0xa8,
+    mcan_rxbc: McanRxbc @ 0xac,
+    mcan_rxf1c: McanRxf1c @ 0xb0,
+    mcan_rxf1s: McanRxf1s @ 0xb4,
+    mcan_rxf1a: McanRxf1a @ 0xb8,
+    mcan_rxesc: McanRxesc @ 0xbc,
+    mcan_txbc: McanTxbc @ 0xc0,
+    mcan_txfqs: McanTxfqs @ 0xc4,
+    mcan_txesc: McanTxesc @ 0xc8,
+    mcan_txbrp: McanTxbrp @ 0xcc,
+    mcan_txbar: McanTxbar @ 0xd0,
+    mcan_txbcr: McanTxbcr @ 0xd4,
+    mcan_txbto: McanTxbto @ 0xd8,
+    mcan_txbcf: McanTxbcf @ 0xdc,
+    mcan_txbtie: McanTxbtie @ 0xe0,
+    mcan_txbcie: McanTxbcie @ 0xe4,
+    mcan_txefc: McanTxefc @ 0xf0,
+    mcan_txefs: McanTxefs @ 0xf4,
+    mcan_txefa: McanTxefa @ 0xf8,
+}
+#[doc = "Core Release Register"]
+ReadOnly register[32] McanCrel {
+    #[doc = "Timestamp Day"]
+    day[0..8],
+    #[doc = "Timestamp Month"]
+    mon[8..16],
+    #[doc = "Timestamp Year"]
+    year[16..20],
+    #[doc = "Sub-step of Core Release"]
+    substep[20..24],
+    #[doc = "Step of Core Release"]
+    step[24..28],
+    #[doc = "Core Release"]
+    rel[28..32],
+}
+#[doc = "Endian Register"]
+ReadOnly register[32] McanEndn {
+    #[doc = "Endianness Test Value"]
+    etv[0..32],
+}
+#[doc = "Customer Register"]
+ReadWrite register[32] McanCust {
+    #[doc = "Customer-specific Value"]
+    csv[0..32],
+}
+#[doc = "Data Bit Timing and Prescaler Register"]
+ReadWrite register[32] McanDbtp {
+    #[doc = "Data (Re) Synchronization Jump Width"]
+    dsjw[0..3],
+    #[doc = "Data Time Segment After Sample Point"]
+    dtseg2[4..8],
+    #[doc = "Data Time Segment Before Sample Point"]
+    dtseg1[8..13],
+    #[doc = "Data Bit Rate Prescaler"]
+    dbrp[16..21],
+    #[doc = "Transmitter Delay Compensation"]
+    tdc[23] {
+        #[doc = "Transmitter Delay Compensation disabled."]
+        Disabled = 0x0,
+        #[doc = "Transmitter Delay Compensation enabled."]
+        Enabled = 0x1,
+    },
+}
+#[doc = "Test Register"]
+ReadWrite register[32] McanTest {
+    #[doc = "Loop Back Mode (read/write)"]
+    lbck[4] {
+        #[doc = "Reset value. Loop Back mode is disabled."]
+        Disabled = 0x0,
+        #[doc = "Loop Back mode is enabled (see Section 6.1.9)."]
+        Enabled = 0x1,
+    },
+    #[doc = "Control of Transmit Pin (read/write)"]
+    tx[5..7] {
+        #[doc = "Reset value, CANTX controlled by the CAN Core, updated at the end of the CAN bit time."]
+        Reset = 0x0,
+        #[doc = "Sample Point can be monitored at pin CANTX."]
+        SamplePointMonitoring = 0x1,
+        #[doc = "Dominant ('0') level at pin CANTX."]
+        Dominant = 0x2,
+        #[doc = "Recessive ('1') at pin CANTX."]
+        Recessive = 0x3,
+    },
+    #[doc = "Receive Pin (read-only)"]
+    rx[7],
+}
+#[doc = "RAM Watchdog Register"]
+ReadWrite register[32] McanRwd {
+    #[doc = "Watchdog Configuration (read/write)"]
+    wdc[0..8],
+    #[doc = "Watchdog Value (read-only)"]
+    wdv[8..16],
+}
+#[doc = "CC Control Register"]
+ReadWrite register[32] McanCccr {
+    #[doc = "Initialization (read/write)"]
+    init[0] {
+        #[doc = "Normal operation."]
+        Disabled = 0x0,
+        #[doc = "Initialization is started."]
+        Enabled = 0x1,
+    },
+    #[doc = "Configuration Change Enable (read/write, write protection)"]
+    cce[1] {
+        #[doc = "The processor has no write access to the protected configuration registers."]
+        Protected = 0x0,
+        #[doc = "The processor has write access to the protected configuration registers (while MCAN_CCCR.INIT = '1')."]
+        Configurable = 0x1,
+    },
+    #[doc = "Restricted Operation Mode (read/write, write protection against '1')"]
+    asm[2] {
+        #[doc = "Normal CAN operation."]
+        Normal = 0x0,
+        #[doc = "Restricted Operation mode active."]
+        Restricted = 0x1,
+    },
+    #[doc = "Clock Stop Acknowledge (read-only)"]
+    csa[3],
+    #[doc = "Clock Stop Request (read/write)"]
+    csr[4] {
+        #[doc = "No clock stop is requested."]
+        NoClockStop = 0x0,
+        #[doc = "Clock stop requested. When clock stop is requested, first INIT and then CSA will be set after all pend-ing transfer requests have been completed and the CAN bus reached idle."]
+        ClockStop = 0x1,
+    },
+    #[doc = "Bus Monitoring Mode (read/write, write protection against '1')"]
+    mon[5] {
+        #[doc = "Bus Monitoring mode is disabled."]
+        Disabled = 0x0,
+        #[doc = "Bus Monitoring mode is enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Disable Automatic Retransmission (read/write, write protection)"]
+    dar[6] {
+        #[doc = "Automatic retransmission of messages not transmitted successfully enabled."]
+        AutoRetx = 0x0,
+        #[doc = "Automatic retransmission disabled."]
+        NoAutoRetx = 0x1,
+    },
+    #[doc = "Test Mode Enable (read/write, write protection against '1')"]
+    test[7] {
+        #[doc = "Normal operation, MCAN_TEST register holds reset values."]
+        Disabled = 0x0,
+        #[doc = "Test mode, write access to MCAN_TEST register enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "CAN FD Operation Enable (read/write, write protection)"]
+    fdoe[8] {
+        #[doc = "FD operation disabled."]
+        Disabled = 0x0,
+        #[doc = "FD operation enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Bit Rate Switching Enable (read/write, write protection)"]
+    brse[9] {
+        #[doc = "Bit rate switching for transmissions disabled."]
+        Disabled = 0x0,
+        #[doc = "Bit rate switching for transmissions enabled."]
+        Enabled = 0x1,
+    },
+    #[doc = "Protocol Exception Event Handling (read/write, write protection)"]
+    pxhd[12],
+    #[doc = "Edge Filtering during Bus Integration (read/write, write protection)"]
+    efbi[13],
+    #[doc = "Transmit Pause (read/write, write protection)"]
+    txp[14],
+    #[doc = "Non-ISO Operation"]
+    niso[15],
+}
+#[doc = "Nominal Bit Timing and Prescaler Register"]
+ReadWrite register[32] McanNbtp {
+    #[doc = "Nominal Time Segment After Sample Point"]
+    ntseg2[0..7],
+    #[doc = "Nominal Time Segment Before Sample Point"]
+    ntseg1[8..16],
+    #[doc = "Nominal Bit Rate Prescaler"]
+    nbrp[16..25],
+    #[doc = "Nominal (Re) Synchronization Jump Width"]
+    nsjw[25..32],
+}
+#[doc = "Timestamp Counter Configuration Register"]
+ReadWrite register[32] McanTscc {
+    #[doc = "Timestamp Select"]
+    tss[0..2] {
+        #[doc = "Timestamp counter value always 0x0000"]
+        Always0 = 0x0,
+        #[doc = "Timestamp counter value incremented according to TCP"]
+        TcpInc = 0x1,
+        #[doc = "External timestamp counter value used"]
+        ExtTimestamp = 0x2,
+    },
+    #[doc = "Timestamp Counter Prescaler"]
+    tcp[16..20],
+}
+#[doc = "Timestamp Counter Value Register"]
+ReadWrite register[32] McanTscv {
+    #[doc = "Timestamp Counter (cleared on write)"]
+    tsc[0..16],
+}
+#[doc = "Timeout Counter Configuration Register"]
+ReadWrite register[32] McanTocc {
+    #[doc = "Enable Timeout Counter"]
+    etoc[0] {
+        #[doc = "Timeout Counter disabled."]
+        NoTimeout = 0x0,
+        #[doc = "Timeout Counter enabled."]
+        TosControlled = 0x1,
+    },
+    #[doc = "Timeout Select"]
+    tos[1..3] {
+        #[doc = "Continuous operation"]
+        Continuous = 0x0,
+        #[doc = "Timeout controlled by Tx Event FIFO"]
+        TxEvTimeout = 0x1,
+        #[doc = "Timeout controlled by Receive FIFO 0"]
+        Rx0EvTimeout = 0x2,
+        #[doc = "Timeout controlled by Receive FIFO 1"]
+        Rx1EvTimeout = 0x3,
+    },
+    #[doc = "Timeout Period"]
+    top[16..32],
+}
+#[doc = "Timeout Counter Value Register"]
+ReadWrite register[32] McanTocv {
+    #[doc = "Timeout Counter (cleared on write)"]
+    toc[0..16],
+}
+#[doc = "Error Counter Register"]
+ReadOnly register[32] McanEcr {
+    #[doc = "Transmit Error Counter"]
+    tec[0..8],
+    #[doc = "Receive Error Counter"]
+    rec[8..15],
+    #[doc = "Receive Error Passive"]
+    rp[15],
+    #[doc = "CAN Error Logging (cleared on read)"]
+    cel[16..24],
+}
+#[doc = "Protocol Status Register"]
+ReadOnly register[32] McanPsr {
+    #[doc = "Last Error Code (set to 111 on read)"]
+    lec[0..3] {
+        #[doc = "No error occurred since LEC has been reset by successful reception or transmission."]
+        NoError = 0x0,
+        #[doc = "More than 5 equal bits in a sequence have occurred in a part of a received message where this is not allowed."]
+        StuffError = 0x1,
+        #[doc = "A fixed format part of a received frame has the wrong format."]
+        FormError = 0x2,
+        #[doc = "The message transmitted by the MCAN was not acknowledged by another node."]
+        AckError = 0x3,
+        #[doc = "During transmission of a message (with the exception of the arbitration field), the device tried to send a recessive level (bit of logical value '1'), but the monitored bus value was dominant."]
+        Bit1Error = 0x4,
+        #[doc = "During transmission of a message (or acknowledge bit, or active error flag, or overload flag), the device tried to send a dominant level (data or identifier bit logical value '0'), but the monitored bus value was recessive. During Bus_Off recovery, this status is set each time a sequence of 11 recessive bits has been monitored. This enables the processor to monitor the proceeding of the Bus_Off recovery sequence (indicating the bus is not stuck at dominant or continuously disturbed)."]
+        Bit0Error = 0x5,
+        #[doc = "The CRC check sum of a received message was incorrect. The CRC of an incoming message does not match the CRC calculated from the received data."]
+        CrcError = 0x6,
+        #[doc = "Any read access to the Protocol Status Register re-initializes the LEC to '7'. When the LEC shows value '7', no CAN bus event was detected since the last processor read access to the Protocol Status Register."]
+        NoChange = 0x7,
+    },
+    #[doc = "Activity"]
+    act[3..5] {
+        #[doc = "Node is synchronizing on CAN communication"]
+        Synchronizing = 0x0,
+        #[doc = "Node is neither receiver nor transmitter"]
+        Idle = 0x1,
+        #[doc = "Node is operating as receiver"]
+        Receiver = 0x2,
+        #[doc = "Node is operating as transmitter"]
+        Transmitter = 0x3,
+    },
+    #[doc = "Error Passive"]
+    ep[5],
+    #[doc = "Warning Status"]
+    ew[6],
+    #[doc = "Bus_Off Status"]
+    bo[7],
+    #[doc = "Data Phase Last Error Code (set to 111 on read)"]
+    dlec[8..11],
+    #[doc = "ESI Flag of Last Received CAN FD Message (cleared on read)"]
+    resi[11],
+    #[doc = "BRS Flag of Last Received CAN FD Message (cleared on read)"]
+    rbrs[12],
+    #[doc = "Received a CAN FD Message (cleared on read)"]
+    rfdf[13],
+    #[doc = "Protocol Exception Event (cleared on read)"]
+    pxe[14],
+    #[doc = "Transmitter Delay Compensation Value"]
+    tdcv[16..23],
+}
+#[doc = "Transmit Delay Compensation Register"]
+ReadWrite register[32] McanTdcr {
+    #[doc = "Transmitter Delay Compensation Filter"]
+    tdcf[0..7],
+    #[doc = "Transmitter Delay Compensation Offset"]
+    tdco[8..15],
+}
+#[doc = "Interrupt Register"]
+ReadWrite register[32] McanIr {
+    #[doc = "Receive FIFO 0 New Message"]
+    rf0n[0],
+    #[doc = "Receive FIFO 0 Watermark Reached"]
+    rf0w[1],
+    #[doc = "Receive FIFO 0 Full"]
+    rf0f[2],
+    #[doc = "Receive FIFO 0 Message Lost"]
+    rf0l[3],
+    #[doc = "Receive FIFO 1 New Message"]
+    rf1n[4],
+    #[doc = "Receive FIFO 1 Watermark Reached"]
+    rf1w[5],
+    #[doc = "Receive FIFO 1 Full"]
+    rf1f[6],
+    #[doc = "Receive FIFO 1 Message Lost"]
+    rf1l[7],
+    #[doc = "High Priority Message"]
+    hpm[8],
+    #[doc = "Transmission Completed"]
+    tc[9],
+    #[doc = "Transmission Cancellation Finished"]
+    tcf[10],
+    #[doc = "Tx FIFO Empty"]
+    tfe[11],
+    #[doc = "Tx Event FIFO New Entry"]
+    tefn[12],
+    #[doc = "Tx Event FIFO Watermark Reached"]
+    tefw[13],
+    #[doc = "Tx Event FIFO Full"]
+    teff[14],
+    #[doc = "Tx Event FIFO Element Lost"]
+    tefl[15],
+    #[doc = "Timestamp Wraparound"]
+    tsw[16],
+    #[doc = "Message RAM Access Failure"]
+    mraf[17],
+    #[doc = "Timeout Occurred"]
+    too[18],
+    #[doc = "Message stored to Dedicated Receive Buffer"]
+    drx[19],
+    #[doc = "Error Logging Overflow"]
+    elo[22],
+    #[doc = "Error Passive"]
+    ep[23],
+    #[doc = "Warning Status"]
+    ew[24],
+    #[doc = "Bus_Off Status"]
+    bo[25],
+    #[doc = "Watchdog Interrupt"]
+    wdi[26],
+    #[doc = "Protocol Error in Arbitration Phase"]
+    pea[27],
+    #[doc = "Protocol Error in Data Phase"]
+    ped[28],
+    #[doc = "Access to Reserved Address"]
+    ara[29],
+}
+#[doc = "Interrupt Enable Register"]
+ReadWrite register[32] McanIe {
+    #[doc = "Receive FIFO 0 New Message Interrupt Enable"]
+    rf0ne[0],
+    #[doc = "Receive FIFO 0 Watermark Reached Interrupt Enable"]
+    rf0we[1],
+    #[doc = "Receive FIFO 0 Full Interrupt Enable"]
+    rf0fe[2],
+    #[doc = "Receive FIFO 0 Message Lost Interrupt Enable"]
+    rf0le[3],
+    #[doc = "Receive FIFO 1 New Message Interrupt Enable"]
+    rf1ne[4],
+    #[doc = "Receive FIFO 1 Watermark Reached Interrupt Enable"]
+    rf1we[5],
+    #[doc = "Receive FIFO 1 Full Interrupt Enable"]
+    rf1fe[6],
+    #[doc = "Receive FIFO 1 Message Lost Interrupt Enable"]
+    rf1le[7],
+    #[doc = "High Priority Message Interrupt Enable"]
+    hpme[8],
+    #[doc = "Transmission Completed Interrupt Enable"]
+    tce[9],
+    #[doc = "Transmission Cancellation Finished Interrupt Enable"]
+    tcfe[10],
+    #[doc = "Tx FIFO Empty Interrupt Enable"]
+    tfee[11],
+    #[doc = "Tx Event FIFO New Entry Interrupt Enable"]
+    tefne[12],
+    #[doc = "Tx Event FIFO Watermark Reached Interrupt Enable"]
+    tefwe[13],
+    #[doc = "Tx Event FIFO Full Interrupt Enable"]
+    teffe[14],
+    #[doc = "Tx Event FIFO Event Lost Interrupt Enable"]
+    tefle[15],
+    #[doc = "Timestamp Wraparound Interrupt Enable"]
+    tswe[16],
+    #[doc = "Message RAM Access Failure Interrupt Enable"]
+    mrafe[17],
+    #[doc = "Timeout Occurred Interrupt Enable"]
+    tooe[18],
+    #[doc = "Message stored to Dedicated Receive Buffer Interrupt Enable"]
+    drxe[19],
+    #[doc = "Error Logging Overflow Interrupt Enable"]
+    eloe[22],
+    #[doc = "Error Passive Interrupt Enable"]
+    epe[23],
+    #[doc = "Warning Status Interrupt Enable"]
+    ewe[24],
+    #[doc = "Bus_Off Status Interrupt Enable"]
+    boe[25],
+    #[doc = "Watchdog Interrupt Enable"]
+    wdie[26],
+    #[doc = "Protocol Error in Arbitration Phase Enable"]
+    peae[27],
+    #[doc = "Protocol Error in Data Phase Enable"]
+    pede[28],
+    #[doc = "Access to Reserved Address Enable"]
+    arae[29],
+}
+#[doc = "Interrupt Line Select Register"]
+ReadWrite register[32] McanIls {
+    #[doc = "Receive FIFO 0 New Message Interrupt Line"]
+    rf0nl[0],
+    #[doc = "Receive FIFO 0 Watermark Reached Interrupt Line"]
+    rf0wl[1],
+    #[doc = "Receive FIFO 0 Full Interrupt Line"]
+    rf0fl[2],
+    #[doc = "Receive FIFO 0 Message Lost Interrupt Line"]
+    rf0ll[3],
+    #[doc = "Receive FIFO 1 New Message Interrupt Line"]
+    rf1nl[4],
+    #[doc = "Receive FIFO 1 Watermark Reached Interrupt Line"]
+    rf1wl[5],
+    #[doc = "Receive FIFO 1 Full Interrupt Line"]
+    rf1fl[6],
+    #[doc = "Receive FIFO 1 Message Lost Interrupt Line"]
+    rf1ll[7],
+    #[doc = "High Priority Message Interrupt Line"]
+    hpml[8],
+    #[doc = "Transmission Completed Interrupt Line"]
+    tcl[9],
+    #[doc = "Transmission Cancellation Finished Interrupt Line"]
+    tcfl[10],
+    #[doc = "Tx FIFO Empty Interrupt Line"]
+    tfel[11],
+    #[doc = "Tx Event FIFO New Entry Interrupt Line"]
+    tefnl[12],
+    #[doc = "Tx Event FIFO Watermark Reached Interrupt Line"]
+    tefwl[13],
+    #[doc = "Tx Event FIFO Full Interrupt Line"]
+    teffl[14],
+    #[doc = "Tx Event FIFO Event Lost Interrupt Line"]
+    tefll[15],
+    #[doc = "Timestamp Wraparound Interrupt Line"]
+    tswl[16],
+    #[doc = "Message RAM Access Failure Interrupt Line"]
+    mrafl[17],
+    #[doc = "Timeout Occurred Interrupt Line"]
+    tool[18],
+    #[doc = "Message stored to Dedicated Receive Buffer Interrupt Line"]
+    drxl[19],
+    #[doc = "Error Logging Overflow Interrupt Line"]
+    elol[22],
+    #[doc = "Error Passive Interrupt Line"]
+    epl[23],
+    #[doc = "Warning Status Interrupt Line"]
+    ewl[24],
+    #[doc = "Bus_Off Status Interrupt Line"]
+    bol[25],
+    #[doc = "Watchdog Interrupt Line"]
+    wdil[26],
+    #[doc = "Protocol Error in Arbitration Phase Line"]
+    peal[27],
+    #[doc = "Protocol Error in Data Phase Line"]
+    pedl[28],
+    #[doc = "Access to Reserved Address Line"]
+    aral[29],
+}
+#[doc = "Interrupt Line Enable Register"]
+ReadWrite register[32] McanIle {
+    #[doc = "Enable Interrupt Line 0"]
+    eint0[0],
+    #[doc = "Enable Interrupt Line 1"]
+    eint1[1],
+}
+#[doc = "Global Filter Configuration Register"]
+ReadWrite register[32] McanGfc {
+    #[doc = "Reject Remote Frames Extended"]
+    rrfe[0] {
+        #[doc = "Filter remote frames with 29-bit extended IDs."]
+        Filter = 0x0,
+        #[doc = "Reject all remote frames with 29-bit extended IDs."]
+        Reject = 0x1,
+    },
+    #[doc = "Reject Remote Frames Standard"]
+    rrfs[1] {
+        #[doc = "Filter remote frames with 11-bit standard IDs."]
+        Filter = 0x0,
+        #[doc = "Reject all remote frames with 11-bit standard IDs."]
+        Reject = 0x1,
+    },
+    #[doc = "Accept Non-matching Frames Extended"]
+    anfe[2..4] {
+        #[doc = "Accept in Rx FIFO 0"]
+        RxFifo0 = 0x0,
+        #[doc = "Accept in Rx FIFO 1"]
+        RxFifo1 = 0x1,
+    },
+    #[doc = "Accept Non-matching Frames Standard"]
+    anfs[4..6] {
+        #[doc = "Accept in Rx FIFO 0"]
+        RxFifo0 = 0x0,
+        #[doc = "Accept in Rx FIFO 1"]
+        RxFifo1 = 0x1,
+    },
+}
+#[doc = "Standard ID Filter Configuration Register"]
+ReadWrite register[32] McanSidfc {
+    #[doc = "Filter List Standard Start Address"]
+    flssa[2..16],
+    #[doc = "List Size Standard"]
+    lss[16..24],
+}
+#[doc = "Extended ID Filter Configuration Register"]
+ReadWrite register[32] McanXidfc {
+    #[doc = "Filter List Extended Start Address"]
+    flesa[2..16],
+    #[doc = "List Size Extended"]
+    lse[16..23],
+}
+#[doc = "Extended ID AND Mask Register"]
+ReadWrite register[32] McanXidam {
+    #[doc = "Extended ID Mask"]
+    eidm[0..29],
+}
+#[doc = "High Priority Message Status Register"]
+ReadOnly register[32] McanHpms {
+    #[doc = "Buffer Index"]
+    bidx[0..6],
+    #[doc = "Message Storage Indicator"]
+    msi[6..8] {
+        #[doc = "No FIFO selected."]
+        NoFifoSel = 0x0,
+        #[doc = "FIFO message lost."]
+        Lost = 0x1,
+        #[doc = "Message stored in FIFO 0."]
+        Fifo0 = 0x2,
+        #[doc = "Message stored in FIFO 1."]
+        Fifo1 = 0x3,
+    },
+    #[doc = "Filter Index"]
+    fidx[8..15],
+    #[doc = "Filter List"]
+    flst[15],
+}
+#[doc = "New Data 1 Register"]
+ReadWrite register[32] McanNdat1 {
+    #[doc = "New Data"]
+    nd0[0],
+    #[doc = "New Data"]
+    nd1[1],
+    #[doc = "New Data"]
+    nd2[2],
+    #[doc = "New Data"]
+    nd3[3],
+    #[doc = "New Data"]
+    nd4[4],
+    #[doc = "New Data"]
+    nd5[5],
+    #[doc = "New Data"]
+    nd6[6],
+    #[doc = "New Data"]
+    nd7[7],
+    #[doc = "New Data"]
+    nd8[8],
+    #[doc = "New Data"]
+    nd9[9],
+    #[doc = "New Data"]
+    nd10[10],
+    #[doc = "New Data"]
+    nd11[11],
+    #[doc = "New Data"]
+    nd12[12],
+    #[doc = "New Data"]
+    nd13[13],
+    #[doc = "New Data"]
+    nd14[14],
+    #[doc = "New Data"]
+    nd15[15],
+    #[doc = "New Data"]
+    nd16[16],
+    #[doc = "New Data"]
+    nd17[17],
+    #[doc = "New Data"]
+    nd18[18],
+    #[doc = "New Data"]
+    nd19[19],
+    #[doc = "New Data"]
+    nd20[20],
+    #[doc = "New Data"]
+    nd21[21],
+    #[doc = "New Data"]
+    nd22[22],
+    #[doc = "New Data"]
+    nd23[23],
+    #[doc = "New Data"]
+    nd24[24],
+    #[doc = "New Data"]
+    nd25[25],
+    #[doc = "New Data"]
+    nd26[26],
+    #[doc = "New Data"]
+    nd27[27],
+    #[doc = "New Data"]
+    nd28[28],
+    #[doc = "New Data"]
+    nd29[29],
+    #[doc = "New Data"]
+    nd30[30],
+    #[doc = "New Data"]
+    nd31[31],
+}
+#[doc = "New Data 2 Register"]
+ReadWrite register[32] McanNdat2 {
+    #[doc = "New Data"]
+    nd32[0],
+    #[doc = "New Data"]
+    nd33[1],
+    #[doc = "New Data"]
+    nd34[2],
+    #[doc = "New Data"]
+    nd35[3],
+    #[doc = "New Data"]
+    nd36[4],
+    #[doc = "New Data"]
+    nd37[5],
+    #[doc = "New Data"]
+    nd38[6],
+    #[doc = "New Data"]
+    nd39[7],
+    #[doc = "New Data"]
+    nd40[8],
+    #[doc = "New Data"]
+    nd41[9],
+    #[doc = "New Data"]
+    nd42[10],
+    #[doc = "New Data"]
+    nd43[11],
+    #[doc = "New Data"]
+    nd44[12],
+    #[doc = "New Data"]
+    nd45[13],
+    #[doc = "New Data"]
+    nd46[14],
+    #[doc = "New Data"]
+    nd47[15],
+    #[doc = "New Data"]
+    nd48[16],
+    #[doc = "New Data"]
+    nd49[17],
+    #[doc = "New Data"]
+    nd50[18],
+    #[doc = "New Data"]
+    nd51[19],
+    #[doc = "New Data"]
+    nd52[20],
+    #[doc = "New Data"]
+    nd53[21],
+    #[doc = "New Data"]
+    nd54[22],
+    #[doc = "New Data"]
+    nd55[23],
+    #[doc = "New Data"]
+    nd56[24],
+    #[doc = "New Data"]
+    nd57[25],
+    #[doc = "New Data"]
+    nd58[26],
+    #[doc = "New Data"]
+    nd59[27],
+    #[doc = "New Data"]
+    nd60[28],
+    #[doc = "New Data"]
+    nd61[29],
+    #[doc = "New Data"]
+    nd62[30],
+    #[doc = "New Data"]
+    nd63[31],
+}
+#[doc = "Receive FIFO 0 Configuration Register"]
+ReadWrite register[32] McanRxf0c {
+    #[doc = "Receive FIFO 0 Start Address"]
+    f0sa[2..16],
+    #[doc = "Receive FIFO 0 Start Address"]
+    f0s[16..23],
+    #[doc = "Receive FIFO 0 Watermark"]
+    f0wm[24..31],
+    #[doc = "FIFO 0 Operation Mode"]
+    f0om[31],
+}
+#[doc = "Receive FIFO 0 Status Register"]
+ReadOnly register[32] McanRxf0s {
+    #[doc = "Receive FIFO 0 Fill Level"]
+    f0fl[0..7],
+    #[doc = "Receive FIFO 0 Get Index"]
+    f0gi[8..14],
+    #[doc = "Receive FIFO 0 Put Index"]
+    f0pi[16..22],
+    #[doc = "Receive FIFO 0 Fill Level"]
+    f0f[24],
+    #[doc = "Receive FIFO 0 Message Lost"]
+    rf0l[25],
+}
+#[doc = "Receive FIFO 0 Acknowledge Register"]
+ReadWrite register[32] McanRxf0a {
+    #[doc = "Receive FIFO 0 Acknowledge Index"]
+    f0ai[0..6],
+}
+#[doc = "Receive Rx Buffer Configuration Register"]
+ReadWrite register[32] McanRxbc {
+    #[doc = "Receive Buffer Start Address"]
+    rbsa[2..16],
+}
+#[doc = "Receive FIFO 1 Configuration Register"]
+ReadWrite register[32] McanRxf1c {
+    #[doc = "Receive FIFO 1 Start Address"]
+    f1sa[2..16],
+    #[doc = "Receive FIFO 1 Start Address"]
+    f1s[16..23],
+    #[doc = "Receive FIFO 1 Watermark"]
+    f1wm[24..31],
+    #[doc = "FIFO 1 Operation Mode"]
+    f1om[31],
+}
+#[doc = "Receive FIFO 1 Status Register"]
+ReadOnly register[32] McanRxf1s {
+    #[doc = "Receive FIFO 1 Fill Level"]
+    f1fl[0..7],
+    #[doc = "Receive FIFO 1 Get Index"]
+    f1gi[8..14],
+    #[doc = "Receive FIFO 1 Put Index"]
+    f1pi[16..22],
+    #[doc = "Receive FIFO 1 Fill Level"]
+    f1f[24],
+    #[doc = "Receive FIFO 1 Message Lost"]
+    rf1l[25],
+    #[doc = "Debug Message Status"]
+    dms[30..32] {
+        #[doc = "Idle state, wait for reception of debug messages, DMA request is cleared."]
+        Idle = 0x0,
+        #[doc = "Debug message A received."]
+        MsgA = 0x1,
+        #[doc = "Debug messages A, B received."]
+        MsgAb = 0x2,
+        #[doc = "Debug messages A, B, C received, DMA request is set."]
+        MsgAbc = 0x3,
+    },
+}
+#[doc = "Receive FIFO 1 Acknowledge Register"]
+ReadWrite register[32] McanRxf1a {
+    #[doc = "Receive FIFO 1 Acknowledge Index"]
+    f1ai[0..6],
+}
+#[doc = "Receive Buffer / FIFO Element Size Configuration Register"]
+ReadWrite register[32] McanRxesc {
+    #[doc = "Receive FIFO 0 Data Field Size"]
+    f0ds[0..3] {
+        #[doc = "8-byte data field"]
+        _8Byte = 0x0,
+        #[doc = "12-byte data field"]
+        _12Byte = 0x1,
+        #[doc = "16-byte data field"]
+        _16Byte = 0x2,
+        #[doc = "20-byte data field"]
+        _20Byte = 0x3,
+        #[doc = "24-byte data field"]
+        _24Byte = 0x4,
+        #[doc = "32-byte data field"]
+        _32Byte = 0x5,
+        #[doc = "48-byte data field"]
+        _48Byte = 0x6,
+        #[doc = "64-byte data field"]
+        _64Byte = 0x7,
+    },
+    #[doc = "Receive FIFO 1 Data Field Size"]
+    f1ds[4..7] {
+        #[doc = "8-byte data field"]
+        _8Byte = 0x0,
+        #[doc = "12-byte data field"]
+        _12Byte = 0x1,
+        #[doc = "16-byte data field"]
+        _16Byte = 0x2,
+        #[doc = "20-byte data field"]
+        _20Byte = 0x3,
+        #[doc = "24-byte data field"]
+        _24Byte = 0x4,
+        #[doc = "32-byte data field"]
+        _32Byte = 0x5,
+        #[doc = "48-byte data field"]
+        _48Byte = 0x6,
+        #[doc = "64-byte data field"]
+        _64Byte = 0x7,
+    },
+    #[doc = "Receive Buffer Data Field Size"]
+    rbds[8..11] {
+        #[doc = "8-byte data field"]
+        _8Byte = 0x0,
+        #[doc = "12-byte data field"]
+        _12Byte = 0x1,
+        #[doc = "16-byte data field"]
+        _16Byte = 0x2,
+        #[doc = "20-byte data field"]
+        _20Byte = 0x3,
+        #[doc = "24-byte data field"]
+        _24Byte = 0x4,
+        #[doc = "32-byte data field"]
+        _32Byte = 0x5,
+        #[doc = "48-byte data field"]
+        _48Byte = 0x6,
+        #[doc = "64-byte data field"]
+        _64Byte = 0x7,
+    },
+}
+#[doc = "Transmit Buffer Configuration Register"]
+ReadWrite register[32] McanTxbc {
+    #[doc = "Tx Buffers Start Address"]
+    tbsa[2..16],
+    #[doc = "Number of Dedicated Transmit Buffers"]
+    ndtb[16..22],
+    #[doc = "Transmit FIFO/Queue Size"]
+    tfqs[24..30],
+    #[doc = "Tx FIFO/Queue Mode"]
+    tfqm[30],
+}
+#[doc = "Transmit FIFO/Queue Status Register"]
+ReadOnly register[32] McanTxfqs {
+    #[doc = "Tx FIFO Free Level"]
+    tffl[0..6],
+    #[doc = "Tx FIFO Get Index"]
+    tfgi[8..13],
+    #[doc = "Tx FIFO/Queue Put Index"]
+    tfqpi[16..21],
+    #[doc = "Tx FIFO/Queue Full"]
+    tfqf[21],
+}
+#[doc = "Transmit Buffer Element Size Configuration Register"]
+ReadWrite register[32] McanTxesc {
+    #[doc = "Tx Buffer Data Field Size"]
+    tbds[0..3] {
+        #[doc = "8-byte data field"]
+        _8Byte = 0x0,
+        #[doc = "12-byte data field"]
+        _12Byte = 0x1,
+        #[doc = "16-byte data field"]
+        _16Byte = 0x2,
+        #[doc = "20-byte data field"]
+        _20Byte = 0x3,
+        #[doc = "24-byte data field"]
+        _24Byte = 0x4,
+        #[doc = "32-byte data field"]
+        _32Byte = 0x5,
+        #[doc = "48- byte data field"]
+        _48Byte = 0x6,
+        #[doc = "64-byte data field"]
+        _64Byte = 0x7,
+    },
+}
+#[doc = "Transmit Buffer Request Pending Register"]
+ReadOnly register[32] McanTxbrp {
+    #[doc = "Transmission Request Pending for Buffer 0"]
+    trp0[0],
+    #[doc = "Transmission Request Pending for Buffer 1"]
+    trp1[1],
+    #[doc = "Transmission Request Pending for Buffer 2"]
+    trp2[2],
+    #[doc = "Transmission Request Pending for Buffer 3"]
+    trp3[3],
+    #[doc = "Transmission Request Pending for Buffer 4"]
+    trp4[4],
+    #[doc = "Transmission Request Pending for Buffer 5"]
+    trp5[5],
+    #[doc = "Transmission Request Pending for Buffer 6"]
+    trp6[6],
+    #[doc = "Transmission Request Pending for Buffer 7"]
+    trp7[7],
+    #[doc = "Transmission Request Pending for Buffer 8"]
+    trp8[8],
+    #[doc = "Transmission Request Pending for Buffer 9"]
+    trp9[9],
+    #[doc = "Transmission Request Pending for Buffer 10"]
+    trp10[10],
+    #[doc = "Transmission Request Pending for Buffer 11"]
+    trp11[11],
+    #[doc = "Transmission Request Pending for Buffer 12"]
+    trp12[12],
+    #[doc = "Transmission Request Pending for Buffer 13"]
+    trp13[13],
+    #[doc = "Transmission Request Pending for Buffer 14"]
+    trp14[14],
+    #[doc = "Transmission Request Pending for Buffer 15"]
+    trp15[15],
+    #[doc = "Transmission Request Pending for Buffer 16"]
+    trp16[16],
+    #[doc = "Transmission Request Pending for Buffer 17"]
+    trp17[17],
+    #[doc = "Transmission Request Pending for Buffer 18"]
+    trp18[18],
+    #[doc = "Transmission Request Pending for Buffer 19"]
+    trp19[19],
+    #[doc = "Transmission Request Pending for Buffer 20"]
+    trp20[20],
+    #[doc = "Transmission Request Pending for Buffer 21"]
+    trp21[21],
+    #[doc = "Transmission Request Pending for Buffer 22"]
+    trp22[22],
+    #[doc = "Transmission Request Pending for Buffer 23"]
+    trp23[23],
+    #[doc = "Transmission Request Pending for Buffer 24"]
+    trp24[24],
+    #[doc = "Transmission Request Pending for Buffer 25"]
+    trp25[25],
+    #[doc = "Transmission Request Pending for Buffer 26"]
+    trp26[26],
+    #[doc = "Transmission Request Pending for Buffer 27"]
+    trp27[27],
+    #[doc = "Transmission Request Pending for Buffer 28"]
+    trp28[28],
+    #[doc = "Transmission Request Pending for Buffer 29"]
+    trp29[29],
+    #[doc = "Transmission Request Pending for Buffer 30"]
+    trp30[30],
+    #[doc = "Transmission Request Pending for Buffer 31"]
+    trp31[31],
+}
+#[doc = "Transmit Buffer Add Request Register"]
+ReadWrite register[32] McanTxbar {
+    #[doc = "Add Request for Transmit Buffer 0"]
+    ar0[0],
+    #[doc = "Add Request for Transmit Buffer 1"]
+    ar1[1],
+    #[doc = "Add Request for Transmit Buffer 2"]
+    ar2[2],
+    #[doc = "Add Request for Transmit Buffer 3"]
+    ar3[3],
+    #[doc = "Add Request for Transmit Buffer 4"]
+    ar4[4],
+    #[doc = "Add Request for Transmit Buffer 5"]
+    ar5[5],
+    #[doc = "Add Request for Transmit Buffer 6"]
+    ar6[6],
+    #[doc = "Add Request for Transmit Buffer 7"]
+    ar7[7],
+    #[doc = "Add Request for Transmit Buffer 8"]
+    ar8[8],
+    #[doc = "Add Request for Transmit Buffer 9"]
+    ar9[9],
+    #[doc = "Add Request for Transmit Buffer 10"]
+    ar10[10],
+    #[doc = "Add Request for Transmit Buffer 11"]
+    ar11[11],
+    #[doc = "Add Request for Transmit Buffer 12"]
+    ar12[12],
+    #[doc = "Add Request for Transmit Buffer 13"]
+    ar13[13],
+    #[doc = "Add Request for Transmit Buffer 14"]
+    ar14[14],
+    #[doc = "Add Request for Transmit Buffer 15"]
+    ar15[15],
+    #[doc = "Add Request for Transmit Buffer 16"]
+    ar16[16],
+    #[doc = "Add Request for Transmit Buffer 17"]
+    ar17[17],
+    #[doc = "Add Request for Transmit Buffer 18"]
+    ar18[18],
+    #[doc = "Add Request for Transmit Buffer 19"]
+    ar19[19],
+    #[doc = "Add Request for Transmit Buffer 20"]
+    ar20[20],
+    #[doc = "Add Request for Transmit Buffer 21"]
+    ar21[21],
+    #[doc = "Add Request for Transmit Buffer 22"]
+    ar22[22],
+    #[doc = "Add Request for Transmit Buffer 23"]
+    ar23[23],
+    #[doc = "Add Request for Transmit Buffer 24"]
+    ar24[24],
+    #[doc = "Add Request for Transmit Buffer 25"]
+    ar25[25],
+    #[doc = "Add Request for Transmit Buffer 26"]
+    ar26[26],
+    #[doc = "Add Request for Transmit Buffer 27"]
+    ar27[27],
+    #[doc = "Add Request for Transmit Buffer 28"]
+    ar28[28],
+    #[doc = "Add Request for Transmit Buffer 29"]
+    ar29[29],
+    #[doc = "Add Request for Transmit Buffer 30"]
+    ar30[30],
+    #[doc = "Add Request for Transmit Buffer 31"]
+    ar31[31],
+}
+#[doc = "Transmit Buffer Cancellation Request Register"]
+ReadWrite register[32] McanTxbcr {
+    #[doc = "Cancellation Request for Transmit Buffer 0"]
+    cr0[0],
+    #[doc = "Cancellation Request for Transmit Buffer 1"]
+    cr1[1],
+    #[doc = "Cancellation Request for Transmit Buffer 2"]
+    cr2[2],
+    #[doc = "Cancellation Request for Transmit Buffer 3"]
+    cr3[3],
+    #[doc = "Cancellation Request for Transmit Buffer 4"]
+    cr4[4],
+    #[doc = "Cancellation Request for Transmit Buffer 5"]
+    cr5[5],
+    #[doc = "Cancellation Request for Transmit Buffer 6"]
+    cr6[6],
+    #[doc = "Cancellation Request for Transmit Buffer 7"]
+    cr7[7],
+    #[doc = "Cancellation Request for Transmit Buffer 8"]
+    cr8[8],
+    #[doc = "Cancellation Request for Transmit Buffer 9"]
+    cr9[9],
+    #[doc = "Cancellation Request for Transmit Buffer 10"]
+    cr10[10],
+    #[doc = "Cancellation Request for Transmit Buffer 11"]
+    cr11[11],
+    #[doc = "Cancellation Request for Transmit Buffer 12"]
+    cr12[12],
+    #[doc = "Cancellation Request for Transmit Buffer 13"]
+    cr13[13],
+    #[doc = "Cancellation Request for Transmit Buffer 14"]
+    cr14[14],
+    #[doc = "Cancellation Request for Transmit Buffer 15"]
+    cr15[15],
+    #[doc = "Cancellation Request for Transmit Buffer 16"]
+    cr16[16],
+    #[doc = "Cancellation Request for Transmit Buffer 17"]
+    cr17[17],
+    #[doc = "Cancellation Request for Transmit Buffer 18"]
+    cr18[18],
+    #[doc = "Cancellation Request for Transmit Buffer 19"]
+    cr19[19],
+    #[doc = "Cancellation Request for Transmit Buffer 20"]
+    cr20[20],
+    #[doc = "Cancellation Request for Transmit Buffer 21"]
+    cr21[21],
+    #[doc = "Cancellation Request for Transmit Buffer 22"]
+    cr22[22],
+    #[doc = "Cancellation Request for Transmit Buffer 23"]
+    cr23[23],
+    #[doc = "Cancellation Request for Transmit Buffer 24"]
+    cr24[24],
+    #[doc = "Cancellation Request for Transmit Buffer 25"]
+    cr25[25],
+    #[doc = "Cancellation Request for Transmit Buffer 26"]
+    cr26[26],
+    #[doc = "Cancellation Request for Transmit Buffer 27"]
+    cr27[27],
+    #[doc = "Cancellation Request for Transmit Buffer 28"]
+    cr28[28],
+    #[doc = "Cancellation Request for Transmit Buffer 29"]
+    cr29[29],
+    #[doc = "Cancellation Request for Transmit Buffer 30"]
+    cr30[30],
+    #[doc = "Cancellation Request for Transmit Buffer 31"]
+    cr31[31],
+}
+#[doc = "Transmit Buffer Transmission Occurred Register"]
+ReadOnly register[32] McanTxbto {
+    #[doc = "Transmission Occurred for Buffer 0"]
+    to0[0],
+    #[doc = "Transmission Occurred for Buffer 1"]
+    to1[1],
+    #[doc = "Transmission Occurred for Buffer 2"]
+    to2[2],
+    #[doc = "Transmission Occurred for Buffer 3"]
+    to3[3],
+    #[doc = "Transmission Occurred for Buffer 4"]
+    to4[4],
+    #[doc = "Transmission Occurred for Buffer 5"]
+    to5[5],
+    #[doc = "Transmission Occurred for Buffer 6"]
+    to6[6],
+    #[doc = "Transmission Occurred for Buffer 7"]
+    to7[7],
+    #[doc = "Transmission Occurred for Buffer 8"]
+    to8[8],
+    #[doc = "Transmission Occurred for Buffer 9"]
+    to9[9],
+    #[doc = "Transmission Occurred for Buffer 10"]
+    to10[10],
+    #[doc = "Transmission Occurred for Buffer 11"]
+    to11[11],
+    #[doc = "Transmission Occurred for Buffer 12"]
+    to12[12],
+    #[doc = "Transmission Occurred for Buffer 13"]
+    to13[13],
+    #[doc = "Transmission Occurred for Buffer 14"]
+    to14[14],
+    #[doc = "Transmission Occurred for Buffer 15"]
+    to15[15],
+    #[doc = "Transmission Occurred for Buffer 16"]
+    to16[16],
+    #[doc = "Transmission Occurred for Buffer 17"]
+    to17[17],
+    #[doc = "Transmission Occurred for Buffer 18"]
+    to18[18],
+    #[doc = "Transmission Occurred for Buffer 19"]
+    to19[19],
+    #[doc = "Transmission Occurred for Buffer 20"]
+    to20[20],
+    #[doc = "Transmission Occurred for Buffer 21"]
+    to21[21],
+    #[doc = "Transmission Occurred for Buffer 22"]
+    to22[22],
+    #[doc = "Transmission Occurred for Buffer 23"]
+    to23[23],
+    #[doc = "Transmission Occurred for Buffer 24"]
+    to24[24],
+    #[doc = "Transmission Occurred for Buffer 25"]
+    to25[25],
+    #[doc = "Transmission Occurred for Buffer 26"]
+    to26[26],
+    #[doc = "Transmission Occurred for Buffer 27"]
+    to27[27],
+    #[doc = "Transmission Occurred for Buffer 28"]
+    to28[28],
+    #[doc = "Transmission Occurred for Buffer 29"]
+    to29[29],
+    #[doc = "Transmission Occurred for Buffer 30"]
+    to30[30],
+    #[doc = "Transmission Occurred for Buffer 31"]
+    to31[31],
+}
+#[doc = "Transmit Buffer Cancellation Finished Register"]
+ReadOnly register[32] McanTxbcf {
+    #[doc = "Cancellation Finished for Transmit Buffer 0"]
+    cf0[0],
+    #[doc = "Cancellation Finished for Transmit Buffer 1"]
+    cf1[1],
+    #[doc = "Cancellation Finished for Transmit Buffer 2"]
+    cf2[2],
+    #[doc = "Cancellation Finished for Transmit Buffer 3"]
+    cf3[3],
+    #[doc = "Cancellation Finished for Transmit Buffer 4"]
+    cf4[4],
+    #[doc = "Cancellation Finished for Transmit Buffer 5"]
+    cf5[5],
+    #[doc = "Cancellation Finished for Transmit Buffer 6"]
+    cf6[6],
+    #[doc = "Cancellation Finished for Transmit Buffer 7"]
+    cf7[7],
+    #[doc = "Cancellation Finished for Transmit Buffer 8"]
+    cf8[8],
+    #[doc = "Cancellation Finished for Transmit Buffer 9"]
+    cf9[9],
+    #[doc = "Cancellation Finished for Transmit Buffer 10"]
+    cf10[10],
+    #[doc = "Cancellation Finished for Transmit Buffer 11"]
+    cf11[11],
+    #[doc = "Cancellation Finished for Transmit Buffer 12"]
+    cf12[12],
+    #[doc = "Cancellation Finished for Transmit Buffer 13"]
+    cf13[13],
+    #[doc = "Cancellation Finished for Transmit Buffer 14"]
+    cf14[14],
+    #[doc = "Cancellation Finished for Transmit Buffer 15"]
+    cf15[15],
+    #[doc = "Cancellation Finished for Transmit Buffer 16"]
+    cf16[16],
+    #[doc = "Cancellation Finished for Transmit Buffer 17"]
+    cf17[17],
+    #[doc = "Cancellation Finished for Transmit Buffer 18"]
+    cf18[18],
+    #[doc = "Cancellation Finished for Transmit Buffer 19"]
+    cf19[19],
+    #[doc = "Cancellation Finished for Transmit Buffer 20"]
+    cf20[20],
+    #[doc = "Cancellation Finished for Transmit Buffer 21"]
+    cf21[21],
+    #[doc = "Cancellation Finished for Transmit Buffer 22"]
+    cf22[22],
+    #[doc = "Cancellation Finished for Transmit Buffer 23"]
+    cf23[23],
+    #[doc = "Cancellation Finished for Transmit Buffer 24"]
+    cf24[24],
+    #[doc = "Cancellation Finished for Transmit Buffer 25"]
+    cf25[25],
+    #[doc = "Cancellation Finished for Transmit Buffer 26"]
+    cf26[26],
+    #[doc = "Cancellation Finished for Transmit Buffer 27"]
+    cf27[27],
+    #[doc = "Cancellation Finished for Transmit Buffer 28"]
+    cf28[28],
+    #[doc = "Cancellation Finished for Transmit Buffer 29"]
+    cf29[29],
+    #[doc = "Cancellation Finished for Transmit Buffer 30"]
+    cf30[30],
+    #[doc = "Cancellation Finished for Transmit Buffer 31"]
+    cf31[31],
+}
+#[doc = "Transmit Buffer Transmission Interrupt Enable Register"]
+ReadWrite register[32] McanTxbtie {
+    #[doc = "Transmission Interrupt Enable for Buffer 0"]
+    tie0[0],
+    #[doc = "Transmission Interrupt Enable for Buffer 1"]
+    tie1[1],
+    #[doc = "Transmission Interrupt Enable for Buffer 2"]
+    tie2[2],
+    #[doc = "Transmission Interrupt Enable for Buffer 3"]
+    tie3[3],
+    #[doc = "Transmission Interrupt Enable for Buffer 4"]
+    tie4[4],
+    #[doc = "Transmission Interrupt Enable for Buffer 5"]
+    tie5[5],
+    #[doc = "Transmission Interrupt Enable for Buffer 6"]
+    tie6[6],
+    #[doc = "Transmission Interrupt Enable for Buffer 7"]
+    tie7[7],
+    #[doc = "Transmission Interrupt Enable for Buffer 8"]
+    tie8[8],
+    #[doc = "Transmission Interrupt Enable for Buffer 9"]
+    tie9[9],
+    #[doc = "Transmission Interrupt Enable for Buffer 10"]
+    tie10[10],
+    #[doc = "Transmission Interrupt Enable for Buffer 11"]
+    tie11[11],
+    #[doc = "Transmission Interrupt Enable for Buffer 12"]
+    tie12[12],
+    #[doc = "Transmission Interrupt Enable for Buffer 13"]
+    tie13[13],
+    #[doc = "Transmission Interrupt Enable for Buffer 14"]
+    tie14[14],
+    #[doc = "Transmission Interrupt Enable for Buffer 15"]
+    tie15[15],
+    #[doc = "Transmission Interrupt Enable for Buffer 16"]
+    tie16[16],
+    #[doc = "Transmission Interrupt Enable for Buffer 17"]
+    tie17[17],
+    #[doc = "Transmission Interrupt Enable for Buffer 18"]
+    tie18[18],
+    #[doc = "Transmission Interrupt Enable for Buffer 19"]
+    tie19[19],
+    #[doc = "Transmission Interrupt Enable for Buffer 20"]
+    tie20[20],
+    #[doc = "Transmission Interrupt Enable for Buffer 21"]
+    tie21[21],
+    #[doc = "Transmission Interrupt Enable for Buffer 22"]
+    tie22[22],
+    #[doc = "Transmission Interrupt Enable for Buffer 23"]
+    tie23[23],
+    #[doc = "Transmission Interrupt Enable for Buffer 24"]
+    tie24[24],
+    #[doc = "Transmission Interrupt Enable for Buffer 25"]
+    tie25[25],
+    #[doc = "Transmission Interrupt Enable for Buffer 26"]
+    tie26[26],
+    #[doc = "Transmission Interrupt Enable for Buffer 27"]
+    tie27[27],
+    #[doc = "Transmission Interrupt Enable for Buffer 28"]
+    tie28[28],
+    #[doc = "Transmission Interrupt Enable for Buffer 29"]
+    tie29[29],
+    #[doc = "Transmission Interrupt Enable for Buffer 30"]
+    tie30[30],
+    #[doc = "Transmission Interrupt Enable for Buffer 31"]
+    tie31[31],
+}
+#[doc = "Transmit Buffer Cancellation Finished Interrupt Enable Register"]
+ReadWrite register[32] McanTxbcie {
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 0"]
+    cfie0[0],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 1"]
+    cfie1[1],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 2"]
+    cfie2[2],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 3"]
+    cfie3[3],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 4"]
+    cfie4[4],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 5"]
+    cfie5[5],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 6"]
+    cfie6[6],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 7"]
+    cfie7[7],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 8"]
+    cfie8[8],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 9"]
+    cfie9[9],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 10"]
+    cfie10[10],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 11"]
+    cfie11[11],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 12"]
+    cfie12[12],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 13"]
+    cfie13[13],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 14"]
+    cfie14[14],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 15"]
+    cfie15[15],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 16"]
+    cfie16[16],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 17"]
+    cfie17[17],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 18"]
+    cfie18[18],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 19"]
+    cfie19[19],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 20"]
+    cfie20[20],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 21"]
+    cfie21[21],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 22"]
+    cfie22[22],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 23"]
+    cfie23[23],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 24"]
+    cfie24[24],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 25"]
+    cfie25[25],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 26"]
+    cfie26[26],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 27"]
+    cfie27[27],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 28"]
+    cfie28[28],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 29"]
+    cfie29[29],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 30"]
+    cfie30[30],
+    #[doc = "Cancellation Finished Interrupt Enable for Transmit Buffer 31"]
+    cfie31[31],
+}
+#[doc = "Transmit Event FIFO Configuration Register"]
+ReadWrite register[32] McanTxefc {
+    #[doc = "Event FIFO Start Address"]
+    efsa[2..16],
+    #[doc = "Event FIFO Size"]
+    efs[16..22],
+    #[doc = "Event FIFO Watermark"]
+    efwm[24..30],
+}
+#[doc = "Transmit Event FIFO Status Register"]
+ReadOnly register[32] McanTxefs {
+    #[doc = "Event FIFO Fill Level"]
+    effl[0..6],
+    #[doc = "Event FIFO Get Index"]
+    efgi[8..13],
+    #[doc = "Event FIFO Put Index"]
+    efpi[16..21],
+    #[doc = "Event FIFO Full"]
+    eff[24],
+    #[doc = "Tx Event FIFO Element Lost"]
+    tefl[25],
+}
+#[doc = "Transmit Event FIFO Acknowledge Register"]
+ReadWrite register[32] McanTxefa {
+    #[doc = "Event FIFO Acknowledge Index"]
+    efai[0..5],
+}

@@ -1,0 +1,349 @@
+#[doc = "Two-wire Interface High Speed"]
+peripheral Twihs {
+    twihs_cr: TwihsCr @ 0x0,
+    twihs_mmr: TwihsMmr @ 0x4,
+    twihs_smr: TwihsSmr @ 0x8,
+    twihs_iadr: TwihsIadr @ 0xc,
+    twihs_cwgr: TwihsCwgr @ 0x10,
+    twihs_sr: TwihsSr @ 0x20,
+    twihs_ier: TwihsIer @ 0x24,
+    twihs_idr: TwihsIdr @ 0x28,
+    twihs_imr: TwihsImr @ 0x2c,
+    twihs_rhr: TwihsRhr @ 0x30,
+    twihs_thr: TwihsThr @ 0x34,
+    twihs_smbtr: TwihsSmbtr @ 0x38,
+    twihs_filtr: TwihsFiltr @ 0x44,
+    twihs_swmr: TwihsSwmr @ 0x4c,
+    twihs_dr: TwihsDr @ 0xd0,
+    twihs_wpmr: TwihsWpmr @ 0xe4,
+    twihs_wpsr: TwihsWpsr @ 0xe8,
+    twihs_ver: TwihsVer @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] TwihsCr {
+    #[doc = "Send a START Condition"]
+    start[0],
+    #[doc = "Send a STOP Condition"]
+    stop[1],
+    #[doc = "TWIHS Master Mode Enabled"]
+    msen[2],
+    #[doc = "TWIHS Master Mode Disabled"]
+    msdis[3],
+    #[doc = "TWIHS Slave Mode Enabled"]
+    sven[4],
+    #[doc = "TWIHS Slave Mode Disabled"]
+    svdis[5],
+    #[doc = "SMBus Quick Command"]
+    quick[6],
+    #[doc = "Software Reset"]
+    swrst[7],
+    #[doc = "TWIHS High-Speed Mode Enabled"]
+    hsen[8],
+    #[doc = "TWIHS High-Speed Mode Disabled"]
+    hsdis[9],
+    #[doc = "SMBus Mode Enabled"]
+    smben[10],
+    #[doc = "SMBus Mode Disabled"]
+    smbdis[11],
+    #[doc = "Packet Error Checking Enable"]
+    pecen[12],
+    #[doc = "Packet Error Checking Disable"]
+    pecdis[13],
+    #[doc = "PEC Request"]
+    pecrq[14],
+    #[doc = "Bus CLEAR Command"]
+    clear[15],
+    #[doc = "Alternative Command Mode Enable"]
+    acmen[16],
+    #[doc = "Alternative Command Mode Disable"]
+    acmdis[17],
+    #[doc = "Transmit Holding Register Clear"]
+    thrclr[24],
+    #[doc = "Lock Clear"]
+    lockclr[26],
+    #[doc = "FIFO Enable"]
+    fifoen[28],
+    #[doc = "FIFO Disable"]
+    fifodis[29],
+}
+#[doc = "Master Mode Register"]
+ReadWrite register[32] TwihsMmr {
+    #[doc = "Internal Device Address Size"]
+    iadrsz[8..10] {
+        #[doc = "No internal device address"]
+        None = 0x0,
+        #[doc = "One-byte internal device address"]
+        _1Byte = 0x1,
+        #[doc = "Two-byte internal device address"]
+        _2Byte = 0x2,
+        #[doc = "Three-byte internal device address"]
+        _3Byte = 0x3,
+    },
+    #[doc = "Master Read Direction"]
+    mread[12],
+    #[doc = "Device Address"]
+    dadr[16..23],
+}
+#[doc = "Slave Mode Register"]
+ReadWrite register[32] TwihsSmr {
+    #[doc = "Slave Receiver Data Phase NACK enable"]
+    nacken[0],
+    #[doc = "SMBus Default Address"]
+    smda[2],
+    #[doc = "SMBus Host Header"]
+    smhh[3],
+    #[doc = "Clock Wait State Disable"]
+    sclwsdis[6],
+    #[doc = "Slave Address Mask"]
+    mask[8..15],
+    #[doc = "Slave Address"]
+    sadr[16..23],
+    #[doc = "Slave Address 1 Enable"]
+    sadr1en[28],
+    #[doc = "Slave Address 2 Enable"]
+    sadr2en[29],
+    #[doc = "Slave Address 3 Enable"]
+    sadr3en[30],
+    #[doc = "Data Matching Enable"]
+    datamen[31],
+}
+#[doc = "Internal Address Register"]
+ReadWrite register[32] TwihsIadr {
+    #[doc = "Internal Address"]
+    iadr[0..24],
+}
+#[doc = "Clock Waveform Generator Register"]
+ReadWrite register[32] TwihsCwgr {
+    #[doc = "Clock Low Divider"]
+    cldiv[0..8],
+    #[doc = "Clock High Divider"]
+    chdiv[8..16],
+    #[doc = "Clock Divider"]
+    ckdiv[16..19],
+    #[doc = "TWD Hold Time Versus TWCK Falling"]
+    hold[24..30],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] TwihsSr {
+    #[doc = "Transmission Completed (cleared by writing TWIHS_THR)"]
+    txcomp[0],
+    #[doc = "Receive Holding Register Ready (cleared by reading TWIHS_RHR)"]
+    rxrdy[1],
+    #[doc = "Transmit Holding Register Ready (cleared by writing TWIHS_THR)"]
+    txrdy[2],
+    #[doc = "Slave Read"]
+    svread[3],
+    #[doc = "Slave Access"]
+    svacc[4],
+    #[doc = "General Call Access (cleared on read)"]
+    gacc[5],
+    #[doc = "Overrun Error (cleared on read)"]
+    ovre[6],
+    #[doc = "Underrun Error (cleared on read)"]
+    unre[7],
+    #[doc = "Not Acknowledged (cleared on read)"]
+    nack[8],
+    #[doc = "Arbitration Lost (cleared on read)"]
+    arblst[9],
+    #[doc = "Clock Wait State"]
+    sclws[10],
+    #[doc = "End Of Slave Access (cleared on read)"]
+    eosacc[11],
+    #[doc = "Master Code Acknowledge (cleared on read)"]
+    mcack[16],
+    #[doc = "Timeout Error (cleared on read)"]
+    tout[18],
+    #[doc = "PEC Error (cleared on read)"]
+    pecerr[19],
+    #[doc = "SMBus Default Address Match (cleared on read)"]
+    smbdam[20],
+    #[doc = "SMBus Host Header Address Match (cleared on read)"]
+    smbhhm[21],
+    #[doc = "SCL Line Value"]
+    scl[24],
+    #[doc = "SDA Line Value"]
+    sda[25],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] TwihsIer {
+    #[doc = "Transmission Completed Interrupt Enable"]
+    txcomp[0],
+    #[doc = "Receive Holding Register Ready Interrupt Enable"]
+    rxrdy[1],
+    #[doc = "Transmit Holding Register Ready Interrupt Enable"]
+    txrdy[2],
+    #[doc = "Slave Access Interrupt Enable"]
+    svacc[4],
+    #[doc = "General Call Access Interrupt Enable"]
+    gacc[5],
+    #[doc = "Overrun Error Interrupt Enable"]
+    ovre[6],
+    #[doc = "Underrun Error Interrupt Enable"]
+    unre[7],
+    #[doc = "Not Acknowledge Interrupt Enable"]
+    nack[8],
+    #[doc = "Arbitration Lost Interrupt Enable"]
+    arblst[9],
+    #[doc = "Clock Wait State Interrupt Enable"]
+    scl_ws[10],
+    #[doc = "End Of Slave Access Interrupt Enable"]
+    eosacc[11],
+    #[doc = "Master Code Acknowledge Interrupt Enable"]
+    mcack[16],
+    #[doc = "Timeout Error Interrupt Enable"]
+    tout[18],
+    #[doc = "PEC Error Interrupt Enable"]
+    pecerr[19],
+    #[doc = "SMBus Default Address Match Interrupt Enable"]
+    smbdam[20],
+    #[doc = "SMBus Host Header Address Match Interrupt Enable"]
+    smbhhm[21],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] TwihsIdr {
+    #[doc = "Transmission Completed Interrupt Disable"]
+    txcomp[0],
+    #[doc = "Receive Holding Register Ready Interrupt Disable"]
+    rxrdy[1],
+    #[doc = "Transmit Holding Register Ready Interrupt Disable"]
+    txrdy[2],
+    #[doc = "Slave Access Interrupt Disable"]
+    svacc[4],
+    #[doc = "General Call Access Interrupt Disable"]
+    gacc[5],
+    #[doc = "Overrun Error Interrupt Disable"]
+    ovre[6],
+    #[doc = "Underrun Error Interrupt Disable"]
+    unre[7],
+    #[doc = "Not Acknowledge Interrupt Disable"]
+    nack[8],
+    #[doc = "Arbitration Lost Interrupt Disable"]
+    arblst[9],
+    #[doc = "Clock Wait State Interrupt Disable"]
+    scl_ws[10],
+    #[doc = "End Of Slave Access Interrupt Disable"]
+    eosacc[11],
+    #[doc = "Master Code Acknowledge Interrupt Disable"]
+    mcack[16],
+    #[doc = "Timeout Error Interrupt Disable"]
+    tout[18],
+    #[doc = "PEC Error Interrupt Disable"]
+    pecerr[19],
+    #[doc = "SMBus Default Address Match Interrupt Disable"]
+    smbdam[20],
+    #[doc = "SMBus Host Header Address Match Interrupt Disable"]
+    smbhhm[21],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] TwihsImr {
+    #[doc = "Transmission Completed Interrupt Mask"]
+    txcomp[0],
+    #[doc = "Receive Holding Register Ready Interrupt Mask"]
+    rxrdy[1],
+    #[doc = "Transmit Holding Register Ready Interrupt Mask"]
+    txrdy[2],
+    #[doc = "Slave Access Interrupt Mask"]
+    svacc[4],
+    #[doc = "General Call Access Interrupt Mask"]
+    gacc[5],
+    #[doc = "Overrun Error Interrupt Mask"]
+    ovre[6],
+    #[doc = "Underrun Error Interrupt Mask"]
+    unre[7],
+    #[doc = "Not Acknowledge Interrupt Mask"]
+    nack[8],
+    #[doc = "Arbitration Lost Interrupt Mask"]
+    arblst[9],
+    #[doc = "Clock Wait State Interrupt Mask"]
+    scl_ws[10],
+    #[doc = "End Of Slave Access Interrupt Mask"]
+    eosacc[11],
+    #[doc = "Master Code Acknowledge Interrupt Mask"]
+    mcack[16],
+    #[doc = "Timeout Error Interrupt Mask"]
+    tout[18],
+    #[doc = "PEC Error Interrupt Mask"]
+    pecerr[19],
+    #[doc = "SMBus Default Address Match Interrupt Mask"]
+    smbdam[20],
+    #[doc = "SMBus Host Header Address Match Interrupt Mask"]
+    smbhhm[21],
+}
+#[doc = "Receive Holding Register"]
+ReadOnly register[32] TwihsRhr {
+    #[doc = "Master or Slave Receive Holding Data"]
+    rxdata[0..8],
+}
+#[doc = "Transmit Holding Register"]
+WriteOnly register[32] TwihsThr {
+    #[doc = "Master or Slave Transmit Holding Data"]
+    txdata[0..8],
+}
+#[doc = "SMBus Timing Register"]
+ReadWrite register[32] TwihsSmbtr {
+    #[doc = "SMBus Clock Prescaler"]
+    presc[0..4],
+    #[doc = "Slave Clock Stretch Maximum Cycles"]
+    tlows[8..16],
+    #[doc = "Master Clock Stretch Maximum Cycles"]
+    tlowm[16..24],
+    #[doc = "Clock High Maximum Cycles"]
+    thmax[24..32],
+}
+#[doc = "Filter Register"]
+ReadWrite register[32] TwihsFiltr {
+    #[doc = "RX Digital Filter"]
+    filt[0],
+    #[doc = "PAD Filter Enable"]
+    padfen[1],
+    #[doc = "PAD Filter Config"]
+    padfcfg[2],
+    #[doc = "Digital Filter Threshold"]
+    thres[8..11],
+}
+#[doc = "SleepWalking Matching Register"]
+ReadWrite register[32] TwihsSwmr {
+    #[doc = "Slave Address 1"]
+    sadr1[0..7],
+    #[doc = "Slave Address 2"]
+    sadr2[8..15],
+    #[doc = "Slave Address 3"]
+    sadr3[16..23],
+    #[doc = "Data Match"]
+    datam[24..32],
+}
+#[doc = "Debug Register"]
+ReadOnly register[32] TwihsDr {
+    #[doc = "SleepWalking Enable"]
+    swen[0],
+    #[doc = "Clock Request"]
+    clkrq[1],
+    #[doc = "SleepWalking Match"]
+    swmatch[2],
+    #[doc = "Transfer Pending"]
+    trp[3],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] TwihsWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0"]
+        Passwd = 0x545749,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] TwihsWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..32],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] TwihsVer {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

@@ -1,0 +1,61 @@
+#[doc = "Memory Protection Unit Registers"]
+peripheral Mpu {
+    mpu_type: MpuType @ 0x0,
+    mpu_ctrl: MpuCtrl @ 0x4,
+    mpu_rnr: MpuRnr @ 0x8,
+    mpu_rbar: MpuRbar @ 0xc,
+    mpu_rasr: MpuRasr @ 0x10,
+}
+#[doc = "MPU Type Register"]
+ReadWrite register[32] MpuType {
+    #[doc = "Indicates support for unified or separate instruction and date memory maps."]
+    separate[0],
+    #[doc = "Indicates the number of supported MPU instruction regions."]
+    dregion[8..16],
+    #[doc = "Indicates the number of supported MPU data regions."]
+    iregion[16..24],
+}
+#[doc = "MPU Control Register"]
+ReadWrite register[32] MpuCtrl {
+    #[doc = "Enables the MPU"]
+    enable[0],
+    #[doc = "Enables the operation of MPU during hard fault, NMI, and FAULTMASK handlers."]
+    hfnmiena[1],
+    #[doc = "Enables privileged software access to the default memory map."]
+    privdefena[2],
+}
+#[doc = "MPU Region Number Register"]
+ReadWrite register[32] MpuRnr {
+    #[doc = "Indicates the MPU region referenced by the MPU_RBAR and MPU_RASR registers."]
+    region[0..8],
+}
+#[doc = "MPU Region Base Address Register"]
+ReadWrite register[32] MpuRbar {
+    #[doc = "MPU region field."]
+    region[0..4],
+    #[doc = "MPU Region Number valid bit."]
+    valid[4],
+    #[doc = "Region base address field."]
+    addr[5..32],
+}
+#[doc = "MPU Region Attribute and Size Register"]
+ReadWrite register[32] MpuRasr {
+    #[doc = "Region enable bit."]
+    enable[0],
+    #[doc = "Specifies the size of the MPU protection region."]
+    size[1..6],
+    #[doc = "Subregion disable bits."]
+    srd[8..16],
+    #[doc = "MPU access permission attributes."]
+    b[16],
+    #[doc = "MPU access permission attributes."]
+    c[17],
+    #[doc = "Shareable bit."]
+    s[18],
+    #[doc = "MPU access permission attributes."]
+    tex[19..22],
+    #[doc = "Access permission field."]
+    ap[24..27],
+    #[doc = "Instruction access disable bit."]
+    xn[28],
+}

@@ -1,0 +1,504 @@
+#[doc = "High Speed MultiMedia Card Interface"]
+peripheral Hsmci {
+    hsmci_cr: HsmciCr @ 0x0,
+    hsmci_mr: HsmciMr @ 0x4,
+    hsmci_dtor: HsmciDtor @ 0x8,
+    hsmci_sdcr: HsmciSdcr @ 0xc,
+    hsmci_argr: HsmciArgr @ 0x10,
+    hsmci_cmdr: HsmciCmdr @ 0x14,
+    hsmci_blkr: HsmciBlkr @ 0x18,
+    hsmci_cstor: HsmciCstor @ 0x1c,
+    hsmci_rspr: [HsmciRspr; 4] @ 0x20,
+    hsmci_rdr: HsmciRdr @ 0x30,
+    hsmci_tdr: HsmciTdr @ 0x34,
+    hsmci_sr: HsmciSr @ 0x40,
+    hsmci_ier: HsmciIer @ 0x44,
+    hsmci_idr: HsmciIdr @ 0x48,
+    hsmci_imr: HsmciImr @ 0x4c,
+    hsmci_dma: HsmciDma @ 0x50,
+    hsmci_cfg: HsmciCfg @ 0x54,
+    hsmci_wpmr: HsmciWpmr @ 0xe4,
+    hsmci_wpsr: HsmciWpsr @ 0xe8,
+    hsmci_version: HsmciVersion @ 0xfc,
+    hsmci_fifo: [HsmciFifo; 256] @ 0x200,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] HsmciCr {
+    #[doc = "Multi-Media Interface Enable"]
+    mcien[0],
+    #[doc = "Multi-Media Interface Disable"]
+    mcidis[1],
+    #[doc = "Power Save Mode Enable"]
+    pwsen[2],
+    #[doc = "Power Save Mode Disable"]
+    pwsdis[3],
+    #[doc = "Software Reset"]
+    swrst[7],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] HsmciMr {
+    #[doc = "Clock Divider"]
+    clkdiv[0..8],
+    #[doc = "Power Saving Divider"]
+    pwsdiv[8..11],
+    #[doc = "Read Proof Enable"]
+    rdproof[11],
+    #[doc = "Write Proof Enable"]
+    wrproof[12],
+    #[doc = "Force Byte Transfer"]
+    fbyte[13],
+    #[doc = "Padding Value"]
+    padv[14],
+    #[doc = "Clock divider is odd"]
+    clkodd[16],
+}
+#[doc = "Data Timeout Register"]
+ReadWrite register[32] HsmciDtor {
+    #[doc = "Data Timeout Cycle Number"]
+    dtocyc[0..4],
+    #[doc = "Data Timeout Multiplier"]
+    dtomul[4..7] {
+        #[doc = "DTOCYC"]
+        _1 = 0x0,
+        #[doc = "DTOCYC x 16"]
+        _16 = 0x1,
+        #[doc = "DTOCYC x 128"]
+        _128 = 0x2,
+        #[doc = "DTOCYC x 256"]
+        _256 = 0x3,
+        #[doc = "DTOCYC x 1024"]
+        _1024 = 0x4,
+        #[doc = "DTOCYC x 4096"]
+        _4096 = 0x5,
+        #[doc = "DTOCYC x 65536"]
+        _65536 = 0x6,
+        #[doc = "DTOCYC x 1048576"]
+        _1048576 = 0x7,
+    },
+}
+#[doc = "SD/SDIO Card Register"]
+ReadWrite register[32] HsmciSdcr {
+    #[doc = "SDCard/SDIO Slot"]
+    sdcsel[0..2] {
+        #[doc = "Slot A is selected."]
+        Slota = 0x0,
+    },
+    #[doc = "SDCard/SDIO Bus Width"]
+    sdcbus[6..8] {
+        #[doc = "1 bit"]
+        _1 = 0x0,
+        #[doc = "4 bits"]
+        _4 = 0x2,
+        #[doc = "8 bits"]
+        _8 = 0x3,
+    },
+}
+#[doc = "Argument Register"]
+ReadWrite register[32] HsmciArgr {
+    #[doc = "Command Argument"]
+    arg[0..32],
+}
+#[doc = "Command Register"]
+WriteOnly register[32] HsmciCmdr {
+    #[doc = "Command Number"]
+    cmdnb[0..6],
+    #[doc = "Response Type"]
+    rsptyp[6..8] {
+        #[doc = "No response"]
+        Noresp = 0x0,
+        #[doc = "48-bit response"]
+        _48Bit = 0x1,
+        #[doc = "136-bit response"]
+        _136Bit = 0x2,
+        #[doc = "R1b response type"]
+        R1b = 0x3,
+    },
+    #[doc = "Special Command"]
+    spcmd[8..11] {
+        #[doc = "Not a special CMD."]
+        Std = 0x0,
+        #[doc = "Initialization CMD: 74 clock cycles for initialization sequence."]
+        Init = 0x1,
+        #[doc = "Synchronized CMD: Wait for the end of the current data block transfer before sending the pending command."]
+        Sync = 0x2,
+        #[doc = "CE-ATA Completion Signal disable Command. The host cancels the ability for the device to return a command completion signal on the command line."]
+        CeAta = 0x3,
+        #[doc = "Interrupt command: Corresponds to the Interrupt Mode (CMD40)."]
+        ItCmd = 0x4,
+        #[doc = "Interrupt response: Corresponds to the Interrupt Mode (CMD40)."]
+        ItResp = 0x5,
+        #[doc = "Boot Operation Request. Start a boot operation mode, the host processor can read boot data from the MMC device directly."]
+        Bor = 0x6,
+        #[doc = "End Boot Operation. This command allows the host processor to terminate the boot operation mode."]
+        Ebo = 0x7,
+    },
+    #[doc = "Open Drain Command"]
+    opdcmd[11] {
+        #[doc = "Push pull command."]
+        Pushpull = 0x0,
+        #[doc = "Open drain command."]
+        Opendrain = 0x1,
+    },
+    #[doc = "Max Latency for Command to Response"]
+    maxlat[12] {
+        #[doc = "5-cycle max latency."]
+        _5 = 0x0,
+        #[doc = "64-cycle max latency."]
+        _64 = 0x1,
+    },
+    #[doc = "Transfer Command"]
+    trcmd[16..18] {
+        #[doc = "No data transfer"]
+        NoData = 0x0,
+        #[doc = "Start data transfer"]
+        StartData = 0x1,
+        #[doc = "Stop data transfer"]
+        StopData = 0x2,
+    },
+    #[doc = "Transfer Direction"]
+    trdir[18] {
+        #[doc = "Write."]
+        Write = 0x0,
+        #[doc = "Read."]
+        Read = 0x1,
+    },
+    #[doc = "Transfer Type"]
+    trtyp[19..22] {
+        #[doc = "MMC/SD Card Single Block"]
+        Single = 0x0,
+        #[doc = "MMC/SD Card Multiple Block"]
+        Multiple = 0x1,
+        #[doc = "MMC Stream"]
+        Stream = 0x2,
+        #[doc = "SDIO Byte"]
+        Byte = 0x4,
+        #[doc = "SDIO Block"]
+        Block = 0x5,
+    },
+    #[doc = "SDIO Special Command"]
+    iospcmd[24..26] {
+        #[doc = "Not an SDIO Special Command"]
+        Std = 0x0,
+        #[doc = "SDIO Suspend Command"]
+        Suspend = 0x1,
+        #[doc = "SDIO Resume Command"]
+        Resume = 0x2,
+    },
+    #[doc = "ATA with Command Completion Signal"]
+    atacs[26] {
+        #[doc = "Normal operation mode."]
+        Normal = 0x0,
+        #[doc = "This bit indicates that a completion signal is expected within a programmed amount of time (HSMCI_CSTOR)."]
+        Completion = 0x1,
+    },
+    #[doc = "Boot Operation Acknowledge"]
+    boot_ack[27],
+}
+#[doc = "Block Register"]
+ReadWrite register[32] HsmciBlkr {
+    #[doc = "MMC/SDIO Block Count - SDIO Byte Count"]
+    bcnt[0..16],
+    #[doc = "Data Block Length"]
+    blklen[16..32],
+}
+#[doc = "Completion Signal Timeout Register"]
+ReadWrite register[32] HsmciCstor {
+    #[doc = "Completion Signal Timeout Cycle Number"]
+    cstocyc[0..4],
+    #[doc = "Completion Signal Timeout Multiplier"]
+    cstomul[4..7] {
+        #[doc = "CSTOCYC x 1"]
+        _1 = 0x0,
+        #[doc = "CSTOCYC x 16"]
+        _16 = 0x1,
+        #[doc = "CSTOCYC x 128"]
+        _128 = 0x2,
+        #[doc = "CSTOCYC x 256"]
+        _256 = 0x3,
+        #[doc = "CSTOCYC x 1024"]
+        _1024 = 0x4,
+        #[doc = "CSTOCYC x 4096"]
+        _4096 = 0x5,
+        #[doc = "CSTOCYC x 65536"]
+        _65536 = 0x6,
+        #[doc = "CSTOCYC x 1048576"]
+        _1048576 = 0x7,
+    },
+}
+#[doc = "Response Register 0"]
+ReadOnly register[32] HsmciRspr {
+    #[doc = "Response"]
+    rsp[0..32],
+}
+#[doc = "Receive Data Register"]
+ReadOnly register[32] HsmciRdr {
+    #[doc = "Data to Read"]
+    data[0..32],
+}
+#[doc = "Transmit Data Register"]
+WriteOnly register[32] HsmciTdr {
+    #[doc = "Data to Write"]
+    data[0..32],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] HsmciSr {
+    #[doc = "Command Ready (cleared by writing in HSMCI_CMDR)"]
+    cmdrdy[0],
+    #[doc = "Receiver Ready (cleared by reading HSMCI_RDR)"]
+    rxrdy[1],
+    #[doc = "Transmit Ready (cleared by writing in HSMCI_TDR)"]
+    txrdy[2],
+    #[doc = "Data Block Ended (cleared on read)"]
+    blke[3],
+    #[doc = "Data Transfer in Progress (cleared at the end of CRC16 calculation)"]
+    dtip[4],
+    #[doc = "HSMCI Not Busy"]
+    notbusy[5],
+    #[doc = "SDIO Interrupt for Slot A (cleared on read)"]
+    sdioirqa[8],
+    #[doc = "SDIO Read Wait Operation Status"]
+    sdiowait[12],
+    #[doc = "CE-ATA Completion Signal Received (cleared on read)"]
+    csrcv[13],
+    #[doc = "Response Index Error (cleared by writing in HSMCI_CMDR)"]
+    rinde[16],
+    #[doc = "Response Direction Error (cleared by writing in HSMCI_CMDR)"]
+    rdire[17],
+    #[doc = "Response CRC Error (cleared by writing in HSMCI_CMDR)"]
+    rcrce[18],
+    #[doc = "Response End Bit Error (cleared by writing in HSMCI_CMDR)"]
+    rende[19],
+    #[doc = "Response Time-out Error (cleared by writing in HSMCI_CMDR)"]
+    rtoe[20],
+    #[doc = "Data CRC Error (cleared on read)"]
+    dcrce[21],
+    #[doc = "Data Time-out Error (cleared on read)"]
+    dtoe[22],
+    #[doc = "Completion Signal Time-out Error (cleared on read)"]
+    cstoe[23],
+    #[doc = "DMA Block Overrun Error (cleared on read)"]
+    blkovre[24],
+    #[doc = "FIFO empty flag"]
+    fifoempty[26],
+    #[doc = "Transfer Done flag"]
+    xfrdone[27],
+    #[doc = "Boot Operation Acknowledge Received (cleared on read)"]
+    ackrcv[28],
+    #[doc = "Boot Operation Acknowledge Error (cleared on read)"]
+    ackrcve[29],
+    #[doc = "Overrun (if FERRCTRL = 1, cleared by writing in HSMCI_CMDR or cleared on read if FERRCTRL = 0)"]
+    ovre[30],
+    #[doc = "Underrun (if FERRCTRL = 1, cleared by writing in HSMCI_CMDR or cleared on read if FERRCTRL = 0)"]
+    unre[31],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] HsmciIer {
+    #[doc = "Command Ready Interrupt Enable"]
+    cmdrdy[0],
+    #[doc = "Receiver Ready Interrupt Enable"]
+    rxrdy[1],
+    #[doc = "Transmit Ready Interrupt Enable"]
+    txrdy[2],
+    #[doc = "Data Block Ended Interrupt Enable"]
+    blke[3],
+    #[doc = "Data Transfer in Progress Interrupt Enable"]
+    dtip[4],
+    #[doc = "Data Not Busy Interrupt Enable"]
+    notbusy[5],
+    #[doc = "SDIO Interrupt for Slot A Interrupt Enable"]
+    sdioirqa[8],
+    #[doc = "SDIO Read Wait Operation Status Interrupt Enable"]
+    sdiowait[12],
+    #[doc = "Completion Signal Received Interrupt Enable"]
+    csrcv[13],
+    #[doc = "Response Index Error Interrupt Enable"]
+    rinde[16],
+    #[doc = "Response Direction Error Interrupt Enable"]
+    rdire[17],
+    #[doc = "Response CRC Error Interrupt Enable"]
+    rcrce[18],
+    #[doc = "Response End Bit Error Interrupt Enable"]
+    rende[19],
+    #[doc = "Response Time-out Error Interrupt Enable"]
+    rtoe[20],
+    #[doc = "Data CRC Error Interrupt Enable"]
+    dcrce[21],
+    #[doc = "Data Time-out Error Interrupt Enable"]
+    dtoe[22],
+    #[doc = "Completion Signal Timeout Error Interrupt Enable"]
+    cstoe[23],
+    #[doc = "DMA Block Overrun Error Interrupt Enable"]
+    blkovre[24],
+    #[doc = "FIFO empty Interrupt enable"]
+    fifoempty[26],
+    #[doc = "Transfer Done Interrupt enable"]
+    xfrdone[27],
+    #[doc = "Boot Acknowledge Interrupt Enable"]
+    ackrcv[28],
+    #[doc = "Boot Acknowledge Error Interrupt Enable"]
+    ackrcve[29],
+    #[doc = "Overrun Interrupt Enable"]
+    ovre[30],
+    #[doc = "Underrun Interrupt Enable"]
+    unre[31],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] HsmciIdr {
+    #[doc = "Command Ready Interrupt Disable"]
+    cmdrdy[0],
+    #[doc = "Receiver Ready Interrupt Disable"]
+    rxrdy[1],
+    #[doc = "Transmit Ready Interrupt Disable"]
+    txrdy[2],
+    #[doc = "Data Block Ended Interrupt Disable"]
+    blke[3],
+    #[doc = "Data Transfer in Progress Interrupt Disable"]
+    dtip[4],
+    #[doc = "Data Not Busy Interrupt Disable"]
+    notbusy[5],
+    #[doc = "SDIO Interrupt for Slot A Interrupt Disable"]
+    sdioirqa[8],
+    #[doc = "SDIO Read Wait Operation Status Interrupt Disable"]
+    sdiowait[12],
+    #[doc = "Completion Signal received interrupt Disable"]
+    csrcv[13],
+    #[doc = "Response Index Error Interrupt Disable"]
+    rinde[16],
+    #[doc = "Response Direction Error Interrupt Disable"]
+    rdire[17],
+    #[doc = "Response CRC Error Interrupt Disable"]
+    rcrce[18],
+    #[doc = "Response End Bit Error Interrupt Disable"]
+    rende[19],
+    #[doc = "Response Time-out Error Interrupt Disable"]
+    rtoe[20],
+    #[doc = "Data CRC Error Interrupt Disable"]
+    dcrce[21],
+    #[doc = "Data Time-out Error Interrupt Disable"]
+    dtoe[22],
+    #[doc = "Completion Signal Time out Error Interrupt Disable"]
+    cstoe[23],
+    #[doc = "DMA Block Overrun Error Interrupt Disable"]
+    blkovre[24],
+    #[doc = "FIFO empty Interrupt Disable"]
+    fifoempty[26],
+    #[doc = "Transfer Done Interrupt Disable"]
+    xfrdone[27],
+    #[doc = "Boot Acknowledge Interrupt Disable"]
+    ackrcv[28],
+    #[doc = "Boot Acknowledge Error Interrupt Disable"]
+    ackrcve[29],
+    #[doc = "Overrun Interrupt Disable"]
+    ovre[30],
+    #[doc = "Underrun Interrupt Disable"]
+    unre[31],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] HsmciImr {
+    #[doc = "Command Ready Interrupt Mask"]
+    cmdrdy[0],
+    #[doc = "Receiver Ready Interrupt Mask"]
+    rxrdy[1],
+    #[doc = "Transmit Ready Interrupt Mask"]
+    txrdy[2],
+    #[doc = "Data Block Ended Interrupt Mask"]
+    blke[3],
+    #[doc = "Data Transfer in Progress Interrupt Mask"]
+    dtip[4],
+    #[doc = "Data Not Busy Interrupt Mask"]
+    notbusy[5],
+    #[doc = "SDIO Interrupt for Slot A Interrupt Mask"]
+    sdioirqa[8],
+    #[doc = "SDIO Read Wait Operation Status Interrupt Mask"]
+    sdiowait[12],
+    #[doc = "Completion Signal Received Interrupt Mask"]
+    csrcv[13],
+    #[doc = "Response Index Error Interrupt Mask"]
+    rinde[16],
+    #[doc = "Response Direction Error Interrupt Mask"]
+    rdire[17],
+    #[doc = "Response CRC Error Interrupt Mask"]
+    rcrce[18],
+    #[doc = "Response End Bit Error Interrupt Mask"]
+    rende[19],
+    #[doc = "Response Time-out Error Interrupt Mask"]
+    rtoe[20],
+    #[doc = "Data CRC Error Interrupt Mask"]
+    dcrce[21],
+    #[doc = "Data Time-out Error Interrupt Mask"]
+    dtoe[22],
+    #[doc = "Completion Signal Time-out Error Interrupt Mask"]
+    cstoe[23],
+    #[doc = "DMA Block Overrun Error Interrupt Mask"]
+    blkovre[24],
+    #[doc = "FIFO Empty Interrupt Mask"]
+    fifoempty[26],
+    #[doc = "Transfer Done Interrupt Mask"]
+    xfrdone[27],
+    #[doc = "Boot Operation Acknowledge Received Interrupt Mask"]
+    ackrcv[28],
+    #[doc = "Boot Operation Acknowledge Error Interrupt Mask"]
+    ackrcve[29],
+    #[doc = "Overrun Interrupt Mask"]
+    ovre[30],
+    #[doc = "Underrun Interrupt Mask"]
+    unre[31],
+}
+#[doc = "DMA Configuration Register"]
+ReadWrite register[32] HsmciDma {
+    #[doc = "DMA Channel Read and Write Chunk Size"]
+    chksize[4..7] {
+        #[doc = "1 data available"]
+        _1 = 0x0,
+        #[doc = "2 data available"]
+        _2 = 0x1,
+        #[doc = "4 data available"]
+        _4 = 0x2,
+        #[doc = "8 data available"]
+        _8 = 0x3,
+        #[doc = "16 data available"]
+        _16 = 0x4,
+    },
+    #[doc = "DMA Hardware Handshaking Enable"]
+    dmaen[8],
+}
+#[doc = "Configuration Register"]
+ReadWrite register[32] HsmciCfg {
+    #[doc = "HSMCI Internal FIFO control mode"]
+    fifomode[0],
+    #[doc = "Flow Error flag reset control mode"]
+    ferrctrl[4],
+    #[doc = "High Speed Mode"]
+    hsmode[8],
+    #[doc = "Synchronize on the last block"]
+    lsync[12],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] HsmciWpmr {
+    #[doc = "Write Protect Enable"]
+    wpen[0],
+    #[doc = "Write Protect Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0."]
+        Passwd = 0x4d4349,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] HsmciWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] HsmciVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}
+#[doc = "FIFO Memory Aperture0 0"]
+ReadWrite register[32] HsmciFifo {
+    #[doc = "Data to Read or Data to Write"]
+    data[0..32],
+}

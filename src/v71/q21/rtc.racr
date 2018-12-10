@@ -1,0 +1,299 @@
+#[doc = "Real-time Clock"]
+peripheral Rtc {
+    rtc_cr: RtcCr @ 0x0,
+    rtc_mr: RtcMr @ 0x4,
+    rtc_timr: RtcTimr @ 0x8,
+    rtc_calr: RtcCalr @ 0xc,
+    rtc_timalr: RtcTimalr @ 0x10,
+    rtc_calalr: RtcCalalr @ 0x14,
+    rtc_sr: RtcSr @ 0x18,
+    rtc_sccr: RtcSccr @ 0x1c,
+    rtc_ier: RtcIer @ 0x20,
+    rtc_idr: RtcIdr @ 0x24,
+    rtc_imr: RtcImr @ 0x28,
+    rtc_ver: RtcVer @ 0x2c,
+    rtc_version: RtcVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+ReadWrite register[32] RtcCr {
+    #[doc = "Update Request Time Register"]
+    updtim[0],
+    #[doc = "Update Request Calendar Register"]
+    updcal[1],
+    #[doc = "Time Event Selection"]
+    timevsel[8..10] {
+        #[doc = "Minute change"]
+        Minute = 0x0,
+        #[doc = "Hour change"]
+        Hour = 0x1,
+        #[doc = "Every day at midnight"]
+        Midnight = 0x2,
+        #[doc = "Every day at noon"]
+        Noon = 0x3,
+    },
+    #[doc = "Calendar Event Selection"]
+    calevsel[16..18] {
+        #[doc = "Week change (every Monday at time 00:00:00)"]
+        Week = 0x0,
+        #[doc = "Month change (every 01 of each month at time 00:00:00)"]
+        Month = 0x1,
+        #[doc = "Year change (every January 1 at time 00:00:00)"]
+        Year = 0x2,
+    },
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] RtcMr {
+    #[doc = "12-/24-hour Mode"]
+    hrmod[0],
+    #[doc = "PERSIAN Calendar"]
+    persian[1],
+    #[doc = "NEGative PPM Correction"]
+    negppm[4],
+    #[doc = "Slow Clock Correction"]
+    correction[8..15],
+    #[doc = "HIGH PPM Correction"]
+    highppm[15],
+    #[doc = "RTCOUT0 OutputSource Selection"]
+    out0[16..19] {
+        #[doc = "No waveform, stuck at '0'"]
+        NoWave = 0x0,
+        #[doc = "1 Hz square wave"]
+        Freq1hz = 0x1,
+        #[doc = "32 Hz square wave"]
+        Freq32hz = 0x2,
+        #[doc = "64 Hz square wave"]
+        Freq64hz = 0x3,
+        #[doc = "512 Hz square wave"]
+        Freq512hz = 0x4,
+        #[doc = "Output toggles when alarm flag rises"]
+        AlarmToggle = 0x5,
+        #[doc = "Output is a copy of the alarm flag"]
+        AlarmFlag = 0x6,
+        #[doc = "Duty cycle programmable pulse"]
+        ProgPulse = 0x7,
+    },
+    #[doc = "RTCOUT1 Output Source Selection"]
+    out1[20..23] {
+        #[doc = "No waveform, stuck at '0'"]
+        NoWave = 0x0,
+        #[doc = "1 Hz square wave"]
+        Freq1hz = 0x1,
+        #[doc = "32 Hz square wave"]
+        Freq32hz = 0x2,
+        #[doc = "64 Hz square wave"]
+        Freq64hz = 0x3,
+        #[doc = "512 Hz square wave"]
+        Freq512hz = 0x4,
+        #[doc = "Output toggles when alarm flag rises"]
+        AlarmToggle = 0x5,
+        #[doc = "Output is a copy of the alarm flag"]
+        AlarmFlag = 0x6,
+        #[doc = "Duty cycle programmable pulse"]
+        ProgPulse = 0x7,
+    },
+    #[doc = "High Duration of the Output Pulse"]
+    thigh[24..27] {
+        #[doc = "31.2 ms"]
+        H31ms = 0x0,
+        #[doc = "15.6 ms"]
+        H16ms = 0x1,
+        #[doc = "3.91 ms"]
+        H4ms = 0x2,
+        #[doc = "976 us"]
+        H976us = 0x3,
+        #[doc = "488 us"]
+        H488us = 0x4,
+        #[doc = "122 us"]
+        H122us = 0x5,
+        #[doc = "30.5 us"]
+        H30us = 0x6,
+        #[doc = "15.2 us"]
+        H15us = 0x7,
+    },
+    #[doc = "Period of the Output Pulse"]
+    tperiod[28..30] {
+        #[doc = "1 second"]
+        P1s = 0x0,
+        #[doc = "500 ms"]
+        P500ms = 0x1,
+        #[doc = "250 ms"]
+        P250ms = 0x2,
+        #[doc = "125 ms"]
+        P125ms = 0x3,
+    },
+}
+#[doc = "Time Register"]
+ReadWrite register[32] RtcTimr {
+    #[doc = "Current Second"]
+    sec[0..7],
+    #[doc = "Current Minute"]
+    min[8..15],
+    #[doc = "Current Hour"]
+    hour[16..22],
+    #[doc = "Ante Meridiem Post Meridiem Indicator"]
+    ampm[22],
+}
+#[doc = "Calendar Register"]
+ReadWrite register[32] RtcCalr {
+    #[doc = "Current Century"]
+    cent[0..7],
+    #[doc = "Current Year"]
+    year[8..16],
+    #[doc = "Current Month"]
+    month[16..21],
+    #[doc = "Current Day in Current Week"]
+    day[21..24],
+    #[doc = "Current Day in Current Month"]
+    date[24..30],
+}
+#[doc = "Time Alarm Register"]
+ReadWrite register[32] RtcTimalr {
+    #[doc = "Second Alarm"]
+    sec[0..7],
+    #[doc = "Second Alarm Enable"]
+    secen[7],
+    #[doc = "Minute Alarm"]
+    min[8..15],
+    #[doc = "Minute Alarm Enable"]
+    minen[15],
+    #[doc = "Hour Alarm"]
+    hour[16..22],
+    #[doc = "AM/PM Indicator"]
+    ampm[22],
+    #[doc = "Hour Alarm Enable"]
+    houren[23],
+}
+#[doc = "Calendar Alarm Register"]
+ReadWrite register[32] RtcCalalr {
+    #[doc = "Month Alarm"]
+    month[16..21],
+    #[doc = "Month Alarm Enable"]
+    mthen[23],
+    #[doc = "Date Alarm"]
+    date[24..30],
+    #[doc = "Date Alarm Enable"]
+    dateen[31],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] RtcSr {
+    #[doc = "Acknowledge for Update"]
+    ackupd[0] {
+        #[doc = "Time and calendar registers cannot be updated."]
+        Freerun = 0x0,
+        #[doc = "Time and calendar registers can be updated."]
+        Update = 0x1,
+    },
+    #[doc = "Alarm Flag"]
+    alarm[1] {
+        #[doc = "No alarm matching condition occurred."]
+        NoAlarmevent = 0x0,
+        #[doc = "An alarm matching condition has occurred."]
+        Alarmevent = 0x1,
+    },
+    #[doc = "Second Event"]
+    sec[2] {
+        #[doc = "No second event has occurred since the last clear."]
+        NoSecevent = 0x0,
+        #[doc = "At least one second event has occurred since the last clear."]
+        Secevent = 0x1,
+    },
+    #[doc = "Time Event"]
+    timev[3] {
+        #[doc = "No time event has occurred since the last clear."]
+        NoTimevent = 0x0,
+        #[doc = "At least one time event has occurred since the last clear."]
+        Timevent = 0x1,
+    },
+    #[doc = "Calendar Event"]
+    calev[4] {
+        #[doc = "No calendar event has occurred since the last clear."]
+        NoCalevent = 0x0,
+        #[doc = "At least one calendar event has occurred since the last clear."]
+        Calevent = 0x1,
+    },
+    #[doc = "Time and/or Date Free Running Error"]
+    tderr[5] {
+        #[doc = "The internal free running counters are carrying valid values since the last read of the Status Register (RTC_SR)."]
+        Correct = 0x0,
+        #[doc = "The internal free running counters have been corrupted (invalid date or time, non-BCD values) since the last read and/or they are still invalid."]
+        ErrTimedate = 0x1,
+    },
+}
+#[doc = "Status Clear Command Register"]
+WriteOnly register[32] RtcSccr {
+    #[doc = "Acknowledge Clear"]
+    ackclr[0],
+    #[doc = "Alarm Clear"]
+    alrclr[1],
+    #[doc = "Second Clear"]
+    secclr[2],
+    #[doc = "Time Clear"]
+    timclr[3],
+    #[doc = "Calendar Clear"]
+    calclr[4],
+    #[doc = "Time and/or Date Free Running Error Clear"]
+    tderrclr[5],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] RtcIer {
+    #[doc = "Acknowledge Update Interrupt Enable"]
+    acken[0],
+    #[doc = "Alarm Interrupt Enable"]
+    alren[1],
+    #[doc = "Second Event Interrupt Enable"]
+    secen[2],
+    #[doc = "Time Event Interrupt Enable"]
+    timen[3],
+    #[doc = "Calendar Event Interrupt Enable"]
+    calen[4],
+    #[doc = "Time and/or Date Error Interrupt Enable"]
+    tderren[5],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] RtcIdr {
+    #[doc = "Acknowledge Update Interrupt Disable"]
+    ackdis[0],
+    #[doc = "Alarm Interrupt Disable"]
+    alrdis[1],
+    #[doc = "Second Event Interrupt Disable"]
+    secdis[2],
+    #[doc = "Time Event Interrupt Disable"]
+    timdis[3],
+    #[doc = "Calendar Event Interrupt Disable"]
+    caldis[4],
+    #[doc = "Time and/or Date Error Interrupt Disable"]
+    tderrdis[5],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] RtcImr {
+    #[doc = "Acknowledge Update Interrupt Mask"]
+    ack[0],
+    #[doc = "Alarm Interrupt Mask"]
+    alr[1],
+    #[doc = "Second Event Interrupt Mask"]
+    sec[2],
+    #[doc = "Time Event Interrupt Mask"]
+    tim[3],
+    #[doc = "Calendar Event Interrupt Mask"]
+    cal[4],
+    #[doc = "Time and/or Date Error Mask"]
+    tderr[5],
+}
+#[doc = "Valid Entry Register"]
+ReadOnly register[32] RtcVer {
+    #[doc = "Non-valid Time"]
+    nvtim[0],
+    #[doc = "Non-valid Calendar"]
+    nvcal[1],
+    #[doc = "Non-valid Time Alarm"]
+    nvtimalr[2],
+    #[doc = "Non-valid Calendar Alarm"]
+    nvcalalr[3],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] RtcVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

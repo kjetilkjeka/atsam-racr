@@ -1,0 +1,167 @@
+#[doc = "Integrity Check Monitor"]
+peripheral Icm {
+    icm_cfg: IcmCfg @ 0x0,
+    icm_ctrl: IcmCtrl @ 0x4,
+    icm_sr: IcmSr @ 0x8,
+    icm_ier: IcmIer @ 0x10,
+    icm_idr: IcmIdr @ 0x14,
+    icm_imr: IcmImr @ 0x18,
+    icm_isr: IcmIsr @ 0x1c,
+    icm_uasr: IcmUasr @ 0x20,
+    icm_dscr: IcmDscr @ 0x30,
+    icm_hash: IcmHash @ 0x34,
+    icm_uihval: [IcmUihval; 8] @ 0x38,
+}
+#[doc = "Configuration Register"]
+ReadWrite register[32] IcmCfg {
+    #[doc = "Write Back Disable"]
+    wbdis[0],
+    #[doc = "End of Monitoring Disable"]
+    eomdis[1],
+    #[doc = "Secondary List Branching Disable"]
+    slbdis[2],
+    #[doc = "Bus Burden Control"]
+    bbc[4..8],
+    #[doc = "Automatic Switch To Compare Digest"]
+    ascd[8],
+    #[doc = "Dual Input Buffer"]
+    dualbuff[9],
+    #[doc = "User Initial Hash Value"]
+    uihash[12],
+    #[doc = "User SHA Algorithm"]
+    ualgo[13..16] {
+        #[doc = "SHA1 algorithm processed"]
+        Sha1 = 0x0,
+        #[doc = "SHA256 algorithm processed"]
+        Sha256 = 0x1,
+        #[doc = "SHA224 algorithm processed"]
+        Sha224 = 0x4,
+    },
+    #[doc = "Region Hash Area Protection"]
+    haprot[16..22],
+    #[doc = "Region Descriptor Area Protection"]
+    daprot[24..30],
+}
+#[doc = "Control Register"]
+WriteOnly register[32] IcmCtrl {
+    #[doc = "ICM Enable"]
+    enable[0],
+    #[doc = "ICM Disable Register"]
+    disable[1],
+    #[doc = "Software Reset"]
+    swrst[2],
+    #[doc = "Recompute Internal Hash"]
+    rehash[4..8],
+    #[doc = "Region Monitoring Disable"]
+    rmdis[8..12],
+    #[doc = "Region Monitoring Enable"]
+    rmen[12..16],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] IcmSr {
+    #[doc = "ICM Controller Enable Register"]
+    enable[0],
+    #[doc = "Region Monitoring Disabled Raw Status"]
+    rawrmdis[8..12],
+    #[doc = "Region Monitoring Disabled Status"]
+    rmdis[12..16],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] IcmIer {
+    #[doc = "Region Hash Completed Interrupt Enable"]
+    rhc[0..4],
+    #[doc = "Region Digest Mismatch Interrupt Enable"]
+    rdm[4..8],
+    #[doc = "Region Bus Error Interrupt Enable"]
+    rbe[8..12],
+    #[doc = "Region Wrap Condition detected Interrupt Enable"]
+    rwc[12..16],
+    #[doc = "Region End bit Condition Detected Interrupt Enable"]
+    rec[16..20],
+    #[doc = "Region Status Updated Interrupt Disable"]
+    rsu[20..24],
+    #[doc = "Undefined Register Access Detection Interrupt Enable"]
+    urad[24],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] IcmIdr {
+    #[doc = "Region Hash Completed Interrupt Disable"]
+    rhc[0..4],
+    #[doc = "Region Digest Mismatch Interrupt Disable"]
+    rdm[4..8],
+    #[doc = "Region Bus Error Interrupt Disable"]
+    rbe[8..12],
+    #[doc = "Region Wrap Condition Detected Interrupt Disable"]
+    rwc[12..16],
+    #[doc = "Region End bit Condition detected Interrupt Disable"]
+    rec[16..20],
+    #[doc = "Region Status Updated Interrupt Disable"]
+    rsu[20..24],
+    #[doc = "Undefined Register Access Detection Interrupt Disable"]
+    urad[24],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] IcmImr {
+    #[doc = "Region Hash Completed Interrupt Mask"]
+    rhc[0..4],
+    #[doc = "Region Digest Mismatch Interrupt Mask"]
+    rdm[4..8],
+    #[doc = "Region Bus Error Interrupt Mask"]
+    rbe[8..12],
+    #[doc = "Region Wrap Condition Detected Interrupt Mask"]
+    rwc[12..16],
+    #[doc = "Region End bit Condition Detected Interrupt Mask"]
+    rec[16..20],
+    #[doc = "Region Status Updated Interrupt Mask"]
+    rsu[20..24],
+    #[doc = "Undefined Register Access Detection Interrupt Mask"]
+    urad[24],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] IcmIsr {
+    #[doc = "Region Hash Completed"]
+    rhc[0..4],
+    #[doc = "Region Digest Mismatch"]
+    rdm[4..8],
+    #[doc = "Region Bus Error"]
+    rbe[8..12],
+    #[doc = "Region Wrap Condition Detected"]
+    rwc[12..16],
+    #[doc = "Region End bit Condition Detected"]
+    rec[16..20],
+    #[doc = "Region Status Updated Detected"]
+    rsu[20..24],
+    #[doc = "Undefined Register Access Detection Status"]
+    urad[24],
+}
+#[doc = "Undefined Access Status Register"]
+ReadOnly register[32] IcmUasr {
+    #[doc = "Undefined Register Access Trace"]
+    urat[0..3] {
+        #[doc = "Unspecified structure member set to one detected when the descriptor is loaded."]
+        UnspecStructMember = 0x0,
+        #[doc = "ICM_CFG modified during active monitoring."]
+        IcmCfgModified = 0x1,
+        #[doc = "ICM_DSCR modified during active monitoring."]
+        IcmDscrModified = 0x2,
+        #[doc = "ICM_HASH modified during active monitoring"]
+        IcmHashModified = 0x3,
+        #[doc = "Write-only register read access"]
+        ReadAccess = 0x4,
+    },
+}
+#[doc = "Region Descriptor Area Start Address Register"]
+ReadWrite register[32] IcmDscr {
+    #[doc = "Descriptor Area Start Address"]
+    dasa[6..32],
+}
+#[doc = "Region Hash Area Start Address Register"]
+ReadWrite register[32] IcmHash {
+    #[doc = "Hash Area Start Address"]
+    hasa[7..32],
+}
+#[doc = "User Initial Hash Value 0 Register 0"]
+WriteOnly register[32] IcmUihval {
+    #[doc = "Initial Hash Value"]
+    val[0..32],
+}

@@ -1,0 +1,1373 @@
+#[doc = "USB High-Speed Interface"]
+peripheral Usbhs {
+    usbhs_devctrl: UsbhsDevctrl @ 0x0,
+    usbhs_devisr: UsbhsDevisr @ 0x4,
+    usbhs_devicr: UsbhsDevicr @ 0x8,
+    usbhs_devifr: UsbhsDevifr @ 0xc,
+    usbhs_devimr: UsbhsDevimr @ 0x10,
+    usbhs_devidr: UsbhsDevidr @ 0x14,
+    usbhs_devier: UsbhsDevier @ 0x18,
+    usbhs_devept: UsbhsDevept @ 0x1c,
+    usbhs_devfnum: UsbhsDevfnum @ 0x20,
+    usbhs_deveptcfg: [UsbhsDeveptcfg; 10] @ 0x100,
+    usbhs_deveptisr: [UsbhsDeveptisr; 10] @ 0x130,
+    usbhs_devepticr: [UsbhsDevepticr; 10] @ 0x160,
+    usbhs_deveptifr: [UsbhsDeveptifr; 10] @ 0x190,
+    usbhs_deveptimr: [UsbhsDeveptimr; 10] @ 0x1c0,
+    usbhs_deveptier: [UsbhsDeveptier; 10] @ 0x1f0,
+    usbhs_deveptidr: [UsbhsDeveptidr; 10] @ 0x220,
+    usbhs_hstctrl: UsbhsHstctrl @ 0x400,
+    usbhs_hstisr: UsbhsHstisr @ 0x404,
+    usbhs_hsticr: UsbhsHsticr @ 0x408,
+    usbhs_hstifr: UsbhsHstifr @ 0x40c,
+    usbhs_hstimr: UsbhsHstimr @ 0x410,
+    usbhs_hstidr: UsbhsHstidr @ 0x414,
+    usbhs_hstier: UsbhsHstier @ 0x418,
+    usbhs_hstpip: UsbhsHstpip @ 0x41c,
+    usbhs_hstfnum: UsbhsHstfnum @ 0x420,
+    usbhs_hstaddr1: UsbhsHstaddr1 @ 0x424,
+    usbhs_hstaddr2: UsbhsHstaddr2 @ 0x428,
+    usbhs_hstaddr3: UsbhsHstaddr3 @ 0x42c,
+    usbhs_hstpipcfg: [UsbhsHstpipcfg; 10] @ 0x500,
+    usbhs_hstpipisr: [UsbhsHstpipisr; 10] @ 0x530,
+    usbhs_hstpipicr: [UsbhsHstpipicr; 10] @ 0x560,
+    usbhs_hstpipifr: [UsbhsHstpipifr; 10] @ 0x590,
+    usbhs_hstpipimr: [UsbhsHstpipimr; 10] @ 0x5c0,
+    usbhs_hstpipier: [UsbhsHstpipier; 10] @ 0x5f0,
+    usbhs_hstpipidr: [UsbhsHstpipidr; 10] @ 0x620,
+    usbhs_hstpipinrq: [UsbhsHstpipinrq; 10] @ 0x650,
+    usbhs_hstpiperr: [UsbhsHstpiperr; 10] @ 0x680,
+    usbhs_ctrl: UsbhsCtrl @ 0x800,
+    usbhs_sr: UsbhsSr @ 0x804,
+    usbhs_scr: UsbhsScr @ 0x808,
+    usbhs_sfr: UsbhsSfr @ 0x80c,
+    usbhs_tsta1: UsbhsTsta1 @ 0x810,
+    usbhs_tsta2: UsbhsTsta2 @ 0x814,
+    usbhs_version: UsbhsVersion @ 0x818,
+    usbhs_fsm: UsbhsFsm @ 0x82c,
+}
+#[doc = "Device General Control Register"]
+ReadWrite register[32] UsbhsDevctrl {
+    #[doc = "USB Address"]
+    uadd[0..7],
+    #[doc = "Address Enable"]
+    adden[7],
+    #[doc = "Detach"]
+    detach[8],
+    #[doc = "Remote Wake-Up"]
+    rmwkup[9],
+    #[doc = "Mode Configuration"]
+    spdconf[10..12] {
+        #[doc = "The peripheral starts in Full-speed mode and performs a high-speed reset to switch to High-speed mode if the host is high-speed-capable."]
+        Normal = 0x0,
+        #[doc = "For a better consumption, if high speed is not needed."]
+        LowPower = 0x1,
+        #[doc = "Forced high speed."]
+        HighSpeed = 0x2,
+        #[doc = "The peripheral remains in Full-speed mode whatever the host speed capability."]
+        ForcedFs = 0x3,
+    },
+    #[doc = "Low-Speed Mode Force"]
+    ls[12],
+    #[doc = "Test mode J"]
+    tstj[13],
+    #[doc = "Test mode K"]
+    tstk[14],
+    #[doc = "Test packet mode"]
+    tstpckt[15],
+    #[doc = "Specific Operational mode"]
+    opmode2[16],
+}
+#[doc = "Device Global Interrupt Status Register"]
+ReadOnly register[32] UsbhsDevisr {
+    #[doc = "Suspend Interrupt"]
+    susp[0],
+    #[doc = "Micro Start of Frame Interrupt"]
+    msof[1],
+    #[doc = "Start of Frame Interrupt"]
+    sof[2],
+    #[doc = "End of Reset Interrupt"]
+    eorst[3],
+    #[doc = "Wake-Up Interrupt"]
+    wakeup[4],
+    #[doc = "End of Resume Interrupt"]
+    eorsm[5],
+    #[doc = "Upstream Resume Interrupt"]
+    uprsm[6],
+    #[doc = "Endpoint 0 Interrupt"]
+    pep_0[12],
+    #[doc = "Endpoint 1 Interrupt"]
+    pep_1[13],
+    #[doc = "Endpoint 2 Interrupt"]
+    pep_2[14],
+    #[doc = "Endpoint 3 Interrupt"]
+    pep_3[15],
+    #[doc = "Endpoint 4 Interrupt"]
+    pep_4[16],
+    #[doc = "Endpoint 5 Interrupt"]
+    pep_5[17],
+    #[doc = "Endpoint 6 Interrupt"]
+    pep_6[18],
+    #[doc = "Endpoint 7 Interrupt"]
+    pep_7[19],
+    #[doc = "Endpoint 8 Interrupt"]
+    pep_8[20],
+    #[doc = "Endpoint 9 Interrupt"]
+    pep_9[21],
+    #[doc = "DMA Channel 1 Interrupt"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt"]
+    dma_7[31],
+}
+#[doc = "Device Global Interrupt Clear Register"]
+WriteOnly register[32] UsbhsDevicr {
+    #[doc = "Suspend Interrupt Clear"]
+    suspc[0],
+    #[doc = "Micro Start of Frame Interrupt Clear"]
+    msofc[1],
+    #[doc = "Start of Frame Interrupt Clear"]
+    sofc[2],
+    #[doc = "End of Reset Interrupt Clear"]
+    eorstc[3],
+    #[doc = "Wake-Up Interrupt Clear"]
+    wakeupc[4],
+    #[doc = "End of Resume Interrupt Clear"]
+    eorsmc[5],
+    #[doc = "Upstream Resume Interrupt Clear"]
+    uprsmc[6],
+}
+#[doc = "Device Global Interrupt Set Register"]
+WriteOnly register[32] UsbhsDevifr {
+    #[doc = "Suspend Interrupt Set"]
+    susps[0],
+    #[doc = "Micro Start of Frame Interrupt Set"]
+    msofs[1],
+    #[doc = "Start of Frame Interrupt Set"]
+    sofs[2],
+    #[doc = "End of Reset Interrupt Set"]
+    eorsts[3],
+    #[doc = "Wake-Up Interrupt Set"]
+    wakeups[4],
+    #[doc = "End of Resume Interrupt Set"]
+    eorsms[5],
+    #[doc = "Upstream Resume Interrupt Set"]
+    uprsms[6],
+    #[doc = "DMA Channel 1 Interrupt Set"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Set"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Set"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Set"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Set"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Set"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Set"]
+    dma_7[31],
+}
+#[doc = "Device Global Interrupt Mask Register"]
+ReadOnly register[32] UsbhsDevimr {
+    #[doc = "Suspend Interrupt Mask"]
+    suspe[0],
+    #[doc = "Micro Start of Frame Interrupt Mask"]
+    msofe[1],
+    #[doc = "Start of Frame Interrupt Mask"]
+    sofe[2],
+    #[doc = "End of Reset Interrupt Mask"]
+    eorste[3],
+    #[doc = "Wake-Up Interrupt Mask"]
+    wakeupe[4],
+    #[doc = "End of Resume Interrupt Mask"]
+    eorsme[5],
+    #[doc = "Upstream Resume Interrupt Mask"]
+    uprsme[6],
+    #[doc = "Endpoint 0 Interrupt Mask"]
+    pep_0[12],
+    #[doc = "Endpoint 1 Interrupt Mask"]
+    pep_1[13],
+    #[doc = "Endpoint 2 Interrupt Mask"]
+    pep_2[14],
+    #[doc = "Endpoint 3 Interrupt Mask"]
+    pep_3[15],
+    #[doc = "Endpoint 4 Interrupt Mask"]
+    pep_4[16],
+    #[doc = "Endpoint 5 Interrupt Mask"]
+    pep_5[17],
+    #[doc = "Endpoint 6 Interrupt Mask"]
+    pep_6[18],
+    #[doc = "Endpoint 7 Interrupt Mask"]
+    pep_7[19],
+    #[doc = "Endpoint 8 Interrupt Mask"]
+    pep_8[20],
+    #[doc = "Endpoint 9 Interrupt Mask"]
+    pep_9[21],
+    #[doc = "DMA Channel 1 Interrupt Mask"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Mask"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Mask"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Mask"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Mask"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Mask"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Mask"]
+    dma_7[31],
+}
+#[doc = "Device Global Interrupt Disable Register"]
+WriteOnly register[32] UsbhsDevidr {
+    #[doc = "Suspend Interrupt Disable"]
+    suspec[0],
+    #[doc = "Micro Start of Frame Interrupt Disable"]
+    msofec[1],
+    #[doc = "Start of Frame Interrupt Disable"]
+    sofec[2],
+    #[doc = "End of Reset Interrupt Disable"]
+    eorstec[3],
+    #[doc = "Wake-Up Interrupt Disable"]
+    wakeupec[4],
+    #[doc = "End of Resume Interrupt Disable"]
+    eorsmec[5],
+    #[doc = "Upstream Resume Interrupt Disable"]
+    uprsmec[6],
+    #[doc = "Endpoint 0 Interrupt Disable"]
+    pep_0[12],
+    #[doc = "Endpoint 1 Interrupt Disable"]
+    pep_1[13],
+    #[doc = "Endpoint 2 Interrupt Disable"]
+    pep_2[14],
+    #[doc = "Endpoint 3 Interrupt Disable"]
+    pep_3[15],
+    #[doc = "Endpoint 4 Interrupt Disable"]
+    pep_4[16],
+    #[doc = "Endpoint 5 Interrupt Disable"]
+    pep_5[17],
+    #[doc = "Endpoint 6 Interrupt Disable"]
+    pep_6[18],
+    #[doc = "Endpoint 7 Interrupt Disable"]
+    pep_7[19],
+    #[doc = "Endpoint 8 Interrupt Disable"]
+    pep_8[20],
+    #[doc = "Endpoint 9 Interrupt Disable"]
+    pep_9[21],
+    #[doc = "DMA Channel 1 Interrupt Disable"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Disable"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Disable"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Disable"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Disable"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Disable"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Disable"]
+    dma_7[31],
+}
+#[doc = "Device Global Interrupt Enable Register"]
+WriteOnly register[32] UsbhsDevier {
+    #[doc = "Suspend Interrupt Enable"]
+    suspes[0],
+    #[doc = "Micro Start of Frame Interrupt Enable"]
+    msofes[1],
+    #[doc = "Start of Frame Interrupt Enable"]
+    sofes[2],
+    #[doc = "End of Reset Interrupt Enable"]
+    eorstes[3],
+    #[doc = "Wake-Up Interrupt Enable"]
+    wakeupes[4],
+    #[doc = "End of Resume Interrupt Enable"]
+    eorsmes[5],
+    #[doc = "Upstream Resume Interrupt Enable"]
+    uprsmes[6],
+    #[doc = "Endpoint 0 Interrupt Enable"]
+    pep_0[12],
+    #[doc = "Endpoint 1 Interrupt Enable"]
+    pep_1[13],
+    #[doc = "Endpoint 2 Interrupt Enable"]
+    pep_2[14],
+    #[doc = "Endpoint 3 Interrupt Enable"]
+    pep_3[15],
+    #[doc = "Endpoint 4 Interrupt Enable"]
+    pep_4[16],
+    #[doc = "Endpoint 5 Interrupt Enable"]
+    pep_5[17],
+    #[doc = "Endpoint 6 Interrupt Enable"]
+    pep_6[18],
+    #[doc = "Endpoint 7 Interrupt Enable"]
+    pep_7[19],
+    #[doc = "Endpoint 8 Interrupt Enable"]
+    pep_8[20],
+    #[doc = "Endpoint 9 Interrupt Enable"]
+    pep_9[21],
+    #[doc = "DMA Channel 1 Interrupt Enable"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Enable"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Enable"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Enable"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Enable"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Enable"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Enable"]
+    dma_7[31],
+}
+#[doc = "Device Endpoint Register"]
+ReadWrite register[32] UsbhsDevept {
+    #[doc = "Endpoint 0 Enable"]
+    epen0[0],
+    #[doc = "Endpoint 1 Enable"]
+    epen1[1],
+    #[doc = "Endpoint 2 Enable"]
+    epen2[2],
+    #[doc = "Endpoint 3 Enable"]
+    epen3[3],
+    #[doc = "Endpoint 4 Enable"]
+    epen4[4],
+    #[doc = "Endpoint 5 Enable"]
+    epen5[5],
+    #[doc = "Endpoint 6 Enable"]
+    epen6[6],
+    #[doc = "Endpoint 7 Enable"]
+    epen7[7],
+    #[doc = "Endpoint 8 Enable"]
+    epen8[8],
+    #[doc = "Endpoint 9 Enable"]
+    epen9[9],
+    #[doc = "Endpoint 0 Reset"]
+    eprst0[16],
+    #[doc = "Endpoint 1 Reset"]
+    eprst1[17],
+    #[doc = "Endpoint 2 Reset"]
+    eprst2[18],
+    #[doc = "Endpoint 3 Reset"]
+    eprst3[19],
+    #[doc = "Endpoint 4 Reset"]
+    eprst4[20],
+    #[doc = "Endpoint 5 Reset"]
+    eprst5[21],
+    #[doc = "Endpoint 6 Reset"]
+    eprst6[22],
+    #[doc = "Endpoint 7 Reset"]
+    eprst7[23],
+    #[doc = "Endpoint 8 Reset"]
+    eprst8[24],
+    #[doc = "Endpoint 9 Reset"]
+    eprst9[25],
+}
+#[doc = "Device Frame Number Register"]
+ReadOnly register[32] UsbhsDevfnum {
+    #[doc = "Micro Frame Number"]
+    mfnum[0..3],
+    #[doc = "Frame Number"]
+    fnum[3..14],
+    #[doc = "Frame Number CRC Error"]
+    fncerr[15],
+}
+#[doc = "Device Endpoint Configuration Register (n = 0) 0"]
+ReadWrite register[32] UsbhsDeveptcfg {
+    #[doc = "Endpoint Memory Allocate"]
+    alloc[1],
+    #[doc = "Endpoint Banks"]
+    epbk[2..4] {
+        #[doc = "Single-bank endpoint"]
+        _1Bank = 0x0,
+        #[doc = "Double-bank endpoint"]
+        _2Bank = 0x1,
+        #[doc = "Triple-bank endpoint"]
+        _3Bank = 0x2,
+    },
+    #[doc = "Endpoint Size"]
+    epsize[4..7] {
+        #[doc = "8 bytes"]
+        _8Byte = 0x0,
+        #[doc = "16 bytes"]
+        _16Byte = 0x1,
+        #[doc = "32 bytes"]
+        _32Byte = 0x2,
+        #[doc = "64 bytes"]
+        _64Byte = 0x3,
+        #[doc = "128 bytes"]
+        _128Byte = 0x4,
+        #[doc = "256 bytes"]
+        _256Byte = 0x5,
+        #[doc = "512 bytes"]
+        _512Byte = 0x6,
+        #[doc = "1024 bytes"]
+        _1024Byte = 0x7,
+    },
+    #[doc = "Endpoint Direction"]
+    epdir[8] {
+        #[doc = "The endpoint direction is OUT."]
+        Out = 0x0,
+        #[doc = "The endpoint direction is IN (nor for control endpoints)."]
+        In = 0x1,
+    },
+    #[doc = "Automatic Switch"]
+    autosw[9],
+    #[doc = "Endpoint Type"]
+    eptype[11..13] {
+        #[doc = "Control"]
+        Ctrl = 0x0,
+        #[doc = "Isochronous"]
+        Iso = 0x1,
+        #[doc = "Bulk"]
+        Blk = 0x2,
+        #[doc = "Interrupt"]
+        Intrpt = 0x3,
+    },
+    #[doc = "Number of transactions per microframe for isochronous endpoint"]
+    nbtrans[13..15] {
+        #[doc = "Reserved to endpoint that does not have the high-bandwidth isochronous capability."]
+        _0Trans = 0x0,
+        #[doc = "Default value: one transaction per microframe."]
+        _1Trans = 0x1,
+        #[doc = "Two transactions per microframe. This endpoint should be configured as double-bank."]
+        _2Trans = 0x2,
+        #[doc = "Three transactions per microframe. This endpoint should be configured as triple-bank."]
+        _3Trans = 0x3,
+    },
+}
+#[doc = "Device Endpoint Status Register (n = 0) 0"]
+ReadOnly register[32] UsbhsDeveptisr {
+    #[doc = "Transmitted IN Data Interrupt"]
+    txini[0],
+    #[doc = "Received OUT Data Interrupt"]
+    rxouti[1],
+    #[doc = "Received SETUP Interrupt"]
+    rxstpi[2],
+    #[doc = "NAKed OUT Interrupt"]
+    nakouti[3],
+    #[doc = "NAKed IN Interrupt"]
+    nakini[4],
+    #[doc = "Overflow Interrupt"]
+    overfi[5],
+    #[doc = "STALLed Interrupt"]
+    stalledi[6],
+    #[doc = "Short Packet Interrupt"]
+    shortpacket[7],
+    #[doc = "Data Toggle Sequence"]
+    dtseq[8..10] {
+        #[doc = "Data0 toggle sequence"]
+        Data0 = 0x0,
+        #[doc = "Data1 toggle sequence"]
+        Data1 = 0x1,
+        #[doc = "Reserved for high-bandwidth isochronous endpoint"]
+        Data2 = 0x2,
+        #[doc = "Reserved for high-bandwidth isochronous endpoint"]
+        Mdata = 0x3,
+    },
+    #[doc = "Number of Busy Banks"]
+    nbusybk[12..14] {
+        #[doc = "0 busy bank (all banks free)"]
+        _0Busy = 0x0,
+        #[doc = "1 busy bank"]
+        _1Busy = 0x1,
+        #[doc = "2 busy banks"]
+        _2Busy = 0x2,
+        #[doc = "3 busy banks"]
+        _3Busy = 0x3,
+    },
+    #[doc = "Current Bank"]
+    currbk[14..16] {
+        #[doc = "Current bank is bank0"]
+        Bank0 = 0x0,
+        #[doc = "Current bank is bank1"]
+        Bank1 = 0x1,
+        #[doc = "Current bank is bank2"]
+        Bank2 = 0x2,
+    },
+    #[doc = "Read/Write Allowed"]
+    rwall[16],
+    #[doc = "Control Direction"]
+    ctrldir[17],
+    #[doc = "Configuration OK Status"]
+    cfgok[18],
+    #[doc = "Byte Count"]
+    byct[20..31],
+}
+#[doc = "Device Endpoint Clear Register (n = 0) 0"]
+WriteOnly register[32] UsbhsDevepticr {
+    #[doc = "Transmitted IN Data Interrupt Clear"]
+    txinic[0],
+    #[doc = "Received OUT Data Interrupt Clear"]
+    rxoutic[1],
+    #[doc = "Received SETUP Interrupt Clear"]
+    rxstpic[2],
+    #[doc = "NAKed OUT Interrupt Clear"]
+    nakoutic[3],
+    #[doc = "NAKed IN Interrupt Clear"]
+    nakinic[4],
+    #[doc = "Overflow Interrupt Clear"]
+    overfic[5],
+    #[doc = "STALLed Interrupt Clear"]
+    stalledic[6],
+    #[doc = "Short Packet Interrupt Clear"]
+    shortpacketc[7],
+}
+#[doc = "Device Endpoint Set Register (n = 0) 0"]
+WriteOnly register[32] UsbhsDeveptifr {
+    #[doc = "Transmitted IN Data Interrupt Set"]
+    txinis[0],
+    #[doc = "Received OUT Data Interrupt Set"]
+    rxoutis[1],
+    #[doc = "Received SETUP Interrupt Set"]
+    rxstpis[2],
+    #[doc = "NAKed OUT Interrupt Set"]
+    nakoutis[3],
+    #[doc = "NAKed IN Interrupt Set"]
+    nakinis[4],
+    #[doc = "Overflow Interrupt Set"]
+    overfis[5],
+    #[doc = "STALLed Interrupt Set"]
+    stalledis[6],
+    #[doc = "Short Packet Interrupt Set"]
+    shortpackets[7],
+    #[doc = "Number of Busy Banks Interrupt Set"]
+    nbusybks[12],
+}
+#[doc = "Device Endpoint Mask Register (n = 0) 0"]
+ReadOnly register[32] UsbhsDeveptimr {
+    #[doc = "Transmitted IN Data Interrupt"]
+    txine[0],
+    #[doc = "Received OUT Data Interrupt"]
+    rxoute[1],
+    #[doc = "Received SETUP Interrupt"]
+    rxstpe[2],
+    #[doc = "NAKed OUT Interrupt"]
+    nakoute[3],
+    #[doc = "NAKed IN Interrupt"]
+    nakine[4],
+    #[doc = "Overflow Interrupt"]
+    overfe[5],
+    #[doc = "STALLed Interrupt"]
+    stallede[6],
+    #[doc = "Short Packet Interrupt"]
+    shortpackete[7],
+    #[doc = "Number of Busy Banks Interrupt"]
+    nbusybke[12],
+    #[doc = "Kill IN Bank"]
+    killbk[13],
+    #[doc = "FIFO Control"]
+    fifocon[14],
+    #[doc = "Endpoint Interrupts Disable HDMA Request"]
+    epdishdma[16],
+    #[doc = "NYET Token Disable"]
+    nyetdis[17],
+    #[doc = "Reset Data Toggle"]
+    rstdt[18],
+    #[doc = "STALL Request"]
+    stallrq[19],
+}
+#[doc = "Device Endpoint Enable Register (n = 0) 0"]
+WriteOnly register[32] UsbhsDeveptier {
+    #[doc = "Transmitted IN Data Interrupt Enable"]
+    txines[0],
+    #[doc = "Received OUT Data Interrupt Enable"]
+    rxoutes[1],
+    #[doc = "Received SETUP Interrupt Enable"]
+    rxstpes[2],
+    #[doc = "NAKed OUT Interrupt Enable"]
+    nakoutes[3],
+    #[doc = "NAKed IN Interrupt Enable"]
+    nakines[4],
+    #[doc = "Overflow Interrupt Enable"]
+    overfes[5],
+    #[doc = "STALLed Interrupt Enable"]
+    stalledes[6],
+    #[doc = "Short Packet Interrupt Enable"]
+    shortpacketes[7],
+    #[doc = "Number of Busy Banks Interrupt Enable"]
+    nbusybkes[12],
+    #[doc = "Kill IN Bank"]
+    killbks[13],
+    #[doc = "FIFO Control"]
+    fifocons[14],
+    #[doc = "Endpoint Interrupts Disable HDMA Request Enable"]
+    epdishdmas[16],
+    #[doc = "NYET Token Disable Enable"]
+    nyetdiss[17],
+    #[doc = "Reset Data Toggle Enable"]
+    rstdts[18],
+    #[doc = "STALL Request Enable"]
+    stallrqs[19],
+}
+#[doc = "Device Endpoint Disable Register (n = 0) 0"]
+WriteOnly register[32] UsbhsDeveptidr {
+    #[doc = "Transmitted IN Interrupt Clear"]
+    txinec[0],
+    #[doc = "Received OUT Data Interrupt Clear"]
+    rxoutec[1],
+    #[doc = "Received SETUP Interrupt Clear"]
+    rxstpec[2],
+    #[doc = "NAKed OUT Interrupt Clear"]
+    nakoutec[3],
+    #[doc = "NAKed IN Interrupt Clear"]
+    nakinec[4],
+    #[doc = "Overflow Interrupt Clear"]
+    overfec[5],
+    #[doc = "STALLed Interrupt Clear"]
+    stalledec[6],
+    #[doc = "Shortpacket Interrupt Clear"]
+    shortpacketec[7],
+    #[doc = "Number of Busy Banks Interrupt Clear"]
+    nbusybkec[12],
+    #[doc = "FIFO Control Clear"]
+    fifoconc[14],
+    #[doc = "Endpoint Interrupts Disable HDMA Request Clear"]
+    epdishdmac[16],
+    #[doc = "NYET Token Disable Clear"]
+    nyetdisc[17],
+    #[doc = "STALL Request Clear"]
+    stallrqc[19],
+}
+#[doc = "Host General Control Register"]
+ReadWrite register[32] UsbhsHstctrl {
+    #[doc = "Start of Frame Generation Enable"]
+    sofe[8],
+    #[doc = "Send USB Reset"]
+    reset[9],
+    #[doc = "Send USB Resume"]
+    resume[10],
+    #[doc = "Mode Configuration"]
+    spdconf[12..14] {
+        #[doc = "The host starts in Full-speed mode and performs a high-speed reset to switch to High-speed mode if the downstream peripheral is high-speed capable."]
+        Normal = 0x0,
+        #[doc = "For a better consumption, if high speed is not needed."]
+        LowPower = 0x1,
+        #[doc = "Forced high speed."]
+        HighSpeed = 0x2,
+        #[doc = "The host remains in Full-speed mode whatever the peripheral speed capability."]
+        ForcedFs = 0x3,
+    },
+}
+#[doc = "Host Global Interrupt Status Register"]
+ReadOnly register[32] UsbhsHstisr {
+    #[doc = "Device Connection Interrupt"]
+    dconni[0],
+    #[doc = "Device Disconnection Interrupt"]
+    ddisci[1],
+    #[doc = "USB Reset Sent Interrupt"]
+    rsti[2],
+    #[doc = "Downstream Resume Sent Interrupt"]
+    rsmedi[3],
+    #[doc = "Upstream Resume Received Interrupt"]
+    rxrsmi[4],
+    #[doc = "Host Start of Frame Interrupt"]
+    hsofi[5],
+    #[doc = "Host Wake-Up Interrupt"]
+    hwupi[6],
+    #[doc = "Pipe 0 Interrupt"]
+    pep_0[8],
+    #[doc = "Pipe 1 Interrupt"]
+    pep_1[9],
+    #[doc = "Pipe 2 Interrupt"]
+    pep_2[10],
+    #[doc = "Pipe 3 Interrupt"]
+    pep_3[11],
+    #[doc = "Pipe 4 Interrupt"]
+    pep_4[12],
+    #[doc = "Pipe 5 Interrupt"]
+    pep_5[13],
+    #[doc = "Pipe 6 Interrupt"]
+    pep_6[14],
+    #[doc = "Pipe 7 Interrupt"]
+    pep_7[15],
+    #[doc = "Pipe 8 Interrupt"]
+    pep_8[16],
+    #[doc = "Pipe 9 Interrupt"]
+    pep_9[17],
+    #[doc = "DMA Channel 1 Interrupt"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt"]
+    dma_7[31],
+}
+#[doc = "Host Global Interrupt Clear Register"]
+WriteOnly register[32] UsbhsHsticr {
+    #[doc = "Device Connection Interrupt Clear"]
+    dconnic[0],
+    #[doc = "Device Disconnection Interrupt Clear"]
+    ddiscic[1],
+    #[doc = "USB Reset Sent Interrupt Clear"]
+    rstic[2],
+    #[doc = "Downstream Resume Sent Interrupt Clear"]
+    rsmedic[3],
+    #[doc = "Upstream Resume Received Interrupt Clear"]
+    rxrsmic[4],
+    #[doc = "Host Start of Frame Interrupt Clear"]
+    hsofic[5],
+    #[doc = "Host Wake-Up Interrupt Clear"]
+    hwupic[6],
+}
+#[doc = "Host Global Interrupt Set Register"]
+WriteOnly register[32] UsbhsHstifr {
+    #[doc = "Device Connection Interrupt Set"]
+    dconnis[0],
+    #[doc = "Device Disconnection Interrupt Set"]
+    ddiscis[1],
+    #[doc = "USB Reset Sent Interrupt Set"]
+    rstis[2],
+    #[doc = "Downstream Resume Sent Interrupt Set"]
+    rsmedis[3],
+    #[doc = "Upstream Resume Received Interrupt Set"]
+    rxrsmis[4],
+    #[doc = "Host Start of Frame Interrupt Set"]
+    hsofis[5],
+    #[doc = "Host Wake-Up Interrupt Set"]
+    hwupis[6],
+    #[doc = "DMA Channel 1 Interrupt Set"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Set"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Set"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Set"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Set"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Set"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Set"]
+    dma_7[31],
+}
+#[doc = "Host Global Interrupt Mask Register"]
+ReadOnly register[32] UsbhsHstimr {
+    #[doc = "Device Connection Interrupt Enable"]
+    dconnie[0],
+    #[doc = "Device Disconnection Interrupt Enable"]
+    ddiscie[1],
+    #[doc = "USB Reset Sent Interrupt Enable"]
+    rstie[2],
+    #[doc = "Downstream Resume Sent Interrupt Enable"]
+    rsmedie[3],
+    #[doc = "Upstream Resume Received Interrupt Enable"]
+    rxrsmie[4],
+    #[doc = "Host Start of Frame Interrupt Enable"]
+    hsofie[5],
+    #[doc = "Host Wake-Up Interrupt Enable"]
+    hwupie[6],
+    #[doc = "Pipe 0 Interrupt Enable"]
+    pep_0[8],
+    #[doc = "Pipe 1 Interrupt Enable"]
+    pep_1[9],
+    #[doc = "Pipe 2 Interrupt Enable"]
+    pep_2[10],
+    #[doc = "Pipe 3 Interrupt Enable"]
+    pep_3[11],
+    #[doc = "Pipe 4 Interrupt Enable"]
+    pep_4[12],
+    #[doc = "Pipe 5 Interrupt Enable"]
+    pep_5[13],
+    #[doc = "Pipe 6 Interrupt Enable"]
+    pep_6[14],
+    #[doc = "Pipe 7 Interrupt Enable"]
+    pep_7[15],
+    #[doc = "Pipe 8 Interrupt Enable"]
+    pep_8[16],
+    #[doc = "Pipe 9 Interrupt Enable"]
+    pep_9[17],
+    #[doc = "DMA Channel 1 Interrupt Enable"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Enable"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Enable"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Enable"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Enable"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Enable"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Enable"]
+    dma_7[31],
+}
+#[doc = "Host Global Interrupt Disable Register"]
+WriteOnly register[32] UsbhsHstidr {
+    #[doc = "Device Connection Interrupt Disable"]
+    dconniec[0],
+    #[doc = "Device Disconnection Interrupt Disable"]
+    ddisciec[1],
+    #[doc = "USB Reset Sent Interrupt Disable"]
+    rstiec[2],
+    #[doc = "Downstream Resume Sent Interrupt Disable"]
+    rsmediec[3],
+    #[doc = "Upstream Resume Received Interrupt Disable"]
+    rxrsmiec[4],
+    #[doc = "Host Start of Frame Interrupt Disable"]
+    hsofiec[5],
+    #[doc = "Host Wake-Up Interrupt Disable"]
+    hwupiec[6],
+    #[doc = "Pipe 0 Interrupt Disable"]
+    pep_0[8],
+    #[doc = "Pipe 1 Interrupt Disable"]
+    pep_1[9],
+    #[doc = "Pipe 2 Interrupt Disable"]
+    pep_2[10],
+    #[doc = "Pipe 3 Interrupt Disable"]
+    pep_3[11],
+    #[doc = "Pipe 4 Interrupt Disable"]
+    pep_4[12],
+    #[doc = "Pipe 5 Interrupt Disable"]
+    pep_5[13],
+    #[doc = "Pipe 6 Interrupt Disable"]
+    pep_6[14],
+    #[doc = "Pipe 7 Interrupt Disable"]
+    pep_7[15],
+    #[doc = "Pipe 8 Interrupt Disable"]
+    pep_8[16],
+    #[doc = "Pipe 9 Interrupt Disable"]
+    pep_9[17],
+    #[doc = "DMA Channel 1 Interrupt Disable"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Disable"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Disable"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Disable"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Disable"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Disable"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Disable"]
+    dma_7[31],
+}
+#[doc = "Host Global Interrupt Enable Register"]
+WriteOnly register[32] UsbhsHstier {
+    #[doc = "Device Connection Interrupt Enable"]
+    dconnies[0],
+    #[doc = "Device Disconnection Interrupt Enable"]
+    ddiscies[1],
+    #[doc = "USB Reset Sent Interrupt Enable"]
+    rsties[2],
+    #[doc = "Downstream Resume Sent Interrupt Enable"]
+    rsmedies[3],
+    #[doc = "Upstream Resume Received Interrupt Enable"]
+    rxrsmies[4],
+    #[doc = "Host Start of Frame Interrupt Enable"]
+    hsofies[5],
+    #[doc = "Host Wake-Up Interrupt Enable"]
+    hwupies[6],
+    #[doc = "Pipe 0 Interrupt Enable"]
+    pep_0[8],
+    #[doc = "Pipe 1 Interrupt Enable"]
+    pep_1[9],
+    #[doc = "Pipe 2 Interrupt Enable"]
+    pep_2[10],
+    #[doc = "Pipe 3 Interrupt Enable"]
+    pep_3[11],
+    #[doc = "Pipe 4 Interrupt Enable"]
+    pep_4[12],
+    #[doc = "Pipe 5 Interrupt Enable"]
+    pep_5[13],
+    #[doc = "Pipe 6 Interrupt Enable"]
+    pep_6[14],
+    #[doc = "Pipe 7 Interrupt Enable"]
+    pep_7[15],
+    #[doc = "Pipe 8 Interrupt Enable"]
+    pep_8[16],
+    #[doc = "Pipe 9 Interrupt Enable"]
+    pep_9[17],
+    #[doc = "DMA Channel 1 Interrupt Enable"]
+    dma_1[25],
+    #[doc = "DMA Channel 2 Interrupt Enable"]
+    dma_2[26],
+    #[doc = "DMA Channel 3 Interrupt Enable"]
+    dma_3[27],
+    #[doc = "DMA Channel 4 Interrupt Enable"]
+    dma_4[28],
+    #[doc = "DMA Channel 5 Interrupt Enable"]
+    dma_5[29],
+    #[doc = "DMA Channel 6 Interrupt Enable"]
+    dma_6[30],
+    #[doc = "DMA Channel 7 Interrupt Enable"]
+    dma_7[31],
+}
+#[doc = "Host Pipe Register"]
+ReadWrite register[32] UsbhsHstpip {
+    #[doc = "Pipe 0 Enable"]
+    pen0[0],
+    #[doc = "Pipe 1 Enable"]
+    pen1[1],
+    #[doc = "Pipe 2 Enable"]
+    pen2[2],
+    #[doc = "Pipe 3 Enable"]
+    pen3[3],
+    #[doc = "Pipe 4 Enable"]
+    pen4[4],
+    #[doc = "Pipe 5 Enable"]
+    pen5[5],
+    #[doc = "Pipe 6 Enable"]
+    pen6[6],
+    #[doc = "Pipe 7 Enable"]
+    pen7[7],
+    #[doc = "Pipe 8 Enable"]
+    pen8[8],
+    #[doc = "Pipe 0 Reset"]
+    prst0[16],
+    #[doc = "Pipe 1 Reset"]
+    prst1[17],
+    #[doc = "Pipe 2 Reset"]
+    prst2[18],
+    #[doc = "Pipe 3 Reset"]
+    prst3[19],
+    #[doc = "Pipe 4 Reset"]
+    prst4[20],
+    #[doc = "Pipe 5 Reset"]
+    prst5[21],
+    #[doc = "Pipe 6 Reset"]
+    prst6[22],
+    #[doc = "Pipe 7 Reset"]
+    prst7[23],
+    #[doc = "Pipe 8 Reset"]
+    prst8[24],
+}
+#[doc = "Host Frame Number Register"]
+ReadWrite register[32] UsbhsHstfnum {
+    #[doc = "Micro Frame Number"]
+    mfnum[0..3],
+    #[doc = "Frame Number"]
+    fnum[3..14],
+    #[doc = "Frame Length"]
+    flenhigh[16..24],
+}
+#[doc = "Host Address 1 Register"]
+ReadWrite register[32] UsbhsHstaddr1 {
+    #[doc = "USB Host Address"]
+    hstaddrp0[0..7],
+    #[doc = "USB Host Address"]
+    hstaddrp1[8..15],
+    #[doc = "USB Host Address"]
+    hstaddrp2[16..23],
+    #[doc = "USB Host Address"]
+    hstaddrp3[24..31],
+}
+#[doc = "Host Address 2 Register"]
+ReadWrite register[32] UsbhsHstaddr2 {
+    #[doc = "USB Host Address"]
+    hstaddrp4[0..7],
+    #[doc = "USB Host Address"]
+    hstaddrp5[8..15],
+    #[doc = "USB Host Address"]
+    hstaddrp6[16..23],
+    #[doc = "USB Host Address"]
+    hstaddrp7[24..31],
+}
+#[doc = "Host Address 3 Register"]
+ReadWrite register[32] UsbhsHstaddr3 {
+    #[doc = "USB Host Address"]
+    hstaddrp8[0..7],
+    #[doc = "USB Host Address"]
+    hstaddrp9[8..15],
+}
+#[doc = "Host Pipe Configuration Register (n = 0) 0"]
+ReadWrite register[32] UsbhsHstpipcfg {
+    #[doc = "Pipe Memory Allocate"]
+    alloc[1],
+    #[doc = "Pipe Banks"]
+    pbk[2..4] {
+        #[doc = "Single-bank pipe"]
+        _1Bank = 0x0,
+        #[doc = "Double-bank pipe"]
+        _2Bank = 0x1,
+        #[doc = "Triple-bank pipe"]
+        _3Bank = 0x2,
+    },
+    #[doc = "Pipe Size"]
+    psize[4..7] {
+        #[doc = "8 bytes"]
+        _8Byte = 0x0,
+        #[doc = "16 bytes"]
+        _16Byte = 0x1,
+        #[doc = "32 bytes"]
+        _32Byte = 0x2,
+        #[doc = "64 bytes"]
+        _64Byte = 0x3,
+        #[doc = "128 bytes"]
+        _128Byte = 0x4,
+        #[doc = "256 bytes"]
+        _256Byte = 0x5,
+        #[doc = "512 bytes"]
+        _512Byte = 0x6,
+        #[doc = "1024 bytes"]
+        _1024Byte = 0x7,
+    },
+    #[doc = "Pipe Token"]
+    ptoken[8..10] {
+        #[doc = "SETUP"]
+        Setup = 0x0,
+        #[doc = "IN"]
+        In = 0x1,
+        #[doc = "OUT"]
+        Out = 0x2,
+    },
+    #[doc = "Automatic Switch"]
+    autosw[10],
+    #[doc = "Pipe Type"]
+    ptype[12..14] {
+        #[doc = "Control"]
+        Ctrl = 0x0,
+        #[doc = "Isochronous"]
+        Iso = 0x1,
+        #[doc = "Bulk"]
+        Blk = 0x2,
+        #[doc = "Interrupt"]
+        Intrpt = 0x3,
+    },
+    #[doc = "Pipe Endpoint Number"]
+    pepnum[16..20],
+    #[doc = "Pipe Interrupt Request Frequency"]
+    intfrq[24..32],
+}
+#[doc = "Host Pipe Status Register (n = 0) 0"]
+ReadOnly register[32] UsbhsHstpipisr {
+    #[doc = "Received IN Data Interrupt"]
+    rxini[0],
+    #[doc = "Transmitted OUT Data Interrupt"]
+    txouti[1],
+    #[doc = "Transmitted SETUP Interrupt"]
+    txstpi[2],
+    #[doc = "Pipe Error Interrupt"]
+    perri[3],
+    #[doc = "NAKed Interrupt"]
+    nakedi[4],
+    #[doc = "Overflow Interrupt"]
+    overfi[5],
+    #[doc = "Received STALLed Interrupt"]
+    rxstalldi[6],
+    #[doc = "Short Packet Interrupt"]
+    shortpacketi[7],
+    #[doc = "Data Toggle Sequence"]
+    dtseq[8..10] {
+        #[doc = "Data0 toggle sequence"]
+        Data0 = 0x0,
+        #[doc = "Data1 toggle sequence"]
+        Data1 = 0x1,
+    },
+    #[doc = "Number of Busy Banks"]
+    nbusybk[12..14] {
+        #[doc = "0 busy bank (all banks free)"]
+        _0Busy = 0x0,
+        #[doc = "1 busy bank"]
+        _1Busy = 0x1,
+        #[doc = "2 busy banks"]
+        _2Busy = 0x2,
+        #[doc = "3 busy banks"]
+        _3Busy = 0x3,
+    },
+    #[doc = "Current Bank"]
+    currbk[14..16] {
+        #[doc = "Current bank is bank0"]
+        Bank0 = 0x0,
+        #[doc = "Current bank is bank1"]
+        Bank1 = 0x1,
+        #[doc = "Current bank is bank2"]
+        Bank2 = 0x2,
+    },
+    #[doc = "Read/Write Allowed"]
+    rwall[16],
+    #[doc = "Configuration OK Status"]
+    cfgok[18],
+    #[doc = "Pipe Byte Count"]
+    pbyct[20..31],
+}
+#[doc = "Host Pipe Clear Register (n = 0) 0"]
+WriteOnly register[32] UsbhsHstpipicr {
+    #[doc = "Received IN Data Interrupt Clear"]
+    rxinic[0],
+    #[doc = "Transmitted OUT Data Interrupt Clear"]
+    txoutic[1],
+    #[doc = "Transmitted SETUP Interrupt Clear"]
+    txstpic[2],
+    #[doc = "NAKed Interrupt Clear"]
+    nakedic[4],
+    #[doc = "Overflow Interrupt Clear"]
+    overfic[5],
+    #[doc = "Received STALLed Interrupt Clear"]
+    rxstalldic[6],
+    #[doc = "Short Packet Interrupt Clear"]
+    shortpacketic[7],
+}
+#[doc = "Host Pipe Set Register (n = 0) 0"]
+WriteOnly register[32] UsbhsHstpipifr {
+    #[doc = "Received IN Data Interrupt Set"]
+    rxinis[0],
+    #[doc = "Transmitted OUT Data Interrupt Set"]
+    txoutis[1],
+    #[doc = "Transmitted SETUP Interrupt Set"]
+    txstpis[2],
+    #[doc = "Pipe Error Interrupt Set"]
+    perris[3],
+    #[doc = "NAKed Interrupt Set"]
+    nakedis[4],
+    #[doc = "Overflow Interrupt Set"]
+    overfis[5],
+    #[doc = "Received STALLed Interrupt Set"]
+    rxstalldis[6],
+    #[doc = "Short Packet Interrupt Set"]
+    shortpacketis[7],
+    #[doc = "Number of Busy Banks Set"]
+    nbusybks[12],
+}
+#[doc = "Host Pipe Mask Register (n = 0) 0"]
+ReadOnly register[32] UsbhsHstpipimr {
+    #[doc = "Received IN Data Interrupt Enable"]
+    rxine[0],
+    #[doc = "Transmitted OUT Data Interrupt Enable"]
+    txoute[1],
+    #[doc = "Transmitted SETUP Interrupt Enable"]
+    txstpe[2],
+    #[doc = "Pipe Error Interrupt Enable"]
+    perre[3],
+    #[doc = "NAKed Interrupt Enable"]
+    nakede[4],
+    #[doc = "Overflow Interrupt Enable"]
+    overfie[5],
+    #[doc = "Received STALLed Interrupt Enable"]
+    rxstallde[6],
+    #[doc = "Short Packet Interrupt Enable"]
+    shortpacketie[7],
+    #[doc = "Number of Busy Banks Interrupt Enable"]
+    nbusybke[12],
+    #[doc = "FIFO Control"]
+    fifocon[14],
+    #[doc = "Pipe Interrupts Disable HDMA Request Enable"]
+    pdishdma[16],
+    #[doc = "Pipe Freeze"]
+    pfreeze[17],
+    #[doc = "Reset Data Toggle"]
+    rstdt[18],
+}
+#[doc = "Host Pipe Enable Register (n = 0) 0"]
+WriteOnly register[32] UsbhsHstpipier {
+    #[doc = "Received IN Data Interrupt Enable"]
+    rxines[0],
+    #[doc = "Transmitted OUT Data Interrupt Enable"]
+    txoutes[1],
+    #[doc = "Transmitted SETUP Interrupt Enable"]
+    txstpes[2],
+    #[doc = "Pipe Error Interrupt Enable"]
+    perres[3],
+    #[doc = "NAKed Interrupt Enable"]
+    nakedes[4],
+    #[doc = "Overflow Interrupt Enable"]
+    overfies[5],
+    #[doc = "Received STALLed Interrupt Enable"]
+    rxstalldes[6],
+    #[doc = "Short Packet Interrupt Enable"]
+    shortpacketies[7],
+    #[doc = "Number of Busy Banks Enable"]
+    nbusybkes[12],
+    #[doc = "Pipe Interrupts Disable HDMA Request Enable"]
+    pdishdmas[16],
+    #[doc = "Pipe Freeze Enable"]
+    pfreezes[17],
+    #[doc = "Reset Data Toggle Enable"]
+    rstdts[18],
+}
+#[doc = "Host Pipe Disable Register (n = 0) 0"]
+WriteOnly register[32] UsbhsHstpipidr {
+    #[doc = "Received IN Data Interrupt Disable"]
+    rxinec[0],
+    #[doc = "Transmitted OUT Data Interrupt Disable"]
+    txoutec[1],
+    #[doc = "Transmitted SETUP Interrupt Disable"]
+    txstpec[2],
+    #[doc = "Pipe Error Interrupt Disable"]
+    perrec[3],
+    #[doc = "NAKed Interrupt Disable"]
+    nakedec[4],
+    #[doc = "Overflow Interrupt Disable"]
+    overfiec[5],
+    #[doc = "Received STALLed Interrupt Disable"]
+    rxstalldec[6],
+    #[doc = "Short Packet Interrupt Disable"]
+    shortpacketiec[7],
+    #[doc = "Number of Busy Banks Disable"]
+    nbusybkec[12],
+    #[doc = "FIFO Control Disable"]
+    fifoconc[14],
+    #[doc = "Pipe Interrupts Disable HDMA Request Disable"]
+    pdishdmac[16],
+    #[doc = "Pipe Freeze Disable"]
+    pfreezec[17],
+}
+#[doc = "Host Pipe IN Request Register (n = 0) 0"]
+ReadWrite register[32] UsbhsHstpipinrq {
+    #[doc = "IN Request Number before Freeze"]
+    inrq[0..8],
+    #[doc = "IN Request Mode"]
+    inmode[8],
+}
+#[doc = "Host Pipe Error Register (n = 0) 0"]
+ReadWrite register[32] UsbhsHstpiperr {
+    #[doc = "Data Toggle Error"]
+    datatgl[0],
+    #[doc = "Data PID Error"]
+    datapid[1],
+    #[doc = "Data PID Error"]
+    pid[2],
+    #[doc = "Time-Out Error"]
+    timeout[3],
+    #[doc = "CRC16 Error"]
+    crc16[4],
+    #[doc = "Error Counter"]
+    counter[5..7],
+}
+#[doc = "General Control Register"]
+ReadWrite register[32] UsbhsCtrl {
+    #[doc = "Remote Device Connection Error Interrupt Enable"]
+    rderre[4],
+    #[doc = "VBUS Hardware Control"]
+    vbushwc[8],
+    #[doc = "Freeze USB Clock"]
+    frzclk[14],
+    #[doc = "USBHS Enable"]
+    usbe[15],
+    #[doc = "UID Pin Enable"]
+    uid[24],
+    #[doc = "USBHS Mode"]
+    uimod[25] {
+        #[doc = "The module is in USB Host mode."]
+        Host = 0x0,
+        #[doc = "The module is in USB Device mode."]
+        Device = 0x1,
+    },
+}
+#[doc = "General Status Register"]
+ReadOnly register[32] UsbhsSr {
+    #[doc = "Remote Device Connection Error Interrupt (Host mode only)"]
+    rderri[4],
+    #[doc = "Speed Status (Device mode only)"]
+    speed[12..14] {
+        #[doc = "Full-Speed mode"]
+        FullSpeed = 0x0,
+        #[doc = "High-Speed mode"]
+        HighSpeed = 0x1,
+        #[doc = "Low-Speed mode"]
+        LowSpeed = 0x2,
+    },
+    #[doc = "UTMI Clock Usable"]
+    clkusable[14],
+}
+#[doc = "General Status Clear Register"]
+WriteOnly register[32] UsbhsScr {
+    #[doc = "Remote Device Connection Error Interrupt Clear"]
+    rderric[4],
+}
+#[doc = "General Status Set Register"]
+WriteOnly register[32] UsbhsSfr {
+    #[doc = "Remote Device Connection Error Interrupt Set"]
+    rderris[4],
+    #[doc = "VBUS Request Set"]
+    vbusrqs[9],
+}
+#[doc = "General Test A1 Register"]
+ReadWrite register[32] UsbhsTsta1 {
+    #[doc = "Counter A"]
+    counter_a[0..15],
+    #[doc = "Load CounterA"]
+    load_cnt_a[15],
+    #[doc = "Counter B"]
+    counter_b[16..22],
+    #[doc = "Load CounterB"]
+    load_cnt_b[23],
+    #[doc = "SOF Counter Max"]
+    sofcnt_ma1[24..31],
+    #[doc = "Load SOF Counter"]
+    load_sofcnt[31],
+}
+#[doc = "General Test A2 Register"]
+ReadWrite register[32] UsbhsTsta2 {
+    #[doc = "Full Detach Enable"]
+    full_detach_en[0],
+    #[doc = "HS Serial Mode"]
+    hsserial_mode[1],
+    #[doc = "Loop-back Mode"]
+    loop_back_mode[2],
+    #[doc = "Disable Gated Clock"]
+    disable_gated_clock[3],
+    #[doc = "Force SuspendM to 1"]
+    force_suspend_mto1[4],
+    #[doc = "Bypass DPLL"]
+    by_pass_dpll[5],
+    #[doc = "Host HS Disconnect Disable"]
+    host_hsdisconnect_disable[6],
+    #[doc = "Force HS Reset to 50 ms"]
+    force_hsrst_50ms[7],
+    #[doc = "Remove Pull-up When TX"]
+    remove_puwhen_tx[9],
+}
+#[doc = "General Version Register"]
+ReadOnly register[32] UsbhsVersion {
+    #[doc = "Version Number"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..20],
+}
+#[doc = "General Finite State Machine Register"]
+ReadOnly register[32] UsbhsFsm {
+    #[doc = "Dual Role Device State"]
+    drdstate[0..4] {
+        #[doc = "This is the start state for A-devices (when the ID pin is 0)"]
+        AIdlestate = 0x0,
+        #[doc = "In this state, the A-device waits for the voltage on VBus to rise above the A-device VBus Valid threshold (4.4 V)."]
+        AWaitVrise = 0x1,
+        #[doc = "In this state, the A-device waits for the B-device to signal a connection."]
+        AWaitBcon = 0x2,
+        #[doc = "In this state, the A-device that operates in Host mode is operational."]
+        AHost = 0x3,
+        #[doc = "The A-device operating as a host is in the Suspend mode."]
+        ASuspend = 0x4,
+        #[doc = "The A-device operates as a peripheral."]
+        APeripheral = 0x5,
+        #[doc = "In this state, the A-device waits for the voltage on VBus to drop below the A-device Session Valid threshold (1.4 V)."]
+        AWaitVfall = 0x6,
+        #[doc = "In this state, the A-device waits for recovery of the over-current condition that caused it to enter this state."]
+        AVbusErr = 0x7,
+        #[doc = "In this state, the A-device waits for the data USB line to discharge (100 us)."]
+        AWaitDischarge = 0x8,
+        #[doc = "This is the start state for B-device (when the ID pin is 1)."]
+        BIdle = 0x9,
+        #[doc = "In this state, the B-device acts as the peripheral."]
+        BPeripheral = 0xa,
+        #[doc = "In this state, the B-device is in Suspend mode and waits until 3 ms before initiating the HNP protocol if requested."]
+        BWaitBeginHnp = 0xb,
+        #[doc = "In this state, the B-device waits for the data USB line to discharge (100 us)) before becoming Host."]
+        BWaitDischarge = 0xc,
+        #[doc = "In this state, the B-device waits for the A-device to signal a connect before becoming B-Host."]
+        BWaitAcon = 0xd,
+        #[doc = "In this state, the B-device acts as the Host."]
+        BHost = 0xe,
+        #[doc = "In this state, the B-device attempts to start a session using the SRP protocol."]
+        BSrpInit = 0xf,
+    },
+}

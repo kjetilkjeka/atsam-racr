@@ -1,0 +1,250 @@
+#[doc = "Digital-to-Analog Converter Controller"]
+peripheral Dacc {
+    dacc_cr: DaccCr @ 0x0,
+    dacc_mr: DaccMr @ 0x4,
+    dacc_trigr: DaccTrigr @ 0x8,
+    dacc_cher: DaccCher @ 0x10,
+    dacc_chdr: DaccChdr @ 0x14,
+    dacc_chsr: DaccChsr @ 0x18,
+    dacc_cdr: [DaccCdr; 2] @ 0x1c,
+    dacc_ier: DaccIer @ 0x24,
+    dacc_idr: DaccIdr @ 0x28,
+    dacc_imr: DaccImr @ 0x2c,
+    dacc_isr: DaccIsr @ 0x30,
+    dacc_acr: DaccAcr @ 0x94,
+    dacc_wpmr: DaccWpmr @ 0xe4,
+    dacc_wpsr: DaccWpsr @ 0xe8,
+    dacc_version: DaccVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] DaccCr {
+    #[doc = "Software Reset"]
+    swrst[0],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] DaccMr {
+    #[doc = "Max Speed Mode for Channel 0"]
+    maxs0[0] {
+        #[doc = "Trigger mode or Free-running mode enabled. (See TRGENx.DACC_TRIGR.)"]
+        TrigEvent = 0x0,
+        #[doc = "Max speed mode enabled."]
+        Maximum = 0x1,
+    },
+    #[doc = "Max Speed Mode for Channel 1"]
+    maxs1[1] {
+        #[doc = "Trigger mode or Free-running mode enabled. (See TRGENx.DACC_TRIGR.)"]
+        TrigEvent = 0x0,
+        #[doc = "Max speed mode enabled."]
+        Maximum = 0x1,
+    },
+    #[doc = "Word Transfer Mode"]
+    word[4] {
+        #[doc = "One data to convert is written to the FIFO per access to DACC."]
+        Disabled = 0x0,
+        #[doc = "Two data to convert are written to the FIFO per access to DACC (reduces the number of requests to DMA and the number of system bus accesses)."]
+        Enabled = 0x1,
+    },
+    #[doc = "Must always be written to 0."]
+    zero[5],
+    #[doc = "Differential Mode"]
+    diff[23] {
+        #[doc = "DAC0 and DAC1 are single-ended outputs."]
+        Disabled = 0x0,
+        #[doc = "DACP and DACN are differential outputs. The differential level is configured by the channel 0 value."]
+        Enabled = 0x1,
+    },
+    #[doc = "Peripheral Clock to DAC Clock Ratio"]
+    prescaler[24..28],
+}
+#[doc = "Trigger Register"]
+ReadWrite register[32] DaccTrigr {
+    #[doc = "Trigger Enable of Channel 0"]
+    trgen0[0] {
+        #[doc = "Trigger mode disabled. DACC is in Free-running mode or Max speed mode."]
+        Dis = 0x0,
+        #[doc = "Trigger mode enabled."]
+        En = 0x1,
+    },
+    #[doc = "Trigger Enable of Channel 1"]
+    trgen1[1] {
+        #[doc = "Trigger mode disabled. DACC is in Free-running mode or Max speed mode."]
+        Dis = 0x0,
+        #[doc = "Trigger mode enabled."]
+        En = 0x1,
+    },
+    #[doc = "Trigger Selection of Channel 0"]
+    trgsel0[4..7] {
+        #[doc = "DATRG"]
+        Trgsel0 = 0x0,
+        #[doc = "TC0 output"]
+        Trgsel1 = 0x1,
+        #[doc = "TC1 output"]
+        Trgsel2 = 0x2,
+        #[doc = "TC2 output"]
+        Trgsel3 = 0x3,
+        #[doc = "PWM0 event 0"]
+        Trgsel4 = 0x4,
+        #[doc = "PWM0 event 1"]
+        Trgsel5 = 0x5,
+        #[doc = "PWM1 event 0"]
+        Trgsel6 = 0x6,
+        #[doc = "PWM1 event 1"]
+        Trgsel7 = 0x7,
+    },
+    #[doc = "Trigger Selection of Channel 1"]
+    trgsel1[8..11] {
+        #[doc = "DATRG"]
+        Trgsel0 = 0x0,
+        #[doc = "TC0 output"]
+        Trgsel1 = 0x1,
+        #[doc = "TC1 output"]
+        Trgsel2 = 0x2,
+        #[doc = "TC2 output"]
+        Trgsel3 = 0x3,
+        #[doc = "PWM0 event 0"]
+        Trgsel4 = 0x4,
+        #[doc = "PWM0 event 1"]
+        Trgsel5 = 0x5,
+        #[doc = "PWM1 event 0"]
+        Trgsel6 = 0x6,
+        #[doc = "PWM1 event 1"]
+        Trgsel7 = 0x7,
+    },
+    #[doc = "Over Sampling Ratio of Channel 0"]
+    osr0[16..19] {
+        #[doc = "OSR = 1"]
+        Osr1 = 0x0,
+        #[doc = "OSR = 2"]
+        Osr2 = 0x1,
+        #[doc = "OSR = 4"]
+        Osr4 = 0x2,
+        #[doc = "OSR = 8"]
+        Osr8 = 0x3,
+        #[doc = "OSR = 16"]
+        Osr16 = 0x4,
+        #[doc = "OSR = 32"]
+        Osr32 = 0x5,
+    },
+    #[doc = "Over Sampling Ratio of Channel 1"]
+    osr1[20..23] {
+        #[doc = "OSR = 1"]
+        Osr1 = 0x0,
+        #[doc = "OSR = 2"]
+        Osr2 = 0x1,
+        #[doc = "OSR = 4"]
+        Osr4 = 0x2,
+        #[doc = "OSR = 8"]
+        Osr8 = 0x3,
+        #[doc = "OSR = 16"]
+        Osr16 = 0x4,
+        #[doc = "OSR = 32"]
+        Osr32 = 0x5,
+    },
+}
+#[doc = "Channel Enable Register"]
+WriteOnly register[32] DaccCher {
+    #[doc = "Channel 0 Enable"]
+    ch0[0],
+    #[doc = "Channel 1 Enable"]
+    ch1[1],
+}
+#[doc = "Channel Disable Register"]
+WriteOnly register[32] DaccChdr {
+    #[doc = "Channel 0 Disable"]
+    ch0[0],
+    #[doc = "Channel 1 Disable"]
+    ch1[1],
+}
+#[doc = "Channel Status Register"]
+ReadOnly register[32] DaccChsr {
+    #[doc = "Channel 0 Status"]
+    ch0[0],
+    #[doc = "Channel 1 Status"]
+    ch1[1],
+    #[doc = "DAC Ready Flag"]
+    dacrdy0[8],
+    #[doc = "DAC Ready Flag"]
+    dacrdy1[9],
+}
+#[doc = "Conversion Data Register 0"]
+WriteOnly register[32] DaccCdr {
+    #[doc = "Data to Convert for channel 0"]
+    data0[0..16],
+    #[doc = "Data to Convert for channel 1"]
+    data1[16..32],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] DaccIer {
+    #[doc = "Transmit Ready Interrupt Enable of channel 0"]
+    txrdy0[0],
+    #[doc = "Transmit Ready Interrupt Enable of channel 1"]
+    txrdy1[1],
+    #[doc = "End of Conversion Interrupt Enable of channel 0"]
+    eoc0[4],
+    #[doc = "End of Conversion Interrupt Enable of channel 1"]
+    eoc1[5],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] DaccIdr {
+    #[doc = "Transmit Ready Interrupt Disable of channel 0"]
+    txrdy0[0],
+    #[doc = "Transmit Ready Interrupt Disable of channel 1"]
+    txrdy1[1],
+    #[doc = "End of Conversion Interrupt Disable of channel 0"]
+    eoc0[4],
+    #[doc = "End of Conversion Interrupt Disable of channel 1"]
+    eoc1[5],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] DaccImr {
+    #[doc = "Transmit Ready Interrupt Mask of channel 0"]
+    txrdy0[0],
+    #[doc = "Transmit Ready Interrupt Mask of channel 1"]
+    txrdy1[1],
+    #[doc = "End of Conversion Interrupt Mask of channel 0"]
+    eoc0[4],
+    #[doc = "End of Conversion Interrupt Mask of channel 1"]
+    eoc1[5],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] DaccIsr {
+    #[doc = "Transmit Ready Interrupt Flag of channel 0"]
+    txrdy0[0],
+    #[doc = "Transmit Ready Interrupt Flag of channel 1"]
+    txrdy1[1],
+    #[doc = "End of Conversion Interrupt Flag of channel 0"]
+    eoc0[4],
+    #[doc = "End of Conversion Interrupt Flag of channel 1"]
+    eoc1[5],
+}
+#[doc = "Analog Current Register"]
+ReadWrite register[32] DaccAcr {
+    #[doc = "Analog Output Current Control"]
+    ibctlch0[0..2],
+    #[doc = "Analog Output Current Control"]
+    ibctlch1[2..4],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] DaccWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protect Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of bit WPEN.Always reads as 0."]
+        Passwd = 0x444143,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] DaccWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..16],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] DaccVersion {
+    #[doc = "Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

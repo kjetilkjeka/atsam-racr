@@ -1,0 +1,52 @@
+#[doc = "True Random Number Generator"]
+peripheral Trng {
+    trng_cr: TrngCr @ 0x0,
+    trng_ier: TrngIer @ 0x10,
+    trng_idr: TrngIdr @ 0x14,
+    trng_imr: TrngImr @ 0x18,
+    trng_isr: TrngIsr @ 0x1c,
+    trng_odata: TrngOdata @ 0x50,
+    trng_version: TrngVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] TrngCr {
+    #[doc = "Enables the TRNG to Provide Random Values"]
+    enable[0],
+    #[doc = "Security Key"]
+    key[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation."]
+        Passwd = 0x524e47,
+    },
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] TrngIer {
+    #[doc = "Data Ready Interrupt Enable"]
+    datrdy[0],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] TrngIdr {
+    #[doc = "Data Ready Interrupt Disable"]
+    datrdy[0],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] TrngImr {
+    #[doc = "Data Ready Interrupt Mask"]
+    datrdy[0],
+}
+#[doc = "Interrupt Status Register"]
+ReadOnly register[32] TrngIsr {
+    #[doc = "Data Ready"]
+    datrdy[0],
+}
+#[doc = "Output Data Register"]
+ReadOnly register[32] TrngOdata {
+    #[doc = "Output Data"]
+    odata[0..32],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] TrngVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

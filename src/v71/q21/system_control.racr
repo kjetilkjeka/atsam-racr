@@ -1,0 +1,535 @@
+#[doc = "System Control Registers"]
+peripheral SystemControl {
+    actlr: Actlr @ 0x8,
+    cpuid: Cpuid @ 0xd00,
+    icsr: Icsr @ 0xd04,
+    vtor: Vtor @ 0xd08,
+    aircr: Aircr @ 0xd0c,
+    scr: Scr @ 0xd10,
+    ccr: Ccr @ 0xd14,
+    shpr1: Shpr1 @ 0xd18,
+    shpr2: Shpr2 @ 0xd1c,
+    shpr3: Shpr3 @ 0xd20,
+    shcsr: Shcsr @ 0xd24,
+    cfsr: Cfsr @ 0xd28,
+    hfsr: Hfsr @ 0xd2c,
+    dfsr: Dfsr @ 0xd30,
+    mmfar: Mmfar @ 0xd34,
+    bfar: Bfar @ 0xd38,
+    afsr: Afsr @ 0xd3c,
+    cpacr: Cpacr @ 0xd88,
+}
+#[doc = "Auxiliary Control Register,"]
+ReadWrite register[32] Actlr {
+    #[doc = "Disables interruption of multi-cycle instructions."]
+    dismcycint[0],
+    #[doc = "Disables write buffer use during default memory map accesses."]
+    disdefwbuf[1],
+    #[doc = "Disables folding of IT instructions."]
+    disfold[2],
+}
+#[doc = "CPUID Base Register"]
+ReadWrite register[32] Cpuid {
+    #[doc = "Indicates patch release: 0x0 = Patch 0"]
+    revision[0..4],
+    #[doc = "Indicates part number"]
+    partno[4..16],
+    #[doc = "Indicates processor revision: 0x2 = Revision 2"]
+    variant[20..24],
+    #[doc = "Implementer code"]
+    implementer[24..32],
+}
+#[doc = "Interrupt Control and State Register"]
+ReadWrite register[32] Icsr {
+    #[doc = "Active exception number"]
+    vectactive[0..9],
+    #[doc = "no description available"]
+    rettobase[11] {
+        #[doc = "there are preempted active exceptions to execute"]
+        Value0 = 0x0,
+        #[doc = "there are no active exceptions, or the currently-executing exception is the only active exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "Exception number of the highest priority pending enabled exception"]
+    vectpending[12..18],
+    #[doc = "no description available"]
+    isrpending[22],
+    #[doc = "no description available"]
+    isrpreempt[23] {
+        #[doc = "Will not service"]
+        Value0 = 0x0,
+        #[doc = "Will service a pending exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    pendstclr[25] {
+        #[doc = "no effect"]
+        Value0 = 0x0,
+        #[doc = "removes the pending state from the SysTick exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    pendstset[26] {
+        #[doc = "write: no effect; read: SysTick exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "write: changes SysTick exception state to pending; read: SysTick exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    pendsvclr[27] {
+        #[doc = "no effect"]
+        Value0 = 0x0,
+        #[doc = "removes the pending state from the PendSV exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    pendsvset[28] {
+        #[doc = "write: no effect; read: PendSV exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "write: changes PendSV exception state to pending; read: PendSV exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    nmipendset[31] {
+        #[doc = "write: no effect; read: NMI exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "write: changes NMI exception state to pending; read: NMI exception is pending"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "Vector Table Offset Register"]
+ReadWrite register[32] Vtor {
+    #[doc = "Vector table base offset"]
+    tbloff[7..32],
+}
+#[doc = "Application Interrupt and Reset Control Register"]
+ReadWrite register[32] Aircr {
+    #[doc = "no description available"]
+    vectreset[0],
+    #[doc = "no description available"]
+    vectclractive[1],
+    #[doc = "no description available"]
+    sysresetreq[2] {
+        #[doc = "no system reset request"]
+        Value0 = 0x0,
+        #[doc = "asserts a signal to the outer system that requests a reset"]
+        Value1 = 0x1,
+    },
+    #[doc = "Interrupt priority grouping field. This field determines the split of group priority from subpriority."]
+    prigroup[8..11],
+    #[doc = "no description available"]
+    endianness[15] {
+        #[doc = "Little-endian"]
+        Value0 = 0x0,
+        #[doc = "Big-endian"]
+        Value1 = 0x1,
+    },
+    #[doc = "Register key"]
+    vectkey[16..32],
+}
+#[doc = "System Control Register"]
+ReadWrite register[32] Scr {
+    #[doc = "no description available"]
+    sleeponexit[1] {
+        #[doc = "o not sleep when returning to Thread mode"]
+        Value0 = 0x0,
+        #[doc = "enter sleep, or deep sleep, on return from an ISR"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    sleepdeep[2] {
+        #[doc = "sleep"]
+        Value0 = 0x0,
+        #[doc = "deep sleep"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    sevonpend[4] {
+        #[doc = "only enabled interrupts or events can wakeup the processor, disabled interrupts are excluded"]
+        Value0 = 0x0,
+        #[doc = "enabled events and all interrupts, including disabled interrupts, can wakeup the processor"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "Configuration and Control Register"]
+ReadWrite register[32] Ccr {
+    #[doc = "no description available"]
+    nonbasethrdena[0] {
+        #[doc = "processor can enter Thread mode only when no exception is active"]
+        Value0 = 0x0,
+        #[doc = "processor can enter Thread mode from any level under the control of an EXC_RETURN value"]
+        Value1 = 0x1,
+    },
+    #[doc = "Enables unprivileged software access to the STIR"]
+    usersetmpend[1] {
+        #[doc = "disable"]
+        Value0 = 0x0,
+        #[doc = "enable"]
+        Value1 = 0x1,
+    },
+    #[doc = "Enables unaligned access traps"]
+    unalign_trp[3] {
+        #[doc = "do not trap unaligned halfword and word accesses"]
+        Value0 = 0x0,
+        #[doc = "trap unaligned halfword and word accesses"]
+        Value1 = 0x1,
+    },
+    #[doc = "Enables faulting or halting when the processor executes an SDIV or UDIV instruction with a divisor of 0"]
+    div_0_trp[4] {
+        #[doc = "do not trap divide by 0"]
+        Value0 = 0x0,
+        #[doc = "trap divide by 0"]
+        Value1 = 0x1,
+    },
+    #[doc = "Enables handlers with priority -1 or -2 to ignore data BusFaults caused by load and store instructions."]
+    bfhfnmign[8] {
+        #[doc = "data bus faults caused by load and store instructions cause a lock-up"]
+        Value0 = 0x0,
+        #[doc = "handlers running at priority -1 and -2 ignore data bus faults caused by load and store instructions"]
+        Value1 = 0x1,
+    },
+    #[doc = "Indicates stack alignment on exception entry"]
+    stkalign[9] {
+        #[doc = "4-byte aligned"]
+        Value0 = 0x0,
+        #[doc = "8-byte aligned"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "System Handler Priority Register 1"]
+ReadWrite register[32] Shpr1 {
+    #[doc = "Priority of system handler 4, MemManage"]
+    pri_4[0..8],
+    #[doc = "Priority of system handler 5, BusFault"]
+    pri_5[8..16],
+    #[doc = "Priority of system handler 6, UsageFault"]
+    pri_6[16..24],
+}
+#[doc = "System Handler Priority Register 2"]
+ReadWrite register[32] Shpr2 {
+    #[doc = "Priority of system handler 11, SVCall"]
+    pri_11[24..32],
+}
+#[doc = "System Handler Priority Register 3"]
+ReadWrite register[32] Shpr3 {
+    #[doc = "Priority of system handler 14, PendSV"]
+    pri_14[16..24],
+    #[doc = "Priority of system handler 15, SysTick exception"]
+    pri_15[24..32],
+}
+#[doc = "System Handler Control and State Register"]
+ReadWrite register[32] Shcsr {
+    #[doc = "no description available"]
+    memfaultact[0] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    busfaultact[1] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    usgfaultact[3] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    svcallact[7] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    monitoract[8] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    pendsvact[10] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    systickact[11] {
+        #[doc = "exception is not active"]
+        Value0 = 0x0,
+        #[doc = "exception is active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    usgfaultpended[12] {
+        #[doc = "exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    memfaultpended[13] {
+        #[doc = "exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    busfaultpended[14] {
+        #[doc = "exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    svcallpended[15] {
+        #[doc = "exception is not pending"]
+        Value0 = 0x0,
+        #[doc = "exception is pending"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    memfaultena[16] {
+        #[doc = "disable the exception"]
+        Value0 = 0x0,
+        #[doc = "enable the exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    busfaultena[17] {
+        #[doc = "disable the exception"]
+        Value0 = 0x0,
+        #[doc = "enable the exception"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    usgfaultena[18] {
+        #[doc = "disable the exception"]
+        Value0 = 0x0,
+        #[doc = "enable the exception"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "Configurable Fault Status Registers"]
+ReadWrite register[32] Cfsr {
+    #[doc = "no description available"]
+    iaccviol[0] {
+        #[doc = "no instruction access violation fault"]
+        Value0 = 0x0,
+        #[doc = "the processor attempted an instruction fetch from a location that does not permit execution"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    daccviol[1] {
+        #[doc = "no data access violation fault"]
+        Value0 = 0x0,
+        #[doc = "the processor attempted a load or store at a location that does not permit the operation"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    munstkerr[3] {
+        #[doc = "no unstacking fault"]
+        Value0 = 0x0,
+        #[doc = "unstack for an exception return has caused one or more access violations"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    mstkerr[4] {
+        #[doc = "no stacking fault"]
+        Value0 = 0x0,
+        #[doc = "stacking for an exception entry has caused one or more access violations"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    mlsperr[5] {
+        #[doc = "No MemManage fault occurred during floating-point lazy state preservation"]
+        Value0 = 0x0,
+        #[doc = "A MemManage fault occurred during floating-point lazy state preservation"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    mmarvalid[7] {
+        #[doc = "value in MMAR is not a valid fault address"]
+        Value0 = 0x0,
+        #[doc = "MMAR holds a valid fault address"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    ibuserr[8] {
+        #[doc = "no instruction bus error"]
+        Value0 = 0x0,
+        #[doc = "instruction bus error"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    preciserr[9] {
+        #[doc = "no precise data bus error"]
+        Value0 = 0x0,
+        #[doc = "a data bus error has occurred, and the PC value stacked for the exception return points to the instruction that caused the fault"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    impreciserr[10] {
+        #[doc = "no imprecise data bus error"]
+        Value0 = 0x0,
+        #[doc = "a data bus error has occurred, but the return address in the stack frame is not related to the instruction that caused the error"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    unstkerr[11] {
+        #[doc = "no unstacking fault"]
+        Value0 = 0x0,
+        #[doc = "unstack for an exception return has caused one or more BusFaults"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    stkerr[12] {
+        #[doc = "no stacking fault"]
+        Value0 = 0x0,
+        #[doc = "stacking for an exception entry has caused one or more BusFaults"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    lsperr[13] {
+        #[doc = "No bus fault occurred during floating-point lazy state preservation"]
+        Value0 = 0x0,
+        #[doc = "A bus fault occurred during floating-point lazy state preservation"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    bfarvalid[15] {
+        #[doc = "value in BFAR is not a valid fault address"]
+        Value0 = 0x0,
+        #[doc = "BFAR holds a valid fault address"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    undefinstr[16] {
+        #[doc = "no undefined instruction UsageFault"]
+        Value0 = 0x0,
+        #[doc = "the processor has attempted to execute an undefined instruction"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    invstate[17] {
+        #[doc = "no invalid state UsageFault"]
+        Value0 = 0x0,
+        #[doc = "the processor has attempted to execute an instruction that makes illegal use of the EPSR"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    invpc[18] {
+        #[doc = "no invalid PC load UsageFault"]
+        Value0 = 0x0,
+        #[doc = "the processor has attempted an illegal load of EXC_RETURN to the PC"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    nocp[19] {
+        #[doc = "no UsageFault caused by attempting to access a coprocessor"]
+        Value0 = 0x0,
+        #[doc = "the processor has attempted to access a coprocessor"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    unaligned[24] {
+        #[doc = "no unaligned access fault, or unaligned access trapping not enabled"]
+        Value0 = 0x0,
+        #[doc = "the processor has made an unaligned memory access"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    divbyzero[25] {
+        #[doc = "no divide by zero fault, or divide by zero trapping not enabled"]
+        Value0 = 0x0,
+        #[doc = "the processor has executed an SDIV or UDIV instruction with a divisor of 0"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "HardFault Status register"]
+ReadWrite register[32] Hfsr {
+    #[doc = "no description available"]
+    vecttbl[1] {
+        #[doc = "no BusFault on vector table read"]
+        Value0 = 0x0,
+        #[doc = "BusFault on vector table read"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    forced[30] {
+        #[doc = "no forced HardFault"]
+        Value0 = 0x0,
+        #[doc = "forced HardFault"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    debugevt[31],
+}
+#[doc = "Debug Fault Status Register"]
+ReadWrite register[32] Dfsr {
+    #[doc = "no description available"]
+    halted[0] {
+        #[doc = "No active halt request debug event"]
+        Value0 = 0x0,
+        #[doc = "Halt request debug event active"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    bkpt[1] {
+        #[doc = "No current breakpoint debug event"]
+        Value0 = 0x0,
+        #[doc = "At least one current breakpoint debug event"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    dwttrap[2] {
+        #[doc = "No current debug events generated by the DWT"]
+        Value0 = 0x0,
+        #[doc = "At least one current debug event generated by the DWT"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    vcatch[3] {
+        #[doc = "No Vector catch triggered"]
+        Value0 = 0x0,
+        #[doc = "Vector catch triggered"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    external[4] {
+        #[doc = "No EDBGRQ debug event"]
+        Value0 = 0x0,
+        #[doc = "EDBGRQ debug event"]
+        Value1 = 0x1,
+    },
+}
+#[doc = "MemManage Address Register"]
+ReadWrite register[32] Mmfar {
+    #[doc = "Address of MemManage fault location"]
+    address[0..32],
+}
+#[doc = "BusFault Address Register"]
+ReadWrite register[32] Bfar {
+    #[doc = "Address of the BusFault location"]
+    address[0..32],
+}
+#[doc = "Auxiliary Fault Status Register"]
+ReadWrite register[32] Afsr {
+    #[doc = "Latched version of the AUXFAULT inputs"]
+    auxfault[0..32],
+}
+#[doc = "Coprocessor Access Control Register"]
+ReadWrite register[32] Cpacr {
+    #[doc = "Access privileges for coprocessor 10."]
+    cp10[20..22],
+    #[doc = "Access privileges for coprocessor 11."]
+    cp11[22..24],
+}

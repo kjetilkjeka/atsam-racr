@@ -1,0 +1,556 @@
+#[doc = "Universal Synchronous Asynchronous Receiver Transmitter"]
+peripheral Usart {
+    us_cr: UsCr @ 0x0,
+    us_mr: UsMr @ 0x4,
+    us_ier: UsIer @ 0x8,
+    us_idr: UsIdr @ 0xc,
+    us_imr: UsImr @ 0x10,
+    us_csr: UsCsr @ 0x14,
+    us_rhr: UsRhr @ 0x18,
+    us_thr: UsThr @ 0x1c,
+    us_brgr: UsBrgr @ 0x20,
+    us_rtor: UsRtor @ 0x24,
+    us_ttgr: UsTtgr @ 0x28,
+    us_fidi: UsFidi @ 0x40,
+    us_ner: UsNer @ 0x44,
+    us_if: UsIf @ 0x4c,
+    us_man: UsMan @ 0x50,
+    us_linmr: UsLinmr @ 0x54,
+    us_linir: UsLinir @ 0x58,
+    us_linbrr: UsLinbrr @ 0x5c,
+    us_lonmr: UsLonmr @ 0x60,
+    us_lonpr: UsLonpr @ 0x64,
+    us_londl: UsLondl @ 0x68,
+    us_lonl2hdr: UsLonl2hdr @ 0x6c,
+    us_lonbl: UsLonbl @ 0x70,
+    us_lonb1tx: UsLonb1tx @ 0x74,
+    us_lonb1rx: UsLonb1rx @ 0x78,
+    us_lonprio: UsLonprio @ 0x7c,
+    us_idttx: UsIdttx @ 0x80,
+    us_idtrx: UsIdtrx @ 0x84,
+    us_icdiff: UsIcdiff @ 0x88,
+    us_wpmr: UsWpmr @ 0xe4,
+    us_wpsr: UsWpsr @ 0xe8,
+    us_version: UsVersion @ 0xfc,
+}
+#[doc = "Control Register"]
+WriteOnly register[32] UsCr {
+    #[doc = "Reset Receiver"]
+    rstrx[2],
+    #[doc = "Reset Transmitter"]
+    rsttx[3],
+    #[doc = "Receiver Enable"]
+    rxen[4],
+    #[doc = "Receiver Disable"]
+    rxdis[5],
+    #[doc = "Transmitter Enable"]
+    txen[6],
+    #[doc = "Transmitter Disable"]
+    txdis[7],
+    #[doc = "Reset Status Bits"]
+    rststa[8],
+    #[doc = "Start Break"]
+    sttbrk[9],
+    #[doc = "Stop Break"]
+    stpbrk[10],
+    #[doc = "Clear TIMEOUT Flag and Start Timeout After Next Character Received"]
+    sttto[11],
+    #[doc = "Send Address"]
+    senda[12],
+    #[doc = "Reset Iterations"]
+    rstit[13],
+    #[doc = "Reset Non Acknowledge"]
+    rstnack[14],
+    #[doc = "Start Timeout Immediately"]
+    retto[15],
+    #[doc = "Data Terminal Ready Enable"]
+    dtren[16],
+    #[doc = "Data Terminal Ready Disable"]
+    dtrdis[17],
+    #[doc = "Request to Send Pin Control"]
+    rtsen[18],
+    #[doc = "Request to Send Pin Control"]
+    rtsdis[19],
+    #[doc = "Abort LIN Transmission"]
+    linabt[20],
+    #[doc = "Send LIN Wakeup Signal"]
+    linwkup[21],
+}
+#[doc = "Mode Register"]
+ReadWrite register[32] UsMr {
+    #[doc = "USART Mode of Operation"]
+    usart_mode[0..4] {
+        #[doc = "Normal mode"]
+        Normal = 0x0,
+        #[doc = "RS485"]
+        Rs485 = 0x1,
+        #[doc = "Hardware Handshaking"]
+        HwHandshaking = 0x2,
+        #[doc = "Modem"]
+        Modem = 0x3,
+        #[doc = "IS07816 Protocol: T = 0"]
+        Is07816T0 = 0x4,
+        #[doc = "IS07816 Protocol: T = 1"]
+        Is07816T1 = 0x6,
+        #[doc = "IrDA"]
+        Irda = 0x8,
+        #[doc = "LON"]
+        Lon = 0x9,
+        #[doc = "LIN Master mode"]
+        LinMaster = 0xa,
+        #[doc = "LIN Slave mode"]
+        LinSlave = 0xb,
+        #[doc = "SPI Master mode (CLKO must be written to 1 and USCLKS = 0, 1 or 2)"]
+        SpiMaster = 0xe,
+        #[doc = "SPI Slave mode"]
+        SpiSlave = 0xf,
+    },
+    #[doc = "Clock Selection"]
+    usclks[4..6] {
+        #[doc = "Peripheral clock is selected"]
+        Mck = 0x0,
+        #[doc = "Peripheral clock divided (DIV=DIV=8) is selected"]
+        Div = 0x1,
+        #[doc = "PMC programmable clock (PCK) is selected. If the SCK pin is driven (CLKO = 1), the CD field must be greater than 1."]
+        Pck = 0x2,
+        #[doc = "Serial clock (SCK) is selected"]
+        Sck = 0x3,
+    },
+    #[doc = "Character Length"]
+    chrl[6..8] {
+        #[doc = "Character length is 5 bits"]
+        _5Bit = 0x0,
+        #[doc = "Character length is 6 bits"]
+        _6Bit = 0x1,
+        #[doc = "Character length is 7 bits"]
+        _7Bit = 0x2,
+        #[doc = "Character length is 8 bits"]
+        _8Bit = 0x3,
+    },
+    #[doc = "Synchronous Mode Select"]
+    sync[8],
+    #[doc = "Parity Type"]
+    par[9..12] {
+        #[doc = "Even parity"]
+        Even = 0x0,
+        #[doc = "Odd parity"]
+        Odd = 0x1,
+        #[doc = "Parity forced to 0 (Space)"]
+        Space = 0x2,
+        #[doc = "Parity forced to 1 (Mark)"]
+        Mark = 0x3,
+        #[doc = "No parity"]
+        No = 0x4,
+        #[doc = "Multidrop mode"]
+        Multidrop = 0x6,
+    },
+    #[doc = "Number of Stop Bits"]
+    nbstop[12..14] {
+        #[doc = "1 stop bit"]
+        _1Bit = 0x0,
+        #[doc = "1.5 stop bit (SYNC = 0) or reserved (SYNC = 1)"]
+        _15Bit = 0x1,
+        #[doc = "2 stop bits"]
+        _2Bit = 0x2,
+    },
+    #[doc = "Channel Mode"]
+    chmode[14..16] {
+        #[doc = "Normal mode"]
+        Normal = 0x0,
+        #[doc = "Automatic Echo. Receiver input is connected to the TXD pin."]
+        Automatic = 0x1,
+        #[doc = "Local Loopback. Transmitter output is connected to the Receiver Input."]
+        LocalLoopback = 0x2,
+        #[doc = "Remote Loopback. RXD pin is internally connected to the TXD pin."]
+        RemoteLoopback = 0x3,
+    },
+    #[doc = "Bit Order"]
+    msbf[16],
+    #[doc = "9-bit Character Length"]
+    mode9[17],
+    #[doc = "Clock Output Select"]
+    clko[18],
+    #[doc = "Oversampling Mode"]
+    over[19],
+    #[doc = "Inhibit Non Acknowledge"]
+    inack[20],
+    #[doc = "Disable Successive NACK"]
+    dsnack[21],
+    #[doc = "Variable Synchronization of Command/Data Sync Start Frame Delimiter"]
+    var_sync[22],
+    #[doc = "Inverted Data"]
+    invdata[23],
+    #[doc = "Maximum Number of Automatic Iteration"]
+    max_iteration[24..27],
+    #[doc = "Receive Line Filter"]
+    filter[28],
+    #[doc = "Manchester Encoder/Decoder Enable"]
+    man[29],
+    #[doc = "Manchester Synchronization Mode"]
+    modsync[30],
+    #[doc = "Start Frame Delimiter Selector"]
+    onebit[31],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] UsIer {
+    #[doc = "RXRDY Interrupt Enable"]
+    rxrdy[0],
+    #[doc = "TXRDY Interrupt Enable"]
+    txrdy[1],
+    #[doc = "Receiver Break Interrupt Enable"]
+    rxbrk[2],
+    #[doc = "Overrun Error Interrupt Enable"]
+    ovre[5],
+    #[doc = "Framing Error Interrupt Enable"]
+    frame[6],
+    #[doc = "Parity Error Interrupt Enable"]
+    pare[7],
+    #[doc = "Timeout Interrupt Enable"]
+    timeout[8],
+    #[doc = "TXEMPTY Interrupt Enable"]
+    txempty[9],
+    #[doc = "Max number of Repetitions Reached Interrupt Enable"]
+    iter[10],
+    #[doc = "Non Acknowledge Interrupt Enable"]
+    nack[13],
+    #[doc = "Ring Indicator Input Change Enable"]
+    riic[16],
+    #[doc = "Data Set Ready Input Change Enable"]
+    dsric[17],
+    #[doc = "Data Carrier Detect Input Change Interrupt Enable"]
+    dcdic[18],
+    #[doc = "Clear to Send Input Change Interrupt Enable"]
+    ctsic[19],
+    #[doc = "Manchester Error Interrupt Enable"]
+    mane[24],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] UsIdr {
+    #[doc = "RXRDY Interrupt Disable"]
+    rxrdy[0],
+    #[doc = "TXRDY Interrupt Disable"]
+    txrdy[1],
+    #[doc = "Receiver Break Interrupt Disable"]
+    rxbrk[2],
+    #[doc = "Overrun Error Interrupt Enable"]
+    ovre[5],
+    #[doc = "Framing Error Interrupt Disable"]
+    frame[6],
+    #[doc = "Parity Error Interrupt Disable"]
+    pare[7],
+    #[doc = "Timeout Interrupt Disable"]
+    timeout[8],
+    #[doc = "TXEMPTY Interrupt Disable"]
+    txempty[9],
+    #[doc = "Max Number of Repetitions Reached Interrupt Disable"]
+    iter[10],
+    #[doc = "Non Acknowledge Interrupt Disable"]
+    nack[13],
+    #[doc = "Ring Indicator Input Change Disable"]
+    riic[16],
+    #[doc = "Data Set Ready Input Change Disable"]
+    dsric[17],
+    #[doc = "Data Carrier Detect Input Change Interrupt Disable"]
+    dcdic[18],
+    #[doc = "Clear to Send Input Change Interrupt Disable"]
+    ctsic[19],
+    #[doc = "Manchester Error Interrupt Disable"]
+    mane[24],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] UsImr {
+    #[doc = "RXRDY Interrupt Mask"]
+    rxrdy[0],
+    #[doc = "TXRDY Interrupt Mask"]
+    txrdy[1],
+    #[doc = "Receiver Break Interrupt Mask"]
+    rxbrk[2],
+    #[doc = "Overrun Error Interrupt Mask"]
+    ovre[5],
+    #[doc = "Framing Error Interrupt Mask"]
+    frame[6],
+    #[doc = "Parity Error Interrupt Mask"]
+    pare[7],
+    #[doc = "Timeout Interrupt Mask"]
+    timeout[8],
+    #[doc = "TXEMPTY Interrupt Mask"]
+    txempty[9],
+    #[doc = "Max Number of Repetitions Reached Interrupt Mask"]
+    iter[10],
+    #[doc = "Non Acknowledge Interrupt Mask"]
+    nack[13],
+    #[doc = "Ring Indicator Input Change Mask"]
+    riic[16],
+    #[doc = "Data Set Ready Input Change Mask"]
+    dsric[17],
+    #[doc = "Data Carrier Detect Input Change Interrupt Mask"]
+    dcdic[18],
+    #[doc = "Clear to Send Input Change Interrupt Mask"]
+    ctsic[19],
+    #[doc = "Manchester Error Interrupt Mask"]
+    mane[24],
+}
+#[doc = "Channel Status Register"]
+ReadOnly register[32] UsCsr {
+    #[doc = "Receiver Ready (cleared by reading US_RHR)"]
+    rxrdy[0],
+    #[doc = "Transmitter Ready (cleared by writing US_THR)"]
+    txrdy[1],
+    #[doc = "Break Received/End of Break (cleared by writing a one to bit US_CR.RSTSTA)"]
+    rxbrk[2],
+    #[doc = "Overrun Error (cleared by writing a one to bit US_CR.RSTSTA)"]
+    ovre[5],
+    #[doc = "Framing Error (cleared by writing a one to bit US_CR.RSTSTA)"]
+    frame[6],
+    #[doc = "Parity Error (cleared by writing a one to bit US_CR.RSTSTA)"]
+    pare[7],
+    #[doc = "Receiver Timeout (cleared by writing a one to bit US_CR.STTTO)"]
+    timeout[8],
+    #[doc = "Transmitter Empty (cleared by writing US_THR)"]
+    txempty[9],
+    #[doc = "Max Number of Repetitions Reached (cleared by writing a one to bit US_CR.RSTIT)"]
+    iter[10],
+    #[doc = "Non Acknowledge Interrupt (cleared by writing a one to bit US_CR.RSTNACK)"]
+    nack[13],
+    #[doc = "Ring Indicator Input Change Flag (cleared on read)"]
+    riic[16],
+    #[doc = "Data Set Ready Input Change Flag (cleared on read)"]
+    dsric[17],
+    #[doc = "Data Carrier Detect Input Change Flag (cleared on read)"]
+    dcdic[18],
+    #[doc = "Clear to Send Input Change Flag (cleared on read)"]
+    ctsic[19],
+    #[doc = "Image of RI Input"]
+    ri[20],
+    #[doc = "Image of DSR Input"]
+    dsr[21],
+    #[doc = "Image of DCD Input"]
+    dcd[22],
+    #[doc = "Image of CTS Input"]
+    cts[23],
+    #[doc = "Manchester Error (cleared by writing a one to the bit US_CR.RSTSTA)"]
+    manerr[24],
+}
+#[doc = "Receive Holding Register"]
+ReadOnly register[32] UsRhr {
+    #[doc = "Received Character"]
+    rxchr[0..9],
+    #[doc = "Received Sync"]
+    rxsynh[15],
+}
+#[doc = "Transmit Holding Register"]
+WriteOnly register[32] UsThr {
+    #[doc = "Character to be Transmitted"]
+    txchr[0..9],
+    #[doc = "Sync Field to be Transmitted"]
+    txsynh[15],
+}
+#[doc = "Baud Rate Generator Register"]
+ReadWrite register[32] UsBrgr {
+    #[doc = "Clock Divider"]
+    cd[0..16],
+    #[doc = "Fractional Part"]
+    fp[16..19],
+}
+#[doc = "Receiver Timeout Register"]
+ReadWrite register[32] UsRtor {
+    #[doc = "Timeout Value"]
+    to[0..17],
+}
+#[doc = "Transmitter Timeguard Register"]
+ReadWrite register[32] UsTtgr {
+    #[doc = "Timeguard Value"]
+    tg[0..8],
+}
+#[doc = "FI DI Ratio Register"]
+ReadWrite register[32] UsFidi {
+    #[doc = "FI Over DI Ratio Value"]
+    fi_di_ratio[0..16],
+}
+#[doc = "Number of Errors Register"]
+ReadOnly register[32] UsNer {
+    #[doc = "Number of Errors"]
+    nb_errors[0..8],
+}
+#[doc = "IrDA Filter Register"]
+ReadWrite register[32] UsIf {
+    #[doc = "IrDA Filter"]
+    irda_filter[0..8],
+}
+#[doc = "Manchester Configuration Register"]
+ReadWrite register[32] UsMan {
+    #[doc = "Transmitter Preamble Length"]
+    tx_pl[0..4],
+    #[doc = "Transmitter Preamble Pattern"]
+    tx_pp[8..10] {
+        #[doc = "The preamble is composed of '1's"]
+        AllOne = 0x0,
+        #[doc = "The preamble is composed of '0's"]
+        AllZero = 0x1,
+        #[doc = "The preamble is composed of '01's"]
+        ZeroOne = 0x2,
+        #[doc = "The preamble is composed of '10's"]
+        OneZero = 0x3,
+    },
+    #[doc = "Transmitter Manchester Polarity"]
+    tx_mpol[12],
+    #[doc = "Receiver Preamble Length"]
+    rx_pl[16..20],
+    #[doc = "Receiver Preamble Pattern detected"]
+    rx_pp[24..26] {
+        #[doc = "The preamble is composed of '1's"]
+        AllOne = 0x0,
+        #[doc = "The preamble is composed of '0's"]
+        AllZero = 0x1,
+        #[doc = "The preamble is composed of '01's"]
+        ZeroOne = 0x2,
+        #[doc = "The preamble is composed of '10's"]
+        OneZero = 0x3,
+    },
+    #[doc = "Receiver Manchester Polarity"]
+    rx_mpol[28],
+    #[doc = "Must Be Set to 1"]
+    one[29],
+    #[doc = "Drift Compensation"]
+    drift[30],
+    rxidlev[31],
+}
+#[doc = "LIN Mode Register"]
+ReadWrite register[32] UsLinmr {
+    #[doc = "LIN Node Action"]
+    nact[0..2] {
+        #[doc = "The USART transmits the response."]
+        Publish = 0x0,
+        #[doc = "The USART receives the response."]
+        Subscribe = 0x1,
+        #[doc = "The USART does not transmit and does not receive the response."]
+        Ignore = 0x2,
+    },
+    #[doc = "Parity Disable"]
+    pardis[2],
+    #[doc = "Checksum Disable"]
+    chkdis[3],
+    #[doc = "Checksum Type"]
+    chktyp[4],
+    #[doc = "Data Length Mode"]
+    dlm[5],
+    #[doc = "Frame Slot Mode Disable"]
+    fsdis[6],
+    #[doc = "Wakeup Signal Type"]
+    wkuptyp[7],
+    #[doc = "Data Length Control"]
+    dlc[8..16],
+    #[doc = "DMAC Mode"]
+    pdcm[16],
+    #[doc = "Synchronization Disable"]
+    syncdis[17],
+}
+#[doc = "LIN Identifier Register"]
+ReadWrite register[32] UsLinir {
+    #[doc = "Identifier Character"]
+    idchr[0..8],
+}
+#[doc = "LIN Baud Rate Register"]
+ReadOnly register[32] UsLinbrr {
+    #[doc = "Clock Divider after Synchronization"]
+    lincd[0..16],
+    #[doc = "Fractional Part after Synchronization"]
+    linfp[16..19],
+}
+#[doc = "LON Mode Register"]
+ReadWrite register[32] UsLonmr {
+    #[doc = "LON comm_type Parameter Value"]
+    commt[0],
+    #[doc = "LON Collision Detection Feature"]
+    coldet[1],
+    #[doc = "Terminate Frame upon Collision Notification"]
+    tcol[2],
+    #[doc = "LON Collision Detection on Frame Tail"]
+    cdtail[3],
+    #[doc = "LON DMA Mode"]
+    dmam[4],
+    #[doc = "LON Collision Detection Source"]
+    lcds[5],
+    #[doc = "End of Frame Condition Size"]
+    eofs[16..24],
+}
+#[doc = "LON Preamble Register"]
+ReadWrite register[32] UsLonpr {
+    #[doc = "LON Preamble Length"]
+    lonpl[0..14],
+}
+#[doc = "LON Data Length Register"]
+ReadWrite register[32] UsLondl {
+    #[doc = "LON Data Length"]
+    londl[0..8],
+}
+#[doc = "LON L2HDR Register"]
+ReadWrite register[32] UsLonl2hdr {
+    #[doc = "LON Backlog Increment"]
+    bli[0..6],
+    #[doc = "LON Alternate Path Bit"]
+    altp[6],
+    #[doc = "LON Priority Bit"]
+    pb[7],
+}
+#[doc = "LON Backlog Register"]
+ReadOnly register[32] UsLonbl {
+    #[doc = "LON Node Backlog Value"]
+    lonbl[0..6],
+}
+#[doc = "LON Beta1 Tx Register"]
+ReadWrite register[32] UsLonb1tx {
+    #[doc = "LON Beta1 Length after Transmission"]
+    beta1tx[0..24],
+}
+#[doc = "LON Beta1 Rx Register"]
+ReadWrite register[32] UsLonb1rx {
+    #[doc = "LON Beta1 Length after Reception"]
+    beta1rx[0..24],
+}
+#[doc = "LON Priority Register"]
+ReadWrite register[32] UsLonprio {
+    #[doc = "LON Priority Slot Number"]
+    psnb[0..7],
+    #[doc = "LON Node Priority Slot"]
+    nps[8..15],
+}
+#[doc = "LON IDT Tx Register"]
+ReadWrite register[32] UsIdttx {
+    #[doc = "LON Indeterminate Time after Transmission (comm_type = 1 mode only)"]
+    idttx[0..24],
+}
+#[doc = "LON IDT Rx Register"]
+ReadWrite register[32] UsIdtrx {
+    #[doc = "LON Indeterminate Time after Reception (comm_type = 1 mode only)"]
+    idtrx[0..24],
+}
+#[doc = "IC DIFF Register"]
+ReadWrite register[32] UsIcdiff {
+    #[doc = "IC Differentiator Number"]
+    icdiff[0..4],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] UsWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit. Always reads as 0."]
+        Passwd = 0x555341,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] UsWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] UsVersion {
+    #[doc = "Hardware Module Version"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}

@@ -1,0 +1,1308 @@
+#[doc = "Power Management Controller"]
+peripheral Pmc {
+    pmc_scer: PmcScer @ 0x0,
+    pmc_scdr: PmcScdr @ 0x4,
+    pmc_scsr: PmcScsr @ 0x8,
+    pmc_pcer0: PmcPcer0 @ 0x10,
+    pmc_pcdr0: PmcPcdr0 @ 0x14,
+    pmc_pcsr0: PmcPcsr0 @ 0x18,
+    ckgr_uckr: CkgrUckr @ 0x1c,
+    ckgr_mor: CkgrMor @ 0x20,
+    ckgr_mcfr: CkgrMcfr @ 0x24,
+    ckgr_pllar: CkgrPllar @ 0x28,
+    pmc_mckr: PmcMckr @ 0x30,
+    pmc_usb: PmcUsb @ 0x38,
+    pmc_pck: [PmcPck; 8] @ 0x40,
+    pmc_ier: PmcIer @ 0x60,
+    pmc_idr: PmcIdr @ 0x64,
+    pmc_sr: PmcSr @ 0x68,
+    pmc_imr: PmcImr @ 0x6c,
+    pmc_fsmr: PmcFsmr @ 0x70,
+    pmc_fspr: PmcFspr @ 0x74,
+    pmc_focr: PmcFocr @ 0x78,
+    pmc_wpmr: PmcWpmr @ 0xe4,
+    pmc_wpsr: PmcWpsr @ 0xe8,
+    pmc_version: PmcVersion @ 0xfc,
+    pmc_pcer1: PmcPcer1 @ 0x100,
+    pmc_pcdr1: PmcPcdr1 @ 0x104,
+    pmc_pcsr1: PmcPcsr1 @ 0x108,
+    pmc_pcr: PmcPcr @ 0x10c,
+    pmc_ocr: PmcOcr @ 0x110,
+    pmc_slpwk_er0: PmcSlpwkEr0 @ 0x114,
+    pmc_slpwk_dr0: PmcSlpwkDr0 @ 0x118,
+    pmc_slpwk_sr0: PmcSlpwkSr0 @ 0x11c,
+    pmc_slpwk_asr0: PmcSlpwkAsr0 @ 0x120,
+    pmc_pmmr: PmcPmmr @ 0x130,
+    pmc_slpwk_er1: PmcSlpwkEr1 @ 0x134,
+    pmc_slpwk_dr1: PmcSlpwkDr1 @ 0x138,
+    pmc_slpwk_sr1: PmcSlpwkSr1 @ 0x13c,
+    pmc_slpwk_asr1: PmcSlpwkAsr1 @ 0x140,
+    pmc_slpwk_aipr: PmcSlpwkAipr @ 0x144,
+    pmc_apllacr: PmcApllacr @ 0x158,
+    pmc_wmst: PmcWmst @ 0x15c,
+}
+#[doc = "System Clock Enable Register"]
+WriteOnly register[32] PmcScer {
+    #[doc = "Enable USB FS Clock"]
+    usbclk[5],
+    #[doc = "Programmable Clock 0 Output Enable"]
+    pck0[8],
+    #[doc = "Programmable Clock 1 Output Enable"]
+    pck1[9],
+    #[doc = "Programmable Clock 2 Output Enable"]
+    pck2[10],
+    #[doc = "Programmable Clock 3 Output Enable"]
+    pck3[11],
+    #[doc = "Programmable Clock 4 Output Enable"]
+    pck4[12],
+    #[doc = "Programmable Clock 5 Output Enable"]
+    pck5[13],
+    #[doc = "Programmable Clock 6 Output Enable"]
+    pck6[14],
+}
+#[doc = "System Clock Disable Register"]
+WriteOnly register[32] PmcScdr {
+    #[doc = "Disable USB FS Clock"]
+    usbclk[5],
+    #[doc = "Programmable Clock 0 Output Disable"]
+    pck0[8],
+    #[doc = "Programmable Clock 1 Output Disable"]
+    pck1[9],
+    #[doc = "Programmable Clock 2 Output Disable"]
+    pck2[10],
+    #[doc = "Programmable Clock 3 Output Disable"]
+    pck3[11],
+    #[doc = "Programmable Clock 4 Output Disable"]
+    pck4[12],
+    #[doc = "Programmable Clock 5 Output Disable"]
+    pck5[13],
+    #[doc = "Programmable Clock 6 Output Disable"]
+    pck6[14],
+}
+#[doc = "System Clock Status Register"]
+ReadOnly register[32] PmcScsr {
+    #[doc = "HCLK Status"]
+    hclks[0],
+    #[doc = "USB FS Clock Status"]
+    usbclk[5],
+    #[doc = "Programmable Clock 0 Output Status"]
+    pck0[8],
+    #[doc = "Programmable Clock 1 Output Status"]
+    pck1[9],
+    #[doc = "Programmable Clock 2 Output Status"]
+    pck2[10],
+    #[doc = "Programmable Clock 3 Output Status"]
+    pck3[11],
+    #[doc = "Programmable Clock 4 Output Status"]
+    pck4[12],
+    #[doc = "Programmable Clock 5 Output Status"]
+    pck5[13],
+    #[doc = "Programmable Clock 6 Output Status"]
+    pck6[14],
+}
+#[doc = "Peripheral Clock Enable Register 0"]
+WriteOnly register[32] PmcPcer0 {
+    #[doc = "Peripheral Clock 7 Enable"]
+    pid7[7],
+    #[doc = "Peripheral Clock 8 Enable"]
+    pid8[8],
+    #[doc = "Peripheral Clock 9 Enable"]
+    pid9[9],
+    #[doc = "Peripheral Clock 10 Enable"]
+    pid10[10],
+    #[doc = "Peripheral Clock 11 Enable"]
+    pid11[11],
+    #[doc = "Peripheral Clock 12 Enable"]
+    pid12[12],
+    #[doc = "Peripheral Clock 13 Enable"]
+    pid13[13],
+    #[doc = "Peripheral Clock 14 Enable"]
+    pid14[14],
+    #[doc = "Peripheral Clock 15 Enable"]
+    pid15[15],
+    #[doc = "Peripheral Clock 16 Enable"]
+    pid16[16],
+    #[doc = "Peripheral Clock 17 Enable"]
+    pid17[17],
+    #[doc = "Peripheral Clock 18 Enable"]
+    pid18[18],
+    #[doc = "Peripheral Clock 19 Enable"]
+    pid19[19],
+    #[doc = "Peripheral Clock 20 Enable"]
+    pid20[20],
+    #[doc = "Peripheral Clock 21 Enable"]
+    pid21[21],
+    #[doc = "Peripheral Clock 22 Enable"]
+    pid22[22],
+    #[doc = "Peripheral Clock 23 Enable"]
+    pid23[23],
+    #[doc = "Peripheral Clock 24 Enable"]
+    pid24[24],
+    #[doc = "Peripheral Clock 25 Enable"]
+    pid25[25],
+    #[doc = "Peripheral Clock 26 Enable"]
+    pid26[26],
+    #[doc = "Peripheral Clock 27 Enable"]
+    pid27[27],
+    #[doc = "Peripheral Clock 28 Enable"]
+    pid28[28],
+    #[doc = "Peripheral Clock 29 Enable"]
+    pid29[29],
+    #[doc = "Peripheral Clock 30 Enable"]
+    pid30[30],
+    #[doc = "Peripheral Clock 31 Enable"]
+    pid31[31],
+}
+#[doc = "Peripheral Clock Disable Register 0"]
+WriteOnly register[32] PmcPcdr0 {
+    #[doc = "Peripheral Clock 7 Disable"]
+    pid7[7],
+    #[doc = "Peripheral Clock 8 Disable"]
+    pid8[8],
+    #[doc = "Peripheral Clock 9 Disable"]
+    pid9[9],
+    #[doc = "Peripheral Clock 10 Disable"]
+    pid10[10],
+    #[doc = "Peripheral Clock 11 Disable"]
+    pid11[11],
+    #[doc = "Peripheral Clock 12 Disable"]
+    pid12[12],
+    #[doc = "Peripheral Clock 13 Disable"]
+    pid13[13],
+    #[doc = "Peripheral Clock 14 Disable"]
+    pid14[14],
+    #[doc = "Peripheral Clock 15 Disable"]
+    pid15[15],
+    #[doc = "Peripheral Clock 16 Disable"]
+    pid16[16],
+    #[doc = "Peripheral Clock 17 Disable"]
+    pid17[17],
+    #[doc = "Peripheral Clock 18 Disable"]
+    pid18[18],
+    #[doc = "Peripheral Clock 19 Disable"]
+    pid19[19],
+    #[doc = "Peripheral Clock 20 Disable"]
+    pid20[20],
+    #[doc = "Peripheral Clock 21 Disable"]
+    pid21[21],
+    #[doc = "Peripheral Clock 22 Disable"]
+    pid22[22],
+    #[doc = "Peripheral Clock 23 Disable"]
+    pid23[23],
+    #[doc = "Peripheral Clock 24 Disable"]
+    pid24[24],
+    #[doc = "Peripheral Clock 25 Disable"]
+    pid25[25],
+    #[doc = "Peripheral Clock 26 Disable"]
+    pid26[26],
+    #[doc = "Peripheral Clock 27 Disable"]
+    pid27[27],
+    #[doc = "Peripheral Clock 28 Disable"]
+    pid28[28],
+    #[doc = "Peripheral Clock 29 Disable"]
+    pid29[29],
+    #[doc = "Peripheral Clock 30 Disable"]
+    pid30[30],
+    #[doc = "Peripheral Clock 31 Disable"]
+    pid31[31],
+}
+#[doc = "Peripheral Clock Status Register 0"]
+ReadOnly register[32] PmcPcsr0 {
+    #[doc = "Peripheral Clock 7 Status"]
+    pid7[7],
+    #[doc = "Peripheral Clock 8 Status"]
+    pid8[8],
+    #[doc = "Peripheral Clock 9 Status"]
+    pid9[9],
+    #[doc = "Peripheral Clock 10 Status"]
+    pid10[10],
+    #[doc = "Peripheral Clock 11 Status"]
+    pid11[11],
+    #[doc = "Peripheral Clock 12 Status"]
+    pid12[12],
+    #[doc = "Peripheral Clock 13 Status"]
+    pid13[13],
+    #[doc = "Peripheral Clock 14 Status"]
+    pid14[14],
+    #[doc = "Peripheral Clock 15 Status"]
+    pid15[15],
+    #[doc = "Peripheral Clock 16 Status"]
+    pid16[16],
+    #[doc = "Peripheral Clock 17 Status"]
+    pid17[17],
+    #[doc = "Peripheral Clock 18 Status"]
+    pid18[18],
+    #[doc = "Peripheral Clock 19 Status"]
+    pid19[19],
+    #[doc = "Peripheral Clock 20 Status"]
+    pid20[20],
+    #[doc = "Peripheral Clock 21 Status"]
+    pid21[21],
+    #[doc = "Peripheral Clock 22 Status"]
+    pid22[22],
+    #[doc = "Peripheral Clock 23 Status"]
+    pid23[23],
+    #[doc = "Peripheral Clock 24 Status"]
+    pid24[24],
+    #[doc = "Peripheral Clock 25 Status"]
+    pid25[25],
+    #[doc = "Peripheral Clock 26 Status"]
+    pid26[26],
+    #[doc = "Peripheral Clock 27 Status"]
+    pid27[27],
+    #[doc = "Peripheral Clock 28 Status"]
+    pid28[28],
+    #[doc = "Peripheral Clock 29 Status"]
+    pid29[29],
+    #[doc = "Peripheral Clock 30 Status"]
+    pid30[30],
+    #[doc = "Peripheral Clock 31 Status"]
+    pid31[31],
+}
+#[doc = "UTMI Clock Register"]
+ReadWrite register[32] CkgrUckr {
+    #[doc = "UTMI PLL Enable"]
+    upllen[16],
+    #[doc = "UTMI PLL Startup Time"]
+    upllcount[20..24],
+}
+#[doc = "Main Oscillator Register"]
+ReadWrite register[32] CkgrMor {
+    #[doc = "Main Crystal Oscillator Enable"]
+    moscxten[0],
+    #[doc = "Main Crystal Oscillator Bypass"]
+    moscxtby[1],
+    #[doc = "Wait Mode Command (Write-only)"]
+    waitmode[2],
+    #[doc = "Main RC Oscillator Enable"]
+    moscrcen[3],
+    #[doc = "Main RC Oscillator Frequency Selection"]
+    moscrcf[4..7] {
+        #[doc = "The RC oscillator frequency is at 4 MHz"]
+        _4Mhz = 0x0,
+        #[doc = "The RC oscillator frequency is at 8 MHz"]
+        _8Mhz = 0x1,
+        #[doc = "The RC oscillator frequency is at 12 MHz"]
+        _12Mhz = 0x2,
+    },
+    #[doc = "Main Crystal Oscillator Startup Time"]
+    moscxtst[8..16],
+    #[doc = "Write Access Password"]
+    key[16..24] {
+        #[doc = "Writing any other value in this field aborts the write operation.Always reads as 0."]
+        Passwd = 0x37,
+    },
+    #[doc = "Main Clock Oscillator Selection"]
+    moscsel[24],
+    #[doc = "Clock Failure Detector Enable"]
+    cfden[25],
+    #[doc = "32.768 kHz Crystal Oscillator Frequency Monitoring Enable"]
+    xt32kfme[26],
+}
+#[doc = "Main Clock Frequency Register"]
+ReadWrite register[32] CkgrMcfr {
+    #[doc = "Main Clock Frequency"]
+    mainf[0..16],
+    #[doc = "Main Clock Frequency Measure Ready"]
+    mainfrdy[16],
+    #[doc = "RC Oscillator Frequency Measure (write-only)"]
+    rcmeas[20],
+    #[doc = "Counter Clock Source Selection"]
+    ccss[24],
+}
+#[doc = "PLLA Register"]
+ReadWrite register[32] CkgrPllar {
+    #[doc = "PLLA Front End Divider"]
+    diva[0..8] {
+        #[doc = "Divider output is 0 and PLLA is disabled."]
+        _0 = 0x0,
+        #[doc = "Divider is bypassed (divide by 1) and PLLA is enabled."]
+        Bypass = 0x1,
+    },
+    #[doc = "PLLA Counter"]
+    pllacount[8..14],
+    #[doc = "PLLA Multiplier"]
+    mula[16..27],
+    #[doc = "Must Be Set to 1"]
+    one[29],
+}
+#[doc = "Master Clock Register"]
+ReadWrite register[32] PmcMckr {
+    #[doc = "Master Clock Source Selection"]
+    css[0..2] {
+        #[doc = "SLCK is selected"]
+        SlowClk = 0x0,
+        #[doc = "MAINCK is selected"]
+        MainClk = 0x1,
+        #[doc = "PLLACK is selected"]
+        PllaClk = 0x2,
+        #[doc = "UPPLLCKDIV is selected"]
+        UpllClk = 0x3,
+    },
+    #[doc = "Processor Clock Prescaler"]
+    pres[4..7] {
+        #[doc = "Selected clock"]
+        Clk1 = 0x0,
+        #[doc = "Selected clock divided by 2"]
+        Clk2 = 0x1,
+        #[doc = "Selected clock divided by 4"]
+        Clk4 = 0x2,
+        #[doc = "Selected clock divided by 8"]
+        Clk8 = 0x3,
+        #[doc = "Selected clock divided by 16"]
+        Clk16 = 0x4,
+        #[doc = "Selected clock divided by 32"]
+        Clk32 = 0x5,
+        #[doc = "Selected clock divided by 64"]
+        Clk64 = 0x6,
+        #[doc = "Selected clock divided by 3"]
+        Clk3 = 0x7,
+    },
+    #[doc = "Master Clock Division"]
+    mdiv[8..10] {
+        #[doc = "MCK is FCLK divided by 1."]
+        EqPck = 0x0,
+        #[doc = "MCK is FCLK divided by 2."]
+        PckDiv2 = 0x1,
+        #[doc = "MCK is FCLK divided by 4."]
+        PckDiv4 = 0x2,
+        #[doc = "MCK is FCLK divided by 3."]
+        PckDiv3 = 0x3,
+    },
+    #[doc = "UPLL Divider by 2"]
+    uplldiv2[13],
+}
+#[doc = "USB Clock Register"]
+ReadWrite register[32] PmcUsb {
+    #[doc = "USB Input Clock Selection"]
+    usbs[0],
+    #[doc = "Divider for USB_48M"]
+    usbdiv[8..12],
+}
+#[doc = "Programmable Clock Register (chid = 0) 0"]
+ReadWrite register[32] PmcPck {
+    #[doc = "Programmable Clock Source Selection"]
+    css[0..3] {
+        #[doc = "SLCK is selected"]
+        SlowClk = 0x0,
+        #[doc = "MAINCK is selected"]
+        MainClk = 0x1,
+        #[doc = "PLLACK is selected"]
+        PllaClk = 0x2,
+        #[doc = "UPLLCKDIV is selected"]
+        UpllClk = 0x3,
+        #[doc = "MCK is selected"]
+        Mck = 0x4,
+    },
+    #[doc = "Programmable Clock Prescaler"]
+    pres[4..12],
+}
+#[doc = "Interrupt Enable Register"]
+WriteOnly register[32] PmcIer {
+    #[doc = "Main Crystal Oscillator Status Interrupt Enable"]
+    moscxts[0],
+    #[doc = "PLLA Lock Interrupt Enable"]
+    locka[1],
+    #[doc = "Master Clock Ready Interrupt Enable"]
+    mckrdy[3],
+    #[doc = "UTMI PLL Lock Interrupt Enable"]
+    locku[6],
+    #[doc = "Programmable Clock Ready 0 Interrupt Enable"]
+    pckrdy0[8],
+    #[doc = "Programmable Clock Ready 1 Interrupt Enable"]
+    pckrdy1[9],
+    #[doc = "Programmable Clock Ready 2 Interrupt Enable"]
+    pckrdy2[10],
+    #[doc = "Programmable Clock Ready 3 Interrupt Enable"]
+    pckrdy3[11],
+    #[doc = "Programmable Clock Ready 4 Interrupt Enable"]
+    pckrdy4[12],
+    #[doc = "Programmable Clock Ready 5 Interrupt Enable"]
+    pckrdy5[13],
+    #[doc = "Programmable Clock Ready 6 Interrupt Enable"]
+    pckrdy6[14],
+    #[doc = "Main Clock Source Oscillator Selection Status Interrupt Enable"]
+    moscsels[16],
+    #[doc = "Main RC Oscillator Status Interrupt Enable"]
+    moscrcs[17],
+    #[doc = "Clock Failure Detector Event Interrupt Enable"]
+    cfdev[18],
+    #[doc = "32.768 kHz Crystal Oscillator Error Interrupt Enable"]
+    xt32kerr[21],
+}
+#[doc = "Interrupt Disable Register"]
+WriteOnly register[32] PmcIdr {
+    #[doc = "Main Crystal Oscillator Status Interrupt Disable"]
+    moscxts[0],
+    #[doc = "PLLA Lock Interrupt Disable"]
+    locka[1],
+    #[doc = "Master Clock Ready Interrupt Disable"]
+    mckrdy[3],
+    #[doc = "UTMI PLL Lock Interrupt Disable"]
+    locku[6],
+    #[doc = "Programmable Clock Ready 0 Interrupt Disable"]
+    pckrdy0[8],
+    #[doc = "Programmable Clock Ready 1 Interrupt Disable"]
+    pckrdy1[9],
+    #[doc = "Programmable Clock Ready 2 Interrupt Disable"]
+    pckrdy2[10],
+    #[doc = "Programmable Clock Ready 3 Interrupt Disable"]
+    pckrdy3[11],
+    #[doc = "Programmable Clock Ready 4 Interrupt Disable"]
+    pckrdy4[12],
+    #[doc = "Programmable Clock Ready 5 Interrupt Disable"]
+    pckrdy5[13],
+    #[doc = "Programmable Clock Ready 6 Interrupt Disable"]
+    pckrdy6[14],
+    #[doc = "Main Clock Source Oscillator Selection Status Interrupt Disable"]
+    moscsels[16],
+    #[doc = "Main RC Status Interrupt Disable"]
+    moscrcs[17],
+    #[doc = "Clock Failure Detector Event Interrupt Disable"]
+    cfdev[18],
+    #[doc = "32.768 kHz Crystal Oscillator Error Interrupt Disable"]
+    xt32kerr[21],
+}
+#[doc = "Status Register"]
+ReadOnly register[32] PmcSr {
+    #[doc = "Main Crystal Oscillator Status"]
+    moscxts[0],
+    #[doc = "PLLA Lock Status"]
+    locka[1],
+    #[doc = "Master Clock Status"]
+    mckrdy[3],
+    #[doc = "UTMI PLL Lock Status"]
+    locku[6],
+    #[doc = "Slow Clock Source Oscillator Selection"]
+    oscsels[7],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy0[8],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy1[9],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy2[10],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy3[11],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy4[12],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy5[13],
+    #[doc = "Programmable Clock Ready Status"]
+    pckrdy6[14],
+    #[doc = "Main Clock Source Oscillator Selection Status"]
+    moscsels[16],
+    #[doc = "Main RC Oscillator Status"]
+    moscrcs[17],
+    #[doc = "Clock Failure Detector Event"]
+    cfdev[18],
+    #[doc = "Clock Failure Detector Status"]
+    cfds[19],
+    #[doc = "Clock Failure Detector Fault Output Status"]
+    fos[20],
+    #[doc = "Slow Crystal Oscillator Error"]
+    xt32kerr[21],
+}
+#[doc = "Interrupt Mask Register"]
+ReadOnly register[32] PmcImr {
+    #[doc = "Main Crystal Oscillator Status Interrupt Mask"]
+    moscxts[0],
+    #[doc = "PLLA Lock Interrupt Mask"]
+    locka[1],
+    #[doc = "Master Clock Ready Interrupt Mask"]
+    mckrdy[3],
+    #[doc = "UTMI PLL Lock Interrupt Mask"]
+    locku[6],
+    #[doc = "Programmable Clock Ready 0 Interrupt Mask"]
+    pckrdy0[8],
+    #[doc = "Programmable Clock Ready 1 Interrupt Mask"]
+    pckrdy1[9],
+    #[doc = "Programmable Clock Ready 2 Interrupt Mask"]
+    pckrdy2[10],
+    #[doc = "Programmable Clock Ready 3 Interrupt Mask"]
+    pckrdy3[11],
+    #[doc = "Programmable Clock Ready 4 Interrupt Mask"]
+    pckrdy4[12],
+    #[doc = "Programmable Clock Ready 5 Interrupt Mask"]
+    pckrdy5[13],
+    #[doc = "Programmable Clock Ready 6 Interrupt Mask"]
+    pckrdy6[14],
+    #[doc = "Main Clock Source Oscillator Selection Status Interrupt Mask"]
+    moscsels[16],
+    #[doc = "Main RC Status Interrupt Mask"]
+    moscrcs[17],
+    #[doc = "Clock Failure Detector Event Interrupt Mask"]
+    cfdev[18],
+    #[doc = "32.768 kHz Crystal Oscillator Error Interrupt Mask"]
+    xt32kerr[21],
+}
+#[doc = "Fast Startup Mode Register"]
+ReadWrite register[32] PmcFsmr {
+    #[doc = "Fast Startup Input Enable 0"]
+    fstt0[0],
+    #[doc = "Fast Startup Input Enable 1"]
+    fstt1[1],
+    #[doc = "Fast Startup Input Enable 2"]
+    fstt2[2],
+    #[doc = "Fast Startup Input Enable 3"]
+    fstt3[3],
+    #[doc = "Fast Startup Input Enable 4"]
+    fstt4[4],
+    #[doc = "Fast Startup Input Enable 5"]
+    fstt5[5],
+    #[doc = "Fast Startup Input Enable 6"]
+    fstt6[6],
+    #[doc = "Fast Startup Input Enable 7"]
+    fstt7[7],
+    #[doc = "Fast Startup Input Enable 8"]
+    fstt8[8],
+    #[doc = "Fast Startup Input Enable 9"]
+    fstt9[9],
+    #[doc = "Fast Startup Input Enable 10"]
+    fstt10[10],
+    #[doc = "Fast Startup Input Enable 11"]
+    fstt11[11],
+    #[doc = "Fast Startup Input Enable 12"]
+    fstt12[12],
+    #[doc = "Fast Startup Input Enable 13"]
+    fstt13[13],
+    #[doc = "Fast Startup Input Enable 14"]
+    fstt14[14],
+    #[doc = "Fast Startup Input Enable 15"]
+    fstt15[15],
+    #[doc = "RTT Alarm Enable"]
+    rttal[16],
+    #[doc = "RTC Alarm Enable"]
+    rtcal[17],
+    #[doc = "USB Alarm Enable"]
+    usbal[18],
+    #[doc = "Low-power Mode"]
+    lpm[20],
+    #[doc = "Flash Low-power Mode"]
+    flpm[21..23] {
+        #[doc = "Flash is in Standby Mode when system enters Wait Mode"]
+        FlashStandby = 0x0,
+        #[doc = "Flash is in Deep-power-down mode when system enters Wait Mode"]
+        FlashDeepPowerdown = 0x1,
+        #[doc = "Idle mode"]
+        FlashIdle = 0x2,
+    },
+    #[doc = "Force Flash Low-power Mode"]
+    fflpm[23],
+}
+#[doc = "Fast Startup Polarity Register"]
+ReadWrite register[32] PmcFspr {
+    #[doc = "Fast Startup Input Polarity 0"]
+    fstp0[0],
+    #[doc = "Fast Startup Input Polarity 1"]
+    fstp1[1],
+    #[doc = "Fast Startup Input Polarity 2"]
+    fstp2[2],
+    #[doc = "Fast Startup Input Polarity 3"]
+    fstp3[3],
+    #[doc = "Fast Startup Input Polarity 4"]
+    fstp4[4],
+    #[doc = "Fast Startup Input Polarity 5"]
+    fstp5[5],
+    #[doc = "Fast Startup Input Polarity 6"]
+    fstp6[6],
+    #[doc = "Fast Startup Input Polarity 7"]
+    fstp7[7],
+    #[doc = "Fast Startup Input Polarity 8"]
+    fstp8[8],
+    #[doc = "Fast Startup Input Polarity 9"]
+    fstp9[9],
+    #[doc = "Fast Startup Input Polarity 10"]
+    fstp10[10],
+    #[doc = "Fast Startup Input Polarity 11"]
+    fstp11[11],
+    #[doc = "Fast Startup Input Polarity 12"]
+    fstp12[12],
+    #[doc = "Fast Startup Input Polarity 13"]
+    fstp13[13],
+    #[doc = "Fast Startup Input Polarity 14"]
+    fstp14[14],
+    #[doc = "Fast Startup Input Polarity 15"]
+    fstp15[15],
+}
+#[doc = "Fault Output Clear Register"]
+WriteOnly register[32] PmcFocr {
+    #[doc = "Fault Output Clear"]
+    foclr[0],
+}
+#[doc = "Write Protection Mode Register"]
+ReadWrite register[32] PmcWpmr {
+    #[doc = "Write Protection Enable"]
+    wpen[0],
+    #[doc = "Write Protection Key"]
+    wpkey[8..32] {
+        #[doc = "Writing any other value in this field aborts the write operation of the WPEN bit. Always reads as 0."]
+        Passwd = 0x504d43,
+    },
+}
+#[doc = "Write Protection Status Register"]
+ReadOnly register[32] PmcWpsr {
+    #[doc = "Write Protection Violation Status"]
+    wpvs[0],
+    #[doc = "Write Protection Violation Source"]
+    wpvsrc[8..24],
+}
+#[doc = "Version Register"]
+ReadOnly register[32] PmcVersion {
+    #[doc = "Version of the Hardware Module"]
+    version[0..12],
+    #[doc = "Metal Fix Number"]
+    mfn[16..19],
+}
+#[doc = "Peripheral Clock Enable Register 1"]
+WriteOnly register[32] PmcPcer1 {
+    #[doc = "Peripheral Clock 32 Enable"]
+    pid32[0],
+    #[doc = "Peripheral Clock 33 Enable"]
+    pid33[1],
+    #[doc = "Peripheral Clock 34 Enable"]
+    pid34[2],
+    #[doc = "Peripheral Clock 35 Enable"]
+    pid35[3],
+    #[doc = "Peripheral Clock 37 Enable"]
+    pid37[5],
+    #[doc = "Peripheral Clock 39 Enable"]
+    pid39[7],
+    #[doc = "Peripheral Clock 40 Enable"]
+    pid40[8],
+    #[doc = "Peripheral Clock 41 Enable"]
+    pid41[9],
+    #[doc = "Peripheral Clock 42 Enable"]
+    pid42[10],
+    #[doc = "Peripheral Clock 43 Enable"]
+    pid43[11],
+    #[doc = "Peripheral Clock 44 Enable"]
+    pid44[12],
+    #[doc = "Peripheral Clock 45 Enable"]
+    pid45[13],
+    #[doc = "Peripheral Clock 46 Enable"]
+    pid46[14],
+    #[doc = "Peripheral Clock 47 Enable"]
+    pid47[15],
+    #[doc = "Peripheral Clock 48 Enable"]
+    pid48[16],
+    #[doc = "Peripheral Clock 49 Enable"]
+    pid49[17],
+    #[doc = "Peripheral Clock 50 Enable"]
+    pid50[18],
+    #[doc = "Peripheral Clock 51 Enable"]
+    pid51[19],
+    #[doc = "Peripheral Clock 52 Enable"]
+    pid52[20],
+    #[doc = "Peripheral Clock 53 Enable"]
+    pid53[21],
+    #[doc = "Peripheral Clock 56 Enable"]
+    pid56[24],
+    #[doc = "Peripheral Clock 57 Enable"]
+    pid57[25],
+    #[doc = "Peripheral Clock 58 Enable"]
+    pid58[26],
+    #[doc = "Peripheral Clock 59 Enable"]
+    pid59[27],
+    #[doc = "Peripheral Clock 60 Enable"]
+    pid60[28],
+}
+#[doc = "Peripheral Clock Disable Register 1"]
+WriteOnly register[32] PmcPcdr1 {
+    #[doc = "Peripheral Clock 32 Disable"]
+    pid32[0],
+    #[doc = "Peripheral Clock 33 Disable"]
+    pid33[1],
+    #[doc = "Peripheral Clock 34 Disable"]
+    pid34[2],
+    #[doc = "Peripheral Clock 35 Disable"]
+    pid35[3],
+    #[doc = "Peripheral Clock 37 Disable"]
+    pid37[5],
+    #[doc = "Peripheral Clock 39 Disable"]
+    pid39[7],
+    #[doc = "Peripheral Clock 40 Disable"]
+    pid40[8],
+    #[doc = "Peripheral Clock 41 Disable"]
+    pid41[9],
+    #[doc = "Peripheral Clock 42 Disable"]
+    pid42[10],
+    #[doc = "Peripheral Clock 43 Disable"]
+    pid43[11],
+    #[doc = "Peripheral Clock 44 Disable"]
+    pid44[12],
+    #[doc = "Peripheral Clock 45 Disable"]
+    pid45[13],
+    #[doc = "Peripheral Clock 46 Disable"]
+    pid46[14],
+    #[doc = "Peripheral Clock 47 Disable"]
+    pid47[15],
+    #[doc = "Peripheral Clock 48 Disable"]
+    pid48[16],
+    #[doc = "Peripheral Clock 49 Disable"]
+    pid49[17],
+    #[doc = "Peripheral Clock 50 Disable"]
+    pid50[18],
+    #[doc = "Peripheral Clock 51 Disable"]
+    pid51[19],
+    #[doc = "Peripheral Clock 52 Disable"]
+    pid52[20],
+    #[doc = "Peripheral Clock 53 Disable"]
+    pid53[21],
+    #[doc = "Peripheral Clock 56 Disable"]
+    pid56[24],
+    #[doc = "Peripheral Clock 57 Disable"]
+    pid57[25],
+    #[doc = "Peripheral Clock 58 Disable"]
+    pid58[26],
+    #[doc = "Peripheral Clock 59 Disable"]
+    pid59[27],
+    #[doc = "Peripheral Clock 60 Disable"]
+    pid60[28],
+}
+#[doc = "Peripheral Clock Status Register 1"]
+ReadOnly register[32] PmcPcsr1 {
+    #[doc = "Peripheral Clock 32 Status"]
+    pid32[0],
+    #[doc = "Peripheral Clock 33 Status"]
+    pid33[1],
+    #[doc = "Peripheral Clock 34 Status"]
+    pid34[2],
+    #[doc = "Peripheral Clock 35 Status"]
+    pid35[3],
+    #[doc = "Peripheral Clock 37 Status"]
+    pid37[5],
+    #[doc = "Peripheral Clock 39 Status"]
+    pid39[7],
+    #[doc = "Peripheral Clock 40 Status"]
+    pid40[8],
+    #[doc = "Peripheral Clock 41 Status"]
+    pid41[9],
+    #[doc = "Peripheral Clock 42 Status"]
+    pid42[10],
+    #[doc = "Peripheral Clock 43 Status"]
+    pid43[11],
+    #[doc = "Peripheral Clock 44 Status"]
+    pid44[12],
+    #[doc = "Peripheral Clock 45 Status"]
+    pid45[13],
+    #[doc = "Peripheral Clock 46 Status"]
+    pid46[14],
+    #[doc = "Peripheral Clock 47 Status"]
+    pid47[15],
+    #[doc = "Peripheral Clock 48 Status"]
+    pid48[16],
+    #[doc = "Peripheral Clock 49 Status"]
+    pid49[17],
+    #[doc = "Peripheral Clock 50 Status"]
+    pid50[18],
+    #[doc = "Peripheral Clock 51 Status"]
+    pid51[19],
+    #[doc = "Peripheral Clock 52 Status"]
+    pid52[20],
+    #[doc = "Peripheral Clock 53 Status"]
+    pid53[21],
+    #[doc = "Peripheral Clock 56 Status"]
+    pid56[24],
+    #[doc = "Peripheral Clock 57 Status"]
+    pid57[25],
+    #[doc = "Peripheral Clock 58 Status"]
+    pid58[26],
+    #[doc = "Peripheral Clock 59 Status"]
+    pid59[27],
+    #[doc = "Peripheral Clock 60 Status"]
+    pid60[28],
+}
+#[doc = "Peripheral Control Register"]
+ReadWrite register[32] PmcPcr {
+    #[doc = "Peripheral ID"]
+    pid[0..7],
+    #[doc = "Generic Clock Source Selection"]
+    gclkcss[8..11] {
+        #[doc = "SLCK is selected"]
+        SlowClk = 0x0,
+        #[doc = "MAINCK is selected"]
+        MainClk = 0x1,
+        #[doc = "PLLACK is selected"]
+        PllaClk = 0x2,
+        #[doc = "UPLLCK is selected"]
+        UpllClk = 0x3,
+        #[doc = "MCK is selected"]
+        MckClk = 0x4,
+    },
+    #[doc = "Command"]
+    cmd[12],
+    #[doc = "Generic Clock Division Ratio"]
+    gclkdiv[20..28],
+    #[doc = "Enable"]
+    en[28],
+    #[doc = "Generic Clock Enable"]
+    gclken[29],
+}
+#[doc = "Oscillator Calibration Register"]
+ReadWrite register[32] PmcOcr {
+    #[doc = "Main RC Oscillator Calibration Bits for 4 MHz"]
+    cal4[0..7],
+    #[doc = "Selection of Main RC Oscillator Calibration Bits for 4 MHz"]
+    sel4[7],
+    #[doc = "Main RC Oscillator Calibration Bits for 8 MHz"]
+    cal8[8..15],
+    #[doc = "Selection of Main RC Oscillator Calibration Bits for 8 MHz"]
+    sel8[15],
+    #[doc = "Main RC Oscillator Calibration Bits for 12 MHz"]
+    cal12[16..23],
+    #[doc = "Selection of Main RC Oscillator Calibration Bits for 12 MHz"]
+    sel12[23],
+}
+#[doc = "SleepWalking Enable Register 0"]
+WriteOnly register[32] PmcSlpwkEr0 {
+    #[doc = "Peripheral 7 SleepWalking Enable"]
+    pid7[7],
+    #[doc = "Peripheral 8 SleepWalking Enable"]
+    pid8[8],
+    #[doc = "Peripheral 9 SleepWalking Enable"]
+    pid9[9],
+    #[doc = "Peripheral 10 SleepWalking Enable"]
+    pid10[10],
+    #[doc = "Peripheral 11 SleepWalking Enable"]
+    pid11[11],
+    #[doc = "Peripheral 12 SleepWalking Enable"]
+    pid12[12],
+    #[doc = "Peripheral 13 SleepWalking Enable"]
+    pid13[13],
+    #[doc = "Peripheral 14 SleepWalking Enable"]
+    pid14[14],
+    #[doc = "Peripheral 15 SleepWalking Enable"]
+    pid15[15],
+    #[doc = "Peripheral 16 SleepWalking Enable"]
+    pid16[16],
+    #[doc = "Peripheral 17 SleepWalking Enable"]
+    pid17[17],
+    #[doc = "Peripheral 18 SleepWalking Enable"]
+    pid18[18],
+    #[doc = "Peripheral 19 SleepWalking Enable"]
+    pid19[19],
+    #[doc = "Peripheral 20 SleepWalking Enable"]
+    pid20[20],
+    #[doc = "Peripheral 21 SleepWalking Enable"]
+    pid21[21],
+    #[doc = "Peripheral 22 SleepWalking Enable"]
+    pid22[22],
+    #[doc = "Peripheral 23 SleepWalking Enable"]
+    pid23[23],
+    #[doc = "Peripheral 24 SleepWalking Enable"]
+    pid24[24],
+    #[doc = "Peripheral 25 SleepWalking Enable"]
+    pid25[25],
+    #[doc = "Peripheral 26 SleepWalking Enable"]
+    pid26[26],
+    #[doc = "Peripheral 27 SleepWalking Enable"]
+    pid27[27],
+    #[doc = "Peripheral 28 SleepWalking Enable"]
+    pid28[28],
+    #[doc = "Peripheral 29 SleepWalking Enable"]
+    pid29[29],
+    #[doc = "Peripheral 30 SleepWalking Enable"]
+    pid30[30],
+    #[doc = "Peripheral 31 SleepWalking Enable"]
+    pid31[31],
+}
+#[doc = "SleepWalking Disable Register 0"]
+WriteOnly register[32] PmcSlpwkDr0 {
+    #[doc = "Peripheral 7 SleepWalking Disable"]
+    pid7[7],
+    #[doc = "Peripheral 8 SleepWalking Disable"]
+    pid8[8],
+    #[doc = "Peripheral 9 SleepWalking Disable"]
+    pid9[9],
+    #[doc = "Peripheral 10 SleepWalking Disable"]
+    pid10[10],
+    #[doc = "Peripheral 11 SleepWalking Disable"]
+    pid11[11],
+    #[doc = "Peripheral 12 SleepWalking Disable"]
+    pid12[12],
+    #[doc = "Peripheral 13 SleepWalking Disable"]
+    pid13[13],
+    #[doc = "Peripheral 14 SleepWalking Disable"]
+    pid14[14],
+    #[doc = "Peripheral 15 SleepWalking Disable"]
+    pid15[15],
+    #[doc = "Peripheral 16 SleepWalking Disable"]
+    pid16[16],
+    #[doc = "Peripheral 17 SleepWalking Disable"]
+    pid17[17],
+    #[doc = "Peripheral 18 SleepWalking Disable"]
+    pid18[18],
+    #[doc = "Peripheral 19 SleepWalking Disable"]
+    pid19[19],
+    #[doc = "Peripheral 20 SleepWalking Disable"]
+    pid20[20],
+    #[doc = "Peripheral 21 SleepWalking Disable"]
+    pid21[21],
+    #[doc = "Peripheral 22 SleepWalking Disable"]
+    pid22[22],
+    #[doc = "Peripheral 23 SleepWalking Disable"]
+    pid23[23],
+    #[doc = "Peripheral 24 SleepWalking Disable"]
+    pid24[24],
+    #[doc = "Peripheral 25 SleepWalking Disable"]
+    pid25[25],
+    #[doc = "Peripheral 26 SleepWalking Disable"]
+    pid26[26],
+    #[doc = "Peripheral 27 SleepWalking Disable"]
+    pid27[27],
+    #[doc = "Peripheral 28 SleepWalking Disable"]
+    pid28[28],
+    #[doc = "Peripheral 29 SleepWalking Disable"]
+    pid29[29],
+    #[doc = "Peripheral 30 SleepWalking Disable"]
+    pid30[30],
+    #[doc = "Peripheral 31 SleepWalking Disable"]
+    pid31[31],
+}
+#[doc = "SleepWalking Status Register 0"]
+ReadOnly register[32] PmcSlpwkSr0 {
+    #[doc = "Peripheral 7 SleepWalking Status"]
+    pid7[7],
+    #[doc = "Peripheral 8 SleepWalking Status"]
+    pid8[8],
+    #[doc = "Peripheral 9 SleepWalking Status"]
+    pid9[9],
+    #[doc = "Peripheral 10 SleepWalking Status"]
+    pid10[10],
+    #[doc = "Peripheral 11 SleepWalking Status"]
+    pid11[11],
+    #[doc = "Peripheral 12 SleepWalking Status"]
+    pid12[12],
+    #[doc = "Peripheral 13 SleepWalking Status"]
+    pid13[13],
+    #[doc = "Peripheral 14 SleepWalking Status"]
+    pid14[14],
+    #[doc = "Peripheral 15 SleepWalking Status"]
+    pid15[15],
+    #[doc = "Peripheral 16 SleepWalking Status"]
+    pid16[16],
+    #[doc = "Peripheral 17 SleepWalking Status"]
+    pid17[17],
+    #[doc = "Peripheral 18 SleepWalking Status"]
+    pid18[18],
+    #[doc = "Peripheral 19 SleepWalking Status"]
+    pid19[19],
+    #[doc = "Peripheral 20 SleepWalking Status"]
+    pid20[20],
+    #[doc = "Peripheral 21 SleepWalking Status"]
+    pid21[21],
+    #[doc = "Peripheral 22 SleepWalking Status"]
+    pid22[22],
+    #[doc = "Peripheral 23 SleepWalking Status"]
+    pid23[23],
+    #[doc = "Peripheral 24 SleepWalking Status"]
+    pid24[24],
+    #[doc = "Peripheral 25 SleepWalking Status"]
+    pid25[25],
+    #[doc = "Peripheral 26 SleepWalking Status"]
+    pid26[26],
+    #[doc = "Peripheral 27 SleepWalking Status"]
+    pid27[27],
+    #[doc = "Peripheral 28 SleepWalking Status"]
+    pid28[28],
+    #[doc = "Peripheral 29 SleepWalking Status"]
+    pid29[29],
+    #[doc = "Peripheral 30 SleepWalking Status"]
+    pid30[30],
+    #[doc = "Peripheral 31 SleepWalking Status"]
+    pid31[31],
+}
+#[doc = "SleepWalking Activity Status Register 0"]
+ReadOnly register[32] PmcSlpwkAsr0 {
+    #[doc = "Peripheral 7 Activity Status"]
+    pid7[7],
+    #[doc = "Peripheral 8 Activity Status"]
+    pid8[8],
+    #[doc = "Peripheral 9 Activity Status"]
+    pid9[9],
+    #[doc = "Peripheral 10 Activity Status"]
+    pid10[10],
+    #[doc = "Peripheral 11 Activity Status"]
+    pid11[11],
+    #[doc = "Peripheral 12 Activity Status"]
+    pid12[12],
+    #[doc = "Peripheral 13 Activity Status"]
+    pid13[13],
+    #[doc = "Peripheral 14 Activity Status"]
+    pid14[14],
+    #[doc = "Peripheral 15 Activity Status"]
+    pid15[15],
+    #[doc = "Peripheral 16 Activity Status"]
+    pid16[16],
+    #[doc = "Peripheral 17 Activity Status"]
+    pid17[17],
+    #[doc = "Peripheral 18 Activity Status"]
+    pid18[18],
+    #[doc = "Peripheral 19 Activity Status"]
+    pid19[19],
+    #[doc = "Peripheral 20 Activity Status"]
+    pid20[20],
+    #[doc = "Peripheral 21 Activity Status"]
+    pid21[21],
+    #[doc = "Peripheral 22 Activity Status"]
+    pid22[22],
+    #[doc = "Peripheral 23 Activity Status"]
+    pid23[23],
+    #[doc = "Peripheral 24 Activity Status"]
+    pid24[24],
+    #[doc = "Peripheral 25 Activity Status"]
+    pid25[25],
+    #[doc = "Peripheral 26 Activity Status"]
+    pid26[26],
+    #[doc = "Peripheral 27 Activity Status"]
+    pid27[27],
+    #[doc = "Peripheral 28 Activity Status"]
+    pid28[28],
+    #[doc = "Peripheral 29 Activity Status"]
+    pid29[29],
+    #[doc = "Peripheral 30 Activity Status"]
+    pid30[30],
+    #[doc = "Peripheral 31 Activity Status"]
+    pid31[31],
+}
+#[doc = "PLL Maximum Multiplier Value Register"]
+ReadWrite register[32] PmcPmmr {
+    #[doc = "PLLA Maximum Allowed Multiplier Value"]
+    plla_mmax[0..11],
+}
+#[doc = "SleepWalking Enable Register 1"]
+WriteOnly register[32] PmcSlpwkEr1 {
+    #[doc = "Peripheral 32 SleepWalking Enable"]
+    pid32[0],
+    #[doc = "Peripheral 33 SleepWalking Enable"]
+    pid33[1],
+    #[doc = "Peripheral 34 SleepWalking Enable"]
+    pid34[2],
+    #[doc = "Peripheral 35 SleepWalking Enable"]
+    pid35[3],
+    #[doc = "Peripheral 37 SleepWalking Enable"]
+    pid37[5],
+    #[doc = "Peripheral 39 SleepWalking Enable"]
+    pid39[7],
+    #[doc = "Peripheral 40 SleepWalking Enable"]
+    pid40[8],
+    #[doc = "Peripheral 41 SleepWalking Enable"]
+    pid41[9],
+    #[doc = "Peripheral 42 SleepWalking Enable"]
+    pid42[10],
+    #[doc = "Peripheral 43 SleepWalking Enable"]
+    pid43[11],
+    #[doc = "Peripheral 44 SleepWalking Enable"]
+    pid44[12],
+    #[doc = "Peripheral 45 SleepWalking Enable"]
+    pid45[13],
+    #[doc = "Peripheral 46 SleepWalking Enable"]
+    pid46[14],
+    #[doc = "Peripheral 47 SleepWalking Enable"]
+    pid47[15],
+    #[doc = "Peripheral 48 SleepWalking Enable"]
+    pid48[16],
+    #[doc = "Peripheral 49 SleepWalking Enable"]
+    pid49[17],
+    #[doc = "Peripheral 50 SleepWalking Enable"]
+    pid50[18],
+    #[doc = "Peripheral 51 SleepWalking Enable"]
+    pid51[19],
+    #[doc = "Peripheral 52 SleepWalking Enable"]
+    pid52[20],
+    #[doc = "Peripheral 53 SleepWalking Enable"]
+    pid53[21],
+    #[doc = "Peripheral 56 SleepWalking Enable"]
+    pid56[24],
+    #[doc = "Peripheral 57 SleepWalking Enable"]
+    pid57[25],
+    #[doc = "Peripheral 58 SleepWalking Enable"]
+    pid58[26],
+    #[doc = "Peripheral 59 SleepWalking Enable"]
+    pid59[27],
+    #[doc = "Peripheral 60 SleepWalking Enable"]
+    pid60[28],
+}
+#[doc = "SleepWalking Disable Register 1"]
+WriteOnly register[32] PmcSlpwkDr1 {
+    #[doc = "Peripheral 32 SleepWalking Disable"]
+    pid32[0],
+    #[doc = "Peripheral 33 SleepWalking Disable"]
+    pid33[1],
+    #[doc = "Peripheral 34 SleepWalking Disable"]
+    pid34[2],
+    #[doc = "Peripheral 35 SleepWalking Disable"]
+    pid35[3],
+    #[doc = "Peripheral 37 SleepWalking Disable"]
+    pid37[5],
+    #[doc = "Peripheral 39 SleepWalking Disable"]
+    pid39[7],
+    #[doc = "Peripheral 40 SleepWalking Disable"]
+    pid40[8],
+    #[doc = "Peripheral 41 SleepWalking Disable"]
+    pid41[9],
+    #[doc = "Peripheral 42 SleepWalking Disable"]
+    pid42[10],
+    #[doc = "Peripheral 43 SleepWalking Disable"]
+    pid43[11],
+    #[doc = "Peripheral 44 SleepWalking Disable"]
+    pid44[12],
+    #[doc = "Peripheral 45 SleepWalking Disable"]
+    pid45[13],
+    #[doc = "Peripheral 46 SleepWalking Disable"]
+    pid46[14],
+    #[doc = "Peripheral 47 SleepWalking Disable"]
+    pid47[15],
+    #[doc = "Peripheral 48 SleepWalking Disable"]
+    pid48[16],
+    #[doc = "Peripheral 49 SleepWalking Disable"]
+    pid49[17],
+    #[doc = "Peripheral 50 SleepWalking Disable"]
+    pid50[18],
+    #[doc = "Peripheral 51 SleepWalking Disable"]
+    pid51[19],
+    #[doc = "Peripheral 52 SleepWalking Disable"]
+    pid52[20],
+    #[doc = "Peripheral 53 SleepWalking Disable"]
+    pid53[21],
+    #[doc = "Peripheral 56 SleepWalking Disable"]
+    pid56[24],
+    #[doc = "Peripheral 57 SleepWalking Disable"]
+    pid57[25],
+    #[doc = "Peripheral 58 SleepWalking Disable"]
+    pid58[26],
+    #[doc = "Peripheral 59 SleepWalking Disable"]
+    pid59[27],
+    #[doc = "Peripheral 60 SleepWalking Disable"]
+    pid60[28],
+}
+#[doc = "SleepWalking Status Register 1"]
+ReadOnly register[32] PmcSlpwkSr1 {
+    #[doc = "Peripheral 32 SleepWalking Status"]
+    pid32[0],
+    #[doc = "Peripheral 33 SleepWalking Status"]
+    pid33[1],
+    #[doc = "Peripheral 34 SleepWalking Status"]
+    pid34[2],
+    #[doc = "Peripheral 35 SleepWalking Status"]
+    pid35[3],
+    #[doc = "Peripheral 37 SleepWalking Status"]
+    pid37[5],
+    #[doc = "Peripheral 39 SleepWalking Status"]
+    pid39[7],
+    #[doc = "Peripheral 40 SleepWalking Status"]
+    pid40[8],
+    #[doc = "Peripheral 41 SleepWalking Status"]
+    pid41[9],
+    #[doc = "Peripheral 42 SleepWalking Status"]
+    pid42[10],
+    #[doc = "Peripheral 43 SleepWalking Status"]
+    pid43[11],
+    #[doc = "Peripheral 44 SleepWalking Status"]
+    pid44[12],
+    #[doc = "Peripheral 45 SleepWalking Status"]
+    pid45[13],
+    #[doc = "Peripheral 46 SleepWalking Status"]
+    pid46[14],
+    #[doc = "Peripheral 47 SleepWalking Status"]
+    pid47[15],
+    #[doc = "Peripheral 48 SleepWalking Status"]
+    pid48[16],
+    #[doc = "Peripheral 49 SleepWalking Status"]
+    pid49[17],
+    #[doc = "Peripheral 50 SleepWalking Status"]
+    pid50[18],
+    #[doc = "Peripheral 51 SleepWalking Status"]
+    pid51[19],
+    #[doc = "Peripheral 52 SleepWalking Status"]
+    pid52[20],
+    #[doc = "Peripheral 53 SleepWalking Status"]
+    pid53[21],
+    #[doc = "Peripheral 56 SleepWalking Status"]
+    pid56[24],
+    #[doc = "Peripheral 57 SleepWalking Status"]
+    pid57[25],
+    #[doc = "Peripheral 58 SleepWalking Status"]
+    pid58[26],
+    #[doc = "Peripheral 59 SleepWalking Status"]
+    pid59[27],
+    #[doc = "Peripheral 60 SleepWalking Status"]
+    pid60[28],
+}
+#[doc = "SleepWalking Activity Status Register 1"]
+ReadOnly register[32] PmcSlpwkAsr1 {
+    #[doc = "Peripheral 32 Activity Status"]
+    pid32[0],
+    #[doc = "Peripheral 33 Activity Status"]
+    pid33[1],
+    #[doc = "Peripheral 34 Activity Status"]
+    pid34[2],
+    #[doc = "Peripheral 35 Activity Status"]
+    pid35[3],
+    #[doc = "Peripheral 37 Activity Status"]
+    pid37[5],
+    #[doc = "Peripheral 39 Activity Status"]
+    pid39[7],
+    #[doc = "Peripheral 40 Activity Status"]
+    pid40[8],
+    #[doc = "Peripheral 41 Activity Status"]
+    pid41[9],
+    #[doc = "Peripheral 42 Activity Status"]
+    pid42[10],
+    #[doc = "Peripheral 43 Activity Status"]
+    pid43[11],
+    #[doc = "Peripheral 44 Activity Status"]
+    pid44[12],
+    #[doc = "Peripheral 45 Activity Status"]
+    pid45[13],
+    #[doc = "Peripheral 46 Activity Status"]
+    pid46[14],
+    #[doc = "Peripheral 47 Activity Status"]
+    pid47[15],
+    #[doc = "Peripheral 48 Activity Status"]
+    pid48[16],
+    #[doc = "Peripheral 49 Activity Status"]
+    pid49[17],
+    #[doc = "Peripheral 50 Activity Status"]
+    pid50[18],
+    #[doc = "Peripheral 51 Activity Status"]
+    pid51[19],
+    #[doc = "Peripheral 52 Activity Status"]
+    pid52[20],
+    #[doc = "Peripheral 53 Activity Status"]
+    pid53[21],
+    #[doc = "Peripheral 56 Activity Status"]
+    pid56[24],
+    #[doc = "Peripheral 57 Activity Status"]
+    pid57[25],
+    #[doc = "Peripheral 58 Activity Status"]
+    pid58[26],
+    #[doc = "Peripheral 59 Activity Status"]
+    pid59[27],
+    #[doc = "Peripheral 60 Activity Status"]
+    pid60[28],
+}
+#[doc = "SleepWalking Activity In Progress Register"]
+ReadOnly register[32] PmcSlpwkAipr {
+    #[doc = "Activity In Progress"]
+    aip[0],
+}
+#[doc = "Audio PLL Analog Configuration Register"]
+ReadWrite register[32] PmcApllacr {
+    #[doc = "DCO Filter Selection"]
+    dcofltsel[0..4],
+    #[doc = "PLL Filter Selection"]
+    fltsel[4..8],
+    #[doc = "Bias Voltage Selection"]
+    bias[8..10],
+}
+#[doc = "Wait Mode Startup Time Register"]
+ReadWrite register[32] PmcWmst {
+    #[doc = "Wait Mode Startup Time"]
+    wmst[0..8],
+    #[doc = "Write Access Password"]
+    key[24..32] {
+        #[doc = "Writing any other value in this field aborts the write operation.Always reads as 0."]
+        Passwd = 0x5a,
+    },
+}

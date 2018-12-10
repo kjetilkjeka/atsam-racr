@@ -1,0 +1,62 @@
+#[doc = "System timer"]
+peripheral SysTick {
+    csr: Csr @ 0x0,
+    rvr: Rvr @ 0x4,
+    cvr: Cvr @ 0x8,
+    calib: Calib @ 0xc,
+}
+#[doc = "SysTick Control and Status Register"]
+ReadWrite register[32] Csr {
+    #[doc = "no description available"]
+    enable[0] {
+        #[doc = "counter disabled"]
+        Value0 = 0x0,
+        #[doc = "counter enabled"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    tickint[1] {
+        #[doc = "counting down to 0 does not assert the SysTick exception request"]
+        Value0 = 0x0,
+        #[doc = "counting down to 0 asserts the SysTick exception request"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    clksource[2] {
+        #[doc = "external clock"]
+        Value0 = 0x0,
+        #[doc = "processor clock"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    countflag[16],
+}
+#[doc = "SysTick Reload Value Register"]
+ReadWrite register[32] Rvr {
+    #[doc = "Value to load into the SysTick Current Value Register when the counter reaches 0"]
+    reload[0..24],
+}
+#[doc = "SysTick Current Value Register"]
+ReadWrite register[32] Cvr {
+    #[doc = "Current value at the time the register is accessed"]
+    current[0..24],
+}
+#[doc = "SysTick Calibration Value Register"]
+ReadWrite register[32] Calib {
+    #[doc = "Reload value to use for 10ms timing"]
+    tenms[0..24],
+    #[doc = "no description available"]
+    skew[30] {
+        #[doc = "10ms calibration value is exact"]
+        Value0 = 0x0,
+        #[doc = "10ms calibration value is inexact, because of the clock frequency"]
+        Value1 = 0x1,
+    },
+    #[doc = "no description available"]
+    noref[31] {
+        #[doc = "The reference clock is provided"]
+        Value0 = 0x0,
+        #[doc = "The reference clock is not provided"]
+        Value1 = 0x1,
+    },
+}
